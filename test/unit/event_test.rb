@@ -2,12 +2,12 @@
 #
 # Table name: events
 #
-#  id             :integer         not null, primary key
-#  game_id        :integer
-#  source_user_id :integer
-#  target_user_id :integer
-#  created_at     :datetime
-#  updated_at     :datetime
+#  id               :integer         not null, primary key
+#  game_id          :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#  source_player_id :integer
+#  target_player_id :integer
 #
 
 require 'test_helper'
