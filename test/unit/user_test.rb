@@ -32,8 +32,16 @@
 #  updated_at                   :datetime
 #
 
-class User < TwitterAuth::GenericUser
-  # Extend and define your user model as you see fit.
-  # All of the authentication logic is handled by the 
-  # parent TwitterAuth::GenericUser class.
+
+require 'test_helper'
+
+# note: uses TwitterAuth's GenericUser as a base
+class UserTest < ActiveSupport::TestCase
+  setup do
+    @user = Factory(:user)
+  end
+
+  should_validate_presence_of :login, :twitter_id
+  should_validate_uniqueness_of :login
+  should_validate_uniqueness_of :twitter_id, :message => "ID has already been taken."
 end
