@@ -2,6 +2,7 @@ class CreateEvents < ActiveRecord::Migration
   def self.up
     create_table :events do |t|
       t.integer :game_id
+      t.string  :type
       t.timestamps
     end
   end
