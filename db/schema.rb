@@ -9,10 +9,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090613160919) do
+ActiveRecord::Schema.define(:version => 20090613190422) do
+
+  create_table "events", :force => true do |t|
+    t.integer  "game_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "source_player_id"
+    t.integer  "target_player_id"
+  end
 
   create_table "games", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "game_id"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

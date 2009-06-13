@@ -9,5 +9,10 @@
 #
 
 class Game < ActiveRecord::Base
+  has_many :players
+  has_many :users, :through => :players
+
+  has_many :events
+
   validates_presence_of :name
 end
