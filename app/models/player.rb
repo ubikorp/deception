@@ -16,7 +16,9 @@ class Player < ActiveRecord::Base
 
   validates_presence_of :user_id, :game_id
   validates_uniqueness_of :user_id, :scope => :game_id
-end
 
-#class Villager < Player; end
-#class Werewolf < Player; end
+  # indicates whether this user has been killed
+  def dead?
+    !game.events.kills.select { |e| e.target_player_id == self.id }.empty?
+  end
+end

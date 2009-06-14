@@ -11,14 +11,5 @@
 #  target_player_id :integer
 #
 
-require 'test_helper'
-
-class EventTest < ActiveSupport::TestCase
-  setup do
-    @event = Factory(:vote_event)
-  end
-
-  should_belong_to :game
-
-  should_validate_presence_of :game_id
+class QuitEvent < Event
 end
