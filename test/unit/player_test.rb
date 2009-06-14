@@ -27,10 +27,15 @@ class PlayerTest < ActiveSupport::TestCase
     setup do
       @game   = Factory(:game)
       @player = Factory(:villager, :game => @game)
-      @event  = Factory(:kill_event, :game => @game, :target_player => @player)
     end
 
-    should 'be dead' do
+    should 'be dead if they were killed' do
+      @event = Factory(:kill_event, :game => @game, :target_player => @player)
+      assert @player.dead?
+    end
+
+    should 'be dead if they committed suicide' do
+      @event = Factory(:quit_event, :game => @game, :source_player => @player)
       assert @player.dead?
     end
   end

@@ -19,6 +19,7 @@ class Player < ActiveRecord::Base
 
   # indicates whether this user has been killed
   def dead?
-    !game.events.kills.select { |e| e.target_player_id == self.id }.empty?
+    !game.events.quits.select { |e| e.source_player_id == self.id }.empty? || 
+      !game.events.kills.select { |e| e.target_player_id == self.id }.empty?
   end
 end
