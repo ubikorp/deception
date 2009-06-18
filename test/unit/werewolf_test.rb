@@ -11,5 +11,10 @@
 #  dead       :boolean
 #
 
-class Werewolf < Player
+require 'test_helper'
+
+class VillagerTest < ActiveSupport::TestCase
+  context 'villager' do
+    # ...
+  end
 end

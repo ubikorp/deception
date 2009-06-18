@@ -8,6 +8,7 @@
 #  type       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  dead       :boolean
 #
 
 class Villager < Player

@@ -8,18 +8,25 @@
 #  type       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  dead       :boolean
 #
 
 class Player < ActiveRecord::Base
+  named_scope :alive,      :conditions => { :dead => false }
+  named_scope :villagers,  :conditions => { :type => 'Villager' }
+  named_scope :werewolves, :conditions => { :type => 'Werewolf' }
+
   belongs_to :user
   belongs_to :game
 
   validates_presence_of :user_id, :game_id
   validates_uniqueness_of :user_id, :scope => :game_id
 
-  # indicates whether this user has been killed
-  def dead?
-    !game.events.quits.select { |e| e.source_player_id == self.id }.empty? || 
-      !game.events.kills.select { |e| e.target_player_id == self.id }.empty?
+  def werewolf?
+    type == 'Werewolf'
+  end
+
+  def villager?
+    type == 'Villager'
   end
 end

@@ -37,14 +37,16 @@ require 'test_helper'
 
 # note: uses TwitterAuth's GenericUser as a base
 class UserTest < ActiveSupport::TestCase
-  setup do
-    @user = Factory(:darcy)
+  context 'user' do
+    setup do
+      @user = Factory(:darcy)
+    end
+
+    should_have_many :players
+    should_have_many :games, :through => :players
+
+    should_validate_presence_of :login, :twitter_id
+    should_validate_uniqueness_of :login
+    should_validate_uniqueness_of :twitter_id, :message => "ID has already been taken."
   end
-
-  should_have_many :players
-  should_have_many :games, :through => :players
-
-  should_validate_presence_of :login, :twitter_id
-  should_validate_uniqueness_of :login
-  should_validate_uniqueness_of :twitter_id, :message => "ID has already been taken."
 end
