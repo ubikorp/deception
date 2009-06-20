@@ -16,3 +16,13 @@ Factory.define :darcy, :parent => :user do |f|
   f.login      'sutto'
   f.twitter_id 'sutto'
 end
+
+Factory.define :aaron, :parent => :user do |f|
+  f.login      'aaronstack'
+  f.twitter_id 'aaronstack'
+end
+
+Factory.define :elsa, :parent => :user do |f|
+  f.login      'ebloodstone'
+  f.twitter_id 'ebloodstone'
+end

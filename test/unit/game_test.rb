@@ -20,11 +20,11 @@ class GameTest < ActiveSupport::TestCase
     should_have_many :users, :through => :players
 
     setup do
-      @game = Factory(:game)
+      @game = Game.create(:name => 'The Portsmouth Massacre')
     end
 
     should 'start out in the initial state' do
-      assert_equal 'setup', @game.state
+      assert @game.state?(:setup)
     end
 
     context 'recently created' do
@@ -33,7 +33,7 @@ class GameTest < ActiveSupport::TestCase
       end
 
       should 'enter the playable state' do
-        assert_equal 'playable', @game.state
+        assert @game.state?(:playable)
       end
 
       should 'create an initial period' do
@@ -45,20 +45,24 @@ class GameTest < ActiveSupport::TestCase
       end
     end
 
-    should 'be completed' do
+    should 'be finished' do
       @game.start
-      @game.end
-      assert_equal 'completed', @game.state
+      @game.finish
+      assert @game.state?(:finished)
     end
 
     context 'in progress' do
       setup do
+        @werewolf1 = Factory(:werewolf, :game => @game)
+        @werewolf2 = Factory(:werewolf, :game => @game, :user => Factory(:aaron))
+        @villager1 = Factory(:villager, :game => @game)
+        @villager2 = Factory(:villager, :game => @game, :user => Factory(:darcy))
         @game.start
         @game.continue
       end
 
       should 'remain in the playable state' do
-        assert_equal 'playable', @game.state
+        assert @game.state?(:playable)
       end
 
       should 'be nighttime' do
@@ -78,28 +82,22 @@ class GameTest < ActiveSupport::TestCase
       end
 
       should 'return all events occurring in the current period' do
-        player = Factory(:werewolf, :game => @game)
-        first_period = @game.periods.first
-        first_event = Factory(:event, :period => first_period, :source_player => player)
-        new_period = @game.periods.create
-        new_event = Factory(:event, :period => new_period, :source_player => player)
+        first_event = Factory(:event, :period => @game.current_period, :source_player => @villager1)
+        @game.continue
+        new_event = Factory(:event, :period => @game.current_period, :source_player => @villager1)
         assert @game.current_events.include?(new_event)
         assert !@game.current_events.include?(first_event)
       end
 
       should 'report villagers that are still in the game' do
-        player1 = Factory(:villager, :game => @game, :user => Factory(:jeff))
-        player2 = Factory(:villager, :game => @game, :user => Factory(:darcy))
         assert_equal 2, @game.villagers.length
-        player2.update_attribute(:dead, true)
+        @villager1.update_attribute(:dead, true)
         assert_equal 1, @game.villagers.length
       end
 
       should 'report werewolves that are still in the game' do
-        player1 = Factory(:werewolf, :game => @game, :user => Factory(:jeff))
-        player2 = Factory(:werewolf, :game => @game, :user => Factory(:darcy))
         assert_equal 2, @game.werewolves.length
-        player2.update_attribute(:dead, true)
+        @werewolf1.update_attribute(:dead, true)
         assert_equal 1, @game.werewolves.length
       end
     end
@@ -107,8 +105,8 @@ class GameTest < ActiveSupport::TestCase
     context 'end of turn actions' do
       setup do
         @werewolf = Factory(:werewolf, :game => @game)
-        @villager1 = Factory(:villager, :user => Factory(:jeff), :game => @game)
-        @villager2 = Factory(:villager, :user => Factory(:darcy), :game => @game)
+        @villager1 = Factory(:villager, :game => @game)
+        @villager2 = Factory(:villager, :game => @game, :user => Factory(:darcy))
         @game.start
       end
 
@@ -131,6 +129,36 @@ class GameTest < ActiveSupport::TestCase
         vote = Factory(:vote_event, :source_player => @villager2, :target_player => @werewolf, :period => @game.current_period)
         @game.continue
         assert @werewolf.reload.dead?
+      end
+
+      should 'end game if we have a winner' do
+        @game.continue
+        vote = Factory(:vote_event, :source_player => @villager1, :target_player => @werewolf, :period => @game.current_period)
+        vote = Factory(:vote_event, :source_player => @villager2, :target_player => @werewolf, :period => @game.current_period)
+        @game.continue
+        assert @game.state?(:finished)
+      end
+    end
+
+    context 'winner' do
+      setup do
+        @werewolf = Factory(:werewolf, :game => @game)
+        @villager = Factory(:villager, :game => @game)
+        @game.start
+      end
+
+      should 'be werewolf' do
+        @villager.update_attribute(:dead, true)
+        assert @game.winner.include?(@werewolf)
+      end
+
+      should 'be villagers' do
+        @werewolf.update_attribute(:dead, true)
+        assert @game.winner.include?(@villager)
+      end
+
+      should 'not be available yet' do
+        assert !@game.winner
       end
     end
   end

@@ -16,14 +16,15 @@ require 'test_helper'
 class QuitEventTest < ActiveSupport::TestCase
   context 'quit event' do
     setup do
-      @game   = Factory(:game)
-      @period = Factory(:first_period, :game => @game)
-      @player = Factory(:werewolf, :game => @game)
+      @game     = Factory(:game)
+      @werewolf = Factory(:werewolf, :game => @game)
+      @villager = Factory(:villager, :game => @game)
     end
 
     should 'kill player' do
-      @event = Factory(:quit_event, :period => @period, :source_player => @player)
-      assert @player.dead?
+      @game.start
+      @event = Factory(:quit_event, :period => @game.current_period, :source_player => @werewolf)
+      assert @werewolf.dead?
     end
   end
 end

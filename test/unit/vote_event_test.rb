@@ -17,11 +17,12 @@ class VoteEventTest < ActiveSupport::TestCase
   context 'vote event' do
     setup do
       @game     = Factory(:game)
-      @period   = Factory(:first_period, :game => @game)
       @villager = Factory(:villager, :game => @game)
       @werewolf = Factory(:werewolf, :game => @game)
       @otherguy = Factory(:villager, :game => @game, :user => Factory(:darcy))
-      @event    = Factory(:vote_event, :period => @period, :source_player => @villager, :target_player => @werewolf)
+
+      @game.start
+      @event    = Factory(:vote_event, :period => @game.current_period, :source_player => @werewolf, :target_player => @villager)
     end
 
     should_validate_presence_of   :source_player_id
@@ -30,7 +31,7 @@ class VoteEventTest < ActiveSupport::TestCase
 
     should 'disallow more than one vote from a player during a period' do
       assert_raise ActiveRecord::RecordInvalid, 'Validation failed: Source player has already been taken' do
-        Factory(:vote_event, :period => @period, :source_player => @villager, :target_player => @otherguy)
+        Factory(:vote_event, :period => @game.current_period, :source_player => @werewolf, :target_player => @otherguy)
       end
     end
   end

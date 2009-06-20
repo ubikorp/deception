@@ -22,6 +22,10 @@ class Player < ActiveRecord::Base
   validates_presence_of :user_id, :game_id
   validates_uniqueness_of :user_id, :scope => :game_id
 
+  def validate
+    errors.add(:game_id, "is already in progress") if game && !game.state?(:setup)
+  end
+
   def werewolf?
     type == 'Werewolf'
   end

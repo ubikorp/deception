@@ -16,16 +16,17 @@ require 'test_helper'
 class KillEventTest < ActiveSupport::TestCase
   context 'kill event' do
     setup do
-      @game   = Factory(:game)
-      @period = Factory(:first_period, :game => @game)
-      @player = Factory(:werewolf, :game => @game)
+      @game     = Factory(:game)
+      @werewolf = Factory(:werewolf, :game => @game)
+      @villager = Factory(:villager, :game => @game)
     end
 
     should_validate_presence_of :target_player_id
 
     should 'kill player' do
-      @event = Factory(:kill_event, :period => @period, :target_player => @player)
-      assert @player.dead?
+      @game.start
+      @event = Factory(:kill_event, :period => @game.current_period, :target_player => @werewolf)
+      assert @werewolf.dead?
     end
   end
 end

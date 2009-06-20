@@ -24,6 +24,8 @@ class Event < ActiveRecord::Base
   validates_presence_of :period_id
 
   def validate
+    errors.add(:period_id, "is not playable") if period && game && !game.state?(:playable)
+
     # custom validator to check that source player is in this game and is alive
     if source_player
       errors.add(:source_player_id, "is not playing in this game") unless game.players.alive.include?(source_player)

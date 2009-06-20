@@ -16,10 +16,12 @@ require 'test_helper'
 class EventTest < ActiveSupport::TestCase
   context 'event' do
     setup do
-      @game   = Factory(:game)
-      @period = Factory(:first_period, :game => @game)
-      @player = Factory(:werewolf, :game => @game)
-      @event  = Factory(:vote_event, :period => @period, :source_player => @player)
+      @game     = Factory(:game)
+      @werewolf = Factory(:werewolf, :game => @game)
+      @villager = Factory(:villager, :game => @game)
+
+      @game.start
+      @event  = Factory.build(:vote_event, :period => @game.current_period, :source_player => @werewolf, :target_player => @villager)
     end
 
     should_belong_to :period
@@ -37,8 +39,15 @@ class EventTest < ActiveSupport::TestCase
       assert @event.save
     end
 
+    should 'make sure that game state is playable' do
+      @game.finish
+      @event = Factory.build(:vote_event, :period => @game.current_period, :source_player => @werewolf, :target_player => @villager)
+      assert !@event.valid?
+      assert @event.errors.on(:period_id).include?("is not playable")
+    end
+
     should 'make sure source player is alive' do
-      @player.update_attribute(:dead, true)
+      @werewolf.update_attribute(:dead, true)
       assert !@event.valid?
       assert @event.errors.on(:source_player_id).include?("is not playing in this game")
     end

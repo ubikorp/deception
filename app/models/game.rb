@@ -21,22 +21,22 @@ class Game < ActiveRecord::Base
   validates_presence_of :name
 
   state_machine :initial => :setup do
-    state :playable, :completed
+    state :playable, :finished
 
     event :start do
       transition :setup => :playable
     end
 
-    event :end do
-      transition all => :completed
+    event :finish do
+      transition :playable => :finished
     end
 
     event :continue do
       transition :playable => :playable
     end
 
-    after_transition :setup => :playable, :do => :create_first_period
-    before_transition :playable => :playable, :do => :next_phase
+    before_transition :playable => :playable, :do => :end_turn
+    after_transition  all       => :playable, :do => :next_phase
   end
 
   def current_period
@@ -62,16 +62,26 @@ class Game < ActiveRecord::Base
   def night?
     (periods.length % 2) == 1
   end
+
+  def winner
+    villagers = players.villagers.alive.length > 0
+    werewolves = players.werewolves.alive.length > 0
+    if villagers && werewolves
+      false
+    elsif villagers
+      players.villagers.alive
+    elsif werewolves
+      players.werewolves.alive
+    else
+      false
+    end
+  end
   
   private
 
-  def create_first_period
-    periods.create
-  end
-
   # tally villager or werewolf votes and remove the victim(s) from play
-  # then move on to the next period
-  def next_phase
+  # called as a before-transition filter
+  def end_turn
     victims = if night?
       current_events.votes.select { |e| e.source_player.werewolf? }.map { |e| e.target_player }
     else
@@ -79,6 +89,16 @@ class Game < ActiveRecord::Base
     end
 
     victims.each { |victim| KillEvent.create(:period => current_period, :target_player => victim) }
-    periods.create
+  end
+
+  # check to see if a winner has been determined
+  # if not, move on to the next phase
+  # called as an after-transition filter
+  def next_phase
+    if winner
+      finish
+    else
+      periods.create
+    end
   end
 end
