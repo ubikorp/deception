@@ -27,12 +27,6 @@ class GameTest < ActiveSupport::TestCase
       assert @game.state?(:setup)
     end
 
-    should 'allow player to join the game' do
-      @game.join(Villager.new(:user => Factory(:nick)))
-      assert @game.players.length >= 1
-      assert !@game.players.first.new_record?
-    end
-
     context 'recently created' do
       setup do
         @game.start

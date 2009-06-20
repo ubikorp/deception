@@ -48,5 +48,21 @@ class UserTest < ActiveSupport::TestCase
     should_validate_presence_of :login, :twitter_id
     should_validate_uniqueness_of :login
     should_validate_uniqueness_of :twitter_id, :message => "ID has already been taken."
+
+    context 'joining a game' do
+      setup do
+        @game = Factory(:game)
+      end
+
+      should 'join a game as a werewolf' do
+        @user.join(@game, :werewolf)
+        assert @game.werewolves.include?(@user.players.first)
+      end
+
+      should 'join a game as a villager' do
+        @user.join(@game, :villager)
+        assert @game.villagers.include?(@user.players.first)
+      end
+    end
   end
 end

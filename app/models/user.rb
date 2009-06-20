@@ -39,4 +39,9 @@ class User < TwitterAuth::GenericUser
 
   has_many :players
   has_many :games, :through => :players
+
+  def join(game, role = :villager)
+    role_klass = role.to_s.classify.constantize
+    game.players << role_klass.new(:user => self)
+  end
 end

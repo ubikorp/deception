@@ -39,10 +39,6 @@ class Game < ActiveRecord::Base
     after_transition  all       => :playable, :do => :next_phase
   end
 
-  def join(player)
-    players << player
-  end
-
   def current_period
     periods.last
   end
