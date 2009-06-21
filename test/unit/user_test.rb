@@ -63,6 +63,79 @@ class UserTest < ActiveSupport::TestCase
         @user.join(@game, :villager)
         assert @game.villagers.include?(@user.players.first)
       end
+
+      should 'not be allowed to join more than one game at a time' do
+        @user.join(@game, :villager)
+        @game = Factory(:game)
+
+        assert_no_difference 'Player.count' do
+          assert !@user.join(@other_game, :werewolf)
+        end
+      end
+    end
+
+    should 'let us know which game is currently active' do
+      @game1 = Factory(:game)
+      @game2 = Factory(:game)
+
+      @player = @user.join(@game1, :villager)
+      @player.update_attribute(:dead, true)
+      @player = @user.join(@game2, :villager)
+
+      assert_equal @player, @user.active_player
+
+      @player.update_attribute(:dead, true)
+      assert_equal nil, @user.active_player
+    end
+
+    context 'voting' do
+      setup do
+        @game   = Factory(:game)
+        @target = Factory(:jeff)
+        @other  = Factory(:nick)
+      end
+
+      should 'should log a vote for another user' do
+        player1 = @user.join(@game, :werewolf)
+        player2 = @target.join(@game, :villager)
+        @game.start
+
+        assert_difference 'VoteEvent.count' do
+          assert @user.vote(@target)
+        end
+      end
+
+      should 'fail if user has already voted in this period' do
+        player1 = @user.join(@game, :werewolf)
+        player2 = @target.join(@game, :villager)
+        player3 = @other.join(@game, :villager)
+        @game.start
+        @user.vote(@target)
+
+        assert_no_difference 'VoteEvent.count' do
+          assert !@user.vote(@other)
+        end
+      end
+
+      should 'fail if user is not an active player' do
+        player2 = @target.join(@game, :villager)
+        player3 = @other.join(@game, :werewolf)
+        @game.start
+
+        assert_no_difference 'VoteEvent.count' do
+          assert !@user.vote(@target)
+        end
+      end
+
+      should 'fail if the target user is not an active player' do
+        player1 = @user.join(@game, :werewolf)
+        player2 = @target.join(@game, :villager)
+        @game.start
+
+        assert_no_difference 'VoteEvent.count' do
+          assert !@user.vote(@other)
+        end
+      end
     end
   end
 end

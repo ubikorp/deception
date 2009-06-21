@@ -40,8 +40,44 @@ class User < TwitterAuth::GenericUser
   has_many :players
   has_many :games, :through => :players
 
+  # return the game player for the game that this user is actively participating in
+  # or nil if they are not currently active in a game
+  def active_player
+    player = nil
+    players.each do |p|
+      player = p unless p.dead?
+    end
+
+    player
+  end
+
+  # join a new game (during the game setup phase)
+  # a user can only participate in one game at a time
+  # only once they have been removed / killed in their active game
+  # may they join a new game
   def join(game, role = :villager)
-    role_klass = role.to_s.classify.constantize
-    game.players << role_klass.new(:user => self)
+    if !active_player
+      role_klass = role.to_s.classify.constantize
+      players << role_klass.new(:game => game)
+      players.last
+    else
+      # TODO: may want to raise here?
+      false
+    end
+  end
+
+  # record a vote in the user's current game
+  def vote(user)
+    if player = active_player
+      vote = VoteEvent.new(:period => player.game.current_period, :source_player => player, :target_player => user.active_player)
+      if vote.save
+        vote
+      else
+        false
+      end
+    else
+      # TODO: may want to raise here?
+      false
+    end
   end
 end
