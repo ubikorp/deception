@@ -45,7 +45,7 @@ class User < TwitterAuth::GenericUser
   def active_player
     player = nil
     players.each do |p|
-      player = p unless p.dead?
+      player = p unless p.dead? or p.game.finished?
     end
 
     player

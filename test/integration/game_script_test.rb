@@ -4,65 +4,75 @@ class GameScriptTest < ActionController::IntegrationTest
   context 'scenarios' do
     setup do
       @game           = Factory(:game)
-      @villager_one   = Factory(:villager, :user => Factory(:darcy), :game => @game)
-      @villager_two   = Factory(:villager, :user => Factory(:jeff), :game => @game)
-      @villager_three = Factory(:villager, :user => Factory(:aaron), :game => @game)
-      @villager_four  = Factory(:villager, :user => Factory(:elsa), :game => @game)
-      @werewolf       = Factory(:werewolf, :user => Factory(:nick), :game => @game)
+      @nick           = Factory(:nick)
+      @jeff           = Factory(:jeff)
+      @darcy          = Factory(:darcy)
+      @aaron          = Factory(:aaron)
+      @elsa           = Factory(:elsa)
+
+      @nick.join(@game, :werewolf)
+      @jeff.join(@game)
+      @darcy.join(@game)
+      @aaron.join(@game)
+      @elsa.join(@game)
+
       @game.start
     end
 
     should 'be won by werewolf' do
       # 1. night: werewolf kills villager one
-      Factory(:vote_event, :source_player => @werewolf, :target_player => @villager_one, :period => @game.current_period)
+      @nick.vote(@jeff)
       @game.continue
-      assert @villager_one.reload.dead?
+      assert !@jeff.reload.active_player
 
       # 2. day: villagers vote to lynch villager two
-      Factory(:vote_event, :source_player => @werewolf, :target_player => @villager_two, :period => @game.current_period)
-      Factory(:vote_event, :source_player => @villager_two, :target_player => @werewolf, :period => @game.current_period)
-      Factory(:vote_event, :source_player => @villager_three, :target_player => @villager_two, :period => @game.current_period)
-      Factory(:vote_event, :source_player => @villager_four, :target_player => @villager_three, :period => @game.current_period)
+      @nick.vote(@darcy)
+      @darcy.vote(@nick)
+      @aaron.vote(@darcy)
+      @elsa.vote(@aaron)
       @game.continue
-      assert @villager_two.reload.dead?
+      assert !@darcy.reload.active_player
 
       # 3. night: werewolf kills villager three
-      Factory(:vote_event, :source_player => @werewolf, :target_player => @villager_three, :period => @game.current_period)
+      @nick.vote(@aaron)
       @game.continue
-      assert @villager_three.reload.dead?
+      assert !@aaron.reload.active_player
 
       # 4. day: stalemated voting, nobody gets lynched
       assert_no_difference 'KillEvent.count' do
-        Factory(:vote_event, :source_player => @villager_four, :target_player => @werewolf, :period => @game.current_period)
-        Factory(:vote_event, :source_player => @werewolf, :target_player => @villager_four, :period => @game.current_period)
+        @nick.vote(@elsa)
+        @elsa.vote(@nick)
         @game.continue
       end
 
       # 5. night: werewolf kills villager four, wins
-      Factory(:vote_event, :source_player => @werewolf, :target_player => @villager_four, :period => @game.current_period)
+      @nick.vote(@elsa)
       @game.continue
-      assert @villager_four.reload.dead?
+      assert !@elsa.reload.active_player
       
       assert @game.finished?
-      assert @game.winner.include?(@werewolf)
+      assert @game.winner.include?(@nick.players.last)
+
+      # game is finished, no players are active
+      assert !@nick.reload.active_player
     end
 
     should 'be won by villagers' do
       # 1. night: werewolf kills villager four
-      Factory(:vote_event, :source_player => @werewolf, :target_player => @villager_four, :period => @game.current_period)
+      @nick.vote(@elsa)
       @game.continue
-      assert @villager_four.reload.dead?
+      assert !@elsa.reload.active_player
 
       # 2. day: villagers vote to lynch werewolf
-      Factory(:vote_event, :source_player => @villager_one, :target_player => @werewolf, :period => @game.current_period)
-      Factory(:vote_event, :source_player => @villager_two, :target_player => @werewolf, :period => @game.current_period)
-      Factory(:vote_event, :source_player => @villager_three, :target_player => @villager_one, :period => @game.current_period)
-      Factory(:vote_event, :source_player => @werewolf, :target_player => @villager_three, :period => @game.current_period)
+      @nick.vote(@aaron)
+      @jeff.vote(@nick)
+      @darcy.vote(@nick)
+      @aaron.vote(@darcy)
       @game.continue
-      assert @werewolf.reload.dead?
+      assert !@nick.reload.active_player
 
       assert @game.finished?
-      assert @game.winner.include?(@villager_one)
+      assert @game.winner.include?(@jeff.players.last)
     end
   end
 end
