@@ -1,0 +1,10 @@
+= Deception!
+
+A turn-based strategy game engine. Basis for Twitter Werewolf game (work in progress).
+
+== Usage
+
+It's a Rails app, dummy. Copy / customize your +database.yml+ and +settings.yml+ from the provided examples in the config directory. Then run +rake db:migrate+. A sample game script is provided. See the integration tests for example.
+
+
+Copyright (c) 2009 Nick Plante
