@@ -2,11 +2,13 @@
 #
 # Table name: games
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  state      :string(255)
+#  id               :integer         not null, primary key
+#  name             :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  state            :string(255)
+#  invite_only      :boolean
+#  player_threshold :integer         default(0)
 #
 
 require 'array_ext'
@@ -17,8 +19,6 @@ class Game < ActiveRecord::Base
 
   has_many :periods, :order => :created_at
   has_many :events, :through => :periods
-
-  validates_presence_of :name
 
   state_machine :initial => :setup do
     state :playable, :finished
@@ -37,6 +37,19 @@ class Game < ActiveRecord::Base
 
     before_transition :playable => :playable, :do => :end_turn
     after_transition  all       => :playable, :do => :next_phase
+  end
+
+  validates_presence_of :name
+  before_create         :set_defaults
+
+  [:invite_only, :player_threshold, :period_length].each do |setter|
+    define_method("#{setter.to_s}=") do |value|
+      if setup?
+        write_attribute(setter, value)
+      else
+        raise GameException::GameInProgress, "Cannot set game options after setup phase"
+      end
+    end
   end
 
   def current_period
@@ -100,5 +113,11 @@ class Game < ActiveRecord::Base
     else
       periods.create
     end
+  end
+
+  def set_defaults
+    self.invite_only      ||= APP_CONFIG[:invite_only]
+    self.player_threshold ||= APP_CONFIG[:player_threshold]
+    self.period_length    ||= APP_CONFIG[:period_length]
   end
 end

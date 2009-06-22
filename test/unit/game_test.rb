@@ -27,6 +27,30 @@ class GameTest < ActiveSupport::TestCase
       assert @game.state?(:setup)
     end
 
+    context 'options' do
+      should 'set invitation strategy' do
+        @game.invite_only = true
+        @game.player_threshold = 11
+        @game.period_length = 600
+        @game.start
+        assert @game.invite_only
+        assert_equal 11, @game.player_threshold
+      end
+
+      should 'only be set before the game is started' do
+        @game.start
+        assert_raise GameException::GameInProgress do
+          @game.invite_only = true
+        end
+      end
+
+      should 'use defaults if unspecified' do
+        assert_equal APP_CONFIG[:period_length],    @game.period_length
+        assert_equal APP_CONFIG[:player_threshold], @game.player_threshold
+        assert_equal APP_CONFIG[:invite_only],      @game.invite_only
+      end
+    end
+
     context 'recently created' do
       setup do
         @game.start
