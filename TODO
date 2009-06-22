@@ -1,0 +1,8 @@
+- support game options: min player threshold, open/closed invites, period length (others?)
+- add invite system (open and closed variations)
+- enforce min player threshold when starting a game
+- enforce period length
+- add custom handler + notification wrapper / integration for bird grinder 
+- optional twitter dm / public notifications when game state changes
+- web interface for game setup and player settings, history
+- rss feed for activity (after web interface)
