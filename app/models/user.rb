@@ -40,6 +40,8 @@ class User < TwitterAuth::GenericUser
   has_many :players
   has_many :games, :through => :players
 
+  has_many :managed_games, :class_name => 'Game', :foreign_key => :owner_id
+
   # return the game player for the game that this user is actively participating in
   # or nil if they are not currently active in a game
   def active_player

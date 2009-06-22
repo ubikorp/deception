@@ -2,25 +2,33 @@
 #
 # Table name: games
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  state      :string(255)
+#  id               :integer         not null, primary key
+#  name             :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  state            :string(255)
+#  invite_only      :boolean
+#  player_threshold :integer
+#  period_length    :integer
+#  short_code       :string(255)
+#  owner_id         :integer
 #
 
 require 'test_helper'
 
 class GameTest < ActiveSupport::TestCase
   context 'game' do
-    should_validate_presence_of :name
     should_have_many :periods
     should_have_many :events, :through => :periods
     should_have_many :players
     should_have_many :users, :through => :players
+    should_have_many :invitations
+    should_belong_to :owner
+
+    should_validate_presence_of :name, :owner_id
 
     setup do
-      @game = Game.create(:name => 'The Portsmouth Massacre')
+      @game = Factory(:game)
     end
 
     should 'start out in the initial state' do

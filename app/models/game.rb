@@ -8,17 +8,23 @@
 #  updated_at       :datetime
 #  state            :string(255)
 #  invite_only      :boolean
-#  player_threshold :integer         default(0)
+#  player_threshold :integer
+#  period_length    :integer
+#  short_code       :string(255)
+#  owner_id         :integer
 #
 
 require 'array_ext'
 
 class Game < ActiveRecord::Base
   has_many :players
+  has_many :invitations
   has_many :users, :through => :players
 
   has_many :periods, :order => :created_at
   has_many :events, :through => :periods
+
+  belongs_to :owner, :class_name => 'User', :foreign_key => :owner_id
 
   state_machine :initial => :setup do
     state :playable, :finished
@@ -39,7 +45,7 @@ class Game < ActiveRecord::Base
     after_transition  all       => :playable, :do => :next_phase
   end
 
-  validates_presence_of :name
+  validates_presence_of :name, :owner_id
   before_create         :set_defaults
 
   [:invite_only, :player_threshold, :period_length].each do |setter|

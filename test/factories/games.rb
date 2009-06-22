@@ -1,3 +1,4 @@
 Factory.define :game do |f|
-  f.name  'The Incident at Mariahville, 1842'
+  f.sequence(:name) { |n| "The Incident at Mariahville #{n}"}
+  f.association :owner, :factory => :user
 end

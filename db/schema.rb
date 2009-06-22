@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090621215112) do
+ActiveRecord::Schema.define(:version => 20090622143525) do
 
   create_table "events", :force => true do |t|
     t.string   "type"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(:version => 20090621215112) do
     t.boolean  "invite_only"
     t.integer  "player_threshold"
     t.integer  "period_length"
+    t.string   "short_code"
+    t.integer  "owner_id"
+  end
+
+  create_table "invitations", :force => true do |t|
+    t.integer  "game_id"
+    t.string   "twitter_login"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "periods", :force => true do |t|
