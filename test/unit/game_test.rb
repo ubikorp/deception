@@ -35,6 +35,15 @@ class GameTest < ActiveSupport::TestCase
       assert @game.state?(:setup)
     end
 
+    should 'auto-generate a short code' do
+      assert !@game.short_code.nil?
+    end
+
+    should 'use short code in url parameters' do
+      @game.short_code = 'abcde123'
+      assert_equal 'abcde123', @game.to_param
+    end
+
     context 'options' do
       should 'set invitation strategy' do
         @game.invite_only = true

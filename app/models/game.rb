@@ -15,6 +15,7 @@
 #
 
 require 'array_ext'
+require 'short_round'
 
 class Game < ActiveRecord::Base
   has_many :players
@@ -47,6 +48,7 @@ class Game < ActiveRecord::Base
 
   validates_presence_of :name, :owner_id
   before_create         :set_defaults
+  after_create          :generate_short_code
 
   [:invite_only, :player_threshold, :period_length].each do |setter|
     define_method("#{setter.to_s}=") do |value|
@@ -56,6 +58,10 @@ class Game < ActiveRecord::Base
         raise GameException::GameInProgress, "Cannot set game options after setup phase"
       end
     end
+  end
+
+  def to_param
+    short_code
   end
 
   def current_period
@@ -125,5 +131,9 @@ class Game < ActiveRecord::Base
     self.invite_only      ||= APP_CONFIG[:invite_only]
     self.player_threshold ||= APP_CONFIG[:player_threshold]
     self.period_length    ||= APP_CONFIG[:period_length]
+  end
+
+  def generate_short_code
+    self.update_attribute(:short_code, ShortRound.generate(self.id))
   end
 end
