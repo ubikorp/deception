@@ -30,6 +30,9 @@ class PlayerTest < ActiveSupport::TestCase
 
     should 'have to be added to a game during the setup phase' do
       @game = Factory(:game)
+      Factory(:darcy).join(@game)
+      Factory(:aaron).join(@game)
+      Factory(:elsa).join(@game)
       @game.start
       @player = Factory.build(:player, :game => @game)
       assert !@player.valid?

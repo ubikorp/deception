@@ -2,16 +2,17 @@
 #
 # Table name: games
 #
-#  id               :integer         not null, primary key
-#  name             :string(255)
-#  created_at       :datetime
-#  updated_at       :datetime
-#  state            :string(255)
-#  invite_only      :boolean
-#  player_threshold :integer
-#  period_length    :integer
-#  short_code       :string(255)
-#  owner_id         :integer
+#  id            :integer         not null, primary key
+#  name          :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  state         :string(255)
+#  invite_only   :boolean
+#  min_players   :integer
+#  period_length :integer
+#  short_code    :string(255)
+#  owner_id      :integer
+#  max_players   :integer
 #
 
 require 'array_ext'
@@ -31,7 +32,7 @@ class Game < ActiveRecord::Base
     state :playable, :finished
 
     event :start do
-      transition :setup => :playable
+      transition :setup => :playable, :if => :startable?
     end
 
     event :finish do
@@ -50,7 +51,7 @@ class Game < ActiveRecord::Base
   before_create         :set_defaults
   after_create          :generate_short_code
 
-  [:invite_only, :player_threshold, :period_length].each do |setter|
+  [:invite_only, :min_players, :max_players, :period_length].each do |setter|
     define_method("#{setter.to_s}=") do |value|
       if setup?
         write_attribute(setter, value)
@@ -127,10 +128,17 @@ class Game < ActiveRecord::Base
     end
   end
 
+  # game is startable if minimum player requirement is met, etc
+  def startable?
+    players.length >= APP_CONFIG[:min_players]
+  end
+
   def set_defaults
-    self.invite_only      ||= APP_CONFIG[:invite_only]
-    self.player_threshold ||= APP_CONFIG[:player_threshold]
-    self.period_length    ||= APP_CONFIG[:period_length]
+    self.invite_only   ||= APP_CONFIG[:invite_only]
+    self.period_length ||= APP_CONFIG[:period_length]
+
+    self.min_players = APP_CONFIG[:min_players] if self.min_players.nil? or (self.min_players < APP_CONFIG[:min_players])
+    self.max_players = APP_CONFIG[:max_players] if self.max_players.nil? or (self.max_players > APP_CONFIG[:max_players])
   end
 
   def generate_short_code

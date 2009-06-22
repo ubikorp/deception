@@ -2,16 +2,17 @@
 #
 # Table name: games
 #
-#  id               :integer         not null, primary key
-#  name             :string(255)
-#  created_at       :datetime
-#  updated_at       :datetime
-#  state            :string(255)
-#  invite_only      :boolean
-#  player_threshold :integer
-#  period_length    :integer
-#  short_code       :string(255)
-#  owner_id         :integer
+#  id            :integer         not null, primary key
+#  name          :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  state         :string(255)
+#  invite_only   :boolean
+#  min_players   :integer
+#  period_length :integer
+#  short_code    :string(255)
+#  owner_id      :integer
+#  max_players   :integer
 #
 
 require 'test_helper'
@@ -45,13 +46,19 @@ class GameTest < ActiveSupport::TestCase
     end
 
     context 'options' do
+      setup do
+        Factory(:nick).join(@game, :werewolf)
+        Factory(:jeff).join(@game)
+        Factory(:darcy).join(@game)
+      end
+
       should 'set invitation strategy' do
         @game.invite_only = true
-        @game.player_threshold = 11
+        @game.min_players = 11
         @game.period_length = 600
         @game.start
         assert @game.invite_only
-        assert_equal 11, @game.player_threshold
+        assert_equal 11, @game.min_players
       end
 
       should 'only be set before the game is started' do
@@ -62,14 +69,35 @@ class GameTest < ActiveSupport::TestCase
       end
 
       should 'use defaults if unspecified' do
-        assert_equal APP_CONFIG[:period_length],    @game.period_length
-        assert_equal APP_CONFIG[:player_threshold], @game.player_threshold
-        assert_equal APP_CONFIG[:invite_only],      @game.invite_only
+        @game.start
+        assert_equal APP_CONFIG[:period_length], @game.period_length
+        assert_equal APP_CONFIG[:min_players],   @game.min_players
+        assert_equal APP_CONFIG[:max_players],   @game.max_players
+        assert_equal APP_CONFIG[:invite_only],   @game.invite_only
       end
+
+      should 'enforce use of min- and max-player threshold values' do
+        @game = Factory(:game)
+        @game.min_players = 3
+        @game.max_players = 255
+
+        Factory(:elsa).join(@game)
+        assert !@game.start
+
+        assert @game.state?(:setup)
+      end
+    end
+
+    should 'only be startable if minimum requirements are met' do
+      assert !@game.start
+      assert !@game.playable?
     end
 
     context 'recently created' do
       setup do
+        Factory(:nick).join(@game, :werewolf)
+        Factory(:jeff).join(@game)
+        Factory(:darcy).join(@game)
         @game.start
       end
 
@@ -84,12 +112,11 @@ class GameTest < ActiveSupport::TestCase
       should 'start out in the night phase' do
         assert_equal :night, @game.periods.first.phase
       end
-    end
 
-    should 'be finished' do
-      @game.start
-      @game.finish
-      assert @game.state?(:finished)
+      should 'be finished' do
+        @game.finish
+        assert @game.state?(:finished)
+      end
     end
 
     context 'in progress' do
@@ -183,19 +210,21 @@ class GameTest < ActiveSupport::TestCase
 
     context 'winner' do
       setup do
-        @werewolf = Factory(:werewolf, :game => @game)
-        @villager = Factory(:villager, :game => @game)
+        @werewolf  = Factory(:werewolf, :game => @game)
+        @villager1 = Factory(:villager, :game => @game)
+        @villager2 = Factory(:darcy).join(@game)
         @game.start
       end
 
       should 'be werewolf' do
-        @villager.update_attribute(:dead, true)
+        @villager1.update_attribute(:dead, true)
+        @villager2.update_attribute(:dead, true)
         assert @game.winner.include?(@werewolf)
       end
 
       should 'be villagers' do
         @werewolf.update_attribute(:dead, true)
-        assert @game.winner.include?(@villager)
+        assert @game.winner.include?(@villager1)
       end
 
       should 'not be available yet' do

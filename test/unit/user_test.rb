@@ -102,24 +102,28 @@ class UserTest < ActiveSupport::TestCase
       setup do
         @game1 = Factory(:game)
         @game2 = Factory(:game)
+        @p1 = Factory(:nick)
+        @p2 = Factory(:jeff)
       end
 
       should 'let us know which game is currently active' do
-        @player = @user.join(@game1, :villager)
+        @player = @user.join(@game1)
         @player.update_attribute(:dead, true)
-        @player = @user.join(@game2, :villager)
+        @player = @user.join(@game2)
 
         assert_equal @player, @user.active_player
       end
 
       should 'report inactive if user player is dead' do
-        @player = @user.join(@game1, :villager)
+        @player = @user.join(@game1)
         @player.update_attribute(:dead, true)
         assert !@user.active_player
       end
 
       should 'report inactive if games are finished' do
-        @player = @user.join(@game1, :villager)
+        @p1.join(@game1, :werewolf)
+        @p2.join(@game1)
+        @player = @user.join(@game1)
         @game1.start
         @game1.finish
         assert !@user.active_player
