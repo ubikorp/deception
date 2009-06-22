@@ -53,12 +53,22 @@ class User < TwitterAuth::GenericUser
     player
   end
 
+  # determine whether or not this user has an invite to a particular game
+  # if the game has selected open invitations, this will always return true
+  def has_invite?(game)
+    if !game.invite_only?
+      true
+    else
+      game.invitations.select { |i| i.twitter_login == login }.length > 0
+    end
+  end
+
   # join a new game (during the game setup phase)
   # a user can only participate in one game at a time
   # only once they have been removed / killed in their active game
   # may they join a new game
   def join(game, role = :villager)
-    if !active_player
+    if !active_player && has_invite?(game)
       role_klass = role.to_s.classify.constantize
       players << role_klass.new(:game => game)
       players.last

@@ -50,6 +50,24 @@ class UserTest < ActiveSupport::TestCase
     should_validate_uniqueness_of :login
     should_validate_uniqueness_of :twitter_id, :message => "ID has already been taken."
 
+    context 'invitation' do
+      should 'not exist for game' do
+        @game = Factory(:game, :invite_only => true)
+        assert !@user.has_invite?(@game)
+      end
+
+      should 'exist for any open game' do
+        @game = Factory(:game, :invite_only => false)
+        assert @user.has_invite?(@game)
+      end
+
+      should 'grant access to game' do
+        @game = Factory(:game, :invite_only => true)
+        @game.invitations.create(:twitter_login => @user.login)
+        assert @user.has_invite?(@game)
+      end
+    end
+
     context 'joining a game' do
       setup do
         @game = Factory(:game)
@@ -72,6 +90,11 @@ class UserTest < ActiveSupport::TestCase
         assert_no_difference 'Player.count' do
           assert !@user.join(@other_game, :werewolf)
         end
+      end
+
+      should 'require an invitation' do
+        @game = Factory(:game, :invite_only => true)
+        assert !@user.join(@game, :werewolf)
       end
     end
 
