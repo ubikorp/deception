@@ -4,7 +4,7 @@ A turn-based strategy game engine. Basis for Twitter Werewolf game (work in prog
 
 == Usage
 
-It's a Rails app, dummy. Copy / customize your +database.yml+ and +settings.yml+ from the provided examples in the config directory. Then run +rake db:migrate+. A sample game script is provided. See the integration tests for example.
+It's a Rails app, dummy. Copy / customize your <tt>database.yml</tt> and <tt>settings.yml</tt> from the provided examples in the config directory. Then run <tt>rake db:migrate</tt>. A sample game script is provided. See the integration tests for example.
 
 
 Copyright (c) 2009 Nick Plante
