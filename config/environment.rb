@@ -5,7 +5,9 @@ RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
+
 require 'game_exception'
+require 'whenever'
 
 Rails::Initializer.run do |config|
   config.gem 'twitter-auth', :lib => 'twitter_auth'
@@ -15,6 +17,8 @@ Rails::Initializer.run do |config|
 
   config.gem 'thoughtbot-shoulda', :lib => 'shoulda/rails', :source => "http://gems.github.com"
   config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
+
+  config.gem 'javan-whenever', :lib => false, :source => 'http://gems.github.com'
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
