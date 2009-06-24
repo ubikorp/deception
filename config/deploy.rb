@@ -1,5 +1,5 @@
 set :application, "deception"
-set :repository,  "set your repository location here"
+set :repository,  "git@github.com:ubikorp/deception.git"
 
 # If you aren't deploying to /u/apps/#{application} on the target
 # servers (which is the default), you can specify the actual location
