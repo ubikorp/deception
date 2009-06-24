@@ -47,9 +47,14 @@ class Game < ActiveRecord::Base
     after_transition  all       => :playable, :do => :next_phase
   end
 
-  validates_presence_of :name, :owner_id
-  before_create         :set_defaults
-  after_create          :generate_short_code
+  validates_presence_of     :name, :owner_id, :period_length, :min_players, :max_players
+  validates_numericality_of :period_length, :min_players, :max_players
+  validates_inclusion_of    :min_players,   :within => APP_CONFIG[:min_players]..APP_CONFIG[:max_players], :message => "is outside the acceptable range"
+  validates_inclusion_of    :max_players,   :within => APP_CONFIG[:min_players]..APP_CONFIG[:max_players], :message => "is outside the acceptable range"
+  validates_inclusion_of    :period_length, :within => APP_CONFIG[:min_period_length]..APP_CONFIG[:max_period_length], :message => "is outside the acceptable range"
+
+  before_validation_on_create :set_defaults
+  after_create                :generate_short_code
 
   [:invite_only, :min_players, :max_players, :period_length].each do |setter|
     define_method("#{setter.to_s}=") do |value|
@@ -134,11 +139,10 @@ class Game < ActiveRecord::Base
   end
 
   def set_defaults
-    self.invite_only   ||= APP_CONFIG[:invite_only]
-    self.period_length ||= APP_CONFIG[:period_length]
-
-    self.min_players = APP_CONFIG[:min_players] if self.min_players.nil? or (self.min_players < APP_CONFIG[:min_players])
-    self.max_players = APP_CONFIG[:max_players] if self.max_players.nil? or (self.max_players > APP_CONFIG[:max_players])
+    self.invite_only   = APP_CONFIG[:invite_only] if invite_only.nil?
+    self.period_length = APP_CONFIG[:default_period_length] if period_length.nil?
+    self.min_players   = APP_CONFIG[:min_players] if min_players.nil?
+    self.max_players   = APP_CONFIG[:max_players] if max_players.nil?
   end
 
   def generate_short_code

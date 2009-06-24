@@ -26,7 +26,14 @@ class GameTest < ActiveSupport::TestCase
     should_have_many :invitations
     should_belong_to :owner
 
-    should_validate_presence_of :name, :owner_id
+    should_validate_presence_of :name, :owner_id, :min_players, :max_players, :period_length
+    should_validate_numericality_of :min_players, :max_players, :period_length
+    should_allow_values_for     :min_players,   APP_CONFIG[:min_players], APP_CONFIG[:max_players]
+    should_not_allow_values_for :min_players,   APP_CONFIG[:min_players] - 1, APP_CONFIG[:max_players] + 1, :message => "is outside the acceptable range"
+    should_allow_values_for     :max_players,   APP_CONFIG[:min_players], APP_CONFIG[:max_players]
+    should_not_allow_values_for :max_players,   APP_CONFIG[:min_players] - 1, APP_CONFIG[:max_players] + 1, :message => "is outside the acceptable range"
+    should_allow_values_for     :period_length, APP_CONFIG[:min_period_length], APP_CONFIG[:max_period_length]
+    should_not_allow_values_for :period_length, APP_CONFIG[:min_period_length] - 1, APP_CONFIG[:max_period_length] + 1, :message => "is outside the acceptable range"
 
     setup do
       @game = Factory(:game)
@@ -69,11 +76,12 @@ class GameTest < ActiveSupport::TestCase
       end
 
       should 'use defaults if unspecified' do
-        @game.start
-        assert_equal APP_CONFIG[:period_length], @game.period_length
-        assert_equal APP_CONFIG[:min_players],   @game.min_players
-        assert_equal APP_CONFIG[:max_players],   @game.max_players
-        assert_equal APP_CONFIG[:invite_only],   @game.invite_only
+        @game = Game.new(:name => "Test Game")
+        @game.save
+        assert_equal APP_CONFIG[:default_period_length], @game.period_length
+        assert_equal APP_CONFIG[:min_players],           @game.min_players
+        assert_equal APP_CONFIG[:max_players],           @game.max_players
+        assert_equal APP_CONFIG[:invite_only],           @game.invite_only
       end
 
       should 'enforce use of min- and max-player threshold values' do

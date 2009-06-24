@@ -1,17 +1,23 @@
-development: &non_production_settings
+development:
   min_players: 7
   max_players: 21
-  period_length: 600 # 10 minutes
+  min_period_length: 120
+  max_period_length: 43200
+  default_period_length: 600 # 10 minutes
   invite_only: false
 
 test:
   min_players: 2
   max_players: 21
-  period_length: 600 # 10 minutes
+  min_period_length: 120
+  max_period_length: 43200
+  default_period_length: 600 # 10 minutes
   invite_only: false
 
 production:
   min_players: 7
   max_players: 21
-  period_length: 43200 # 12 hours
+  min_period_length: 600
+  max_period_length: 43200
+  default_period_length: 43200 # 12 hours
   invite_only: false
