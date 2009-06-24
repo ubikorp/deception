@@ -14,6 +14,7 @@ Rails::Initializer.run do |config|
   config.gem 'oauth', :version => '>= 0.3.1'
   config.gem 'haml', :version => '>= 2.0.6'
   config.gem 'state_machine', :version => '>= 0.7.5'
+  config.gem 'mocha', :version => '>= 0.9.5'
 
   config.gem 'thoughtbot-shoulda', :lib => 'shoulda/rails', :source => "http://gems.github.com"
   config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"

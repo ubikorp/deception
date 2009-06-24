@@ -56,6 +56,16 @@ class Game < ActiveRecord::Base
   before_validation_on_create :set_defaults
   after_create                :generate_short_code
 
+  # Check status of playable games and update them, moving to the next period if the time is right
+  def self.update_periods
+    Game.with_state(:playable).each do |game|
+      if game.next_period_starts_at <= Time.now
+        logger.info "Next period for Game [#{game.id}]"
+        game.continue
+      end
+    end
+  end
+
   [:invite_only, :min_players, :max_players, :period_length].each do |setter|
     define_method("#{setter.to_s}=") do |value|
       if setup?
@@ -72,6 +82,14 @@ class Game < ActiveRecord::Base
 
   def current_period
     periods.last
+  end
+
+  def next_period_starts_at
+    if playable?
+      periods.last.created_at + period_length
+    else
+      nil
+    end
   end
 
   def current_events

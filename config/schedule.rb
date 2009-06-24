@@ -4,16 +4,15 @@
 # http://en.wikipedia.org/wiki/Cron
 
 # Example:
-#
-# set :cron_log, "/path/to/my/cron_log.log"
-#
-# every 2.hours do
-#   command "/usr/bin/some_great_command"
-#   runner "MyModel.some_method"
-#   rake "some:great:rake:task"
-# end
-#
+
+set :cron_log, "/var/www/apps/deception/shared/log/cron_log.log"
+
+every 10.minutes do
+  rake "game:periods:update"
+end
+
 # every 4.days do
+#   command "/usr/bin/some_great_command"
 #   runner "AnotherModel.prune_old_records"
 # end
 

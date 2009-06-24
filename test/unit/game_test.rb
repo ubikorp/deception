@@ -239,5 +239,35 @@ class GameTest < ActiveSupport::TestCase
         assert !@game.winner
       end
     end
+
+    context 'period change' do
+      setup do
+        @game.update_attribute(:period_length, 1200)
+        @werewolf =  Factory(:werewolf, :game => @game)
+        @villager1 = Factory(:villager, :game => @game)
+        @villager2 = Factory(:darcy).join(@game)
+        @game.start
+      end
+
+      should 'indicate when next period starts' do
+        assert_equal Time.now.to_i + @game.period_length, @game.next_period_starts_at.to_i
+      end
+
+      should 'ensure that games always start on the XX minute mark (for easy / timely updates)'
+
+      should 'continue any game that has exceeded period length' do
+        Time.stubs(:now).returns(@game.next_period_starts_at)
+
+        assert_difference 'Period.count' do
+          Game.update_periods
+        end
+      end
+
+      should 'not affect games that have a longer period length' do
+        assert_no_difference 'Period.count' do
+          Game.update_periods
+        end
+      end
+    end
   end
 end
