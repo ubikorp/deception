@@ -29,17 +29,27 @@ class Game < ActiveRecord::Base
   belongs_to :owner, :class_name => 'User', :foreign_key => :owner_id
 
   state_machine :initial => :setup do
-    state :playable, :finished
+    state :ready, :playable, :finished
 
+    # used by player to manually start (queue for sync start)
+    event :ready do
+      transition :setup => :ready, :if => :startable?
+    end
+
+    # start the game
     event :start do
+      transition :ready => :playable, :if => :startable?
       transition :setup => :playable, :if => :startable?
     end
 
+    # end the game
     event :finish do
       transition :playable => :finished
     end
 
+    # start next phase / round of play
     event :continue do
+      transition :waiting  => :playable
       transition :playable => :playable
     end
 
@@ -64,6 +74,22 @@ class Game < ActiveRecord::Base
         game.continue
       end
     end
+
+    # user requested start
+    Game.with_state(:ready).each do |game|
+      logger.info "Starting Game [#{game.id}]"
+      game.start
+    end
+
+    # game auto-start
+    Game.with_state(:setup).each do |game|
+      if game.players.length >= game.max_players
+        logger.info "Auto-Starting Game [#{game.id}]"
+        game.start
+      end
+    end
+
+    # TODO: what about games that were open invite and hit their max user num? start automatically?
   end
 
   [:invite_only, :min_players, :max_players, :period_length].each do |setter|
@@ -153,7 +179,12 @@ class Game < ActiveRecord::Base
 
   # game is startable if minimum player requirement is met, etc
   def startable?
-    players.length >= APP_CONFIG[:min_players]
+    if players.length < APP_CONFIG[:min_players]
+      errors.add_to_base("This game must have at least #{APP_CONFIG[:min_players]} players")
+      false
+    else
+      true
+    end
   end
 
   def set_defaults

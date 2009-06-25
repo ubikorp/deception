@@ -97,8 +97,10 @@ class GameTest < ActiveSupport::TestCase
     end
 
     should 'only be startable if minimum requirements are met' do
+      assert !@game.ready
       assert !@game.start
       assert !@game.playable?
+      assert @game.errors.on_base.include?("This game must have at least #{APP_CONFIG[:min_players]} players")
     end
 
     context 'recently created' do
@@ -246,16 +248,24 @@ class GameTest < ActiveSupport::TestCase
         @werewolf =  Factory(:werewolf, :game => @game)
         @villager1 = Factory(:villager, :game => @game)
         @villager2 = Factory(:darcy).join(@game)
-        @game.start
       end
 
       should 'indicate when next period starts' do
+        @game.start
         assert_equal Time.now.to_i + @game.period_length, @game.next_period_starts_at.to_i
       end
 
-      should 'ensure that games always start on the XX minute mark (for easy / timely updates)'
+      should 'start games that are in the ready state (ensuring that games always start on the XX minute mark for easy sync updates)' do
+        @game.ready
+
+        assert_difference 'Period.count' do
+          Game.update_periods
+          @game.reload.playable?
+        end
+      end
 
       should 'continue any game that has exceeded period length' do
+        @game.start
         Time.stubs(:now).returns(@game.next_period_starts_at)
 
         assert_difference 'Period.count' do
@@ -264,6 +274,7 @@ class GameTest < ActiveSupport::TestCase
       end
 
       should 'not affect games that have a longer period length' do
+        @game.start
         assert_no_difference 'Period.count' do
           Game.update_periods
         end
