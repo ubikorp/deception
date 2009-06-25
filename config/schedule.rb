@@ -7,6 +7,7 @@
 
 set :cron_log, "/var/www/apps/deception/shared/log/cron_log.log"
 
+# should be the same as the min_period_length in settings.yml
 every 10.minutes do
   rake "game:periods:update"
 end

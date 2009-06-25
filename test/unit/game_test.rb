@@ -94,6 +94,12 @@ class GameTest < ActiveSupport::TestCase
 
         assert @game.state?(:setup)
       end
+
+      should 'require a period length that is a multiple of the minimum (for easy game turnover sync)' do
+        @game.period_length = 930
+        assert !@game.valid?
+        assert @game.errors.on(:period_length).include?("must be a multiple of #{APP_CONFIG[:min_period_length]}")
+      end
     end
 
     should 'only be startable if minimum requirements are met' do

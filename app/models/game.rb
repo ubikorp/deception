@@ -88,8 +88,6 @@ class Game < ActiveRecord::Base
         game.start
       end
     end
-
-    # TODO: what about games that were open invite and hit their max user num? start automatically?
   end
 
   [:invite_only, :min_players, :max_players, :period_length].each do |setter|
@@ -99,6 +97,13 @@ class Game < ActiveRecord::Base
       else
         raise GameException::GameInProgress, "Cannot set game options after setup phase"
       end
+    end
+  end
+
+  def validate
+    # period length should always be a multiple of min_period_length
+    if period_length
+      errors.add(:period_length, "must be a multiple of #{APP_CONFIG[:min_period_length]}") unless (period_length % APP_CONFIG[:min_period_length] == 0)
     end
   end
 
