@@ -1,4 +1,3 @@
-- enforce period length (evented? use whenever?)
 - add custom handler + notification wrapper / integration for bird grinder 
 - optional twitter dm / public notifications when game state changes
 - web interface for game setup and player settings, history

@@ -1,0 +1,7 @@
+%p Werewolf is a game of psychological intrigue pitting the villagers of Twittsville against the lycanthropic forces of evil, hidden away in their very ranks!
+%p At night, werewolves transform and kill innocent villagers. During the day, villagers debate the identity of the wolves and vote to lynch the prime suspect. It's a game of deception and skill. Do you have what it takes to win?
+%p Sign up to create a private game and play it on Twitter, by inviting your friends and followers. Or browse the list of public games that you can join and start playing any time.
+
+%ul.games
+- @games.each do |game|
+  %li= link_to(game.name, game_path(game))

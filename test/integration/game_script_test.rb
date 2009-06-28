@@ -3,20 +3,7 @@ require 'test_helper'
 class GameScriptTest < ActionController::IntegrationTest
   context 'scenarios' do
     setup do
-      @game           = Factory(:game)
-      @nick           = Factory(:nick)
-      @jeff           = Factory(:jeff)
-      @darcy          = Factory(:darcy)
-      @aaron          = Factory(:aaron)
-      @elsa           = Factory(:elsa)
-
-      @nick.join(@game, :werewolf)
-      @jeff.join(@game)
-      @darcy.join(@game)
-      @aaron.join(@game)
-      @elsa.join(@game)
-
-      @game.start
+      create_game
     end
 
     should 'be won by werewolf' do
@@ -74,5 +61,22 @@ class GameScriptTest < ActionController::IntegrationTest
       assert @game.finished?
       assert @game.winner.include?(@jeff.players.last)
     end
+  end
+
+  def create_game
+    @game  = Factory(:game)
+    @nick  = Factory(:nick)
+    @jeff  = Factory(:jeff)
+    @darcy = Factory(:darcy)
+    @aaron = Factory(:aaron)
+    @elsa  = Factory(:elsa)
+
+    @nick.join(@game, :werewolf)
+    @jeff.join(@game)
+    @darcy.join(@game)
+    @aaron.join(@game)
+    @elsa.join(@game)
+
+    @game.start
   end
 end
