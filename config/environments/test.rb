@@ -27,8 +27,7 @@ config.action_mailer.delivery_method = :test
 # like if you have constraints or database-specific column types
 # config.active_record.schema_format = :sql
 
-config.gem 'mocha', :version => '>= 0.9.5'
-config.gem 'webrat', :version => '>= 0.4.4'
-
-config.gem 'thoughtbot-shoulda', :lib => 'shoulda/rails', :source => "http://gems.github.com"
-config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
+config.gem "rspec",                   :lib => false,            :version => ">=1.2.6" unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
+config.gem "rspec-rails",             :lib => 'spec/rails',     :version => ">=1.2.6" unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
+config.gem "remarkable_rails",        :lib => false,            :version => ">=3.1.7"
+config.gem "thoughtbot-factory_girl", :lib => "factory_girl",   :source => "http://gems.github.com"
