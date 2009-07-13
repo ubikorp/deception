@@ -1,0 +1,22 @@
+%h2 Create New Game
+
+.errors= error_messages_for(:game)
+
+- form_for(@game) do |f|
+  %p
+    = f.label(:name, 'Name')
+    = f.text_field(:name)
+  %p
+    = f.label(:invite_only, 'Game Type')
+    = f.select(:invite_only, [['Open Game', false], ['Invite Only', true]])
+  %p
+    = f.label(:period_length)
+    = f.select(:period_length, [['10 minutes', 600], ['30 minutes', 1800], ['1 hour', 3600]])
+  %p
+    = f.label(:min_players)
+    = f.select(:min_players, [APP_CONFIG[:min_players]], {}, :disabled => true)
+  %p
+    = f.label(:max_players)
+    = f.select(:max_players, (9..20).to_a)
+
+  = f.submit('Create Game')

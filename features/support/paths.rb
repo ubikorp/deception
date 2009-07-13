@@ -10,6 +10,9 @@ module NavigationHelpers
     
     when /the homepage/
       '/'
+
+    when /the new game page/
+      new_game_path
     
     # Add more mappings here.
     # Here is a more fancy example:

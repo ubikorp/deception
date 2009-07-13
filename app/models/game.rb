@@ -96,7 +96,7 @@ class Game < ActiveRecord::Base
 
   [:invite_only, :min_players, :max_players, :period_length].each do |setter|
     define_method("#{setter.to_s}=") do |value|
-      if setup?
+      if new_record? || setup? 
         write_attribute(setter, value)
       else
         raise GameException::GameInProgress, "Cannot set game options after setup phase"

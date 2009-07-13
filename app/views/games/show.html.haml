@@ -1,0 +1,15 @@
+%h2= "Game Details: #{@game.name}"
+
+%p This should read like a script :)
+
+%ul.players
+  - @game.players.each do |player|
+    %li
+      = player.user.login
+      = ' (DEAD)' if player.dead?
+
+%ul.story
+  - @game.periods.each_with_index do |period, index|
+    %li
+      %strong= "PERIOD #{index}"
+      %p= "Summary goes here!"
