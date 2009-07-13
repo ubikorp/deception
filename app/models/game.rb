@@ -68,7 +68,7 @@ class Game < ActiveRecord::Base
   validates_inclusion_of    :period_length, :within => APP_CONFIG[:min_period_length]..APP_CONFIG[:max_period_length], :message => "is outside the acceptable range"
 
   before_validation_on_create :set_defaults
-  after_create                :generate_short_code
+  after_create                :generate_short_code, :add_owner_as_player
 
   # Check status of playable games and update them, moving to the next period if the time is right
   def self.update_periods
@@ -205,5 +205,9 @@ class Game < ActiveRecord::Base
 
   def generate_short_code
     self.update_attribute(:short_code, ShortRound.generate(self.id))
+  end
+
+  def add_owner_as_player
+    self.owner.join(self)
   end
 end

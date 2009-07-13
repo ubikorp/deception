@@ -47,6 +47,11 @@ describe Game do
     @game.short_code.should_not be_nil
   end
 
+  it 'should auto-add the owner of a game as its first player' do
+    @game.players.length == 1
+    @game.players[0].user == @game.owner
+  end
+
   it 'should use short code in url parameters' do
     @game.short_code = 'abcde123'
     @game.to_param.should == 'abcde123'
@@ -173,9 +178,9 @@ describe Game do
     end
 
     it 'should report villagers that are still in the game' do
-      @game.villagers.length.should == 2
+      @game.villagers.length.should == 3 # include owner
       @villager1.update_attribute(:dead, true)
-      @game.villagers.length.should == 1
+      @game.villagers.length.should == 2
     end
 
     it 'should report werewolves that are still in the game' do
@@ -226,7 +231,7 @@ describe Game do
   context 'winner' do
     before(:each) do
       @werewolf  = Factory(:werewolf, :game => @game)
-      @villager1 = Factory(:villager, :game => @game)
+      @villager1 = @game.owner.active_player
       @villager2 = Factory(:darcy).join(@game)
       @game.start
     end

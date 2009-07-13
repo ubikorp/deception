@@ -2,15 +2,15 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe 'Game script' do
   before(:each) do
-    @game  = Factory(:game)
     @nick  = Factory(:nick)
     @jeff  = Factory(:jeff)
     @darcy = Factory(:darcy)
     @aaron = Factory(:aaron)
     @elsa  = Factory(:elsa)
 
+    @game  = Factory(:game, :owner => @jeff)
+
     @nick.join(@game, :werewolf)
-    @jeff.join(@game)
     @darcy.join(@game)
     @aaron.join(@game)
     @elsa.join(@game)
