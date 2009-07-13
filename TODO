@@ -1,4 +1,4 @@
-- use fakeweb / cuke for testing auth with twitter, etc
+- roles should be assigned at game start not at join time
 - add custom handler + notification wrapper / integration for bird grinder 
 - optional twitter dm / public notifications when game state changes
 - web interface for game setup and player settings, history
