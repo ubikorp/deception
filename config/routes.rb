@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
-  map.static '/:action', :controller => 'static'
+  map.resources :games, :collection => { :available => :get, :finished => :get}
 
+  map.static '/:action', :controller => 'static'
   map.root :controller => 'static', :action => 'index'
 
   # The priority is based upon order of creation: first created -> highest priority.

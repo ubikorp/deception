@@ -1,4 +1,4 @@
-- enforce period length (evented? use whenever?)
+- use fakeweb / cuke for testing auth with twitter, etc
 - add custom handler + notification wrapper / integration for bird grinder 
 - optional twitter dm / public notifications when game state changes
 - web interface for game setup and player settings, history
