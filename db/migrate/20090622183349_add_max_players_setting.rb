@@ -5,7 +5,7 @@ class AddMaxPlayersSetting < ActiveRecord::Migration
   end
 
   def self.down
-    rename_column :min_players, :player_threshold
+    rename_column :games, :min_players, :player_threshold
     remove_column :games, :max_players
   end
 end
