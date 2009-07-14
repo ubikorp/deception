@@ -46,7 +46,7 @@ class User < TwitterAuth::GenericUser
   # or nil if they are not currently active in a game
   def active_player
     player = nil
-    players.each do |p|
+    players(true).each do |p|
       player = p unless p.dead? or p.game.finished?
     end
 
@@ -81,11 +81,31 @@ class User < TwitterAuth::GenericUser
   # record a vote in the user's current game
   def vote(user)
     if player = active_player
-      vote = VoteEvent.new(:period => player.game.current_period, :source_player => player, :target_player => user.active_player)
-      if vote.save
-        vote
+      pvote = VoteEvent.new(:period => player.game.current_period, :source_player => player, :target_player => user.active_player)
+      if pvote.save
+        pvote
       else
         false
+      end
+    else
+      # TODO: may want to raise here?
+      false
+    end
+  end
+
+  # leave an in-progress game
+  def quit(game = nil)
+    if player = active_player
+      if player.game.setup?
+        player.destroy # hasn't started yet, leave without saying goodbye
+      else
+        # game is in-progress; issue a proper QuitEvent (suicide) to leave
+        pquit = QuitEvent.new(:period => player.game.current_period, :source_player => player)
+        if pquit.save
+          pquit
+        else
+          false
+        end
       end
     else
       # TODO: may want to raise here?

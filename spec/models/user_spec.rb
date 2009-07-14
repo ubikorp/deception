@@ -96,6 +96,32 @@ describe User do
     end
   end
 
+  it 'should quit a game in setup phase' do
+    @game = Factory(:game)
+
+    lambda {
+      @user.join(@game)
+      @user.quit(@game)
+    }.should_not change(Player, :count)
+
+    @user.active_player.should be_nil
+  end
+
+  it 'should quit an in-progress game (with logged quit event)' do
+    @game = Factory(:game)
+    Factory(:aaron).join(@game)
+    Factory(:elsa).join(@game)
+
+    @user.join(@game)
+    @game.start
+
+    lambda {
+      @user.quit(@game)
+      @game.players.should_not include(@user.players.first)
+      @game.continue
+    }.should change(QuitEvent, :count)
+  end
+
   context 'game status' do
     before(:each) do
       @game1 = Factory(:game)

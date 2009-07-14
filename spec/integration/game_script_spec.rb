@@ -23,7 +23,7 @@ describe 'Game script' do
     # 1. night: werewolf kills villager one
     @nick.vote(@jeff)
     @game.continue
-    @jeff.reload.active_player.should == nil
+    @jeff.active_player.should == nil
 
     # 2. day: villagers vote to lynch villager two
     @nick.vote(@darcy)
@@ -31,12 +31,12 @@ describe 'Game script' do
     @aaron.vote(@darcy)
     @elsa.vote(@aaron)
     @game.continue
-    @darcy.reload.active_player.should == nil
+    @darcy.active_player.should == nil
 
     # 3. night: werewolf kills villager three
     @nick.vote(@aaron)
     @game.continue
-    @aaron.reload.active_player.should == nil
+    @aaron.active_player.should == nil
 
     # 4. day: stalemated voting, nobody gets lynched
     lambda {
@@ -48,20 +48,20 @@ describe 'Game script' do
     # 5. night: werewolf kills villager four, wins
     @nick.vote(@elsa)
     @game.continue
-    @elsa.reload.active_player.should == nil
+    @elsa.active_player.should == nil
     
     @game.finished?.should == true
     @game.winner.should include(@nick.players.last)
 
     # game is finished, no players are active
-    @nick.reload.active_player.should == nil
+    @nick.active_player.should == nil
   end
 
   it 'should be won by villagers' do
     # 1. night: werewolf kills villager four
     @nick.vote(@elsa)
     @game.continue
-    @elsa.reload.active_player.should == nil
+    @elsa.active_player.should == nil
 
     # 2. day: villagers vote to lynch werewolf
     @nick.vote(@aaron)
@@ -69,7 +69,7 @@ describe 'Game script' do
     @darcy.vote(@nick)
     @aaron.vote(@darcy)
     @game.continue
-    @nick.reload.active_player.should == nil
+    @nick.active_player.should == nil
 
     @game.finished?.should == true
     @game.winner.should include(@jeff.players.last)
