@@ -2,14 +2,23 @@
 
 %p This should read like a script :)
 
+%h3 Cast &amp; Crew
 %ul.players
   - @game.players.each do |player|
     %li
       = player.user.login
       = ' (DEAD)' if player.dead?
 
-%ul.story
-  - @game.periods.each_with_index do |period, index|
-    %li
-      %strong= "PERIOD #{index}"
-      %p= "Summary goes here!"
+- if @game.setup?
+  %p.notice This game has not yet begun.
+
+  - if !@game.invite_only? && logged_in? && !current_user.active_player
+    %p= "We're looking for players though. Want to #{link_to('join this game', new_game_player_path(@game))}?"
+
+- else
+  %h3 The Story
+  %ul.story
+    - @game.periods.each_with_index do |period, index|
+      %li
+        %strong= "PERIOD #{index}"
+        %p= "Summary goes here!"
