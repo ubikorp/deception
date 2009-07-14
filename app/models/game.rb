@@ -111,9 +111,9 @@ class Game < ActiveRecord::Base
     end
 
     # a user can only participate in one game at a time
-    if owner
-      errors.add(:owner, "is already an active member of another game") if owner.active_player
-    end
+    # if owner
+    #   errors.add(:owner, "is already an active member of another game") if owner.active_player
+    # end
   end
 
   def to_param
@@ -173,7 +173,7 @@ class Game < ActiveRecord::Base
   def end_turn
     victims = if night?
       current_events.votes.select { |e| e.source_player.werewolf? }.map { |e| e.target_player }
-    else
+    else # day
       current_events.votes.map { |e| e.target_player }.modes || []
     end
 

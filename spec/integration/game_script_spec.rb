@@ -8,10 +8,10 @@ describe 'Game script' do
     @aaron = Factory(:aaron)
     @elsa  = Factory(:elsa)
 
-    @game  = Factory(:game)
+    @game  = Factory(:game, :owner => @darcy)
 
-    @jeff.join(@game)
     @nick.join(@game, :werewolf)
+    @jeff.join(@game)
     @darcy.join(@game)
     @aaron.join(@game)
     @elsa.join(@game)
