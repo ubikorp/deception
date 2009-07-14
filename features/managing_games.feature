@@ -21,7 +21,7 @@ And edit games that I have created
     Given I am signed in
     And I am already participating in a game
     When I go to "the new game page"
-    Then I should see "Sorry, you cannot manage more than one game at once"
+    Then I should see "Sorry, you cannot participate in more than one game at a time"
 
   Scenario: User invites friends to an open game
     Given I am signed in

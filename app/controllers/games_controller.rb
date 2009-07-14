@@ -18,13 +18,19 @@ class GamesController < ApplicationController
 
   # new game form
   def new
-    @game = Game.new
+    if current_user.active_player
+      flash[:error] = "Sorry, you cannot participate in more than one game at a time"
+      redirect_to(game_path(current_user.active_player.game))
+    else
+      @game = Game.new
+    end
   end
 
   # create new game
   def create
     @game = Game.new(params[:game].merge(:owner => current_user))
     if @game.save
+      current_user.join(@game)
       flash[:notice] = "Your game has been created"
       redirect_to(game_path(@game))
     else
