@@ -109,16 +109,16 @@ describe User do
 
   it 'should quit an in-progress game (with logged quit event)' do
     @game = Factory(:game)
-    Factory(:aaron).join(@game)
+    Factory(:aaron).join(@game, :werewolf)
     Factory(:elsa).join(@game)
 
-    @user.join(@game)
+    @player = @user.join(@game)
     @game.start
 
     lambda {
       @user.quit(@game)
-      @game.players.should_not include(@user.players.first)
       @game.continue
+      @player.reload.should be_dead
     }.should change(QuitEvent, :count)
   end
 
