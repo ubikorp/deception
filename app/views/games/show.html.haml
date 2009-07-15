@@ -17,7 +17,7 @@
     %p= button_to('Join Game', game_players_path(@game))
 
   - elsif !@game.invite_only? && logged_in? && @game.players.include?(current_user.active_player)
-    %p How about inviting some friends? (TODO)
+    %p= "You're scheduled to play in this game, once it starts. Why not #{link_to('invite some of your friends', new_game_invitation_path(@game))} to play too?"
 
 - else
   %h3 The Story

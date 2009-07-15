@@ -25,6 +25,9 @@ module NavigationHelpers
 
     when /the finished games page/
       finished_games_path
+
+    when /the new invitations page for "(.*?)"/
+      new_game_invitation_path(Game.find_by_name($1))
     
     # Add more mappings here.
     # Here is a more fancy example:

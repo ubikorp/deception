@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :games, :collection => { :pending => :get, :finished => :get} do |game|
     game.resources :players, :only => [:create, :destroy]
+    game.resources :invitations, :only => [:new, :create]
   end
 
   map.static '/:action', :controller => 'static'
