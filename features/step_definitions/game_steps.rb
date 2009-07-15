@@ -43,7 +43,7 @@ Given /^there is an invite\-only game called "([^\"]*)"$/ do |arg1|
 end
 
 Given /^I am the owner of the game called "([^\"]*)"$/ do |arg1|
-  #@game = Game.find_by_name(arg1)
-  #@game.owner = User.last
-  #@game.save
+  @game = Game.find_by_name(arg1)
+  @game.owner = User.find_by_login('zapnap')
+  @game.save
 end

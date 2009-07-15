@@ -28,4 +28,4 @@ I want to be able to invite my friends and followers
     Given I am signed in
     And there is an invite-only game called "The Incident at Mariahville"
     When I go to the new invitations page for "The Incident at Mariahville"
-    Then I am redirected to the login page
+    Then I should be redirected to login
