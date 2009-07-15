@@ -31,6 +31,7 @@ Given /^that there is a finished game called "([^\"]*)"$/ do |arg1|
 
   @jeff.vote(@darcy)
   @game.continue
+  @game.finish
 end
 
 Given /^that there is an ongoing game called "([^\"]*)"$/ do |arg1|
