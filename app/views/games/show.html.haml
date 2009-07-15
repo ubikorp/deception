@@ -13,7 +13,11 @@
   %p.notice This game has not yet begun.
 
   - if !@game.invite_only? && logged_in? && !current_user.active_player
-    %p= "We're looking for players though. Want to #{link_to('join this game', new_game_player_path(@game))}?"
+    %p We're looking for players though. Want to join this game?
+    %p= button_to('Join Game', game_players_path(@game))
+
+  - elsif !@game.invite_only? && logged_in? && @game.players.include?(current_user.active_player)
+    %p How about inviting some friends? (TODO)
 
 - else
   %h3 The Story

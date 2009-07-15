@@ -5,12 +5,12 @@ I want to be able to create games
 And edit games that I have created
 
   Scenario: Anonymous user cannot create a game
-    When I go to "the new game page"
+    When I go to the new game page
     Then I should be redirected to login
 
   Scenario: Registered user creates a game
     Given I am signed in
-    When I go to "the new game page"
+    When I go to the new game page
     And I fill in "Name" with "The Incident at Devonshire"
     And I select "Open Game" from "Game Type"
     And I select "30 minutes" from "Period Length"
@@ -20,12 +20,25 @@ And edit games that I have created
   Scenario: Registered user tries to run two games simultaneously
     Given I am signed in
     And I am already participating in a game
-    When I go to "the new game page"
+    When I go to the new game page
     Then I should see "Sorry, you cannot participate in more than one game at a time"
+
+  Scenario: User joins an open game
+    Given I am signed in
+    And there is a game called "The Incident at Mariahville"
+    When I go to the game page for "The Incident at Mariahville"
+    And I press "Join Game"
+    Then I should see "Thanks for joining"
+
+  Scenario: User joins an invite-only game
+    Given I am signed in
+    And there is a game called "The Incident at Mariahville"
+    Then I can join the game
 
   Scenario: User invites friends to an open game
     Given I am signed in
-    When I go to "the game page"
+    And there is a game called "The Incident at Mariahville"
+    When I go to the game page for "The Incident at Mariahville"
     Then I can invite my friends
 
   Scenario: User invites friends to a private game

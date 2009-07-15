@@ -13,6 +13,9 @@ module NavigationHelpers
 
     when /the new game page/
       new_game_path
+
+    when /the game page for "(.*?)"/
+      game_path(Game.find_by_name($1))
     
     # Add more mappings here.
     # Here is a more fancy example:
