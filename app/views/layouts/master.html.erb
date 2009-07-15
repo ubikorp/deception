@@ -6,6 +6,7 @@
     <title>Werewolf - <%= @title || 'A Game of Deception!' %></title>
     <%= stylesheet_link_tag 'master' %>
     <%= javascript_include_tag :defaults %>
+    <%= yield :extra_head %>
   </head>
   <body>
     <div id='wrapper'>

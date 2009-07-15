@@ -64,3 +64,24 @@ div.notice {
   background: #cfc;
   border-color: #191;
   color: #131; }
+
+#followers ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  #followers ul li.follower {
+    float: left;
+    width: 120px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-bottom: 10px; }
+    #followers ul li.follower img {
+      border: 5px solid #eee;
+      margin-bottom: 2px; }
+  #followers ul li.follower.hover img {
+    border: 5px solid #ccc; }
+  #followers ul li.follower.selected img {
+    border: 5px solid #cfc; }
+#followers #invitations textarea {
+  width: 100%;
+  margin-bottom: 20px; }

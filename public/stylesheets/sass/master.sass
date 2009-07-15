@@ -65,3 +65,35 @@ div.notice
   :background #cfc
   :border-color #191
   :color #131
+
+// ---
+
+#followers
+  ul
+    :list-style-type none
+    :margin 0
+    :padding 0
+
+    li.follower
+      :float left
+      :width 120px
+      :font-size 0.8em
+      :font-weight bold
+      :margin-bottom 10px
+      img
+        :border 5px solid #eee
+        :margin-bottom 2px
+
+    li.follower.hover
+      img
+        :border 5px solid #ccc
+
+    li.follower.selected
+      img
+        :border 5px solid #cfc
+
+  #invitations
+    textarea
+      :width 100%
+      :margin-bottom 20px
+

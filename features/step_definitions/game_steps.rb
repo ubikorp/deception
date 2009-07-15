@@ -41,3 +41,9 @@ end
 Given /^there is an invite\-only game called "([^\"]*)"$/ do |arg1|
   @game = Factory(:game, :name => arg1, :owner => Factory(:user), :invite_only => true)
 end
+
+Given /^I am the owner of the game called "([^\"]*)"$/ do |arg1|
+  #@game = Game.find_by_name(arg1)
+  #@game.owner = User.last
+  #@game.save
+end
