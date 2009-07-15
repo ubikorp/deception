@@ -3,15 +3,15 @@ Given /^I am already participating in a game$/ do
   @player = Factory(:villager, :user => User.last, :game => @game)
 end
 
-Given /^there is a game called "([^\"]*)"$/ do |arg1|
+Given /^there is an ongoing game called "([^\"]*)"$/ do |arg1|
   @game = Factory(:game, :name => arg1, :owner => Factory(:user))
+  Factory(:jeff).join(@game, :werewolf)
+  Factory(:nick).join(@game)
+  Factory(:darcy).join(@game)
+  @game.start
 end
 
-Given /^that there is a pending game called "([^\"]*)"$/ do |arg1|
-  @game = Factory(:game, :name => arg1, :owner => Factory(:user))
-end
-
-Given /^that there is a finished game called "([^\"]*)"$/ do |arg1|
+Given /^there is a finished game called "([^\"]*)"$/ do |arg1|
   @game  = Factory(:game, :name => arg1, :owner => Factory(:user))
   @jeff  = Factory(:jeff)
   @nick  = Factory(:nick)
@@ -34,10 +34,10 @@ Given /^that there is a finished game called "([^\"]*)"$/ do |arg1|
   @game.finish
 end
 
-Given /^that there is an ongoing game called "([^\"]*)"$/ do |arg1|
+Given /^there is a pending game called "([^\"]*)"$/ do |arg1|
   @game = Factory(:game, :name => arg1, :owner => Factory(:user))
-  Factory(:jeff).join(@game, :werewolf)
-  Factory(:nick).join(@game)
-  Factory(:darcy).join(@game)
-  @game.start
+end
+
+Given /^there is an invite\-only game called "([^\"]*)"$/ do |arg1|
+  @game = Factory(:game, :name => arg1, :owner => Factory(:user), :invite_only => true)
 end
