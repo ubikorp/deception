@@ -23,18 +23,6 @@ And edit games that I have created
     When I go to the new game page
     Then I should see "Sorry, you cannot participate in more than one game at a time"
 
-  Scenario: User joins an open game
-    Given I am signed in
-    And there is a game called "The Incident at Mariahville"
-    When I go to the game page for "The Incident at Mariahville"
-    And I press "Join Game"
-    Then I should see "Thanks for joining"
-
-  Scenario: User joins an invite-only game
-    Given I am signed in
-    And there is a game called "The Incident at Mariahville"
-    Then I can join the game
-
   Scenario: User invites friends to an open game
     Given I am signed in
     And there is a game called "The Incident at Mariahville"

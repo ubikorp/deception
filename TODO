@@ -1,3 +1,4 @@
+- add aborted state to games..? or allow owner to destroy them before they start?
 - roles should be assigned at game start not at join time
 - add custom handler + notification wrapper / integration for bird grinder 
 - optional twitter dm / public notifications when game state changes

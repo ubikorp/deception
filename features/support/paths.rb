@@ -16,6 +16,15 @@ module NavigationHelpers
 
     when /the game page for "(.*?)"/
       game_path(Game.find_by_name($1))
+
+    when /the pending games page/
+      pending_games_path
+
+    when /the ongoing games page/
+      games_path
+
+    when /the finished games page/
+      finished_games_path
     
     # Add more mappings here.
     # Here is a more fancy example:

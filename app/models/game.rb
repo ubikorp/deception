@@ -19,7 +19,7 @@ require 'array_ext'
 require 'short_round'
 
 class Game < ActiveRecord::Base
-  named_scope :available, :conditions => { :state => 'setup', :invite_only => false }
+  named_scope :pending,   :conditions => { :state => 'setup', :invite_only => false }
   named_scope :current,   :conditions => { :state => 'playable' }
   named_scope :finished,  :conditions => { :state => 'finished' }
 

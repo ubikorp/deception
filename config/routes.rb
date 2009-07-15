@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :games, :collection => { :available => :get, :finished => :get} do |game|
+  map.resources :games, :collection => { :pending => :get, :finished => :get} do |game|
     game.resources :players, :only => [:create, :destroy]
   end
 

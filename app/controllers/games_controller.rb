@@ -7,8 +7,8 @@ class GamesController < ApplicationController
   end
 
   # list of games that are seeking players
-  def available
-    @games = Game.available
+  def pending
+    @games = Game.pending
   end
 
   # list of games that have been completed

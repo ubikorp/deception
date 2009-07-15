@@ -29,7 +29,7 @@ describe Game do
   it { should have_many(:invitations) }
   it { should belong_to(:owner) }
 
-  it { should have_scope(:available, :conditions => { :state => 'setup', :invite_only => false }) }
+  it { should have_scope(:pending,   :conditions => { :state => 'setup', :invite_only => false }) }
   it { should have_scope(:current,   :conditions => { :state => 'playable' }) }
   it { should have_scope(:finished,  :conditions => { :state => 'finished' }) }
 
