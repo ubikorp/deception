@@ -1,6 +1,6 @@
 module GamesHelper
   def user_can_join(game)
-    return false unless logged_in? 
+    return false if !logged_in? || current_user.active_player
 
     if game.invite_only
       game.invitations.includes_user(current_user)

@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_filter :login_required, :only => [:new, :create]
+  before_filter :find_game, :only => [:show, :destroy]
 
   # list of currently ongoing games
   def index
@@ -40,7 +41,23 @@ class GamesController < ApplicationController
   end
 
   # show details for a specific game
-  def show
+  def show; end
+
+  # destroy a game during the setup phase
+  def destroy
+    if @game.setup?
+      @game.destroy
+      flash[:notice] = "The game has been aborted"
+      redirect_back_or_default(games_path)
+    else
+      flash[:error] = "You cannot delete a game after it has started"
+      redirect_back_or_default(games_path)
+    end
+  end
+
+  private
+
+  def find_game
     @game = Game.find(params[:id])
   end
 end
