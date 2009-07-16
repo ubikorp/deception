@@ -47,3 +47,7 @@ Given /^I am the owner of the game called "([^\"]*)"$/ do |arg1|
   @game.owner = User.find_by_login('zapnap')
   @game.save
 end
+
+Then /^there should not be a game called "([^\"]*)"$/ do |arg1|
+  Game.find_by_name(arg1).should == nil
+end
