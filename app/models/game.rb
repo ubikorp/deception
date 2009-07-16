@@ -23,7 +23,7 @@ class Game < ActiveRecord::Base
   named_scope :current,   :conditions => { :state => 'playable' }
   named_scope :finished,  :conditions => { :state => 'finished' }
 
-  has_many :players
+  has_many :players, :dependent => :destroy
   has_many :users, :through => :players
 
   has_many :invitations do
@@ -32,7 +32,7 @@ class Game < ActiveRecord::Base
     end
   end
 
-  has_many :periods, :order => :created_at
+  has_many :periods, :order => :created_at, :dependent => :destroy
   has_many :events, :through => :periods
 
   belongs_to :owner, :class_name => 'User', :foreign_key => :owner_id

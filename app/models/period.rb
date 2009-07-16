@@ -11,7 +11,7 @@
 class Period < ActiveRecord::Base
   PHASES = [:night, :day]
   belongs_to :game
-  has_many   :events
+  has_many   :events, :dependent => :destroy
 
   validates_presence_of :game_id
 
