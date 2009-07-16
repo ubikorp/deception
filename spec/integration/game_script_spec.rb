@@ -11,10 +11,10 @@ describe 'Game script' do
     @game  = Factory(:game, :owner => @darcy)
 
     @nick.join(@game, :werewolf)
-    @jeff.join(@game)
-    @darcy.join(@game)
-    @aaron.join(@game)
-    @elsa.join(@game)
+    @jeff.join(@game, :villager)
+    @darcy.join(@game, :villager)
+    @aaron.join(@game, :villager)
+    @elsa.join(@game, :villager)
 
     @game.start
   end

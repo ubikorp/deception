@@ -58,12 +58,13 @@ class Game < ActiveRecord::Base
 
     # start next phase / round of play
     event :continue do
-      transition :waiting  => :playable
+      transition :ready    => :playable
       transition :playable => :playable
     end
 
-    before_transition :playable => :playable, :do => :end_turn
-    after_transition  all       => :playable, :do => :next_phase
+    before_transition :setup    => [:ready, :playable], :do => :assign_roles
+    before_transition :playable => :playable,           :do => :end_turn
+    after_transition  all       => :playable,           :do => :next_phase
   end
 
   validates_presence_of     :name, :owner_id, :period_length, :min_players, :max_players
@@ -126,7 +127,7 @@ class Game < ActiveRecord::Base
   end
 
   def current_period
-    periods.last
+    periods(true).last
   end
 
   def next_period_starts_at
@@ -163,8 +164,10 @@ class Game < ActiveRecord::Base
     if villagers && werewolves
       false
     elsif villagers
+      logger.info "Ending Game [#{id}] : Won by Villagers"
       players.villagers.alive
     elsif werewolves
+      logger.info "Ending Game [#{id}] : Won by Werewolves"
       players.werewolves.alive
     else
       false
@@ -172,6 +175,22 @@ class Game < ActiveRecord::Base
   end
   
   private
+
+  # assign roles (like villager, werewolf, etc) to players in this game
+  # called as a before-transiton action when leaving the setup state
+  #
+  # note that if we've already 'hinted' the player type for a user,
+  # this needs to respect that.
+  def assign_roles
+    # TODO: make this less 'dumb'; see multi-werewolf game statistics
+    players_without_roles = players.select { |p| p.type.nil? }
+    wolf_candidates = (werewolves.length > 0) ? [] : [rand(players.length)]
+
+    players_without_roles.each_with_index do |player, i|
+      role = wolf_candidates.include?(i) ? :werewolf : :villager
+      player.assign_role(role)
+    end
+  end
 
   # tally villager or werewolf votes and remove the victim(s) from play
   # called as a before-transition filter
@@ -182,6 +201,7 @@ class Game < ActiveRecord::Base
       current_events.votes.map { |e| e.target_player }.modes || []
     end
 
+    logger.info "End of turn for Game [#{id}] : Victims = #{victims.map { |v| v.user.login }.join(', ')}"
     victims.each { |victim| KillEvent.create(:period => current_period, :target_player => victim) }
   end
 

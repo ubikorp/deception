@@ -65,13 +65,14 @@ class User < TwitterAuth::GenericUser
 
   # join a new game (during the game setup phase)
   # a user can only participate in one game at a time
-  # only once they have been removed / killed in their active game
-  # may they join a new game
-  def join(game, role = :villager)
+  # only once they have been removed / killed in their active game may they join a new game
+  #
+  # join supports an optional second argument, which allows us to 'hint' at the role we
+  # would like the user to have in the game.
+  def join(game, role = nil)
     if !active_player && has_invite?(game)
-      role_klass = role.to_s.classify.constantize
-      players << role_klass.new(:game => game)
-      players.last
+      player = players.create(:game => game)
+      role.nil? ? player : player.assign_role(role)
     else
       # TODO: may want to raise here?
       false

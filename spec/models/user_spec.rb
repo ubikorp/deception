@@ -71,14 +71,19 @@ describe User do
       @game = Factory(:game)
     end
 
+    it 'should be added to the list of players' do
+      @user.join(@game)
+      @game.players.should include(@user.players.first)
+    end
+
     it 'should join a game as a werewolf' do
       @user.join(@game, :werewolf)
-      @game.werewolves.should include(@user.players.first)
+      @game.werewolves.should include(@user.active_player)
     end
 
     it 'should join a game as a villager' do
       @user.join(@game, :villager)
-      @game.villagers.should include(@user.players.first)
+      @game.villagers.should include(@user.active_player)
     end
 
     it 'should not be allowed to join more than one game at a time' do

@@ -33,4 +33,15 @@ class Player < ActiveRecord::Base
   def villager?
     type == 'Villager'
   end
+
+  # used to assign a role to the player when game is about to start
+  def assign_role(role = :villager)
+    klass = role.to_s.classify.constantize
+    if klass.new.is_a?(Player)
+      self.update_attribute(:type, role.to_s.classify)
+      klass.find(self.id)
+    else
+      false
+    end
+  end
 end

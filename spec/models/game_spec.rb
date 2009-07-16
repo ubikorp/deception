@@ -133,6 +133,10 @@ describe Game do
       @game.periods.first.phase.should == :night
     end
 
+    it 'should assign roles to players' do
+      @game.players.map { |a| a.type }.sort.should == ['Villager', 'Villager', 'Werewolf']
+    end
+
     it 'should be finished' do
       @game.finish
       @game.state?(:finished).should be_true
@@ -230,25 +234,25 @@ describe Game do
 
   context 'winner' do
     before(:each) do
-      @werewolf  = Factory(:werewolf, :game => @game)
-      @villager1 = Factory(:jeff).join(@game)
-      @villager2 = Factory(:darcy).join(@game)
+      @werewolf  = Factory(:nick).join(@game, :werewolf)
+      @villager1 = Factory(:jeff).join(@game, :villager)
+      @villager2 = Factory(:darcy).join(@game, :villager)
       @game.start
     end
 
     it 'should be werewolf' do
       @villager1.update_attribute(:dead, true)
       @villager2.update_attribute(:dead, true)
-      assert @game.winner.include?(@werewolf)
+      @game.winner.should include(@werewolf)
     end
 
     it 'should be villagers' do
       @werewolf.update_attribute(:dead, true)
-      assert @game.winner.include?(@villager1)
+      @game.winner.should include(@villager1)
     end
 
     it 'should not be available yet' do
-      assert !@game.winner
+      @game.winner.should be_false
     end
   end
 
