@@ -12,8 +12,9 @@
 - if @game.setup?
   %p.notice This game has not yet begun.
 
-  - if !@game.invite_only? && logged_in? && !current_user.active_player
+  - if user_can_join(@game)
     %p We're looking for players though. Want to join this game?
+    %p= "You've even been invited. So that's like, great." if @game.invitations.includes_user(current_user)
     %p= button_to('Join Game', game_players_path(@game))
 
   - elsif !@game.invite_only? && logged_in? && @game.players.include?(current_user.active_player)

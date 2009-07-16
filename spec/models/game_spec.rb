@@ -290,4 +290,15 @@ describe Game do
       }.should_not change(Period, :count)
     end
   end
+
+  context 'invitations' do
+    it 'should include an invite for the user' do
+      @game.invitations.create(:twitter_login => 'foobar')
+      @game.invitations.includes_user(Factory(:user, :login => 'foobar')).should be_true
+    end
+
+    it 'should not include an invite for the user' do
+      @game.invitations.includes_user(Factory(:user)).should be_false
+    end
+  end
 end

@@ -13,8 +13,8 @@ I want to be able to join an existing game
   Scenario: User joins an invite-only game
     Given I am signed in
     And there is an invite-only game called "The Incident at Mariahville"
-    When I go to the game page for "The Incident at Mariahville"
     And I have an invite for "The Incident at Mariahville"
+    When I go to the game page for "The Incident at Mariahville"
     And I press "Join Game"
     Then I should see "Thanks for joining"
 

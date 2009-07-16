@@ -24,8 +24,13 @@ class Game < ActiveRecord::Base
   named_scope :finished,  :conditions => { :state => 'finished' }
 
   has_many :players
-  has_many :invitations
   has_many :users, :through => :players
+
+  has_many :invitations do
+    def includes_user(user)
+      self.map { |i| i.twitter_login }.include?(user.login)
+    end
+  end
 
   has_many :periods, :order => :created_at
   has_many :events, :through => :periods
