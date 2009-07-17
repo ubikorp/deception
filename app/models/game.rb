@@ -27,8 +27,8 @@ class Game < ActiveRecord::Base
   has_many :users, :through => :players
 
   has_many :invitations do
-    def includes_user(user)
-      self.map { |i| i.twitter_login }.include?(user.login)
+    def for_user(user)
+      self.detect { |i| i.twitter_login == user.login }
     end
   end
 

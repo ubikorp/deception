@@ -33,7 +33,7 @@ describe Game do
   it { should have_scope(:current,   :conditions => { :state => 'playable' }) }
   it { should have_scope(:finished,  :conditions => { :state => 'finished' }) }
 
-  it { should validate_presence_of(:name, :owner_id, :min_players, :max_players, :period_length) }
+  it { should validate_presence_of(:name, :owner_id) } # :min_players, :max_players, :period_length have default values
   it { should validate_numericality_of(:min_players, :max_players, :period_length) }
   it { should validate_inclusion_of(:min_players,    :within => APP_CONFIG[:min_players]..APP_CONFIG[:max_players], :message => "is outside the acceptable range") }
   it { should validate_inclusion_of(:max_players,   :within => APP_CONFIG[:min_players]..APP_CONFIG[:max_players], :message => "is outside the acceptable range") }
@@ -297,12 +297,12 @@ describe Game do
 
   context 'invitations' do
     it 'should include an invite for the user' do
-      @game.invitations.create(:twitter_login => 'foobar')
-      @game.invitations.includes_user(Factory(:user, :login => 'foobar')).should be_true
+      invitation = @game.invitations.create(:twitter_login => 'foobar')
+      @game.invitations.for_user(Factory(:user, :login => 'foobar')).should == invitation
     end
 
     it 'should not include an invite for the user' do
-      @game.invitations.includes_user(Factory(:user)).should be_false
+      @game.invitations.for_user(Factory(:user)).should be_nil
     end
   end
 end

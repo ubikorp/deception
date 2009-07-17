@@ -41,7 +41,9 @@ class GamesController < ApplicationController
   end
 
   # show details for a specific game
-  def show; end
+  def show
+    store_location if !logged_in? # for direct-login stuffs
+  end
 
   # destroy a game during the setup phase
   def destroy

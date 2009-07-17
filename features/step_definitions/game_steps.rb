@@ -6,8 +6,8 @@ end
 Given /^there is an ongoing game called "([^\"]*)"$/ do |arg1|
   @game = Factory(:game, :name => arg1, :owner => Factory(:user))
   Factory(:jeff).join(@game, :werewolf)
-  Factory(:nick).join(@game)
   Factory(:darcy).join(@game)
+  Factory(:elsa).join(@game)
   @game.start
 end
 
@@ -48,6 +48,17 @@ Given /^I am the owner of the game called "([^\"]*)"$/ do |arg1|
   @game.save
 end
 
+Given /^I am playing in the game called "([^\"]*)"$/ do |arg1|
+  @game = Game.find_by_name(arg1)
+  @user = User.find_by_login('zapnap')
+  @user.join(@game)
+end
+
 Then /^there should not be a game called "([^\"]*)"$/ do |arg1|
   Game.find_by_name(arg1).should == nil
+end
+
+Then /^I should be redirected to the game page for "([^\"]*)"$/ do |arg1|
+  @game = Game.find_by_name(arg1)
+  response.request.path.should == game_path(@game)
 end
