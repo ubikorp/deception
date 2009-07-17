@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
-  before_filter :login_required, :only => [:new, :create]
-  before_filter :find_game, :only => [:show, :destroy]
+  before_filter :login_required, :only => [:new, :create, :destroy, :start]
+  before_filter :find_game, :only => [:show, :destroy, :start]
+  before_filter :ownership_required, :only => [:destroy, :start]
 
   # list of currently ongoing games
   def index
@@ -57,9 +58,25 @@ class GamesController < ApplicationController
     end
   end
 
+  # start a game, if game start criteria is satisfied
+  def start
+    if @game.setup? && @game.startable?
+      flash[:notice] = "The game will begin shortly!"
+      @game.ready # manual start
+    else
+      flash[:error] = "Unable to start this game"
+    end
+
+    redirect_to(game_path(@game))
+  end
+
   private
 
   def find_game
     @game = Game.find(params[:id])
+  end
+
+  def ownership_required
+    (current_user == @game.owner) || access_denied
   end
 end

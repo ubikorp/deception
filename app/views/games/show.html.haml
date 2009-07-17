@@ -1,4 +1,5 @@
 %h2= "Game Details: #{@game.name}"
+= error_messages_for(:game)
 
 %p This should read like a script :)
 
@@ -17,7 +18,11 @@
     %p You're scheduled to play in this game, once it starts.
 
     - if !@game.invite_only? || (@game.owner == current_user)
-      = "Why not #{link_to('invite some of your friends', new_game_invitation_path(@game))} to play too?"
+      %p= "Why not #{link_to('invite some of your friends', new_game_invitation_path(@game))} to play too?"
+
+    - if @game.startable? && (@game.owner == current_user)
+      %p= "This game is ready to begin. You can start it now, or wait for more players."
+      %p= button_to('Start Game Now', start_game_path(@game))
 
   - elsif @game.invite_only?
     - if !logged_in?

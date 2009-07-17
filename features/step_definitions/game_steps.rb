@@ -44,14 +44,26 @@ end
 
 Given /^I am the owner of the game called "([^\"]*)"$/ do |arg1|
   @game = Game.find_by_name(arg1)
-  @game.owner = User.find_by_login('zapnap')
+  @user = User.find_by_login('zapnap')
+
+  @game.owner = @user
   @game.save
+
+  @user.join(@game)
 end
 
 Given /^I am playing in the game called "([^\"]*)"$/ do |arg1|
   @game = Game.find_by_name(arg1)
   @user = User.find_by_login('zapnap')
   @user.join(@game)
+end
+
+Given /^the game called "([^\"]*)" is startable$/ do |arg1|
+  @game = Game.find_by_name(arg1)
+  APP_CONFIG[:min_players].times { |i| Factory(:user).join(@game) }
+end
+
+Given /^the game called "([^\"]*)" is not startable$/ do |arg1|
 end
 
 Then /^there should not be a game called "([^\"]*)"$/ do |arg1|
@@ -61,4 +73,9 @@ end
 Then /^I should be redirected to the game page for "([^\"]*)"$/ do |arg1|
   @game = Game.find_by_name(arg1)
   response.request.path.should == game_path(@game)
+end
+
+Then /^the game called "([^\"]*)" is waiting to start$/ do |arg1|
+  @game = Game.find_by_name(arg1)
+  @game.should be_ready # manually started, will be promoted to 'start' state by cron task
 end

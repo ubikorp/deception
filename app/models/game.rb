@@ -174,6 +174,18 @@ class Game < ActiveRecord::Base
     end
   end
   
+  # game is startable if minimum player requirement is met, etc
+  def startable?
+    return false unless setup? || ready?
+
+    if players.length < APP_CONFIG[:min_players]
+      errors.add_to_base("This game must have at least #{APP_CONFIG[:min_players]} players")
+      false
+    else
+      true
+    end
+  end
+
   private
 
   # assign roles (like villager, werewolf, etc) to players in this game
@@ -213,16 +225,6 @@ class Game < ActiveRecord::Base
       finish
     else
       periods.create
-    end
-  end
-
-  # game is startable if minimum player requirement is met, etc
-  def startable?
-    if players.length < APP_CONFIG[:min_players]
-      errors.add_to_base("This game must have at least #{APP_CONFIG[:min_players]} players")
-      false
-    else
-      true
     end
   end
 

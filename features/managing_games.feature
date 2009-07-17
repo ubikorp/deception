@@ -32,18 +32,27 @@ And edit games that I have created
     Then I should see "The game has been aborted"
     And there should not be a game called "The Incident at Mariahville"
 
+  Scenario: Register user should not see game owner controls
+    Given I am signed in
+    And there is a pending game called "The Incident at Mariahville"
+    When I go to the game page for "The Incident at Mariahville"
+    Then I should not see "Abort Game"
+    And I should not see "Start Game Now"
+
   Scenario: Owner manually starts game
     Given I am signed in
     And there is a pending game called "The Incident at Mariahville"
     And I am the owner of the game called "The Incident at Mariahville"
-    And the game has at least the minimum number of players
+    And the game called "The Incident at Mariahville" is startable
     When I go to the game page for "The Incident at Mariahville"
-    Then I can start the game
+    And I press "Start Game Now"
+    Then the game called "The Incident at Mariahville" is waiting to start
+    And I should see "The game will begin shortly"
 
   Scenario: User fails to manually start game
     Given I am signed in
     And there is a pending game called "The Incident at Mariahville"
     And I am the owner of the game called "The Incident at Mariahville"
-    And the game has less than the minimum number of players
+    And the game called "The Incident at Mariahville" is not startable
     When I go to the game page for "The Incident at Mariahville"
-    Then I cannot start the game
+    Then I should not see "Start Game Now"
