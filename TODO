@@ -1,4 +1,3 @@
-- add aborted state to games..? or allow owner to destroy them before they start?
 - add custom handler + notification wrapper / integration for bird grinder 
 - optional twitter dm / public notifications when game state changes
 - web interface for game setup and player settings, history
