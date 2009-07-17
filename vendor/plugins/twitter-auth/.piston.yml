@@ -1,0 +1,8 @@
+--- 
+format: 1
+handler: 
+  commit: 6f94b62fcfa9b0002d53786c57846e5ee8ed6527
+  branch: HEAD
+lock: 
+repository_url: git://github.com/mbleigh/twitter-auth.git
+repository_class: Piston::Git::Repository
