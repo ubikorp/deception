@@ -27,6 +27,7 @@ describe Game do
   it { should have_many(:players) }
   it { should have_many(:users, :through => :players) }
   it { should have_many(:invitations) }
+  it { should have_many(:messages) }
   it { should belong_to(:owner) }
 
   it { should have_scope(:pending,   :conditions => { :state => 'setup', :invite_only => false }) }

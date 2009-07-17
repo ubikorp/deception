@@ -26,6 +26,7 @@ class Game < ActiveRecord::Base
   has_many :players, :dependent => :destroy
   has_many :users, :through => :players
 
+  has_many :messages
   has_many :invitations do
     def for_user(user)
       self.detect { |i| i.twitter_login == user.login }
