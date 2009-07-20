@@ -1,6 +1,7 @@
-- add custom handler + notification wrapper / integration for bird grinder 
-- optional twitter dm / public notifications when game state changes
-- web interface for game setup and player settings, history
+- outgoing twitter messages: add handler (use cron'd Twitter gem tasks for now?)
+- incoming twitter messages: add handler (use cron'd Twitter gem tasks for now? BG later?)
+- use obsevers and create a twitter notifier class for handling outgoing messages
+- web interface for player notification settings (usually on game state change), history
 - rss feed for activity (after web interface)
 - make role assignment less 'dumb'
 - add seer player
