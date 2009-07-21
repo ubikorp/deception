@@ -49,4 +49,9 @@ class IncomingMessage < Message
       count
     end
   end
+
+  # send a quick reply to this message
+  def reply(text)
+    OutgoingMessage.create(:to_user => from_user, :game => game, :text => text)
+  end
 end

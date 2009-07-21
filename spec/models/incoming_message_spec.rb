@@ -30,6 +30,18 @@ describe IncomingMessage do
     @message = Factory(:incoming_message)
   end
 
+  context 'replies' do
+    it 'should be created' do
+      lambda {
+        @message.reply("srsly?").should_not be_false
+      }.should change(OutgoingMessage, :count)
+    end
+
+    it 'should be sent to the correct user' do
+      @message.reply("srsly?").to_user.should == @message.from_user
+    end
+  end
+
   context 'polling' do
     before(:each) do
       @game = setup_game
