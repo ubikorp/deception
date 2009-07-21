@@ -2,7 +2,7 @@ namespace :game do
   namespace :messages do
     desc "Sending pending messages via Twitter"
     task :send => :environment do
-      Message.send_messages
+      OutgoingMessage.send_messages
     end
   end
 
