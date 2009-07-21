@@ -4,6 +4,11 @@ namespace :game do
     task :send => :environment do
       OutgoingMessage.send_messages
     end
+
+    desc "Receive player status updates from Twitter"
+    task :receive => :environment do
+      IncomingMessage.receive_messages
+    end
   end
 
   namespace :periods do
