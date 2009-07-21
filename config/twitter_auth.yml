@@ -7,8 +7,8 @@ development:
   api_timeout: 10
   remember_for: 14 # days
   oauth_callback: "http://localhost:3000/oauth_callback"
-  gamebot_user: 'gamebot'
-  gamebot_password: 'gamebot'
+  gamebot_user: 't3stx'
+  gamebot_password: 't3stxpassword'
 test:
   strategy: oauth
   oauth_consumer_key: "haxvctyPPLvu57DseyPyg"
@@ -18,8 +18,8 @@ test:
   api_timeout: 10
   remember_for: 14 # days
   oauth_callback: "http://localhost:3000/oauth_callback"
-  gamebot_user: 'gamebot'
-  gamebot_password: 'gamebot'
+  gamebot_user: 't3stx'
+  gamebot_password: 'test'
 production:
   strategy: oauth
   oauth_consumer_key: "HSiUsYhgwoZdb8pM6Htw"
@@ -28,5 +28,5 @@ production:
   base_url: "http://twitter.com"
   api_timeout: 10
   remember_for: 14 # days
-  gamebot_user: 'gamebot'
-  gamebot_password: 'gamebot'
+  gamebot_user: 't3stx'
+  gamebot_password: 't3stxpassword'

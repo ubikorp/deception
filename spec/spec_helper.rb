@@ -50,3 +50,14 @@ Spec::Runner.configure do |config|
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
 end
+
+module GameSpecHelper
+  def setup_game
+    @game = Factory(:game)
+    Factory(:darcy).join(@game)
+    Factory(:elsa).join(@game)
+    Factory(:aaron).join(@game)
+    @game.start
+    @game
+  end
+end

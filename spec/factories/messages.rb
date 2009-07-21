@@ -8,4 +8,5 @@ Factory.define :incoming_message do |f|
   f.association :game
   f.association :from_user, :factory => :jeff
   f.text        "@gamebot I vote to kill @zapnap"
+  f.status_id   100000001
 end

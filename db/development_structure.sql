@@ -1,7 +1,7 @@
 CREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255), "created_at" datetime, "updated_at" datetime, "source_player_id" integer, "target_player_id" integer, "period_id" integer);
 CREATE TABLE "games" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime, "state" varchar(255), "invite_only" boolean, "min_players" integer, "period_length" integer, "short_code" varchar(255), "owner_id" integer, "max_players" integer);
 CREATE TABLE "invitations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "game_id" integer, "twitter_login" varchar(255), "created_at" datetime, "updated_at" datetime, "invited_by_id" integer);
-CREATE TABLE "messages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "game_id" integer, "text" varchar(255), "delivered_at" datetime, "created_at" datetime, "updated_at" datetime, "type" varchar(255), "from_user_id" integer, "to_user_id" integer);
+CREATE TABLE "messages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "game_id" integer, "text" varchar(255), "delivered_at" datetime, "created_at" datetime, "updated_at" datetime, "type" varchar(255), "from_user_id" integer, "to_user_id" integer, "status_id" integer);
 CREATE TABLE "periods" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "game_id" integer, "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "players" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "game_id" integer, "type" varchar(255), "created_at" datetime, "updated_at" datetime, "dead" boolean DEFAULT 'f');
 CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL);
@@ -32,3 +32,5 @@ INSERT INTO schema_migrations (version) VALUES ('20090715195550');
 INSERT INTO schema_migrations (version) VALUES ('20090717211316');
 
 INSERT INTO schema_migrations (version) VALUES ('20090720234620');
+
+INSERT INTO schema_migrations (version) VALUES ('20090721012532');

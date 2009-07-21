@@ -11,6 +11,7 @@
 #  type         :string(255)
 #  from_user_id :integer
 #  to_user_id   :integer
+#  status_id    :integer
 #
 
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
@@ -21,13 +22,12 @@ describe Message do
   it { should validate_presence_of(:text) }
   it { should validate_presence_of(:game_id) }
 
-  before(:all) do
+  before(:each) do
     Twitter::HTTPAuth.stubs(:new).returns(auth = mock('auth'))
     Twitter::Base.stubs(:new).returns(@twitter = mock('twitter'))
   end
 
   it 'should set up the twitter message handler' do
-    Twitter::Base.expects(:new).returns(@twitter = mock('twitter'))
-    Message.initialize_twitter.should == @twitter
+    Message.twitter.should == @twitter
   end
 end

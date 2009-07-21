@@ -14,6 +14,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Player do
+  include GameSpecHelper
+
   before(:each) do
     @game     = Factory(:game)
     @werewolf = Factory(:werewolf, :game => @game)
@@ -32,11 +34,7 @@ describe Player do
   it { should validate_uniqueness_of(:user_id, :scope => :game_id) }
 
   it 'should have to be added to a game during the setup phase' do
-    @game = Factory(:game)
-    Factory(:darcy).join(@game)
-    Factory(:aaron).join(@game)
-    Factory(:elsa).join(@game)
-    @game.start
+    @game = setup_game
     @player = Factory.build(:player, :game => @game)
     @player.should_not be_valid
     @player.errors.on(:game_id).should include("is already in progress")

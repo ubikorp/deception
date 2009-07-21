@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090720234620) do
+ActiveRecord::Schema.define(:version => 20090721012532) do
 
   create_table "events", :force => true do |t|
     t.string   "type"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20090720234620) do
     t.string   "type"
     t.integer  "from_user_id"
     t.integer  "to_user_id"
+    t.integer  "status_id"
   end
 
   create_table "periods", :force => true do |t|

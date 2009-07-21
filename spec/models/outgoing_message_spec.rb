@@ -11,6 +11,7 @@
 #  type         :string(255)
 #  from_user_id :integer
 #  to_user_id   :integer
+#  status_id    :integer
 #
 
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
@@ -21,7 +22,7 @@ describe OutgoingMessage do
 
   it { should belong_to(:to_user, :class_name => "User") }
 
-  before(:all) do
+  before(:each) do
     OutgoingMessage.stubs(:twitter).returns(@twitter = mock('twitter'))
   end
 
