@@ -1,7 +1,9 @@
 class GamesController < ApplicationController
-  before_filter :login_required, :only => [:new, :create, :destroy, :start]
-  before_filter :find_game, :only => [:show, :destroy, :start]
+  before_filter :login_required, :only => [:new, :create, :destroy, :start, :vote]
+  before_filter :find_game, :only => [:show, :destroy, :start, :vote]
   before_filter :ownership_required, :only => [:destroy, :start]
+  before_filter :membership_required, :only => [:vote]
+  before_filter :playable_required, :only => [:vote]
 
   # list of currently ongoing games
   def index
@@ -70,6 +72,21 @@ class GamesController < ApplicationController
     redirect_to(game_path(@game))
   end
 
+  # record a vote in this game
+  def vote
+    if @user = User.find((params[:vote] || {})[:user_id])
+      # TODO: allow users to change their votes before a period ends?
+      if current_user.vote(@user)
+        flash[:notice] = @game.night? ? "Aye, he looks like a tasty one." : "Yeah, that one sure looks suspicious to me."
+      else
+        flash[:error] = "Unable to record your vote. Please try again."
+      end
+    else
+      flash[:error] = "Votes for this player are not allowed."
+    end
+    redirect_to(game_path(@game))
+  end
+
   private
 
   def find_game
@@ -78,5 +95,13 @@ class GamesController < ApplicationController
 
   def ownership_required
     (current_user == @game.owner) || access_denied
+  end
+
+  def membership_required
+    @game.players.alive.include?(current_user.active_player) || access_denied
+  end
+
+  def playable_required
+    @game.playable? || access_denied
   end
 end

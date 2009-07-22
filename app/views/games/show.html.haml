@@ -3,7 +3,10 @@
 
 %p This should read like a script opening scene / synopsis or something?
 
-= render(:partial => 'games/status', :locals => { :game => @game })
+- if playing_in_game(@game) && @game.playable?
+  = render(:partial => 'games/actions', :locals => { :game => @game })
+- else
+  = render(:partial => 'games/status', :locals => { :game => @game })
 
 %h3 Cast &amp; Crew
 #players
@@ -11,7 +14,7 @@
     %ul 
     - @game.players.each do |player|
       %li.player
-        = link_to(profile_image(player.user), twitter_profile_url(player.user), :target => '_blank')
+        = link_to(profile_image(player.user, :width => 48, :height => 48), twitter_profile_url(player.user), :target => '_blank')
         .name
           = player.user.login
           = ' (DEAD)' if player.dead?

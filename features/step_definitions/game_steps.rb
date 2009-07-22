@@ -5,31 +5,31 @@ end
 
 Given /^there is an ongoing game called "([^\"]*)"$/ do |arg1|
   @game = Factory(:game, :name => arg1, :owner => Factory(:user))
-  Factory(:jeff).join(@game, :werewolf)
-  Factory(:darcy).join(@game)
-  Factory(:elsa).join(@game)
+  Factory(:jeffrafter).join(@game, :werewolf)
+  Factory(:sutto).join(@game)
+  Factory(:ebloodstone).join(@game)
   @game.start
 end
 
 Given /^there is a finished game called "([^\"]*)"$/ do |arg1|
   @game  = Factory(:game, :name => arg1, :owner => Factory(:user))
-  @jeff  = Factory(:jeff)
-  @nick  = Factory(:nick)
-  @darcy = Factory(:darcy)
+  @jeffrafter  = Factory(:jeffrafter)
+  @zapnap  = Factory(:zapnap)
+  @sutto = Factory(:sutto)
 
-  @jeff.join(@game, :werewolf)
-  @nick.join(@game)
-  @darcy.join(@game)
+  @jeffrafter.join(@game, :werewolf)
+  @zapnap.join(@game)
+  @sutto.join(@game)
   @game.start
 
-  @jeff.vote(@nick)
+  @jeffrafter.vote(@zapnap)
   @game.continue
 
-  @darcy.vote(@jeff)
-  @jeff.vote(@darcy)
+  @sutto.vote(@jeffrafter)
+  @jeffrafter.vote(@sutto)
   @game.continue
 
-  @jeff.vote(@darcy)
+  @jeffrafter.vote(@sutto)
   @game.continue
   @game.finish
 end
@@ -114,5 +114,5 @@ end
 
 Then /^the vote for "([^\"]*)" has been recorded$/ do |arg1|
   @user = User.find_by_login(arg1)
-  VoteEvent.find(:first, :conditions => { :target_player_id => @user.id }).should_not be_nil
+  VoteEvent.find(:first, :conditions => { :target_player_id => @user.active_player.id }).should_not be_nil
 end

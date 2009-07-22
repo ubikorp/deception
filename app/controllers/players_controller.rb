@@ -1,6 +1,7 @@
 class PlayersController < ApplicationController
   before_filter :login_required # all
   before_filter :find_game
+  before_filter :membership_required, :except => [:create]
 
   # join a game (join)
   def create
@@ -14,14 +15,16 @@ class PlayersController < ApplicationController
 
   # remove yourself from a game (quit)
   def destroy
-    if @game.players.include?(current_user.active_player)
-      QuitEvent.new
-    end
+    current_user.quit
   end
 
   private
 
   def find_game
     @game = Game.find(params[:game_id])
+  end
+
+  def membership_required
+    @game.players.include?(current_user.active_player) || access_denied
   end
 end
