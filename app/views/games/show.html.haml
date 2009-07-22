@@ -1,7 +1,9 @@
 %h2= "Game Details: #{@game.name}"
 = error_messages_for(:game)
 
-%p This should read like a script :)
+%p This should read like a script opening scene / synopsis or something?
+
+= render(:partial => 'games/status', :locals => { :game => @game })
 
 %h3 Cast &amp; Crew
 #players
@@ -15,46 +17,7 @@
           = ' (DEAD)' if player.dead?
     .clearfix
 
-- if @game.setup?
-  %p.notice This game has not yet begun.
-  %p= button_to('Abort Game', game_path(@game), :method => :delete, :confirm => 'Are you sure you want to abort this game?') if can_be_aborted(@game)
-
-  - if logged_in? && @game.players.include?(current_user.active_player)
-    %p You're scheduled to play in this game, once it starts.
-
-    - if !@game.invite_only? || (@game.owner == current_user)
-      %p= "Why not #{link_to('invite some of your friends', new_game_invitation_path(@game))} to play too?"
-
-    - if @game.startable? && (@game.owner == current_user)
-      %p= "This game is ready to begin. You can start it now, or wait for more players."
-      %p= button_to('Start Game Now', start_game_path(@game))
-
-  - elsif @game.invite_only?
-    - if !logged_in?
-      %p.notice You must have an invite to join this game.
-      %p= "Do you have an invite? #{link_to('Login to find out', login_path)}"
-
-    - elsif invitation = @game.invitations.for_user(current_user)
-      %p.notice= "#{invitation.invited_by.login} has invited you to join this game!"
-
-      - if current_user.active_player.nil?
-        %p= button_to('Join Game', game_players_path(@game))
-      - else
-        %p However, you're already actively participating in another game. You can only play in one game at a time.
-
-    - else
-      %p.notice Sorry, this game is invitation-only.
-      
-  - else
-    %p= "We're currently looking for players. Want to join this game?"
-    - if logged_in? && current_user.active_player.nil?
-      %p= button_to('Join Game', game_players_path(@game))
-    - elsif logged_in?
-      %p.notice Sorry, you're already actively participating in another game. You can only play in one game at a time.
-    - else
-      %p= "Want to join this game? #{link_to('Login to find out how', login_path)}."
-
-- else
+- if !@game.setup?
   %h3 The Story So Far...
   %ul.story
     - @game.periods.each_with_index do |period, index|
