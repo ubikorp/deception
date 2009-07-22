@@ -30,4 +30,14 @@ describe Period do
     @game.periods[1].phase.should == :day
     @game.periods[3].phase.should == :day
   end
+
+  it 'should be during the first day' do
+    @game.periods[0].day.should == 1
+    @game.periods[1].day.should == 1
+  end
+
+  it 'should be during the second day' do
+    @game.periods[2].day.should == 2
+    @game.periods[3].day.should == 2
+  end
 end

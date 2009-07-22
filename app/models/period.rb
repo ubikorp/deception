@@ -19,4 +19,8 @@ class Period < ActiveRecord::Base
     index = game.periods.index(self)
     PHASES[(index || 0) % 2]
   end
+
+  def day
+    (game.periods.index(self) / 2) + 1
+  end
 end
