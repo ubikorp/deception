@@ -209,6 +209,7 @@ class Game < ActiveRecord::Base
   # called as a before-transition filter
   def end_turn
     victims = if night?
+      # TODO: support more than one werewolf
       current_events.votes.select { |e| e.source_player.werewolf? }.map { |e| e.target_player }
     else # day
       current_events.votes.map { |e| e.target_player }.modes || []

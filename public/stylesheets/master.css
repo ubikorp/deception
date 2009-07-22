@@ -65,23 +65,23 @@ div.notice {
   border-color: #191;
   color: #131; }
 
-#followers ul {
+#followers ul, #players ul {
   list-style-type: none;
   margin: 0;
   padding: 0; }
-  #followers ul li.follower {
+  #followers ul li.follower, #followers ul li.player,   #players ul li.follower, #players ul li.player {
     float: left;
     width: 120px;
     font-size: 0.8em;
     font-weight: bold;
     margin-bottom: 10px; }
-    #followers ul li.follower img {
+    #followers ul li.follower img,     #followers ul li.player img,     #players ul li.follower img,     #players ul li.player img {
       border: 5px solid #eee;
       margin-bottom: 2px; }
-  #followers ul li.follower.hover img {
+  #followers ul li.follower.hover img,   #followers ul li.player.hover img,   #players ul li.follower.hover img,   #players ul li.player.hover img {
     border: 5px solid #ccc; }
-  #followers ul li.follower.selected img {
+  #followers ul li.follower.selected img,   #followers ul li.player.selected img,   #players ul li.follower.selected img,   #players ul li.player.selected img {
     border: 5px solid #cfc; }
-#followers #invitations textarea {
+#followers #invitations textarea, #players #invitations textarea {
   width: 100%;
   margin-bottom: 20px; }
