@@ -23,10 +23,7 @@
 - if !@game.setup?
   %h3 The Story So Far...
   %ul.story
-    - @game.periods.each_with_index do |period, index|
-      %li
-        %strong= "DAY #{period.day}, #{period.phase.to_s.upcase}"
-        %p= "Summary goes here!"
+    = render(:partial => 'games/period', :collection => @game.periods)
 
 - if playing_in_game(@game)
   %p= button_to("Leave Game", game_player_path(@game, current_user), :method => :delete, :confirm => "Are you sure? If you leave this game your player will commit suicide and there's no going back!")
