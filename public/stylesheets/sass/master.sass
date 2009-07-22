@@ -107,9 +107,22 @@ div.status
       :font-size 0.8em
       :font-weight bold
       :margin-bottom 10px
+      :position relative
+
       img
         :border 5px solid #eee
         :margin-bottom 2px
+      img.dead
+        :filter alpha(opacity=60)
+        :opacity 0.4
+
+      .player-is-dead
+        :color #fff
+        :font-size 1.2em
+        :top 30%
+        :text-align center
+        :width 58px
+        :position absolute
 
     li.follower.hover, li.player.hover
       img

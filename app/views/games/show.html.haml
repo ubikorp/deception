@@ -14,10 +14,9 @@
     %ul 
     - @game.players.each do |player|
       %li.player
-        = link_to(profile_image(player.user, :width => 48, :height => 48), twitter_profile_url(player.user), :target => '_blank')
-        .name
-          = player.user.login
-          = ' (DEAD)' if player.dead?
+        = link_to(profile_image(player.user, :width => 48, :height => 48, :class => "#{player.dead? ? 'dead' : 'alive'}"), twitter_profile_url(player.user), :target => '_blank')
+        .player-is-dead= "DEAD" if player.dead?
+        .name= player.user.login
     .clearfix
 
 - if !@game.setup?

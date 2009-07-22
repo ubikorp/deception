@@ -100,10 +100,21 @@ div.status {
     width: 120px;
     font-size: 0.8em;
     font-weight: bold;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    position: relative; }
     #followers ul li.follower img,     #followers ul li.player img,     #players ul li.follower img,     #players ul li.player img {
       border: 5px solid #eee;
       margin-bottom: 2px; }
+    #followers ul li.follower img.dead,     #followers ul li.player img.dead,     #players ul li.follower img.dead,     #players ul li.player img.dead {
+      filter: alpha(opacity=60);
+      opacity: 0.4; }
+    #followers ul li.follower .player-is-dead,     #followers ul li.player .player-is-dead,     #players ul li.follower .player-is-dead,     #players ul li.player .player-is-dead {
+      color: #fff;
+      font-size: 1.2em;
+      top: 30%;
+      text-align: center;
+      width: 58px;
+      position: absolute; }
   #followers ul li.follower.hover img,   #followers ul li.player.hover img,   #players ul li.follower.hover img,   #players ul li.player.hover img {
     border: 5px solid #ccc; }
   #followers ul li.follower.selected img,   #followers ul li.player.selected img,   #players ul li.follower.selected img,   #players ul li.player.selected img {
