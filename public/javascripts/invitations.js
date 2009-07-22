@@ -3,6 +3,7 @@ var invitations = new Array();
 $(document).ready(function() {
   // hide the textbox if javascript is enabled!
   $('#invitations').css('display', 'none');
+  $('#followers input[type=submit]').attr('disabled', 'disabled');
 
   $('#followers li.follower').hover(
     function() { $(this).addClass('hover'); },
@@ -16,6 +17,9 @@ $(document).ready(function() {
       var loc  = $.inArray(name, invitations);
       if (loc == -1) { invitations.push(name); }
       else { invitations.splice(loc, 1); }
+
+      if (invitations.length > 0) { $('#followers input[type=submit]').attr('disabled', false); }
+      else { $('#followers input[type=submit]').attr('disabled', 'disabled'); }
     }
   );
   $('#followers form').submit(
