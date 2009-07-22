@@ -12,6 +12,11 @@ every 10.minutes do
   rake "game:periods:update"
 end
 
+every 5.minutes do
+  rake "game:messages:send"
+  rake "game:messages:receive"
+end
+
 # every 4.days do
 #   command "/usr/bin/some_great_command"
 #   runner "AnotherModel.prune_old_records"
