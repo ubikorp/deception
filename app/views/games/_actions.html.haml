@@ -1,0 +1,15 @@
+.status
+  - if game.day?
+    %p= "It's DAY. And you and your fellow villagers are debating the identity of the werewolf. Who will you vote to lynch?"
+  - elsif current_user.active_player.werewolf?
+    %p= "It's NIGHT. You've transformed. And you hunger. Who will you feast upon tonight?"
+  - else
+    %p= "It's NIGHT. You sleep restlessly in your bed chamber, hoping the werewolf spares you this evening..."
+
+- if game.day? || (game.night? && current_user.active_player.werewolf?)
+  .actions
+    %p= "Discuss with your fellow villagers on Twitter, and then..." if game.day?
+    %p Make your selection from the list of villagers below:
+    - form_tag(vote_game_path(game)) do
+      = select(:vote, :user_id, game.players.alive.map { |p| [p.user.login, p.user.id] }.reject { |q| q[1] == current_user.id }, {}, :id => 'victims')
+      = submit_tag('Submit Choice')
