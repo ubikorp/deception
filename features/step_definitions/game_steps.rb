@@ -93,6 +93,14 @@ Given /^the game called "([^\"]*)" is in its "([^\"]*)" period$/ do |arg1, arg2|
   (arg2.to_i - 1).times { |i| @game.continue }
 end
 
+Given /^a werewolf killed "([^\"]*)" in the game called "([^\"]*)"$/ do |arg1, arg2|
+  @game = Game.find_by_name(arg2)
+  @user = User.find_by_login(arg1)
+  @werewolf = @game.players.werewolves[0]
+  @werewolf.user.vote(@user)
+  @game.continue
+end
+
 Then /^there should not be a game called "([^\"]*)"$/ do |arg1|
   Game.find_by_name(arg1).should == nil
 end
