@@ -22,6 +22,14 @@ module GamesHelper
     targets
   end
 
+  def voted_for_player(player)
+    if playing_in_game(player.game) && player.game.playable?
+      current_user.voted_in(player.game.current_period) == player.user
+    else
+      false
+    end
+  end
+
   def player_profile_link(player)
     link_to(player.user.login, twitter_profile_url(player.user), :target => '_blank')
   end
