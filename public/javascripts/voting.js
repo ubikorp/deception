@@ -12,15 +12,11 @@ $(document).ready(function() {
     function() {
       if (!$(this).hasClass('dead')) {
         $(this).toggleClass('selected');
-        victim = $(this).parents('li').attr('id');
+        victim = $(this).attr('id').split('_')[1];
+
+        $('#victims').val(victim);
         $('#voting form').submit();
       }
-    }
-  );
-  $('#voting form').submit(
-    function() {
-      $("#victim option[value='" + victim + "']").attr('selected', 'selected');
-      return true;
     }
   );
 });

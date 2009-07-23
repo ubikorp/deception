@@ -176,7 +176,7 @@ describe User do
       }.should change(VoteEvent, :count)
     end
 
-    it 'should fail if user has already voted in this period' do
+    it 'should replace the previous vote in this period' do
       player1 = @user.join(@game, :werewolf)
       player2 = @target.join(@game, :villager)
       player3 = @other.join(@game, :villager)
@@ -184,7 +184,7 @@ describe User do
       @user.vote(@target)
 
       lambda {
-        @user.vote(@other).should be_false
+        @user.vote(@other).should be_true
       }.should_not change(VoteEvent, :count)
     end
 

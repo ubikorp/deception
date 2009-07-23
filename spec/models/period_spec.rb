@@ -40,4 +40,10 @@ describe Period do
     @game.periods[2].day.should == 2
     @game.periods[3].day.should == 2
   end
+
+  it 'should be current' do
+    Game.any_instance.stubs(:playable?).returns(true)
+    @game.periods[2].should_not be_current
+    @game.periods.last.should be_current
+  end
 end

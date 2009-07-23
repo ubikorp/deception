@@ -1,5 +1,6 @@
-- content_for(:extra_head) do
-  = javascript_include_tag('voting')
+- if logged_in?
+  - content_for(:extra_head) do
+    = javascript_include_tag('voting')
    
 %h2= "Game Details: #{@game.name}"
 = error_messages_for(:game)

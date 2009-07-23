@@ -7,6 +7,7 @@ And receive game progress messages
   Scenario: User should see list of active players
     Given there is a game called "The Incident at Mariahville"
     And "aaronstack" is a player in the game called "The Incident at Mariahville"
+    And "ebloodstone" is a player in the game called "The Incident at Mariahville"
     And the game called "The Incident at Mariahville" has started
     When I go to the game page for "The Incident at Mariahville"
     Then I should see "Cast & Crew"
@@ -24,6 +25,21 @@ And receive game progress messages
     Then I should see "It's DAY"
     And I should see "Yeah, that one sure looks suspicious to me"
     And the vote for "aaronstack" has been recorded
+
+  Scenario: Current user changes his vote
+    Given I am signed in
+    And there is a game called "The Incident at Mariahville"
+    And "aaronstack" is a player in the game called "The Incident at Mariahville"
+    And "ebloodstone" is a player in the game called "The Incident at Mariahville"
+    And I am playing in the game called "The Incident at Mariahville"
+    And the game called "The Incident at Mariahville" is in its "2nd" period
+    And I have voted to kill "aaronstack" in the game called "The Incident at Mariahville"
+    When I go to the game page for "The Incident at Mariahville"
+    And I select "ebloodstone" from "victims"
+    And I press "Submit Choice"
+    Then I should see "Yeah, that one sure looks suspicious to me"
+    And the vote for "ebloodstone" has been recorded
+    And there is no vote for "aaronstack"
 
   Scenario: Current user quits the current game
     Given I am signed in

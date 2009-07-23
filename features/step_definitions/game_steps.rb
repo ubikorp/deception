@@ -101,6 +101,12 @@ Given /^a werewolf killed "([^\"]*)" in the game called "([^\"]*)"$/ do |arg1, a
   @game.continue
 end
 
+Given /^I have voted to kill "([^\"]*)" in the game called "([^\"]*)"$/ do |arg1, arg2|
+  @game = Game.find_by_name(arg2)
+  @user = User.find_by_login('zapnap')
+  @user.vote(User.find_by_login(arg1))
+end
+
 Then /^there should not be a game called "([^\"]*)"$/ do |arg1|
   Game.find_by_name(arg1).should == nil
 end
@@ -123,4 +129,9 @@ end
 Then /^the vote for "([^\"]*)" has been recorded$/ do |arg1|
   @user = User.find_by_login(arg1)
   VoteEvent.find(:first, :conditions => { :target_player_id => @user.active_player.id }).should_not be_nil
+end
+
+Then /^there is no vote for "([^\"]*)"$/ do |arg1|
+  @user = User.find_by_login(arg1)
+  VoteEvent.find(:first, :conditions => { :target_player_id => @user.active_player.id }).should be_nil
 end

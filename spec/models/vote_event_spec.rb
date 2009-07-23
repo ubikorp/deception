@@ -26,11 +26,11 @@ describe VoteEvent do
 
   it { should validate_presence_of(:source_player_id) }
   it { should validate_presence_of(:target_player_id) }
-  it { should validate_uniqueness_of(:source_player_id, :scope => :period_id) }
+  # it { should validate_uniqueness_of(:source_player_id, :scope => :period_id) }
 
-  it 'should disallow more than one vote from a player during a period' do
+  it 'should overwrite previous votes from the same player in a given period' do
     lambda {
       Factory(:vote_event, :period => @game.current_period, :source_player => @werewolf, :target_player => @otherguy)
-    }.should raise_error(ActiveRecord::RecordInvalid, 'Validation failed: Source player has already been taken')
+    }.should_not change(VoteEvent, :count)
   end
 end

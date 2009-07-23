@@ -5,15 +5,15 @@
       - period_votes_summary(period).each do |victim, mob|
         %li= "#{mob.map { |p| player_profile_link(p) }.join(', ')} voted to lynch #{player_profile_link(victim)}."
 
-    - if period.events.kills.length < 1 
+    - if !period.current? && period.events.kills.length < 1 
       %li Nobody was killed.
 
-    - elsif period.phase == :day
+    - else
       - period.events.kills.each do |kill|
-        %li= "The majority agreed to kill #{player_profile_link(kill.target_player)}, a #{kill.target_player.type}."
-
-    - elsif period.phase == :night
-      %li= "Poor #{player_profile_link(period.events.kills[0].target_player)} was killed in the middle of the night by a bloodthirsty werewolf!"
+        - if period.phase == :day
+          %li= "The majority agreed to kill #{player_profile_link(kill.target_player)}, a #{kill.target_player.type}."
+        - elsif period.phase == :night
+          %li= "Poor #{player_profile_link(kill.target_player)} was killed in the middle of the night by a bloodthirsty werewolf!"
 
     - period.events.quits.each do |quit|
       %li= "#{player_profile_link(quit.source_player)} committed suicide!"
