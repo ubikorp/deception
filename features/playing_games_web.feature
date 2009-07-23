@@ -9,9 +9,8 @@ And receive game progress messages
     And "aaronstack" is a player in the game called "The Incident at Mariahville"
     And the game called "The Incident at Mariahville" has started
     When I go to the game page for "The Incident at Mariahville"
-    Then I should open the page
-    #Then I should see "Cast & Crew"
-    #And I should see "aaronstack"
+    Then I should see "Cast & Crew"
+    And I should see "aaronstack"
 
   Scenario: Current user votes to lynch a player
     Given I am signed in
