@@ -1,3 +1,6 @@
+- content_for(:extra_head) do
+  = javascript_include_tag('voting')
+   
 %h2= "Game Details: #{@game.name}"
 = error_messages_for(:game)
 
@@ -13,10 +16,10 @@
   %ul
     %ul 
     - @game.players.each do |player|
-      %li.player
-        = link_to(profile_image(player.user, :width => 48, :height => 48, :class => "#{player.dead? ? 'dead' : 'alive'}"), twitter_profile_url(player.user), :target => '_blank')
+      %li.player{:id => "player_#{player.user_id}", :class => "#{'dead' if player.dead?} #{'selected' if current_user.voted_in(@game.current_period) == player.user}"}
+        = profile_image(player.user, :width => 48, :height => 48)
         .player-is-dead= "DEAD" if player.dead?
-        .name= player.user.login
+        .name= link_to(player.user.login, twitter_profile_url(player.user), :target => '_blank')
     .clearfix
 
 - if !@game.setup?

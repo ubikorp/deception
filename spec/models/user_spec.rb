@@ -207,5 +207,15 @@ describe User do
         @user.vote(@other).should be_false
       }.should_not change(VoteEvent, :count)
     end
+
+    it 'should report the user we voted for' do
+      player1 = @user.join(@game, :werewolf)
+      player2 = @target.join(@game, :villager)
+      @game.start
+      @user.vote(@target)
+
+      @user.voted_in(@game.current_period).should == @target
+      @target.voted_in(@game.current_period).should be_false
+    end
   end
 end

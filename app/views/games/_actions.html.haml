@@ -10,6 +10,7 @@
   .actions
     %p= "Discuss with your fellow villagers on Twitter, and then..." if game.day?
     %p Make your selection from the list of villagers below:
-    - form_tag(vote_game_path(game)) do
-      = select(:vote, :user_id, game.players.alive.map { |p| [p.user.login, p.user.id] }.reject { |q| q[1] == current_user.id }, {}, :id => 'victims')
-      = submit_tag('Submit Choice')
+    #voting
+      - form_tag(vote_game_path(game)) do
+        = select(:vote, :user_id, game.players.alive.map { |p| [p.user.login, p.user.id] }.reject { |q| q[1] == current_user.id }, {}, :id => 'victims')
+        = submit_tag('Submit Choice')

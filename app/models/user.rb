@@ -113,4 +113,17 @@ class User < TwitterAuth::GenericUser
       false
     end
   end
+
+  # discover which user we voted for in the given period
+  def voted_in(period)
+    victim = false
+
+    if player = active_player
+      if target = player.voted_in_period(period)
+        victim = target.user
+      end
+    end
+
+    victim
+  end
 end

@@ -112,9 +112,6 @@ div.status
       img
         :border 5px solid #eee
         :margin-bottom 2px
-      img.dead
-        :filter alpha(opacity=60)
-        :opacity 0.4
 
       .player-is-dead
         :color #fff
@@ -131,6 +128,10 @@ div.status
     li.follower.selected, li.player.selected
       img
         :border 5px solid #cfc
+
+    li.player.dead img
+      :filter alpha(opacity=60)
+      :opacity 0.4
 
   #invitations
     textarea

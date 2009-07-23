@@ -44,4 +44,13 @@ class Player < ActiveRecord::Base
       false
     end
   end
+
+  # used to discover what player, if any, this player voted for in a given period
+  def voted_in_period(period)
+    if vote = period.events.votes.detect { |v| v.source_player == self }
+      vote.target_player
+    else
+      false
+    end
+  end
 end

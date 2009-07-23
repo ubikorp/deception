@@ -61,4 +61,10 @@ describe Player do
       @villager.should be_dead
     end
   end
+
+  it 'should have voted in period' do
+    Factory(:vote_event, :period => @game.current_period, :target_player => @werewolf, :source_player => @villager)
+    @villager.voted_in_period(@game.current_period).should == @werewolf
+    @werewolf.voted_in_period(@game.current_period).should be_false
+  end
 end
