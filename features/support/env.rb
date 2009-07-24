@@ -14,6 +14,7 @@ Cucumber::Rails.use_transactional_fixtures
 # (e.g. rescue_action_in_public / rescue_responses / rescue_from)
 Cucumber::Rails.bypass_rescue
 
+require 'ruby-debug'
 require 'webrat'
 
 Webrat.configure do |config|
