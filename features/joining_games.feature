@@ -60,3 +60,13 @@ I want to be able to join an existing game
     Then I should not see "Join Game"
     And I should see "You're scheduled to play in this game, once it starts"
 
+  Scenario: User should be reminded to follow the gamebot when they join a game
+    Given I am signed in
+    And there is a pending game called "The Incident at Mariahville"
+    And I am playing in the game called "The Incident at Mariahville"
+    When I go to the game page for "The Incident at Mariahville"
+    And I press "Play on Twitter"
+    Then I should be redirected to the game page for "The Incident at Mariahville"
+    And I should see "following @"
+    And I should not see "Play on Twitter"
+    And I should be following the gamebot user on Twitter

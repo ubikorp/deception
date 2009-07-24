@@ -30,6 +30,7 @@
 #  time_zone                    :string(255)
 #  created_at                   :datetime
 #  updated_at                   :datetime
+#  following                    :boolean
 #
 
 require File.dirname(__FILE__) + '/../spec_helper'

@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Date: Fri, 24 Jul 2009 00:27:15 GMT
+Server: hi
+Last-Modified: Fri, 24 Jul 2009 00:27:15 GMT
+Status: 200 OK
+ETag: "25f233caf763c3f416aaef44812a7a19"
+Pragma: no-cache
+Cache-Control: no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+Content-Type: application/json; charset=utf-8
+Content-Length: 964
+Expires: Tue, 31 Mar 1981 05:00:00 GMT
+X-Revision: 08451021f9b9752c438d88882335e6ddc88f994a
+X-Transaction: 1248395235-78347-13910
+Set-Cookie: lang=en; path=/
+Set-Cookie: _twitter_sess=BAh7CToTcGFzc3dvcmRfdG9rZW4iLTU1YTJjOWJkZjlmNDE5NjlmZmVhOTMy%250AN2Y5ZWM4NDQ4M2ZhNTY2ODk6CXVzZXJpA%252FnlFzoHaWQiJTViMGY4NTI5NTNl%250AZTkzYzQ2YjZjNzk0YjllNTJmOWRhIgpmbGFzaElDOidBY3Rpb25Db250cm9s%250AbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ad26af9182934f17004c9f3a9cafec1c9f902e7e; domain=.twitter.com; path=/
+Vary: Accept-Encoding
+Connection: close
+
+{"statuses_count":2,"friends_count":1,"profile_sidebar_border_color":"87bc44","description":null,"notifications":false,"utc_offset":null,"verified":false,"favourites_count":0,"created_at":"Tue Jul 21 01:15:59 +0000 2009","profile_text_color":"000000","profile_background_image_url":"http:\/\/static.twitter.com\/images\/themes\/theme1\/bg.gif","url":null,"name":"t3stx","profile_link_color":"0000ff","protected":false,"status":{"text":"@t3stx interesting.","in_reply_to_status_id":null,"created_at":"Tue Jul 21 01:19:52 +0000 2009","in_reply_to_user_id":58655592,"favorited":false,"in_reply_to_screen_name":"t3stx","id":2749402374,"truncated":false,"source":"web"},"profile_background_tile":false,"profile_background_color":"9ae4e8","profile_image_url":"http:\/\/static.twitter.com\/images\/default_profile_normal.png","following":false,"profile_sidebar_fill_color":"e0ff92","followers_count":1,"location":null,"screen_name":"t3stx","id":58655592,"time_zone":null}

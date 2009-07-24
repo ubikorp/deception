@@ -28,3 +28,5 @@ FakeWeb.register_uri(:post, 'http://twitter.com/oauth/request_token', :body => '
 FakeWeb.register_uri(:post, 'http://twitter.com/oauth/access_token', :body => 'oauth_token=fake&oauth_token_secret=fake')
 FakeWeb.register_uri(:get, 'http://twitter.com/account/verify_credentials.json', :response => File.join(RAILS_ROOT, 'features', 'fixtures', 'verify_credentials.json'))
 FakeWeb.register_uri(:get, 'http://twitter.com/statuses/followers.json', :response => File.join(RAILS_ROOT, 'features', 'fixtures', 'followers.json'))
+# FakeWeb.register_uri(:get, 'http://twitter.com/friendships/show.json', :response => File.join(RAILS_ROOT, 'features', 'fixtures', 'friendship.json'))
+FakeWeb.register_uri(:post, 'http://twitter.com/friendships/create/t3stx.json?follow=true', :body => '', :response => File.join(RAILS_ROOT, 'features', 'fixtures', 'create_friendship.json'))
