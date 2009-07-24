@@ -20,12 +20,9 @@ class IncomingMessage < Message
   validates_presence_of :from_user_id, :status_id
   validates_uniqueness_of :status_id
 
-  # TODO: after_create :record_event or handle this in an observer?
-
   # poll twitter for new game messages
   # return the number of new messages that were successfully processed
   def self.receive_messages
-    # self.twitter.mentions ?
     # TODO: may need to retrieve multiple pages so we don't miss anything (if interval is too large)
     logger.info("Receiving messages from Twitter...")
     count = 0
@@ -52,6 +49,6 @@ class IncomingMessage < Message
 
   # send a quick reply to this message
   def reply(text)
-    OutgoingMessage.create(:to_user => from_user, :game => game, :text => text)
+    msg = OutgoingMessage.create(:to_user => from_user, :game => game, :text => text)
   end
 end

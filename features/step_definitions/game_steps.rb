@@ -58,13 +58,13 @@ end
 
 Given /^I am playing in the game called "([^\"]*)"$/ do |arg1|
   @game = Game.find_by_name(arg1)
-  @user = User.find_by_login('zapnap')
+  @user = User.find_by_login('zapnap') || Factory(:zapnap)
   @user.join(@game)
 end
 
 Given /^I am a "([^\"]*)" in the game called "([^\"]*)"$/ do |arg1, arg2|
   @game = Game.find_by_name(arg2)
-  @user = User.find_by_login('zapnap')
+  @user = User.find_by_login('zapnap') || Factory(:zapnap)
   @user.join(@game, arg1.to_sym)
 end
 
@@ -105,6 +105,31 @@ Given /^I have voted to kill "([^\"]*)" in the game called "([^\"]*)"$/ do |arg1
   @game = Game.find_by_name(arg2)
   @user = User.find_by_login('zapnap')
   @user.vote(User.find_by_login(arg1))
+end
+
+When /^the game called "([^\"]*)" starts$/ do |arg1|
+  @game = Game.find_by_name(arg1)
+  @game.start
+end
+
+When /^the game called "([^\"]*)" is aborted$/ do |arg1|
+  @game = Game.find_by_name(arg1)
+  @game.destroy
+end
+
+When /^I have been killed in the game called "([^\"]*)"$/ do |arg1|
+  @game = Game.find_by_name(arg1)
+  @event = KillEvent.create(:game => @game, :target_user => User.find_by_login('zapnap'))
+end
+
+When /^the game period turns over$/ do
+  @game = Game.last
+  @game.continue
+end
+
+When /^the game called "([^\"]*)" is finished$/ do |arg1|
+  @game = Game.find_by_name(arg1)
+  @game.finish # improper
 end
 
 Then /^there should not be a game called "([^\"]*)"$/ do |arg1|
