@@ -1,3 +1,14 @@
+Given /^I have disabled notifications$/ do
+  @user = User.find_by_login('zapnap') || Factory(:zapnap)
+  @user.notify_start         = false
+  @user.notify_finish        = false
+  @user.notify_period_change = false
+  @user.notify_death         = false
+  @user.notify_quit          = false
+  @user.notify_reply         = false
+  @user.save
+end
+
 When /^I send a public message containing "([^\"]*)"$/ do |arg1|
   @user = User.find_by_login('zapnap')
   @msg = Factory(:incoming_message, :game => Game.first, :from_user => @user, :text => arg1)
@@ -13,10 +24,13 @@ Then /^I should be following the gamebot user on Twitter$/ do
 end
 
 Then /^I should receive a direct message$/ do
-  OutgoingMessage.count.should == 1
-  OutgoingMessage.last.to_user.login.should == 'zapnap'
+  (OutgoingMessage.count.should > 1) && (OutgoingMessage.find(:first, :conditions => { :to_user_id => User.find_by_login('zapnap') }).should_not be_nil)
 end
 
-Then /^The direct message should contain "([^\"]*)"$/ do |arg1|
-  OutgoingMessage.last.text.should match(/#{arg1}/)
+Then /^the direct message should contain "([^\"]*)"$/ do |arg1|
+  OutgoingMessage.find(:all, :conditions => { :to_user_id => User.find_by_login('zapnap') }).detect { |m| m.text.match(arg1) }.should_not be_nil
+end
+
+Then /^I should not receive a direct message$/ do
+  OutgoingMessage.count.should == 0
 end
