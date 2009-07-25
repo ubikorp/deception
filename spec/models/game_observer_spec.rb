@@ -4,7 +4,6 @@ describe GameObserver do
   include GameSpecHelper
 
   before(:each) do
-    Game.delete_observers
     setup_game(false) # setup but don't start
     @obs = GameObserver.instance
   end
