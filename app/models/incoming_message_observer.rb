@@ -1,11 +1,15 @@
+require 'game_messages'
+
 class IncomingMessageObserver < ActiveRecord::Observer
   def after_create(msg)
-    if msg.text.match(/kill/i) || msg.text.match(/vote/i)
-      vote_message_received(msg)
-    elsif msg.text.match(/quit/i)
-      quit_message_received(msg)
-    else
-      help_message_received(msg)
+    if msg.from_user.notify_reply?
+      if msg.text.match(/kill/i) || msg.text.match(/vote/i)
+        vote_message_received(msg)
+      elsif msg.text.match(/quit/i)
+        quit_message_received(msg)
+      else
+        help_message_received(msg)
+      end
     end
   end
 
@@ -16,10 +20,10 @@ class IncomingMessageObserver < ActiveRecord::Observer
       target_user = User.find_by_login(match[1])
       if target_user && (vote = msg.from_user.vote(target_user))
         logger.info("Created a VoteEvent from msg (@#{msg.from_user.login}): #{msg.text}")
-        msg.reply("We've recorded your vote. Thanks!")
+        msg.reply(DeceptionGame::Messages.build(:bot_valid_vote_reply))
       else
         logger.error("Unable to create VoteEvent from msg (@#{msg.from_user.login}): #{msg.text}")
-        msg.reply("Can't record this vote. Are you and the target player both playing in the game? Please visit the website for more info.")
+        msg.reply(DeceptionGame::Messages.build(:bot_invalid_vote_reply))
       end
     else
       help_message_received(msg)
@@ -27,11 +31,11 @@ class IncomingMessageObserver < ActiveRecord::Observer
   end
 
   def quit_message_received(msg)
-    msg.reply("Please visit the website at http://mysite.told if you want to quit or change your account notification settings.")
+    msg.reply(DeceptionGame::Messages.build(:bot_quit_reply))
   end
 
   def help_message_received(msg)
     logger.info("Not sure what to do with this msg (@#{msg.from_user.login}): #{msg.text}")
-    msg.reply("I don't understand. Do you want to *vote* or *kill* someone? For more info, visit http://mysite.tld")
+    msg.reply(DeceptionGame::Messages.build(:bot_help_reply))
   end
 end

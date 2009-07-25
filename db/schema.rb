@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090723220243) do
+ActiveRecord::Schema.define(:version => 20090725021912) do
 
   create_table "events", :force => true do |t|
     t.string   "type"
@@ -97,6 +97,12 @@ ActiveRecord::Schema.define(:version => 20090723220243) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "following",                    :default => false
+    t.boolean  "notify_start",                 :default => true
+    t.boolean  "notify_finish",                :default => true
+    t.boolean  "notify_period_change",         :default => true
+    t.boolean  "notify_death",                 :default => true
+    t.boolean  "notify_quit",                  :default => true
+    t.boolean  "notify_reply",                 :default => true
   end
 
 end

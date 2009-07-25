@@ -52,12 +52,12 @@ Spec::Runner.configure do |config|
 end
 
 module GameSpecHelper
-  def setup_game
+  def setup_game(start = true)
     @game = Factory(:game)
     Factory(:darcy).join(@game)
     Factory(:elsa).join(@game)
     Factory(:aaron).join(@game)
-    @game.start
+    @game.start if start
     @game
   end
 end
