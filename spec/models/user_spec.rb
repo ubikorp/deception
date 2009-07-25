@@ -31,6 +31,12 @@
 #  created_at                   :datetime
 #  updated_at                   :datetime
 #  following                    :boolean
+#  notify_start                 :boolean         default(TRUE)
+#  notify_finish                :boolean         default(TRUE)
+#  notify_period_change         :boolean         default(TRUE)
+#  notify_death                 :boolean         default(TRUE)
+#  notify_quit                  :boolean         default(TRUE)
+#  notify_reply                 :boolean         default(TRUE)
 #
 
 require File.dirname(__FILE__) + '/../spec_helper'
