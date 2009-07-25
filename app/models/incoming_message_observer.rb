@@ -1,5 +1,3 @@
-require 'game_messages'
-
 class IncomingMessageObserver < ActiveRecord::Observer
   def after_create(msg)
     if msg.from_user.notify_reply?

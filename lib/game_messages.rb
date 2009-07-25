@@ -10,7 +10,7 @@ module DeceptionGame
 
     PERIOD_CHANGE_AM_MSG  = "Now it's day time again. Time for justice. Who will you vote to lynch?"
 
-    PERIOD_NODEATH_AM_MSG = "Villagers couldn't decide who to lynch today. Eek. "
+    PERIOD_NODEATH_PM_MSG = "Villagers couldn't decide who to lynch today. Eek. "
     PERIOD_SUMMARY_PM_MSG = "The villagers have chosen to lynch <>, "
 
     VILLAGER_LYNCH_MSG    = "a common villager. Oops."

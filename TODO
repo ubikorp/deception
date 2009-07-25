@@ -1,10 +1,12 @@
-- outgoing twitter messages: add handler (use cron'd Twitter gem tasks for now?)
-- incoming twitter messages: add handler (use cron'd Twitter gem tasks for now? BG later?)
-- use obsevers and create a twitter notifier class for handling outgoing messages
-- instructions might be nice
+- implement game observer specs and make sure cuke tests pass
+- warn villagers that try to vote during night phase in reply
+- refactor cuke stories to use background stuff
+- game start notifications should include role?
+- should only listen to lynch votes that are @replied
+- instructions might be nice (static pages per user class and a general description?)
 - display / gather twitter chatter from in-game users (extra... javascripty?)
 - auto-start feature (once max players satisfied?)
-- web interface for player notification settings (usually on game state change)
+- web interface for player notification settings
 - multiple pages of followers for invite screen
 - rss feed for activity (after web interface)
 - make role assignment less 'dumb'

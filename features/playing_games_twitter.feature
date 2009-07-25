@@ -88,3 +88,10 @@ And receive game progress messages
     When the game called "The Incident at Mariahville" is finished
     Then I should receive a direct message
     And the direct message should contain "The game is over"
+
+  Scenario: User disables notifications
+    Given there is a game called "The Incident at Mariahville"
+    And I am a "player" in the game called "The Incident at Mariahville"
+    And I have disabled notifications
+    When the game called "The Incident at Mariahville" is finished
+    Then I should not receive a direct message

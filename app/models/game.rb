@@ -161,6 +161,7 @@ class Game < ActiveRecord::Base
   end
 
   def winner
+    # TODO: adjust this to be more intelligent; werewolves win if there's only 1 villager left, too (can stalemate voting)
     villagers = players.villagers.alive.length > 0
     werewolves = players.werewolves.alive.length > 0
     if villagers && werewolves

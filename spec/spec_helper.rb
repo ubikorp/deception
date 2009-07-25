@@ -54,9 +54,9 @@ end
 module GameSpecHelper
   def setup_game(start = true)
     @game = Factory(:game)
-    Factory(:darcy).join(@game)
-    Factory(:elsa).join(@game)
-    Factory(:aaron).join(@game)
+    @p1   = Factory(:darcy).join(@game)
+    @p2   = Factory(:elsa).join(@game)
+    @wolf = Factory(:aaron).join(@game, :werewolf)
     @game.start if start
     @game
   end
