@@ -15,7 +15,7 @@ describe IncomingMessage do
 
     reply = OutgoingMessage.last
     reply.to_user.login == @msg.from_user.login
-    reply.text.should match(/I don't understand/)
+    reply.text.should match(/I don't understand/i)
   end
 
   it 'should reply to quit messages with further instructions' do
@@ -26,7 +26,7 @@ describe IncomingMessage do
 
     reply = OutgoingMessage.last
     reply.to_user.login == @msg.from_user.login
-    reply.text.should match(/please visit the web/)
+    reply.text.should match(/Please visit the website/i)
   end
 
   context 'votes' do
@@ -42,7 +42,7 @@ describe IncomingMessage do
 
       reply = OutgoingMessage.last
       reply.to_user.login == @msg.from_user.login
-      reply.text.should match(/recorded your vote/)
+      reply.text.should match(/recorded your vote/i)
     end
 
     it 'should record a vote if message is valid' do
@@ -63,7 +63,7 @@ describe IncomingMessage do
 
       reply = OutgoingMessage.last
       reply.to_user.login == @msg.from_user.login
-      reply.text.should match(/Can't record this vote/)
+      reply.text.should match(/Can't record this vote/i)
     end
 
     it 'should not record a vote if message is invalid' do

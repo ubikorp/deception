@@ -22,8 +22,8 @@ module DeceptionGame
     DEATH_VILLAGER_PM_MSG = "Your fellow villagers seem to think you're a werewolf. They're wrong, of course. But they killed you anyway. Jerks."
     DEATH_WEREWOLF_PM_MSG = "Well, your fellow villagers seem to have found you out. It was fun while it lasted though, right?"
 
-    BOT_HELP_REPLY_MSG         = "Please visit the website at http://mysite.told if you want to quit or change your account notification settings."
-    BOT_QUIT_REPLY_MSG         = "I don't understand. Do you want to *vote* or *kill* someone? For more info, visit http://mysite.tld"
+    BOT_HELP_REPLY_MSG         = "I don't understand. Do you want to *vote* or *kill* someone? For more info, visit http://mysite.tld"
+    BOT_QUIT_REPLY_MSG         = "Please visit the website at http://mysite.told if you want to quit or change your account notification settings."
     BOT_VALID_VOTE_REPLY_MSG   = "We've recorded your vote. Thanks!"
     BOT_INVALID_VOTE_REPLY_MSG = "Can't record this vote. Are you and the target player both playing in the game? Please visit the website for more info."
 

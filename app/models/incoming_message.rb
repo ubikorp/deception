@@ -49,6 +49,6 @@ class IncomingMessage < Message
 
   # send a quick reply to this message
   def reply(text)
-    msg = OutgoingMessage.create(:to_user => from_user, :game => game, :text => text)
+    game.outgoing_messages.create(:to_user => from_user, :text => text)
   end
 end
