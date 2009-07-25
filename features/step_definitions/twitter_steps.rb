@@ -12,26 +12,11 @@ Then /^I should be following the gamebot user on Twitter$/ do
   User.find_by_login('zapnap').should be_following
 end
 
-Then /^I should receive a notification with my role$/ do
-  if @msg = OutgoingMessage.last
-    (@msg.to_user.login.should == 'zapnap') && (@msg.text.should match(/has started/))
-  else
-    false
-  end
+Then /^I should receive a direct message$/ do
+  OutgoingMessage.count.should == 1
+  OutgoingMessage.last.to_user.login.should == 'zapnap'
 end
 
-Then /^I should receive a notification that the game has been aborted$/ do
-  if @msg = OutgoingMessage.last
-    (@msg.to_user.login.should == 'zapnap') && (@msg.text.should match(/has been aborted/))
-  else
-    false
-  end
-end
-
-Then /^I should receive a direct message containing "([^\"]*)"$/ do |arg1|
-  if @msg = OutgoingMessage.last
-    (@msg.to_user.login.should == 'zapnap') && (@msg.text.should match(/#{arg1}/))
-  else
-    false
-  end
+Then /^The direct message should contain "([^\"]*)"$/ do |arg1|
+  OutgoingMessage.last.text.should match(/#{arg1}/)
 end
