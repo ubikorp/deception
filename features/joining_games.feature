@@ -55,7 +55,7 @@ I want to be able to join an existing game
   Scenario: User cannot join game because he is already a participant
     Given I am signed in
     And there is a pending game called "The Incident at Mariahville"
-    And I am playing in the game called "The Incident at Mariahville"
+    And I am a "player" in the game called "The Incident at Mariahville"
     When I go to the game page for "The Incident at Mariahville"
     Then I should not see "Join Game"
     And I should see "You're scheduled to play in this game, once it starts"
@@ -63,7 +63,7 @@ I want to be able to join an existing game
   Scenario: User should be reminded to follow the gamebot when they join a game
     Given I am signed in
     And there is a pending game called "The Incident at Mariahville"
-    And I am playing in the game called "The Incident at Mariahville"
+    And I am a "player" in the game called "The Incident at Mariahville"
     When I go to the game page for "The Incident at Mariahville"
     And I press "Play on Twitter"
     Then I should be redirected to the game page for "The Incident at Mariahville"

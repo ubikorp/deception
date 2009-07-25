@@ -56,22 +56,16 @@ Given /^I am the owner of the game called "([^\"]*)"$/ do |arg1|
   @user.join(@game)
 end
 
-Given /^I am playing in the game called "([^\"]*)"$/ do |arg1|
-  @game = Game.find_by_name(arg1)
-  @user = User.find_by_login('zapnap') || Factory(:zapnap)
-  @user.join(@game)
-end
-
 Given /^I am a "([^\"]*)" in the game called "([^\"]*)"$/ do |arg1, arg2|
   @game = Game.find_by_name(arg2)
   @user = User.find_by_login('zapnap') || Factory(:zapnap)
-  @user.join(@game, arg1.to_sym)
+  @user.join(@game, arg1.nil? ? arg1 : arg1.to_sym)
 end
 
-Given /^"([^\"]*)" is a player in the game called "([^\"]*)"$/ do |arg1, arg2|
-  @game = Game.find_by_name(arg2)
+Given /^"([^\"]*)" is a "([^\"]*)" in the game called "([^\"]*)"$/ do |arg1, arg2, arg3|
+  @game = Game.find_by_name(arg3)
   @user = Factory(arg1.to_sym)
-  @user.join(@game)
+  @user.join(@game, (arg2 == 'player') ? nil : arg2.to_sym)
 end
 
 Given /^the game called "([^\"]*)" is startable$/ do |arg1|
@@ -119,7 +113,7 @@ end
 
 When /^I have been killed in the game called "([^\"]*)"$/ do |arg1|
   @game = Game.find_by_name(arg1)
-  @event = KillEvent.create(:game => @game, :target_user => User.find_by_login('zapnap'))
+  @event = KillEvent.create(:period => @game.current_period, :target_player => User.find_by_login('zapnap').active_player)
 end
 
 When /^the game period turns over$/ do

@@ -27,7 +27,7 @@ class IncomingMessageObserver < ActiveRecord::Observer
   end
 
   def quit_message_received(msg)
-    msg.reply("If you want to quit, please visit the web interface!")
+    msg.reply("Please visit the website at http://mysite.told if you want to quit or change your account notification settings.")
   end
 
   def help_message_received(msg)
