@@ -1,7 +1,7 @@
 class GameObserver < ActiveRecord::Observer
   # TODO: come up with a better abstraction for messages
   def after_transition(game, transition)
-    case(transition)
+    case(transition.event)
     when :start
       send_start_notice(game)
     when :continue

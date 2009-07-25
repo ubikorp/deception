@@ -4,6 +4,7 @@ describe GameObserver do
   include GameSpecHelper
 
   before(:each) do
+    Game.delete_observers
     setup_game(false) # setup but don't start
     @obs = GameObserver.instance
   end
@@ -11,7 +12,7 @@ describe GameObserver do
   it 'should broadcast a game start notice when the game begins' do
     lambda { 
       @game.start
-      @obs.after_transition(@game, :start)
+      @obs.after_transition(@game, mock('Transition', :event => :start))
     }.should change(OutgoingMessage, :count)
 
     msg = OutgoingMessage.last
@@ -22,7 +23,7 @@ describe GameObserver do
     lambda {
       @game.start
       @game.finish
-      @obs.after_transition(@game, :finish)
+      @obs.after_transition(@game, mock('Transition', :event => :finish))
     }.should change(OutgoingMessage, :count)
 
     msg = OutgoingMessage.last
@@ -38,7 +39,7 @@ describe GameObserver do
       lambda {
         @wolf.user.vote(@p1.user)
         @game.continue # day -> night
-        @obs.after_transition(@game, :continue)
+        @obs.after_transition(@game, mock('Transition', :event => :continue))
       }.should change(OutgoingMessage, :count)
 
       msg = OutgoingMessage.last
@@ -53,7 +54,7 @@ describe GameObserver do
         @p1.user.vote(@p2.user)
         @wolf.user.vote(@p2.user)
         @game.continue # day -> night
-        @obs.after_transition(@game, :continue)
+        @obs.after_transition(@game, mock('Transition', :event => :continue))
       }.should change(OutgoingMessage, :count)
 
       msg = OutgoingMessage.find(:first, :conditions => { :to_user_id => @p2.user_id })
@@ -67,7 +68,7 @@ describe GameObserver do
         @p1.user.vote(@wolf.user)
         @p2.user.vote(@wolf.user)
         @game.continue # day -> night
-        @obs.after_transition(@game, :finish)
+        @obs.after_transition(@game, mock('Transition', :event => :finish))
         # NOTE: this will need updating if we support > 1 werewolf
       }.should change(OutgoingMessage, :count)
 
@@ -79,7 +80,7 @@ describe GameObserver do
       @p1.user.update_attribute(:notify_death, false)
       @wolf.user.vote(@p1.user)
       @game.continue
-      @obs.after_transition(@game, :continue)
+      @obs.after_transition(@game, mock('Transition', :event => :continue))
       OutgoingMessage.find(:first, :conditions => { :to_user_id => @p1.user_id }).should be_nil
     end
   end
@@ -92,7 +93,7 @@ describe GameObserver do
     it 'should be sent at sunrise' do
       lambda {
         @game.continue # night -> day
-        @obs.after_transition(@game, :continue)
+        @obs.after_transition(@game, mock('Transition', :event => :continue))
       }.should change(OutgoingMessage, :count)
 
       msg = OutgoingMessage.last
@@ -105,7 +106,7 @@ describe GameObserver do
 
       lambda {
         @game.continue # day -> night
-        @obs.after_transition(@game, :continue)
+        @obs.after_transition(@game, mock('Transition', :event => :continue))
       }.should change(OutgoingMessage, :count)
 
       msg = OutgoingMessage.last
@@ -117,10 +118,10 @@ describe GameObserver do
       lambda {
         @wolf.user.vote(@p1.user)
         @game.continue # night -> day
-        @obs.after_transition(@game, :continue)
+        @obs.after_transition(@game, mock('Transition', :event => :continue))
       }.should change(OutgoingMessage, :count)
 
-      msg = OutgoingMessage.first
+      msg = OutgoingMessage.find(:first, :conditions => { :to_user_id => @p2.user }, :order => "created_at DESC")
       msg.text.should match(/#{DeceptionGame::Messages.build(:period_summary_am, @p1.user.login)}/)
       msg.text.should match(/#{DeceptionGame::Messages::PERIOD_CHANGE_AM_MSG}/)
     end
@@ -132,7 +133,7 @@ describe GameObserver do
         @p1.user.vote(@p2.user)
         @wolf.user.vote(@p2.user)
         @game.continue # day -> night
-        @obs.after_transition(@game, :continue)
+        @obs.after_transition(@game, mock('Transition', :event => :continue))
       }.should change(OutgoingMessage, :count)
 
       msg = OutgoingMessage.first
@@ -144,7 +145,7 @@ describe GameObserver do
     it 'should not be sent to dead players' do
       @wolf.user.vote(@p1.user)
       @game.continue # night -> day
-      @obs.after_transition(@game, :continue)
+      @obs.after_transition(@game, mock('Transition', :event => :continue))
 
       # should get death notice but not period change notice
       OutgoingMessage.find(:first, :conditions => { :to_user_id => @p1.user_id }).text.should_not match(/#{DeceptionGame::Messages::PERIOD_CHANGE_PM_MSG}/)
@@ -153,7 +154,7 @@ describe GameObserver do
     it 'should not be sent to players with notifications turned off' do
       @p1.user.update_attribute(:notify_period_change, false)
       @game.continue # night -> day
-      @obs.after_transition(@game, :continue)
+      @obs.after_transition(@game, mock('Transition', :event => :continue))
       OutgoingMessage.find(:first, :conditions => { :to_user_id => @p1.user_id }).should be_nil
     end
   end

@@ -4,6 +4,7 @@ describe IncomingMessage do
   include GameSpecHelper
 
   before(:each) do
+    IncomingMessage.delete_observers
     @obs = IncomingMessageObserver.instance
   end
 
