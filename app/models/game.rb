@@ -201,7 +201,7 @@ class Game < ActiveRecord::Base
   def assign_roles
     # TODO: make this less 'dumb'; see multi-werewolf game statistics
     players_without_roles = players.select { |p| p.type.nil? }
-    wolf_candidates = (werewolves.length > 0) ? [] : [rand(players.length)]
+    wolf_candidates = (werewolves.length > 0) ? [] : [rand(players_without_roles.length)]
 
     players_without_roles.each_with_index do |player, i|
       role = wolf_candidates.include?(i) ? :werewolf : :villager
