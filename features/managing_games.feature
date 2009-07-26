@@ -4,6 +4,9 @@ As a user
 I want to be able to create games
 And edit games that I have created
 
+  Background:
+    Given I am a user named "zapnap"
+
   Scenario: Anonymous user cannot create a game
     When I go to the new game page
     Then I should be redirected to login
@@ -26,7 +29,7 @@ And edit games that I have created
   Scenario: Owner aborts game during setup phase
     Given I am signed in
     And there is a pending game called "The Incident at Mariahville"
-    And I am the owner of the game called "The Incident at Mariahville"
+    And I am the owner of the game
     When I go to the game page for "The Incident at Mariahville"
     And I press "Abort Game"
     Then I should see "The game has been aborted"
@@ -42,17 +45,17 @@ And edit games that I have created
   Scenario: Owner manually starts game
     Given I am signed in
     And there is a pending game called "The Incident at Mariahville"
-    And I am the owner of the game called "The Incident at Mariahville"
-    And the game called "The Incident at Mariahville" is startable
+    And I am the owner of the game
+    And the game is startable
     When I go to the game page for "The Incident at Mariahville"
     And I press "Start Game Now"
-    Then the game called "The Incident at Mariahville" is waiting to start
+    Then the game is waiting to start
     And I should see "The game will begin shortly"
 
   Scenario: User fails to manually start game
     Given I am signed in
     And there is a pending game called "The Incident at Mariahville"
-    And I am the owner of the game called "The Incident at Mariahville"
-    And the game called "The Incident at Mariahville" is not startable
+    And I am the owner of the game
+    And the game is not startable
     When I go to the game page for "The Incident at Mariahville"
     Then I should not see "Start Game Now"

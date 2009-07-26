@@ -46,83 +46,71 @@ Given /^there is an invite\-only game called "([^\"]*)"$/ do |arg1|
   @game = Factory(:game, :name => arg1, :owner => Factory(:user), :invite_only => true)
 end
 
-Given /^I am the owner of the game called "([^\"]*)"$/ do |arg1|
-  @game = Game.find_by_name(arg1)
-  @user = User.find_by_login('zapnap')
-
+Given /^I am the owner of the game$/ do
   @game.owner = @user
   @game.save
 
   @user.join(@game)
 end
 
-Given /^I am a "([^\"]*)" in the game called "([^\"]*)"$/ do |arg1, arg2|
-  @game = Game.find_by_name(arg2)
-  @user = User.find_by_login('zapnap') || Factory(:zapnap)
-  @user.join(@game, arg1.nil? ? arg1 : arg1.to_sym)
+Given /^I am a "([^\"]*)" in the game$/ do |arg1|
+  role = arg1.match(/player/i) ? nil : arg1.to_sym
+  @user.join(@game, role)
 end
 
-Given /^"([^\"]*)" is a "([^\"]*)" in the game called "([^\"]*)"$/ do |arg1, arg2, arg3|
-  @game = Game.find_by_name(arg3)
-  @user = Factory(arg1.to_sym)
-  @user.join(@game, (arg2 == 'player') ? nil : arg2.to_sym)
+Given /^"([^\"]*)" is a "([^\"]*)" in the game$/ do |arg1, arg2|
+  role = arg2.match(/player/i) ? nil : arg2.to_sym
+  user = Factory(arg1.to_sym)
+  user.join(@game, role)
 end
 
-Given /^the game called "([^\"]*)" is startable$/ do |arg1|
-  @game = Game.find_by_name(arg1)
+Given /^the game is startable$/ do
+  # make sure minimum number of players is met
   APP_CONFIG[:min_players].times { |i| Factory(:user).join(@game) }
 end
 
-Given /^the game called "([^\"]*)" is not startable$/ do |arg1|
+Given /^the game is not startable$/ do
 end
 
-Given /^the game called "([^\"]*)" has started$/ do |arg1|
-  Given "the game called \"#{arg1}\" is startable"
+Given /^the game has started$/ do
+  Given "the game is startable"
   @game.start
 end
 
-Given /^the game called "([^\"]*)" is in its "([^\"]*)" period$/ do |arg1, arg2|
-  Given "the game called \"#{arg1}\" has started"
+Given /^the game is in its "([^\"]*)" period$/ do |arg1|
+  Given "the game has started"
   @game.start
-  (arg2.to_i - 1).times { |i| @game.continue }
+  (arg1.to_i - 1).times { |i| @game.continue }
 end
 
-Given /^a werewolf killed "([^\"]*)" in the game called "([^\"]*)"$/ do |arg1, arg2|
-  @game = Game.find_by_name(arg2)
-  @user = User.find_by_login(arg1)
-  @werewolf = @game.players.werewolves[0]
-  @werewolf.user.vote(@user)
+Given /^a werewolf killed "([^\"]*)" in the game$/ do |arg1|
+  user = User.find_by_login(arg1)
+  werewolf = @game.players.werewolves[0]
+  werewolf.user.vote(user)
   @game.continue
 end
 
-Given /^I have voted to kill "([^\"]*)" in the game called "([^\"]*)"$/ do |arg1, arg2|
-  @game = Game.find_by_name(arg2)
-  @user = User.find_by_login('zapnap')
+Given /^I have voted to kill "([^\"]*)"$/ do |arg1|
   @user.vote(User.find_by_login(arg1))
 end
 
-When /^the game called "([^\"]*)" starts$/ do |arg1|
-  @game = Game.find_by_name(arg1)
+When /^the game starts$/ do
   @game.start
 end
 
-When /^the game called "([^\"]*)" is aborted$/ do |arg1|
-  @game = Game.find_by_name(arg1)
+When /^the game is aborted$/ do
   @game.destroy
 end
 
-When /^I have been killed in the game called "([^\"]*)"$/ do |arg1|
-  @game = Game.find_by_name(arg1)
-  @event = KillEvent.create(:period => @game.current_period, :target_player => User.find_by_login('zapnap').active_player)
+When /^I have been killed in the game$/ do
+  @event = KillEvent.create(:period => @game.current_period, :target_player => @user.active_player)
 end
 
 When /^the game period turns over$/ do
-  @game = Game.last
   @game.continue
 end
 
-When /^the game called "([^\"]*)" is finished$/ do |arg1|
-  @game = Game.find_by_name(arg1)
+When /^the game is finished$/ do
   @game.finish # improper
 end
 
@@ -135,22 +123,20 @@ Then /^I should be redirected to the game page for "([^\"]*)"$/ do |arg1|
   response.request.path.should == game_path(@game)
 end
 
-Then /^the game called "([^\"]*)" is waiting to start$/ do |arg1|
-  @game = Game.find_by_name(arg1)
-  @game.should be_ready # manually started, will be promoted to 'start' state by cron task
+Then /^the game is waiting to start$/ do
+  @game.reload.should be_ready # manually started, will be promoted to 'start' state by cron task
 end
 
 Then /^I should no longer be playing in a game$/ do
-  @user = User.find_by_login('zapnap')
   @user.active_player.should be_nil
 end
 
 Then /^the vote for "([^\"]*)" has been recorded$/ do |arg1|
-  @user = User.find_by_login(arg1)
-  VoteEvent.find(:first, :conditions => { :target_player_id => @user.active_player.id }).should_not be_nil
+  user = User.find_by_login(arg1)
+  VoteEvent.find(:first, :conditions => { :target_player_id => user.active_player.id }).should_not be_nil
 end
 
 Then /^there is no vote for "([^\"]*)"$/ do |arg1|
-  @user = User.find_by_login(arg1)
-  VoteEvent.find(:first, :conditions => { :target_player_id => @user.active_player.id }).should be_nil
+  user = User.find_by_login(arg1)
+  VoteEvent.find(:first, :conditions => { :target_player_id => user.active_player.id }).should be_nil
 end

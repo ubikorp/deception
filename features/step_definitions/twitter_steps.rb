@@ -29,7 +29,7 @@ end
 
 Then /^the direct message should contain "([^\"]*)"$/ do |arg1|
   msgs = OutgoingMessage.find(:all, :conditions => { :to_user_id => User.find_by_login('zapnap') })
-  # puts msgs.map { |a| a.text }.join(' - ')
+  puts msgs.map { |a| a.text }.join(' - ')
   msgs.detect { |m| m.text.match(arg1) }.should_not be_nil
 end
 

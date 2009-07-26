@@ -4,11 +4,14 @@ As a user
 I want to be able to make vote and quit actions on the web
 And receive game progress messages
 
+  Background:
+    Given I am a user named "zapnap"
+
   Scenario: User should see list of active players
     Given there is a game called "The Incident at Mariahville"
-    And "aaronstack" is a "player" in the game called "The Incident at Mariahville"
-    And "ebloodstone" is a "player" in the game called "The Incident at Mariahville"
-    And the game called "The Incident at Mariahville" has started
+    And "aaronstack" is a "player" in the game
+    And "ebloodstone" is a "player" in the game
+    And the game has started
     When I go to the game page for "The Incident at Mariahville"
     Then I should see "Cast & Crew"
     And I should see "aaronstack"
@@ -16,9 +19,9 @@ And receive game progress messages
   Scenario: Current user votes to lynch a player
     Given I am signed in
     And there is a game called "The Incident at Mariahville"
-    And "aaronstack" is a "player" in the game called "The Incident at Mariahville"
-    And I am a "player" in the game called "The Incident at Mariahville"
-    And the game called "The Incident at Mariahville" is in its "2nd" period
+    And "aaronstack" is a "player" in the game
+    And I am a "player" in the game
+    And the game is in its "2nd" period
     When I go to the game page for "The Incident at Mariahville"
     And I select "aaronstack" from "victims"
     And I press "Submit Choice"
@@ -29,11 +32,11 @@ And receive game progress messages
   Scenario: Current user changes his vote
     Given I am signed in
     And there is a game called "The Incident at Mariahville"
-    And "aaronstack" is a "player" in the game called "The Incident at Mariahville"
-    And "ebloodstone" is a "player" in the game called "The Incident at Mariahville"
-    And I am a "player" in the game called "The Incident at Mariahville"
-    And the game called "The Incident at Mariahville" is in its "2nd" period
-    And I have voted to kill "aaronstack" in the game called "The Incident at Mariahville"
+    And "aaronstack" is a "player" in the game
+    And "ebloodstone" is a "player" in the game
+    And I am a "player" in the game
+    And the game is in its "2nd" period
+    And I have voted to kill "aaronstack"
     When I go to the game page for "The Incident at Mariahville"
     And I select "ebloodstone" from "victims"
     And I press "Submit Choice"
@@ -44,7 +47,7 @@ And receive game progress messages
   Scenario: Current user quits the current game
     Given I am signed in
     And there is a game called "The Incident at Mariahville"
-    And I am a "player" in the game called "The Incident at Mariahville"
+    And I am a "player" in the game
     When I go to the game page for "The Incident at Mariahville"
     And I press "Leave Game"
     Then I should see "Your player has committed suicide and left this game"
@@ -52,9 +55,9 @@ And receive game progress messages
 
   Scenario: User should view history of ongoing game
     Given there is a game called "The Incident at Mariahville"
-    And "aaronstack" is a "player" in the game called "The Incident at Mariahville"
-    And the game called "The Incident at Mariahville" is in its "1st" period
-    And a werewolf killed "aaronstack" in the game called "The Incident at Mariahville"
+    And "aaronstack" is a "player" in the game
+    And the game is in its "1st" period
+    And a werewolf killed "aaronstack" in the game
     When I go to the game page for "The Incident at Mariahville"
     Then I should see "The Story So Far"
     And I should see "aaronstack was killed"
@@ -62,9 +65,9 @@ And receive game progress messages
   Scenario: Werewolf user votes to kill a player
     Given I am signed in
     And there is a game called "The Incident at Mariahville"
-    And I am a "werewolf" in the game called "The Incident at Mariahville"
-    And "aaronstack" is a "villager" in the game called "The Incident at Mariahville"
-    And the game called "The Incident at Mariahville" is in its "1st" period
+    And I am a "werewolf" in the game
+    And "aaronstack" is a "villager" in the game
+    And the game is in its "1st" period
     When I go to the game page for "The Incident at Mariahville"
     And I select "aaronstack" from "victims"
     And I press "Submit Choice"
