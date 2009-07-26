@@ -17,6 +17,7 @@ Rails::Initializer.run do |config|
   config.gem 'oauth', :version => '>= 0.3.1'
   config.gem 'haml', :version => '>= 2.0.6'
   config.gem 'state_machine', :version => '>= 0.7.5'
+  config.gem 'semanticart-is_paranoid', :lib => 'is_paranoid', :version => '>= 0.9.0'
 
   config.gem 'javan-whenever', :lib => false, :source => 'http://gems.github.com'
 

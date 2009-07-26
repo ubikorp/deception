@@ -29,6 +29,16 @@ describe GameObserver do
     msg.text.should match(/end of the game/)
   end
 
+  it 'should broadcast a game cancellation notice if game is aborted' do
+    lambda {
+      @game.destroy
+      @obs.before_destroy(@game)
+    }.should change(OutgoingMessage, :count)
+
+    msg = OutgoingMessage.last
+    msg.text.should match(/has been cancelled/)
+  end
+
   context 'death notice' do
     before(:each) do
       @game.start

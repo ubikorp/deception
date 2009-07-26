@@ -1,5 +1,9 @@
 class GameObserver < ActiveRecord::Observer
-  # TODO: come up with a better abstraction for messages
+  def before_destroy(game)
+    # TODO: separate notification setting for aborted?
+    send_abort_notice(game)
+  end
+
   def after_transition(game, transition)
     case(transition.event)
     when :start
@@ -21,6 +25,13 @@ class GameObserver < ActiveRecord::Observer
         # TODO: send role assignment with game start message (individual messages instead of broadcast)
         game.outgoing_messages.create(:to_user => player.user, :text => DeceptionGame::Messages.build(:game_start))
       end
+    end
+  end
+
+  def send_abort_notice(game)
+    game.players.each do |player|
+      # NOTE: game deletion is paranoid; so we can still associate messages with it
+      game.outgoing_messages.create(:to_user => player.user, :text => DeceptionGame::Messages.build(:game_abort)) if player.user.notify_finish?
     end
   end
 

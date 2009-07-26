@@ -17,7 +17,7 @@ And receive game progress messages
     And I am a "player" in the game called "The Incident at Mariahville"
     When the game called "The Incident at Mariahville" is aborted
     Then I should receive a direct message
-    And the direct message should contain "game has been aborted"
+    And the direct message should contain "has been cancelled"
 
   Scenario: User votes to lynch a player
     Given there is a game called "The Incident at Mariahville"
@@ -77,17 +77,19 @@ And receive game progress messages
   Scenario: User is notified when period changes
     Given there is a game called "The Incident at Mariahville"
     And I am a "player" in the game called "The Incident at Mariahville"
+    And the game called "The Incident at Mariahville" has started
     And the game called "The Incident at Mariahville" is in its "2nd" period
     When the game period turns over
     Then I should receive a direct message
-    And the direct message should contain "The next phase of the game has begun..."
+    And the direct message should contain "There were no werewolf attacks last night. Now it's day time again."
 
   Scenario: User is notified when the game is over
     Given there is a game called "The Incident at Mariahville"
     And I am a "player" in the game called "The Incident at Mariahville"
+    And the game called "The Incident at Mariahville" has started
     When the game called "The Incident at Mariahville" is finished
     Then I should receive a direct message
-    And the direct message should contain "The game is over"
+    And the direct message should contain "end of the game"
 
   Scenario: User disables notifications
     Given there is a game called "The Incident at Mariahville"

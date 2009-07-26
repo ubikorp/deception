@@ -24,11 +24,13 @@ Then /^I should be following the gamebot user on Twitter$/ do
 end
 
 Then /^I should receive a direct message$/ do
-  (OutgoingMessage.count.should > 1) && (OutgoingMessage.find(:first, :conditions => { :to_user_id => User.find_by_login('zapnap') }).should_not be_nil)
+  (OutgoingMessage.count.should > 0) && (OutgoingMessage.find(:first, :conditions => { :to_user_id => User.find_by_login('zapnap') }).should_not be_nil)
 end
 
 Then /^the direct message should contain "([^\"]*)"$/ do |arg1|
-  OutgoingMessage.find(:all, :conditions => { :to_user_id => User.find_by_login('zapnap') }).detect { |m| m.text.match(arg1) }.should_not be_nil
+  msgs = OutgoingMessage.find(:all, :conditions => { :to_user_id => User.find_by_login('zapnap') })
+  # puts msgs.map { |a| a.text }.join(' - ')
+  msgs.detect { |m| m.text.match(arg1) }.should_not be_nil
 end
 
 Then /^I should not receive a direct message$/ do

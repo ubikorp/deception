@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090725021912) do
+ActiveRecord::Schema.define(:version => 20090726004520) do
 
   create_table "events", :force => true do |t|
     t.string   "type"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20090725021912) do
     t.string   "short_code"
     t.integer  "owner_id"
     t.integer  "max_players"
+    t.datetime "deleted_at"
   end
 
   create_table "invitations", :force => true do |t|

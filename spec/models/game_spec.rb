@@ -13,6 +13,7 @@
 #  short_code    :string(255)
 #  owner_id      :integer
 #  max_players   :integer
+#  deleted_at    :datetime
 #
 
 require File.dirname(__FILE__) + '/../spec_helper'

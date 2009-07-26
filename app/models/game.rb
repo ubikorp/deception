@@ -13,6 +13,7 @@
 #  short_code    :string(255)
 #  owner_id      :integer
 #  max_players   :integer
+#  deleted_at    :datetime
 #
 
 require 'array_ext'
@@ -22,6 +23,7 @@ class Game < ActiveRecord::Base
   named_scope :pending,   :conditions => { :state => 'setup', :invite_only => false }
   named_scope :current,   :conditions => { :state => 'playable' }
   named_scope :finished,  :conditions => { :state => 'finished' }
+  is_paranoid
 
   has_many :players, :dependent => :destroy
   has_many :users, :through => :players
