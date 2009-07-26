@@ -48,7 +48,7 @@ describe IncomingMessage do
     end
 
     it 'should create new messages from twitter' do
-      @replies = [Mash.new({ :id => 20000433, :user => { :screen_name => 'ebloodstone' }, :text => "@gamebot i'm voting to kill @aaronstack because he is jerks" })]
+      @replies = [Mash.new({ :id => 20000433, :user => { :screen_name => werewolf.user.login }, :text => "@gamebot i'm voting to kill @#{villager(0).user.login} because he is jerks" })]
       IncomingMessage.twitter.stubs(:replies).returns(@replies)
 
       lambda {
@@ -57,7 +57,7 @@ describe IncomingMessage do
     end
 
     it 'should fail to record messages for inactive players' do
-      @replies = [Mash.new({ :id => 20000433, :user => { :screen_name => 'timferriss' }, :text => "@gamebot i'm voting to kill @aaronstack because he is jerks" })]
+      @replies = [Mash.new({ :id => 20000433, :user => { :screen_name => 'timferriss' }, :text => "@gamebot i'm voting to kill @#{villager(0).user.login} because he is jerks" })]
       IncomingMessage.twitter.stubs(:replies).returns(@replies)
 
       lambda {

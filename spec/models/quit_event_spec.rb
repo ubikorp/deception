@@ -14,15 +14,15 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe QuitEvent do
+  include GameSpecHelper
+
   before(:each) do
-    @game     = Factory(:game)
-    @werewolf = Factory(:werewolf, :game => @game)
-    @villager = Factory(:villager, :game => @game)
+    @game = setup_game
   end
 
   it 'should kill player' do
     @game.start
-    @event = Factory(:quit_event, :period => @game.current_period, :source_player => @werewolf)
-    @werewolf.should be_dead
+    @event = Factory(:quit_event, :period => @game.current_period, :source_player => werewolf)
+    werewolf.should be_dead
   end
 end

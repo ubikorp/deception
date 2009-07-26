@@ -1,6 +1,4 @@
-- implement game observer specs and make sure cuke tests pass
 - warn villagers that try to vote during night phase in reply
-- refactor cuke stories to use background stuff
 - game start notifications should include role?
 - should only listen to lynch votes that are @replied
 - instructions might be nice (static pages per user class and a general description?)

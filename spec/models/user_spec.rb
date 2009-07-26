@@ -43,6 +43,8 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 # note: uses TwitterAuth's GenericUser as a base
 describe User do
+  include GameSpecHelper
+
   before(:each) do
     @user = Factory(:darcy)
   end
@@ -168,26 +170,19 @@ describe User do
 
   context 'voting' do
     before(:each) do
-      @game   = Factory(:game)
-      @target = Factory(:jeff)
-      @other  = Factory(:nick)
+      @game   = setup_game
+      @user   = @game.players[0].user
+      @target = @game.players[1].user
+      @other  = @game.players[2].user
     end
 
     it 'should should log a vote for another user' do
-      player1 = @user.join(@game, :werewolf)
-      player2 = @target.join(@game, :villager)
-      @game.start
-
       lambda {
         @user.vote(@target).should be_true
       }.should change(VoteEvent, :count)
     end
 
     it 'should replace the previous vote in this period' do
-      player1 = @user.join(@game, :werewolf)
-      player2 = @target.join(@game, :villager)
-      player3 = @other.join(@game, :villager)
-      @game.start
       @user.vote(@target)
 
       lambda {
@@ -196,31 +191,19 @@ describe User do
     end
 
     it 'should fail if user is not an active player' do
-      player2 = @target.join(@game, :villager)
-      player3 = @other.join(@game, :werewolf)
-      @game.start
-
       lambda {
-        @user.vote(@target).should be_false
+        Factory(:elsa).vote(@target).should be_false
       }.should_not change(VoteEvent, :count)
     end
 
     it 'should fail if the target user is not an active player' do
-      player1 = @user.join(@game, :werewolf)
-      player2 = @target.join(@game, :villager)
-      @game.start
-
       lambda {
-        @user.vote(@other).should be_false
+        @user.vote(Factory(:elsa)).should be_false
       }.should_not change(VoteEvent, :count)
     end
 
     it 'should report the user we voted for' do
-      player1 = @user.join(@game, :werewolf)
-      player2 = @target.join(@game, :villager)
-      @game.start
       @user.vote(@target)
-
       @user.voted_in(@game.current_period).should == @target
       @target.voted_in(@game.current_period).should be_false
     end

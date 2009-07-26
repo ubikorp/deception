@@ -17,10 +17,7 @@ describe Player do
   include GameSpecHelper
 
   before(:each) do
-    @game     = Factory(:game)
-    @werewolf = Factory(:werewolf, :game => @game)
-    @villager = Factory(:villager, :game => @game)
-    @game.start
+    @game = setup_game
   end
 
   it { should belong_to(:user) }
@@ -34,37 +31,36 @@ describe Player do
   it { should validate_uniqueness_of(:user_id, :scope => :game_id) }
 
   it 'should have to be added to a game during the setup phase' do
-    @game = setup_game
-    @player = Factory.build(:player, :game => @game)
-    @player.should_not be_valid
-    @player.errors.on(:game_id).should include("is already in progress")
+    player = Factory.build(:player, :game => @game)
+    player.should_not be_valid
+    player.errors.on(:game_id).should include("is already in progress")
   end
 
   it 'should be a werewolf' do
-    @werewolf.should be_werewolf
-    @werewolf.should_not be_villager
+    werewolf.should be_werewolf
+    werewolf.should_not be_villager
   end
 
   it 'should be a villager' do
-    @villager.should be_villager
-    @villager.should_not be_werewolf
+    villager(0).should be_villager
+    villager(0).should_not be_werewolf
   end
 
   context 'dead players' do
     it 'should be dead if they were killed' do
-      @event = Factory(:kill_event, :period => @game.current_period, :target_player => @villager)
-      @villager.should be_dead
+      @event = Factory(:kill_event, :period => @game.current_period, :target_player => villager(0))
+      villager(0).should be_dead
     end
 
     it 'should be dead if they committed suicide' do
-      @event = Factory(:quit_event, :period => @game.current_period, :source_player => @villager)
-      @villager.should be_dead
+      @event = Factory(:quit_event, :period => @game.current_period, :source_player => villager(0))
+      villager(0).should be_dead
     end
   end
 
   it 'should have voted in period' do
-    Factory(:vote_event, :period => @game.current_period, :target_player => @werewolf, :source_player => @villager)
-    @villager.voted_in_period(@game.current_period).should == @werewolf
-    @werewolf.voted_in_period(@game.current_period).should be_false
+    Factory(:vote_event, :period => @game.current_period, :target_player => werewolf, :source_player => villager(0))
+    villager(0).voted_in_period(@game.current_period).should == werewolf
+    werewolf.voted_in_period(@game.current_period).should be_false
   end
 end

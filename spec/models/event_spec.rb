@@ -14,13 +14,11 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Event do
-  before(:each) do
-    @game     = Factory(:game)
-    @werewolf = Factory(:werewolf, :game => @game)
-    @villager = Factory(:villager, :game => @game)
+  include GameSpecHelper
 
-    @game.start
-    @event  = Factory.build(:vote_event, :period => @game.current_period, :source_player => @werewolf, :target_player => @villager)
+  before(:each) do
+    @game  = setup_game
+    @event = Factory.build(:vote_event, :period => @game.current_period, :source_player => werewolf, :target_player => villager(0))
   end
 
   it { should belong_to(:period) }
@@ -43,13 +41,13 @@ describe Event do
 
   it 'should make sure that game state is playable' do
     @game.finish
-    @event = Factory.build(:vote_event, :period => @game.current_period, :source_player => @werewolf, :target_player => @villager)
+    @event = Factory.build(:vote_event, :period => @game.current_period, :source_player => werewolf, :target_player => villager(0))
     @event.should_not be_valid
     @event.errors.on(:period_id).should include("is not playable")
   end
 
   it 'should make sure source player is alive' do
-    @werewolf.update_attribute(:dead, true)
+    werewolf.update_attribute(:dead, true)
     @event.should_not be_valid
     @event.errors.on(:source_player_id).should include("is not playing in this game")
   end

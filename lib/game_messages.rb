@@ -26,7 +26,8 @@ module DeceptionGame
     BOT_HELP_REPLY_MSG         = "I don't understand. Do you want to *vote* or *kill* someone? For more info, visit http://mysite.tld"
     BOT_QUIT_REPLY_MSG         = "Please visit the website at http://mysite.told if you want to quit or change your account notification settings."
     BOT_VALID_VOTE_REPLY_MSG   = "We've recorded your vote. Thanks!"
-    BOT_INVALID_VOTE_REPLY_MSG = "Can't record this vote. Are you and the target player both playing in the game? Please visit the website for more info."
+    BOT_INVALID_VOTE_REPLY_MSG = "Can't record your vote. Are you and the target player both playing in the game? Is it a night phase maybe? Visit the website for more info."
+    # BOT_NIGHT_TURN_REPLY       = "It's not your turn right now. Go back to sleep so the werewolves can eat you."
 
     def self.build(msg_sym, *args)
       begin

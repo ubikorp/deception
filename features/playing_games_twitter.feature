@@ -58,24 +58,24 @@ And receive game progress messages
     And the direct message should contain "We've recorded your vote"
     And the vote for "aaronstack" has been recorded
 
-  Scenario: User cannot vote during werewolf game phase
+  Scenario: Villager cannot vote during werewolf game phase
     Given there is a game called "The Incident at Mariahville"
     And "aaronstack" is a "villager" in the game
     And I am a "villager" in the game
     And the game is in its "1st" period
     When I send a public message containing "@gamebot We should kill @aaronstack"
     Then I should receive a direct message
-    And the direct message should contain "It's not your turn right now. Go back to sleep so the werewolves can eat you."
+    And the direct message should contain "Can't record your vote"
     And there is no vote for "aaronstack"
 
   Scenario: User is notified if they are killed
     Given there is a game called "The Incident at Mariahville"
-    And I am a "player" in the game
+    And I am a "villager" in the game
     And the game is in its "2nd" period
     When I have been killed in the game
     And the game period turns over
     Then I should receive a direct message
-    And the direct message should contain "Eek they killed you. Those bastards. Hope the wolf gets em."
+    And the direct message should contain "they killed you"
 
   Scenario: User is notified when period changes
     Given there is a game called "The Incident at Mariahville"
@@ -88,6 +88,7 @@ And receive game progress messages
   Scenario: User is notified when the game is over
     Given there is a game called "The Incident at Mariahville"
     And I am a "player" in the game
+    And the game has started
     When the game is finished
     Then I should receive a direct message
     And the direct message should contain "end of the game"
@@ -96,5 +97,6 @@ And receive game progress messages
     Given there is a game called "The Incident at Mariahville"
     And I am a "player" in the game
     And I have disabled notifications
+    And the game has started
     When the game is finished
-    Then I should not receive a direct message
+    Then I should not receive a direct message containing "end of the game"

@@ -14,14 +14,11 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe VoteEvent do
-  before(:each) do
-    @game     = Factory(:game)
-    @villager = Factory(:villager, :game => @game)
-    @werewolf = Factory(:werewolf, :game => @game)
-    @otherguy = Factory(:villager, :game => @game, :user => Factory(:darcy))
+  include GameSpecHelper
 
-    @game.start
-    @event    = Factory(:vote_event, :period => @game.current_period, :source_player => @werewolf, :target_player => @villager)
+  before(:each) do
+    @game  = setup_game
+    @event = Factory(:vote_event, :period => @game.current_period, :source_player => werewolf, :target_player => villager(0))
   end
 
   it { should validate_presence_of(:source_player_id) }
@@ -30,7 +27,7 @@ describe VoteEvent do
 
   it 'should overwrite previous votes from the same player in a given period' do
     lambda {
-      Factory(:vote_event, :period => @game.current_period, :source_player => @werewolf, :target_player => @otherguy)
+      Factory(:vote_event, :period => @game.current_period, :source_player => werewolf, :target_player => villager(1))
     }.should_not change(VoteEvent, :count)
   end
 end

@@ -66,7 +66,8 @@ end
 
 Given /^the game is startable$/ do
   # make sure minimum number of players is met
-  APP_CONFIG[:min_players].times { |i| Factory(:user).join(@game) }
+  (APP_CONFIG[:min_players] + 1).times { |i| Factory(:user).join(@game) }
+  puts "MIN PLAYERS IS #{APP_CONFIG[:min_players]}"
 end
 
 Given /^the game is not startable$/ do
@@ -81,6 +82,8 @@ Given /^the game is in its "([^\"]*)" period$/ do |arg1|
   Given "the game has started"
   @game.start
   (arg1.to_i - 1).times { |i| @game.continue }
+  puts "CURRENT PERIOD IS #{@game.current_period.id}"
+  puts "PHASE IS #{@game.current_period.phase}"
 end
 
 Given /^a werewolf killed "([^\"]*)" in the game$/ do |arg1|
@@ -138,5 +141,6 @@ end
 
 Then /^there is no vote for "([^\"]*)"$/ do |arg1|
   user = User.find_by_login(arg1)
+  puts "USER #{user.active_player}"
   VoteEvent.find(:first, :conditions => { :target_player_id => user.active_player.id }).should be_nil
 end

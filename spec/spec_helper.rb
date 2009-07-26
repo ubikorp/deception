@@ -57,10 +57,18 @@ end
 module GameSpecHelper
   def setup_game(start = true)
     @game = Factory(:game)
-    @p1   = Factory(:darcy).join(@game)
-    @p2   = Factory(:elsa).join(@game)
-    @wolf = Factory(:aaron).join(@game, :werewolf)
+    @p1   = Factory(:user).join(@game)
+    @p2   = Factory(:user).join(@game)
+    @wolf = Factory(:user).join(@game, :werewolf)
     @game.start if start
     @game
+  end
+
+  def werewolf
+    @game.players.werewolves[0]
+  end
+
+  def villager(n)
+    @game.players.villagers[n]
   end
 end

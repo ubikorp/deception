@@ -12,6 +12,7 @@ end
 When /^I send a public message containing "([^\"]*)"$/ do |arg1|
   @user = User.find_by_login('zapnap')
   @msg = Factory(:incoming_message, :game => Game.first, :from_user => @user, :text => arg1)
+  puts "USER IS A #{@user.active_player.type}"
 end
 
 When /^I send a direct message containing "([^\"]*)"$/ do |arg1|
@@ -33,6 +34,7 @@ Then /^the direct message should contain "([^\"]*)"$/ do |arg1|
   msgs.detect { |m| m.text.match(arg1) }.should_not be_nil
 end
 
-Then /^I should not receive a direct message$/ do
-  OutgoingMessage.count.should == 0
+Then /^I should not receive a direct message containing "([^\"]*)"$/ do |arg1|
+  msgs = OutgoingMessage.find(:all, :conditions => { :to_user_id => User.find_by_login('zapnap') })
+  msgs.detect { |m| m.text.match(arg1) }.should be_nil
 end
