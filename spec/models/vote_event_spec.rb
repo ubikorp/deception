@@ -27,7 +27,13 @@ describe VoteEvent do
 
   it 'should overwrite previous votes from the same player in a given period' do
     lambda {
-      Factory(:vote_event, :period => @game.current_period, :source_player => werewolf, :target_player => villager(1))
+      Factory.create(:vote_event, :period => @game.current_period, :source_player => werewolf, :target_player => villager(1))
     }.should_not change(VoteEvent, :count)
+  end
+
+  it 'should not allow votes from villagers during a night phase' do
+    # first period is a night phase
+    vote = Factory.build(:vote_event, :period => @game.current_period, :source_player => villager(0), :target_player => villager(1))
+    vote.should_not be_valid
   end
 end

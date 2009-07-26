@@ -122,17 +122,12 @@ describe User do
   end
 
   it 'should quit an in-progress game (with logged quit event)' do
-    @game = Factory(:game)
-    Factory(:aaron).join(@game, :werewolf)
-    Factory(:elsa).join(@game)
-
-    @player = @user.join(@game)
-    @game.start
+    @game = setup_game
 
     lambda {
-      @user.quit(@game)
+      villager(0).user.quit(@game)
       @game.continue
-      @player.reload.should be_dead
+      villager(0).reload.should be_dead
     }.should change(QuitEvent, :count)
   end
 
@@ -170,42 +165,42 @@ describe User do
 
   context 'voting' do
     before(:each) do
-      @game   = setup_game
-      @user   = @game.players[0].user
-      @target = @game.players[1].user
-      @other  = @game.players[2].user
+      @game  = setup_game
+      @user1 = werewolf.user
+      @user2 = villager(0).user
+      @user3 = villager(1).user
     end
 
     it 'should should log a vote for another user' do
       lambda {
-        @user.vote(@target).should be_true
+        @user1.vote(@user2).should be_true
       }.should change(VoteEvent, :count)
     end
 
     it 'should replace the previous vote in this period' do
-      @user.vote(@target)
+      @user1.vote(@user2)
 
       lambda {
-        @user.vote(@other).should be_true
+        @user1.vote(@user2).should be_true
       }.should_not change(VoteEvent, :count)
     end
 
     it 'should fail if user is not an active player' do
       lambda {
-        Factory(:elsa).vote(@target).should be_false
+        Factory(:elsa).vote(@user2).should be_false
       }.should_not change(VoteEvent, :count)
     end
 
     it 'should fail if the target user is not an active player' do
       lambda {
-        @user.vote(Factory(:elsa)).should be_false
+        @user1.vote(Factory(:elsa)).should be_false
       }.should_not change(VoteEvent, :count)
     end
 
     it 'should report the user we voted for' do
-      @user.vote(@target)
-      @user.voted_in(@game.current_period).should == @target
-      @target.voted_in(@game.current_period).should be_false
+      @user1.vote(@user2)
+      @user1.voted_in(@game.current_period).should == @user2
+      @user3.voted_in(@game.current_period).should be_false
     end
   end
 end

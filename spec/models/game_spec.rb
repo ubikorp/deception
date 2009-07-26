@@ -211,13 +211,6 @@ describe Game do
       @villager1.reload.should be_dead
     end
 
-    it 'should disregard villager votes during night phase' do
-      vote = Factory(:vote_event, :source_player => @villager1, :target_player => @werewolf, :period => @game.current_period)
-      vote = Factory(:vote_event, :source_player => @villager2, :target_player => @werewolf, :period => @game.current_period)
-      @game.continue
-      @werewolf.reload.should_not be_dead
-    end
-
     it 'should lynch chosen villagers at sunset' do
       @game.continue
       vote = Factory(:vote_event, :source_player => @villager1, :target_player => @werewolf, :period => @game.current_period)

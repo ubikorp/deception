@@ -59,8 +59,8 @@ describe Player do
   end
 
   it 'should have voted in period' do
-    Factory(:vote_event, :period => @game.current_period, :target_player => werewolf, :source_player => villager(0))
-    villager(0).voted_in_period(@game.current_period).should == werewolf
-    werewolf.voted_in_period(@game.current_period).should be_false
+    Factory(:vote_event, :period => @game.current_period, :target_player => villager(0), :source_player => werewolf)
+    werewolf.voted_in_period(@game.current_period).should == villager(0)
+    villager(1).voted_in_period(@game.current_period).should be_false
   end
 end

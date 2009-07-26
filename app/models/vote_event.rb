@@ -19,6 +19,16 @@ class VoteEvent < Event
 
   private
 
+  # certain roles can only vote at certain times
+  # users cannot vote during night (werewolf) phases
+  def validate
+    if period && source_player
+      errors.add_to_base("Villagers cannot vote during a night phase") if (period.phase == :night) && source_player.villager?
+    end
+
+    super
+  end
+
   # ensure that a player can only have one vote during a period
   # iow, remove old vote (in same period) before creating new one
   def delete_last_vote

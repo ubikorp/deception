@@ -212,6 +212,7 @@ class Game < ActiveRecord::Base
   # tally villager or werewolf votes and remove the victim(s) from play
   # called as a before-transition filter
   def end_turn
+    # TODO: can probably simplify this since logic for villager voting was moved to vote event
     victims = if night?
       # TODO: support more than one werewolf
       current_events.votes.select { |e| e.source_player.werewolf? }.map { |e| e.target_player }
