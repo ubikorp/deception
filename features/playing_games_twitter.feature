@@ -7,13 +7,14 @@ And receive game progress messages
   Background:
     Given I am a user named "zapnap"
 
-  Scenario: User is notified when game starts
+  Scenario: User is notified when game starts and assigned a role
     Given there is a game called "The Incident at Mariahville"
-    And I am a "player" in the game
+    And I am a "villager" in the game
     And the game is startable
     When the game starts
     Then I should receive a direct message
     And the direct message should contain "game has started"
+    And the direct message should contain "Villager"
 
   Scenario: User is notified if game owner aborts game
     Given there is a pending game called "The Incident at Mariahville"

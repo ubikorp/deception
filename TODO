@@ -1,5 +1,3 @@
-- warn villagers that try to vote during night phase in reply
-- game start notifications should include role?
 - should only listen to lynch votes that are @replied
 - instructions might be nice (static pages per user class and a general description?)
 - display / gather twitter chatter from in-game users (extra... javascripty?)
@@ -11,3 +9,4 @@
 - add multiple werewolf games
 - add seer player class
 - add hunter player class
+- smarter @replies: include actual validation errors?

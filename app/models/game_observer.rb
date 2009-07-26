@@ -23,7 +23,7 @@ class GameObserver < ActiveRecord::Observer
     game.players.each do |player|
       if player.user.notify_start?
         # TODO: send role assignment with game start message (individual messages instead of broadcast)
-        game.outgoing_messages.create(:to_user => player.user, :text => DeceptionGame::Messages.build(:game_start))
+        game.outgoing_messages.create(:to_user => player.user, :text => DeceptionGame::Messages.build(:game_start, player.type))
       end
     end
   end
