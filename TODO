@@ -1,3 +1,5 @@
+- add compass, apply basic design
+- add humane error messages jquery plugin for flash notice display
 - should only listen to lynch votes that are @replied
 - instructions might be nice (static pages per user class and a general description?)
 - display / gather twitter chatter from in-game users (extra... javascripty?)

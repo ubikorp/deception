@@ -15,7 +15,10 @@ Rails::Initializer.run do |config|
   # config.gem 'twitter-auth', :lib => 'twitter_auth', :version => '>= 0.1.21'
   config.gem 'twitter', :lib => 'twitter', :version => '>= 0.6.12'
   config.gem 'oauth', :version => '>= 0.3.1'
+
   config.gem 'haml', :version => '>= 2.0.6'
+  config.gem 'chriseppstein-compass', :lib => "compass", :version => '>= 0.8.8', :source => 'http://gems.github.com'
+
   config.gem 'state_machine', :version => '>= 0.7.5'
   config.gem 'semanticart-is_paranoid', :lib => 'is_paranoid', :version => '>= 0.9.0'
 
