@@ -45,6 +45,8 @@ class GamesController < ApplicationController
 
   # show details for a specific game
   def show
+    # TODO: add custom art
+    # @illustration = @game.day? ? Illustration.find_by_name('villagers') : Illustration.find_by_name('werewolf')
     store_location if !logged_in? # for direct-login stuffs
   end
 

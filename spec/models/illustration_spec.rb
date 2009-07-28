@@ -11,11 +11,13 @@
 #  art_updated_at   :string(255)
 #  created_at       :datetime
 #  updated_at       :datetime
+#  title            :string(255)
 #
 
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Illustration do
+  it { should validate_presence_of(:title) }
   it { should validate_presence_of(:artist_name) }
   it { should validate_presence_of(:artist_url) }
   it { should have_attached_file(:art, :styles => { :ico => "48x48", :normal => "550x500" }) }

@@ -11,6 +11,7 @@
 #  art_updated_at   :string(255)
 #  created_at       :datetime
 #  updated_at       :datetime
+#  title            :string(255)
 #
 
 class Illustration < ActiveRecord::Base
@@ -22,5 +23,5 @@ class Illustration < ActiveRecord::Base
   validates_attachment_presence :art
   validates_attachment_size :art, :less_than => 1.megabyte
 
-  validates_presence_of :artist_name, :artist_url
+  validates_presence_of :title, :artist_name, :artist_url
 end
