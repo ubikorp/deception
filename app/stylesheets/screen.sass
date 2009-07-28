@@ -50,7 +50,8 @@ a
   text-align: center
   font-size: 0.8em
   color= !color_light_beige
-  padding-bottom: 1.5em
+  margin-top: 5px
+  margin-bottom: -5px
 
   a
     +hover-link
@@ -59,13 +60,14 @@ a
 
 #header
   background-color= !color_dark_gray
+  color= !color_white
   -moz-border-radius: 1em 1em 0 0
   -webkit-border-radius: 1em 1em 0 0
   border-radius: 1em 1em 0 0
   +clearfix
 
   #logo
-    +column(11)
+    +column(10)
     font-size: 2em
 
     a
@@ -73,17 +75,29 @@ a
       color= !color_white
       text-decoration: none
 
-  #status
-    +column(11,true)
+  ul#status
+    +column(12,true)
+    +inline-list
     text-align: right
+    float: right
 
-    img
-      vertical-align: middle
+    li
+      padding-left: 10px
+
+    li.hidden
+      display: none
 
     a
       +hover-link
       color= !color_white
       text-decoration: none
+
+      img
+        vertical-align: middle
+        border= 2px solid !color_dark_gray
+
+    a:hover img
+      border= 2px solid !color_light_beige
 
 #content
   color= !color_dark_gray

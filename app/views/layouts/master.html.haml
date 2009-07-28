@@ -17,13 +17,14 @@
       %h1#logo
         = link_to('Werewolf.', '/')
 
-      #status
+      %ul#status
         - if logged_in?
-          = profile_image(current_user, :width => 24, :height => 24)
-          = "Logged in as <strong>@#{current_user.login}</strong>."
-          = link_to('Log out', '/logout')
+          %li= link_to(profile_image(current_user, :width => 24, :height => 24, :title => "Logged in as @#{current_user.login}"), '/')
+          %li.hidden= "Logged in as @#{current_user.login}"
+          %li= link_to('Log out', '/logout')
         - else
-          = link_to('Login via Twitter', '/login')
+          %li= link_to('Login via Twitter', '/login')
+        %li= link_to('Instructions', '/')
 
     #content
       - if flash[:error]
@@ -32,5 +33,6 @@
         .flash.notice= flash[:notice]
 
       = yield
-  #footer
-    = "Copyright &copy; #{Time.now.year} #{link_to('Nth Metal Interactive', 'http://nthmetal.com')}."
+
+    #footer
+      = "Copyright &copy; #{Time.now.year} #{link_to('Nth Metal Interactive', 'http://nthmetal.com')}."

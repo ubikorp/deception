@@ -1190,8 +1190,9 @@ a {
   text-align: center;
   font-size: 0.8em;
   color: #d9c6b0;
-  padding-bottom: 1.5em; }
-  /* line 55, ../../../app/stylesheets/screen.sass */
+  margin-top: 5px;
+  margin-bottom: -5px; }
+  /* line 56, ../../../app/stylesheets/screen.sass */
   #footer a {
     text-decoration: none;
     font-weight: bold;
@@ -1200,9 +1201,10 @@ a {
     #footer a:hover {
       text-decoration: underline; }
 
-/* line 60, ../../../app/stylesheets/screen.sass */
+/* line 61, ../../../app/stylesheets/screen.sass */
 #header {
   background-color: #222222;
+  color: white;
   -moz-border-radius: 1em 1em 0 0;
   -webkit-border-radius: 1em 1em 0 0;
   border-radius: 1em 1em 0 0;
@@ -1211,17 +1213,17 @@ a {
   /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
   #header {
     display: block; }
-  /* line 67, ../../../app/stylesheets/screen.sass */
+  /* line 69, ../../../app/stylesheets/screen.sass */
   #header #logo {
     display: inline;
     float: left;
     margin-right: 10px;
-    width: 270px;
+    width: 244.545px;
     font-size: 2em; }
     /* line 97, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
     * html #header #logo {
       overflow-x: hidden; }
-    /* line 71, ../../../app/stylesheets/screen.sass */
+    /* line 73, ../../../app/stylesheets/screen.sass */
     #header #logo a {
       text-decoration: none;
       color: white;
@@ -1229,29 +1231,49 @@ a {
       /* line 4, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/links/_hover_link.sass */
       #header #logo a:hover {
         text-decoration: underline; }
-  /* line 76, ../../../app/stylesheets/screen.sass */
-  #header #status {
+  /* line 78, ../../../app/stylesheets/screen.sass */
+  #header ul#status {
     display: inline;
     float: left;
     margin-right: 0;
-    width: 270px;
-    text-align: right; }
+    width: 295.455px;
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    display: inline;
+    text-align: right;
+    float: right; }
     /* line 97, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
-    * html #header #status {
+    * html #header ul#status {
       overflow-x: hidden; }
-    /* line 80, ../../../app/stylesheets/screen.sass */
-    #header #status img {
-      vertical-align: middle; }
-    /* line 83, ../../../app/stylesheets/screen.sass */
-    #header #status a {
+    /* line 8, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/lists/_inline_list.sass */
+    #header ul#status li {
+      margin: 0px;
+      padding: 0px;
+      display: inline; }
+    /* line 84, ../../../app/stylesheets/screen.sass */
+    #header ul#status li {
+      padding-left: 10px; }
+    /* line 87, ../../../app/stylesheets/screen.sass */
+    #header ul#status li.hidden {
+      display: none; }
+    /* line 90, ../../../app/stylesheets/screen.sass */
+    #header ul#status a {
       text-decoration: none;
       color: white;
       text-decoration: none; }
       /* line 4, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/links/_hover_link.sass */
-      #header #status a:hover {
+      #header ul#status a:hover {
         text-decoration: underline; }
+      /* line 95, ../../../app/stylesheets/screen.sass */
+      #header ul#status a img {
+        vertical-align: middle;
+        border: 2px solid #222222; }
+    /* line 99, ../../../app/stylesheets/screen.sass */
+    #header ul#status a:hover img {
+      border: 2px solid #d9c6b0; }
 
-/* line 88, ../../../app/stylesheets/screen.sass */
+/* line 102, ../../../app/stylesheets/screen.sass */
 #content {
   color: #222222;
   background-color: #d9c6b0;
@@ -1260,7 +1282,7 @@ a {
   border-radius: 0.5em;
   padding: 0.5em; }
 
-/* line 97, ../../../app/stylesheets/screen.sass */
+/* line 111, ../../../app/stylesheets/screen.sass */
 div.flash {
   padding: 4px 8px;
   -moz-border-radius: 4px;
@@ -1268,17 +1290,17 @@ div.flash {
   border-radius: 4px;
   border: 2px solid #ccc;
   margin: 10px 0; }
-/* line 105, ../../../app/stylesheets/screen.sass */
+/* line 119, ../../../app/stylesheets/screen.sass */
 div.error {
   background: #fcc;
   border-color: #911;
   color: #311; }
-/* line 110, ../../../app/stylesheets/screen.sass */
+/* line 124, ../../../app/stylesheets/screen.sass */
 div.notice {
   background: #cfc;
   border-color: #191;
   color: #131; }
-/* line 115, ../../../app/stylesheets/screen.sass */
+/* line 129, ../../../app/stylesheets/screen.sass */
 div.status {
   padding: 4px 8px;
   -moz-border-radius: 4px;
@@ -1289,12 +1311,12 @@ div.status {
   background: #cfc;
   border-color: #191;
   color: #131; }
-  /* line 126, ../../../app/stylesheets/screen.sass */
+  /* line 140, ../../../app/stylesheets/screen.sass */
   div.status p {
     line-height: 100%;
     margin: 10px 0; }
 
-/* line 130, ../../../app/stylesheets/screen.sass */
+/* line 144, ../../../app/stylesheets/screen.sass */
 #followers ul, #players ul {
   list-style-type: none;
   margin: 0;
@@ -1305,7 +1327,7 @@ div.status {
   #followers ul, #players ul {
     display: block; }
 
-/* line 137, ../../../app/stylesheets/screen.sass */
+/* line 151, ../../../app/stylesheets/screen.sass */
 #followers ul li.follower, #followers ul li.player {
   float: left;
   width: 120px;
@@ -1314,7 +1336,7 @@ div.status {
   margin-bottom: 10px;
   position: relative; }
 
-/* line 146, ../../../app/stylesheets/screen.sass */
+/* line 160, ../../../app/stylesheets/screen.sass */
 #players ul li.follower, #players ul li.player {
   float: left;
   width: 120px;
@@ -1323,17 +1345,17 @@ div.status {
   margin-bottom: 10px;
   position: relative; }
 
-/* line 155, ../../../app/stylesheets/screen.sass */
+/* line 169, ../../../app/stylesheets/screen.sass */
 #followers ul li.follower img, #followers ul li.player img {
   border: 5px solid #eee;
   margin-bottom: 2px; }
 
-/* line 160, ../../../app/stylesheets/screen.sass */
+/* line 174, ../../../app/stylesheets/screen.sass */
 #players ul li.follower img, #players ul li.player img {
   border: 5px solid #eee;
   margin-bottom: 2px; }
 
-/* line 165, ../../../app/stylesheets/screen.sass */
+/* line 179, ../../../app/stylesheets/screen.sass */
 #followers ul li.follower .player-is-dead, #followers ul li.player .player-is-dead {
   color: #fff;
   font-size: 1.2em;
@@ -1342,7 +1364,7 @@ div.status {
   width: 58px;
   position: absolute; }
 
-/* line 174, ../../../app/stylesheets/screen.sass */
+/* line 188, ../../../app/stylesheets/screen.sass */
 #players ul li.follower .player-is-dead, #players ul li.player .player-is-dead {
   color: #fff;
   font-size: 1.2em;
@@ -1351,28 +1373,28 @@ div.status {
   width: 58px;
   position: absolute; }
 
-/* line 183, ../../../app/stylesheets/screen.sass */
+/* line 197, ../../../app/stylesheets/screen.sass */
 #followers ul li.follower.hover img, #followers ul li.player.hover img {
   border: 5px solid #ccc; }
 
-/* line 187, ../../../app/stylesheets/screen.sass */
+/* line 201, ../../../app/stylesheets/screen.sass */
 #players ul li.follower.hover img, #players ul li.player.hover img {
   border: 5px solid #ccc; }
 
-/* line 191, ../../../app/stylesheets/screen.sass */
+/* line 205, ../../../app/stylesheets/screen.sass */
 #followers ul li.follower.selected img, #followers ul li.player.selected img {
   border: 5px solid #cfc; }
 
-/* line 195, ../../../app/stylesheets/screen.sass */
+/* line 209, ../../../app/stylesheets/screen.sass */
 #players ul li.follower.selected img, #players ul li.player.selected img {
   border: 5px solid #cfc; }
 
-/* line 198, ../../../app/stylesheets/screen.sass */
+/* line 212, ../../../app/stylesheets/screen.sass */
 #followers ul li.player.dead img, #players ul li.player.dead img {
   filter: alpha(opacity=60);
   opacity: 0.4; }
 
-/* line 202, ../../../app/stylesheets/screen.sass */
+/* line 216, ../../../app/stylesheets/screen.sass */
 #followers #invitations textarea, #players #invitations textarea {
   width: 100%;
   margin-bottom: 20px; }
