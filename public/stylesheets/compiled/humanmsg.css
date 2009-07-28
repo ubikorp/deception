@@ -50,44 +50,45 @@ html, body {
     margin-left: -100px;
     padding: 0 10px;
     line-height: 20px;
-    background: #333;
+    background: #222;
     text-align: center;
     white-space: pre;
     cursor: pointer; }
     /* line 61, ../../../app/stylesheets/humanmsg.sass */
     #humanMsgLog p:hover {
-      background: #222; }
+      background: #111; }
   /* line 64, ../../../app/stylesheets/humanmsg.sass */
   #humanMsgLog ul {
-    background: #eee;
+    background: #ccc;
     margin: 0;
     padding: 0;
     position: relative;
     max-height: 180px;
     overflow: auto;
-    display: none; }
-    /* line 73, ../../../app/stylesheets/humanmsg.sass */
+    display: none;
+    border-top: 3px solid #222; }
+    /* line 74, ../../../app/stylesheets/humanmsg.sass */
     #humanMsgLog ul li {
-      color: #555;
+      color: #222;
       font-size: 12px;
       list-style-type: none;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 2px solid #999;
       line-height: 40px;
       display: none;
       padding: 0 20px;
       position: relative;
       overflow: hidden;
       white-space: pre; }
-      /* line 85, ../../../app/stylesheets/humanmsg.sass */
+      /* line 86, ../../../app/stylesheets/humanmsg.sass */
       #humanMsgLog ul li:hover {
-        background: #f2f2f2; }
-      /* line 88, ../../../app/stylesheets/humanmsg.sass */
+        background: #ddd; }
+      /* line 89, ../../../app/stylesheets/humanmsg.sass */
       #humanMsgLog ul li:first-child {
         margin-top: 1px; }
-      /* line 91, ../../../app/stylesheets/humanmsg.sass */
+      /* line 92, ../../../app/stylesheets/humanmsg.sass */
       #humanMsgLog ul li .error {
         color: orangered; }
-      /* line 94, ../../../app/stylesheets/humanmsg.sass */
+      /* line 95, ../../../app/stylesheets/humanmsg.sass */
       #humanMsgLog ul li .indent {
         position: absolute;
         top: 0;

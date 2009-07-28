@@ -1,4 +1,3 @@
-- style flash messages
 - should only listen to lynch votes that are @replied
 - copy and static page for instructions
 - display / gather twitter chatter from in-game users (extra... javascripty?)
