@@ -6,6 +6,7 @@
 = error_messages_for(:game)
 
 %p This should read like a script opening scene / synopsis or something?
+%p= "Game phases for this game last #{@game.period_length / 60} minutes"
 
 - if playing_in_game(@game) && @game.playable?
   = render(:partial => 'games/actions', :locals => { :game => @game })
