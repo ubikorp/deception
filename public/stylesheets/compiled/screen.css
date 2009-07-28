@@ -1155,23 +1155,24 @@ body {
     -moz-border-radius: 1em;
     -webkit-border-radius: 1em;
     border-radius: 1em;
-    padding: 12px; }
+    padding: 12px;
+    margin-bottom: 30px; }
     /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
     body #container {
       display: block; }
-  /* line 30, ../../../app/stylesheets/screen.sass */
+  /* line 31, ../../../app/stylesheets/screen.sass */
   body h1 {
     font-size: 2em; }
-  /* line 33, ../../../app/stylesheets/screen.sass */
+  /* line 34, ../../../app/stylesheets/screen.sass */
   body h2 {
     font-size: 1.6em; }
-  /* line 36, ../../../app/stylesheets/screen.sass */
+  /* line 37, ../../../app/stylesheets/screen.sass */
   body h3 {
     font-size: 1.3em; }
-  /* line 39, ../../../app/stylesheets/screen.sass */
+  /* line 40, ../../../app/stylesheets/screen.sass */
   body h4 {
     font-size: 1.1em; }
-  /* line 42, ../../../app/stylesheets/screen.sass */
+  /* line 43, ../../../app/stylesheets/screen.sass */
   body a {
     color: #700000;
     font-weight: bold; }
@@ -1187,17 +1188,17 @@ body {
     /* line 21, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/links/_link_colors.sass */
     body a:active {
       color: #700000; }
-    /* line 46, ../../../app/stylesheets/screen.sass */
+    /* line 47, ../../../app/stylesheets/screen.sass */
     body a img {
       border: 0; }
-  /* line 49, ../../../app/stylesheets/screen.sass */
+  /* line 50, ../../../app/stylesheets/screen.sass */
   body #footer {
     text-align: center;
     font-size: 0.8em;
     color: #d9c6b0;
     margin-top: 5px;
     margin-bottom: -5px; }
-    /* line 56, ../../../app/stylesheets/screen.sass */
+    /* line 57, ../../../app/stylesheets/screen.sass */
     body #footer a {
       text-decoration: none;
       font-weight: bold;
@@ -1205,7 +1206,7 @@ body {
       /* line 4, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/links/_hover_link.sass */
       body #footer a:hover {
         text-decoration: underline; }
-  /* line 61, ../../../app/stylesheets/screen.sass */
+  /* line 62, ../../../app/stylesheets/screen.sass */
   body #header {
     background-color: #222222;
     color: white;
@@ -1217,7 +1218,7 @@ body {
     /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
     body #header {
       display: block; }
-    /* line 69, ../../../app/stylesheets/screen.sass */
+    /* line 70, ../../../app/stylesheets/screen.sass */
     body #header #logo {
       display: inline;
       float: left;
@@ -1227,7 +1228,7 @@ body {
       /* line 97, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
       * html body #header #logo {
         overflow-x: hidden; }
-      /* line 73, ../../../app/stylesheets/screen.sass */
+      /* line 74, ../../../app/stylesheets/screen.sass */
       body #header #logo a {
         text-decoration: none;
         color: white;
@@ -1235,7 +1236,7 @@ body {
         /* line 4, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/links/_hover_link.sass */
         body #header #logo a:hover {
           text-decoration: underline; }
-    /* line 78, ../../../app/stylesheets/screen.sass */
+    /* line 79, ../../../app/stylesheets/screen.sass */
     body #header ul#status {
       display: inline;
       float: left;
@@ -1255,13 +1256,13 @@ body {
         margin: 0px;
         padding: 0px;
         display: inline; }
-      /* line 84, ../../../app/stylesheets/screen.sass */
+      /* line 85, ../../../app/stylesheets/screen.sass */
       body #header ul#status li {
         padding-left: 10px; }
-      /* line 87, ../../../app/stylesheets/screen.sass */
+      /* line 88, ../../../app/stylesheets/screen.sass */
       body #header ul#status li.hidden {
         display: none; }
-      /* line 90, ../../../app/stylesheets/screen.sass */
+      /* line 91, ../../../app/stylesheets/screen.sass */
       body #header ul#status a {
         text-decoration: none;
         color: white;
@@ -1269,24 +1270,25 @@ body {
         /* line 4, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/links/_hover_link.sass */
         body #header ul#status a:hover {
           text-decoration: underline; }
-        /* line 95, ../../../app/stylesheets/screen.sass */
+        /* line 96, ../../../app/stylesheets/screen.sass */
         body #header ul#status a img {
           vertical-align: middle;
           border: 2px solid #222222; }
-      /* line 99, ../../../app/stylesheets/screen.sass */
+      /* line 100, ../../../app/stylesheets/screen.sass */
       body #header ul#status a:hover img {
         border: 2px solid #d9c6b0; }
-  /* line 102, ../../../app/stylesheets/screen.sass */
+  /* line 103, ../../../app/stylesheets/screen.sass */
   body #art {
     margin-bottom: 10px; }
-  /* line 105, ../../../app/stylesheets/screen.sass */
-  body h2#headline {
+  /* line 108, ../../../app/stylesheets/screen.sass */
+  body #middle h2#headline {
     font-size: 1.5em;
+    margin: 0 5px 10px 5px;
     color: white; }
-    /* line 109, ../../../app/stylesheets/screen.sass */
-    body h2#headline img {
-      display: inline; }
-  /* line 112, ../../../app/stylesheets/screen.sass */
+  /* line 113, ../../../app/stylesheets/screen.sass */
+  body #middle img {
+    display: inline; }
+  /* line 116, ../../../app/stylesheets/screen.sass */
   body #content {
     color: #222222;
     background-color: #d9c6b0;
@@ -1294,40 +1296,39 @@ body {
     -webkit-border-radius: 0.5em;
     border-radius: 0.5em;
     padding: 0.5em; }
-  /* line 121, ../../../app/stylesheets/screen.sass */
+  /* line 125, ../../../app/stylesheets/screen.sass */
   body div.flash {
-    padding: 4px 8px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
+    padding: 5px;
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
     border: 2px solid #ccc;
     margin: 10px 0; }
-  /* line 129, ../../../app/stylesheets/screen.sass */
+  /* line 133, ../../../app/stylesheets/screen.sass */
   body div.error {
     background: #fcc;
     border-color: #911;
     color: #311; }
-  /* line 134, ../../../app/stylesheets/screen.sass */
+  /* line 138, ../../../app/stylesheets/screen.sass */
   body div.notice {
     background: #cfc;
     border-color: #191;
     color: #131; }
-  /* line 139, ../../../app/stylesheets/screen.sass */
+  /* line 143, ../../../app/stylesheets/screen.sass */
   body div.status {
-    padding: 4px 8px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
+    padding: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
     border: 2px solid #ccc;
-    margin: 10px 0;
     background: #cfc;
     border-color: #191;
     color: #131; }
-    /* line 150, ../../../app/stylesheets/screen.sass */
+    /* line 153, ../../../app/stylesheets/screen.sass */
     body div.status p {
       line-height: 100%;
       margin: 10px 0; }
-  /* line 154, ../../../app/stylesheets/screen.sass */
+  /* line 157, ../../../app/stylesheets/screen.sass */
   body #followers ul, body #players ul {
     list-style-type: none;
     margin: 0;
@@ -1337,7 +1338,7 @@ body {
     /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
     body #followers ul, body #players ul {
       display: block; }
-  /* line 161, ../../../app/stylesheets/screen.sass */
+  /* line 164, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower, body #followers ul li.player {
     float: left;
     width: 120px;
@@ -1345,7 +1346,7 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
     position: relative; }
-  /* line 170, ../../../app/stylesheets/screen.sass */
+  /* line 173, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower, body #players ul li.player {
     float: left;
     width: 120px;
@@ -1353,15 +1354,15 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
     position: relative; }
-  /* line 179, ../../../app/stylesheets/screen.sass */
+  /* line 182, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower img, body #followers ul li.player img {
     border: 5px solid #eee;
     margin-bottom: 2px; }
-  /* line 184, ../../../app/stylesheets/screen.sass */
+  /* line 187, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower img, body #players ul li.player img {
     border: 5px solid #eee;
     margin-bottom: 2px; }
-  /* line 189, ../../../app/stylesheets/screen.sass */
+  /* line 192, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower .player-is-dead, body #followers ul li.player .player-is-dead {
     color: #fff;
     font-size: 1.2em;
@@ -1369,7 +1370,7 @@ body {
     text-align: center;
     width: 58px;
     position: absolute; }
-  /* line 198, ../../../app/stylesheets/screen.sass */
+  /* line 201, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower .player-is-dead, body #players ul li.player .player-is-dead {
     color: #fff;
     font-size: 1.2em;
@@ -1377,23 +1378,23 @@ body {
     text-align: center;
     width: 58px;
     position: absolute; }
-  /* line 207, ../../../app/stylesheets/screen.sass */
+  /* line 210, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower.hover img, body #followers ul li.player.hover img {
     border: 5px solid #ccc; }
-  /* line 211, ../../../app/stylesheets/screen.sass */
+  /* line 214, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower.hover img, body #players ul li.player.hover img {
     border: 5px solid #ccc; }
-  /* line 215, ../../../app/stylesheets/screen.sass */
+  /* line 218, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower.selected img, body #followers ul li.player.selected img {
     border: 5px solid #cfc; }
-  /* line 219, ../../../app/stylesheets/screen.sass */
+  /* line 222, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower.selected img, body #players ul li.player.selected img {
     border: 5px solid #cfc; }
-  /* line 222, ../../../app/stylesheets/screen.sass */
+  /* line 225, ../../../app/stylesheets/screen.sass */
   body #followers ul li.player.dead img, body #players ul li.player.dead img {
     filter: alpha(opacity=60);
     opacity: 0.4; }
-  /* line 226, ../../../app/stylesheets/screen.sass */
+  /* line 229, ../../../app/stylesheets/screen.sass */
   body #followers #invitations textarea, body #players #invitations textarea {
     width: 100%;
     margin-bottom: 20px; }
