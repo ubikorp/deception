@@ -973,7 +973,7 @@ textarea {
   width: 390px;
   height: 250px; }
 
-/* line 16, ../../../app/stylesheets/screen.sass */
+/* line 19, ../../../app/stylesheets/screen.sass */
 body {
   font-family: Helvetica, Arial, sans-serif;
   background: #402f21;
@@ -1145,7 +1145,7 @@ body {
   /* line 154, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_typography.sass */
   body .loud {
     color: #111111; }
-  /* line 22, ../../../app/stylesheets/screen.sass */
+  /* line 25, ../../../app/stylesheets/screen.sass */
   body #container {
     width: 550px;
     margin: 0 auto;
@@ -1160,19 +1160,19 @@ body {
     /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
     body #container {
       display: block; }
-  /* line 31, ../../../app/stylesheets/screen.sass */
+  /* line 34, ../../../app/stylesheets/screen.sass */
   body h1 {
     font-size: 2em; }
-  /* line 34, ../../../app/stylesheets/screen.sass */
+  /* line 37, ../../../app/stylesheets/screen.sass */
   body h2 {
     font-size: 1.6em; }
-  /* line 37, ../../../app/stylesheets/screen.sass */
+  /* line 40, ../../../app/stylesheets/screen.sass */
   body h3 {
     font-size: 1.3em; }
-  /* line 40, ../../../app/stylesheets/screen.sass */
+  /* line 43, ../../../app/stylesheets/screen.sass */
   body h4 {
     font-size: 1.1em; }
-  /* line 43, ../../../app/stylesheets/screen.sass */
+  /* line 46, ../../../app/stylesheets/screen.sass */
   body a {
     color: #700000;
     font-weight: bold; }
@@ -1188,17 +1188,17 @@ body {
     /* line 21, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/links/_link_colors.sass */
     body a:active {
       color: #700000; }
-    /* line 47, ../../../app/stylesheets/screen.sass */
+    /* line 50, ../../../app/stylesheets/screen.sass */
     body a img {
       border: 0; }
-  /* line 50, ../../../app/stylesheets/screen.sass */
+  /* line 53, ../../../app/stylesheets/screen.sass */
   body #footer {
     text-align: center;
     font-size: 0.8em;
     color: #d9c6b0;
     margin-top: 5px;
     margin-bottom: -5px; }
-    /* line 57, ../../../app/stylesheets/screen.sass */
+    /* line 60, ../../../app/stylesheets/screen.sass */
     body #footer a {
       text-decoration: none;
       font-weight: bold;
@@ -1206,7 +1206,7 @@ body {
       /* line 4, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/links/_hover_link.sass */
       body #footer a:hover {
         text-decoration: underline; }
-  /* line 62, ../../../app/stylesheets/screen.sass */
+  /* line 65, ../../../app/stylesheets/screen.sass */
   body #header {
     background-color: #222222;
     color: white;
@@ -1218,7 +1218,7 @@ body {
     /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
     body #header {
       display: block; }
-    /* line 70, ../../../app/stylesheets/screen.sass */
+    /* line 73, ../../../app/stylesheets/screen.sass */
     body #header #logo {
       display: inline;
       float: left;
@@ -1228,15 +1228,14 @@ body {
       /* line 97, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
       * html body #header #logo {
         overflow-x: hidden; }
-      /* line 74, ../../../app/stylesheets/screen.sass */
+      /* line 77, ../../../app/stylesheets/screen.sass */
       body #header #logo a {
-        text-decoration: none;
         color: white;
         text-decoration: none; }
-        /* line 4, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/links/_hover_link.sass */
-        body #header #logo a:hover {
-          text-decoration: underline; }
-    /* line 79, ../../../app/stylesheets/screen.sass */
+      /* line 81, ../../../app/stylesheets/screen.sass */
+      body #header #logo a:hover {
+        color: #d9c6b0; }
+    /* line 84, ../../../app/stylesheets/screen.sass */
     body #header ul#status {
       display: inline;
       float: left;
@@ -1246,8 +1245,7 @@ body {
       margin: 0px;
       padding: 0px;
       display: inline;
-      text-align: right;
-      float: right; }
+      text-align: right; }
       /* line 97, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
       * html body #header ul#status {
         overflow-x: hidden; }
@@ -1256,13 +1254,18 @@ body {
         margin: 0px;
         padding: 0px;
         display: inline; }
-      /* line 85, ../../../app/stylesheets/screen.sass */
+      /* line 89, ../../../app/stylesheets/screen.sass */
       body #header ul#status li {
-        padding-left: 10px; }
-      /* line 88, ../../../app/stylesheets/screen.sass */
+        zoom: 1;
+        display: inline;
+        display: -moz-inline-box;
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 10px; }
+      /* line 93, ../../../app/stylesheets/screen.sass */
       body #header ul#status li.hidden {
         display: none; }
-      /* line 91, ../../../app/stylesheets/screen.sass */
+      /* line 96, ../../../app/stylesheets/screen.sass */
       body #header ul#status a {
         text-decoration: none;
         color: white;
@@ -1270,25 +1273,46 @@ body {
         /* line 4, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/links/_hover_link.sass */
         body #header ul#status a:hover {
           text-decoration: underline; }
-        /* line 96, ../../../app/stylesheets/screen.sass */
-        body #header ul#status a img {
-          vertical-align: middle;
-          border: 2px solid #222222; }
-      /* line 100, ../../../app/stylesheets/screen.sass */
-      body #header ul#status a:hover img {
-        border: 2px solid #d9c6b0; }
-  /* line 103, ../../../app/stylesheets/screen.sass */
+      /* line 101, ../../../app/stylesheets/screen.sass */
+      body #header ul#status a.image {
+        width: 24px;
+        height: 0;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        padding-top: 24px;
+        float: right; }
+      /* line 109, ../../../app/stylesheets/screen.sass */
+      body #header ul#status a.image:hover {
+        background-position: 0 -24px; }
+      /* line 112, ../../../app/stylesheets/screen.sass */
+      body #header ul#status a.login {
+        width: 25px;
+        background-image: url('/images/twitter.png'); }
+      /* line 116, ../../../app/stylesheets/screen.sass */
+      body #header ul#status a.logout {
+        background-image: url('/images/logout.png'); }
+      /* line 119, ../../../app/stylesheets/screen.sass */
+      body #header ul#status a.help {
+        background-image: url('/images/help.png'); }
+      /* line 122, ../../../app/stylesheets/screen.sass */
+      body #header ul#status a img.profile:hover {
+        opacity: 0.7;
+        -moz-opacity: 0.7;
+        -khtml-opacity: 0.7;
+        -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+        filter: alpha(opacity=70); }
+  /* line 125, ../../../app/stylesheets/screen.sass */
   body #art {
     margin-bottom: 10px; }
-  /* line 108, ../../../app/stylesheets/screen.sass */
+  /* line 130, ../../../app/stylesheets/screen.sass */
   body #middle h2#headline {
     font-size: 1.5em;
     margin: 0 5px 10px 5px;
     color: white; }
-  /* line 113, ../../../app/stylesheets/screen.sass */
+  /* line 135, ../../../app/stylesheets/screen.sass */
   body #middle img {
     display: inline; }
-  /* line 116, ../../../app/stylesheets/screen.sass */
+  /* line 138, ../../../app/stylesheets/screen.sass */
   body #content {
     color: #222222;
     background-color: #d9c6b0;
@@ -1297,7 +1321,7 @@ body {
     border-radius: 0.5em;
     padding: 0.5em;
     font-size: 1.1em; }
-  /* line 126, ../../../app/stylesheets/screen.sass */
+  /* line 148, ../../../app/stylesheets/screen.sass */
   body div.flash {
     padding: 5px;
     -moz-border-radius: 0.5em;
@@ -1305,17 +1329,17 @@ body {
     border-radius: 0.5em;
     border: 2px solid #ccc;
     margin: 10px 0; }
-  /* line 134, ../../../app/stylesheets/screen.sass */
+  /* line 156, ../../../app/stylesheets/screen.sass */
   body div.error {
     background: #fcc;
     border-color: #911;
     color: #311; }
-  /* line 139, ../../../app/stylesheets/screen.sass */
+  /* line 161, ../../../app/stylesheets/screen.sass */
   body div.notice {
     background: #cfc;
     border-color: #191;
     color: #131; }
-  /* line 144, ../../../app/stylesheets/screen.sass */
+  /* line 166, ../../../app/stylesheets/screen.sass */
   body div.status {
     padding: 5px;
     -moz-border-radius: 5px;
@@ -1325,11 +1349,11 @@ body {
     background: #cfc;
     border-color: #191;
     color: #131; }
-    /* line 154, ../../../app/stylesheets/screen.sass */
+    /* line 176, ../../../app/stylesheets/screen.sass */
     body div.status p {
       line-height: 100%;
       margin: 10px 0; }
-  /* line 158, ../../../app/stylesheets/screen.sass */
+  /* line 180, ../../../app/stylesheets/screen.sass */
   body #followers ul, body #players ul {
     list-style-type: none;
     margin: 0;
@@ -1339,7 +1363,7 @@ body {
     /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
     body #followers ul, body #players ul {
       display: block; }
-  /* line 165, ../../../app/stylesheets/screen.sass */
+  /* line 187, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower, body #followers ul li.player {
     float: left;
     width: 120px;
@@ -1347,7 +1371,7 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
     position: relative; }
-  /* line 174, ../../../app/stylesheets/screen.sass */
+  /* line 196, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower, body #players ul li.player {
     float: left;
     width: 120px;
@@ -1355,15 +1379,15 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
     position: relative; }
-  /* line 183, ../../../app/stylesheets/screen.sass */
+  /* line 205, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower img, body #followers ul li.player img {
     border: 5px solid #eee;
     margin-bottom: 2px; }
-  /* line 188, ../../../app/stylesheets/screen.sass */
+  /* line 210, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower img, body #players ul li.player img {
     border: 5px solid #eee;
     margin-bottom: 2px; }
-  /* line 193, ../../../app/stylesheets/screen.sass */
+  /* line 215, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower .player-is-dead, body #followers ul li.player .player-is-dead {
     color: #fff;
     font-size: 1.2em;
@@ -1371,7 +1395,7 @@ body {
     text-align: center;
     width: 58px;
     position: absolute; }
-  /* line 202, ../../../app/stylesheets/screen.sass */
+  /* line 224, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower .player-is-dead, body #players ul li.player .player-is-dead {
     color: #fff;
     font-size: 1.2em;
@@ -1379,23 +1403,23 @@ body {
     text-align: center;
     width: 58px;
     position: absolute; }
-  /* line 211, ../../../app/stylesheets/screen.sass */
+  /* line 233, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower.hover img, body #followers ul li.player.hover img {
     border: 5px solid #ccc; }
-  /* line 215, ../../../app/stylesheets/screen.sass */
+  /* line 237, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower.hover img, body #players ul li.player.hover img {
     border: 5px solid #ccc; }
-  /* line 219, ../../../app/stylesheets/screen.sass */
+  /* line 241, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower.selected img, body #followers ul li.player.selected img {
     border: 5px solid #cfc; }
-  /* line 223, ../../../app/stylesheets/screen.sass */
+  /* line 245, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower.selected img, body #players ul li.player.selected img {
     border: 5px solid #cfc; }
-  /* line 226, ../../../app/stylesheets/screen.sass */
+  /* line 248, ../../../app/stylesheets/screen.sass */
   body #followers ul li.player.dead img, body #players ul li.player.dead img {
     filter: alpha(opacity=60);
     opacity: 0.4; }
-  /* line 230, ../../../app/stylesheets/screen.sass */
+  /* line 252, ../../../app/stylesheets/screen.sass */
   body #followers #invitations textarea, body #players #invitations textarea {
     width: 100%;
     margin-bottom: 20px; }

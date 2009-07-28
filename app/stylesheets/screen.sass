@@ -10,6 +10,9 @@
 @import compass/utilities/links.sass
 @import compass/utilities/lists.sass
 
+// Custom
+@import partials/opacity.sass
+
 // To generate css equivalent to the blueprint css but with your configuration applied, uncomment:
 +blueprint
 
@@ -72,18 +75,20 @@ body
       font-size: 2em
 
       a
-        +hover-link
         color= !color_white
         text-decoration: none
+
+      a:hover
+        color= !color_light_beige
 
     ul#status
       +column(12,true)
       +inline-list
       text-align: right
-      float: right
 
       li
-        padding-left: 10px
+        +inline-block
+        margin-left: 10px
 
       li.hidden
         display: none
@@ -93,12 +98,29 @@ body
         color= !color_white
         text-decoration: none
 
-        img
-          vertical-align: middle
-          border= 2px solid !color_dark_gray
+      a.image
+        width: 24px
+        height: 0
+        background-repeat: no-repeat
+        overflow: hidden
+        padding-top: 24px
+        float: right
 
-      a:hover img
-        border= 2px solid !color_light_beige
+      a.image:hover
+        background-position: 0 -24px
+
+      a.login
+        width: 25px
+        background-image: url('/images/twitter.png')
+
+      a.logout
+        background-image: url('/images/logout.png')
+
+      a.help
+        background-image: url('/images/help.png')
+
+      a img.profile:hover
+        +opacity(.7)
 
   #art
     margin-bottom: 10px
