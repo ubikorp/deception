@@ -5,7 +5,7 @@ I want to sign in with Twitter
 
   Scenario: Login via Twitter
     When I go to "the homepage"
-    And I follow "Login via Twitter"
+    And I follow "Sign in with Twitter"
     And Twitter authorizes me
     Then I should see "Logged in as"
 
@@ -18,4 +18,4 @@ I want to sign in with Twitter
     Given I am signed in
     When I go to "the homepage"
     And I follow "Log out"
-    Then I should see "Login via Twitter"
+    Then I should see "Sign in with Twitter"
