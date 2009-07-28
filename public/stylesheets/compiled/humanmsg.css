@@ -15,24 +15,21 @@ html, body {
   text-align: center;
   display: none;
   opacity: 0;
-  z-index: 100000; }
-  /* line 18, ../../../app/stylesheets/humanmsg.sass */
-  .humanMsg .round {
-    border-left: solid 2px white;
-    border-right: solid 2px white;
-    font-size: 1px;
-    height: 2px; }
-  /* line 24, ../../../app/stylesheets/humanmsg.sass */
+  z-index: 100000;
+  -moz-border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+  border-radius: 0.5em; }
+  /* line 27, ../../../app/stylesheets/humanmsg.sass */
   .humanMsg p {
     padding: .3em;
     display: inline;
     color: white; }
-  /* line 29, ../../../app/stylesheets/humanmsg.sass */
+  /* line 32, ../../../app/stylesheets/humanmsg.sass */
   .humanMsg a {
     display: none;
     color: white; }
 
-/* line 33, ../../../app/stylesheets/humanmsg.sass */
+/* line 36, ../../../app/stylesheets/humanmsg.sass */
 #humanMsgLog {
   font: normal 10px Helvetica, Arial, Sans-Serif;
   color: white;
@@ -43,7 +40,7 @@ html, body {
   max-height: 200px;
   display: none;
   z-index: 10000; }
-  /* line 44, ../../../app/stylesheets/humanmsg.sass */
+  /* line 47, ../../../app/stylesheets/humanmsg.sass */
   #humanMsgLog p {
     color: #EEE;
     position: relative;
@@ -57,10 +54,10 @@ html, body {
     text-align: center;
     white-space: pre;
     cursor: pointer; }
-    /* line 58, ../../../app/stylesheets/humanmsg.sass */
+    /* line 61, ../../../app/stylesheets/humanmsg.sass */
     #humanMsgLog p:hover {
       background: #222; }
-  /* line 61, ../../../app/stylesheets/humanmsg.sass */
+  /* line 64, ../../../app/stylesheets/humanmsg.sass */
   #humanMsgLog ul {
     background: #eee;
     margin: 0;
@@ -69,7 +66,7 @@ html, body {
     max-height: 180px;
     overflow: auto;
     display: none; }
-    /* line 70, ../../../app/stylesheets/humanmsg.sass */
+    /* line 73, ../../../app/stylesheets/humanmsg.sass */
     #humanMsgLog ul li {
       color: #555;
       font-size: 12px;
@@ -81,16 +78,16 @@ html, body {
       position: relative;
       overflow: hidden;
       white-space: pre; }
-      /* line 82, ../../../app/stylesheets/humanmsg.sass */
+      /* line 85, ../../../app/stylesheets/humanmsg.sass */
       #humanMsgLog ul li:hover {
         background: #f2f2f2; }
-      /* line 85, ../../../app/stylesheets/humanmsg.sass */
+      /* line 88, ../../../app/stylesheets/humanmsg.sass */
       #humanMsgLog ul li:first-child {
         margin-top: 1px; }
-      /* line 88, ../../../app/stylesheets/humanmsg.sass */
+      /* line 91, ../../../app/stylesheets/humanmsg.sass */
       #humanMsgLog ul li .error {
         color: orangered; }
-      /* line 91, ../../../app/stylesheets/humanmsg.sass */
+      /* line 94, ../../../app/stylesheets/humanmsg.sass */
       #humanMsgLog ul li .indent {
         position: absolute;
         top: 0;
