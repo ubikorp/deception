@@ -178,6 +178,14 @@ class Game < ActiveRecord::Base
       false
     end
   end
+
+  def winner_type
+    if finished?
+      winner.first.type.pluralize
+    else
+      nil
+    end
+  end
   
   # game is startable if minimum player requirement is met, etc
   def startable?

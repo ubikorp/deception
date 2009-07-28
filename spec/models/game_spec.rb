@@ -250,6 +250,12 @@ describe Game do
     it 'should not be available yet' do
       @game.winner.should be_false
     end
+
+    it 'should summarize results' do
+      @game.stubs(:finished?).returns(true)
+      @werewolf.update_attribute(:dead, true)
+      @game.winner_type.should == 'Villagers'
+    end
   end
 
   context 'period change' do

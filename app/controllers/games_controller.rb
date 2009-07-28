@@ -7,16 +7,19 @@ class GamesController < ApplicationController
 
   # list of currently ongoing games
   def index
+    @title = "Active (Ongoing) Games"
     @games = Game.current
   end
 
   # list of games that are seeking players
   def pending
+    @title = "Games Looking for Players"
     @games = Game.pending
   end
 
   # list of games that have been completed
   def finished
+    @title = "Werewolf Game Archive"
     @games = Game.finished
   end
 
