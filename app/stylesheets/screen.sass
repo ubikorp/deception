@@ -19,200 +19,210 @@ body
   background= !color_dark_brown
   color= !color_dark_gray
 
-#container
-  +container
-  background= !color_dark_gray
-  -moz-border-radius: 1em
-  -webkit-border-radius: 1em
-  border-radius: 1em
-  padding: 1em 
+  #container
+    +container
+    background= !color_dark_gray
+    -moz-border-radius: 1em
+    -webkit-border-radius: 1em
+    border-radius: 1em
+    padding: 12px
 
-h1
-  font-size: 2em
-
-h2
-  font-size: 1.6em
-
-h3
-  font-size: 1.3em
-
-h4
-  font-size: 1.1em
-
-a
-  color: #06b
-  font-weight: bold
-
-  img
-    border: 0
-
-#footer
-  text-align: center
-  font-size: 0.8em
-  color= !color_light_beige
-  margin-top: 5px
-  margin-bottom: -5px
-
-  a
-    +hover-link
-    font-weight: bold
-    color= !color_light_beige
-
-#header
-  background-color= !color_dark_gray
-  color= !color_white
-  -moz-border-radius: 1em 1em 0 0
-  -webkit-border-radius: 1em 1em 0 0
-  border-radius: 1em 1em 0 0
-  +clearfix
-
-  #logo
-    +column(10)
+  h1
     font-size: 2em
 
+  h2
+    font-size: 1.6em
+
+  h3
+    font-size: 1.3em
+
+  h4
+    font-size: 1.1em
+
+  a
+    +link-colors(!color_red, !color_red - #200000, !color_red, !color_red, !color_red)
+    font-weight: bold
+
+    img
+      border: 0
+
+  #footer
+    text-align: center
+    font-size: 0.8em
+    color= !color_light_beige
+    margin-top: 5px
+    margin-bottom: -5px
+
     a
       +hover-link
-      color= !color_white
-      text-decoration: none
+      font-weight: bold
+      color= !color_light_beige
 
-  ul#status
-    +column(12,true)
-    +inline-list
-    text-align: right
-    float: right
+  #header
+    background-color= !color_dark_gray
+    color= !color_white
+    -moz-border-radius: 1em 1em 0 0
+    -webkit-border-radius: 1em 1em 0 0
+    border-radius: 1em 1em 0 0
+    +clearfix
 
-    li
-      padding-left: 10px
+    #logo
+      +column(10)
+      font-size: 2em
 
-    li.hidden
-      display: none
+      a
+        +hover-link
+        color= !color_white
+        text-decoration: none
 
-    a
-      +hover-link
-      color= !color_white
-      text-decoration: none
+    ul#status
+      +column(12,true)
+      +inline-list
+      text-align: right
+      float: right
 
-      img
-        vertical-align: middle
-        border= 2px solid !color_dark_gray
+      li
+        padding-left: 10px
 
-    a:hover img
-      border= 2px solid !color_light_beige
+      li.hidden
+        display: none
 
-#content
-  color= !color_dark_gray
-  background-color= !color_light_beige
-  -moz-border-radius: 0.5em
-  -webkit-border-radius: 0.5em
-  border-radius: 0.5em
-  padding: 0.5em
+      a
+        +hover-link
+        color= !color_white
+        text-decoration: none
 
-div
-  &.flash
-    padding: 4px 8px
-    -moz-border-radius: 4px
-    -webkit-border-radius: 4px
-    border-radius: 4px
-    border: 2px solid #ccc
-    margin: 10px 0
+        img
+          vertical-align: middle
+          border= 2px solid !color_dark_gray
 
-  &.error
-    background: #fcc
-    border-color: #911
-    color: #311
+      a:hover img
+        border= 2px solid !color_light_beige
 
-  &.notice
-    background: #cfc
-    border-color: #191
-    color: #131
+  #art
+    margin-bottom: 10px
 
-  &.status
-    padding: 4px 8px
-    -moz-border-radius: 4px
-    -webkit-border-radius: 4px
-    border-radius: 4px
-    border: 2px solid #ccc
-    margin: 10px 0
-    background: #cfc
-    border-color: #191
-    color: #131
+  h2#headline
+    font-size: 1.5em
+    color= !color_white
 
-    p
-      line-height: 100%
+    img
+      display: inline
+
+  #content
+    color= !color_dark_gray
+    background-color= !color_light_beige
+    -moz-border-radius: 0.5em
+    -webkit-border-radius: 0.5em
+    border-radius: 0.5em
+    padding: 0.5em
+
+  div
+    &.flash
+      padding: 4px 8px
+      -moz-border-radius: 4px
+      -webkit-border-radius: 4px
+      border-radius: 4px
+      border: 2px solid #ccc
       margin: 10px 0
 
-#followers ul, #players ul
-  list-style-type: none
-  margin: 0
-  padding: 0
-  +clearfix
+    &.error
+      background: #fcc
+      border-color: #911
+      color: #311
 
-#followers ul li
-  &.follower, &.player
-    float: left
-    width: 120px
-    font-size: 0.8em
-    font-weight: bold
-    margin-bottom: 10px
-    position: relative
+    &.notice
+      background: #cfc
+      border-color: #191
+      color: #131
 
-#players ul li
-  &.follower, &.player
-    float: left
-    width: 120px
-    font-size: 0.8em
-    font-weight: bold
-    margin-bottom: 10px
-    position: relative
+    &.status
+      padding: 4px 8px
+      -moz-border-radius: 4px
+      -webkit-border-radius: 4px
+      border-radius: 4px
+      border: 2px solid #ccc
+      margin: 10px 0
+      background: #cfc
+      border-color: #191
+      color: #131
 
-#followers ul li
-  &.follower img, &.player img
-    border: 5px solid #eee
-    margin-bottom: 2px
+      p
+        line-height: 100%
+        margin: 10px 0
 
-#players ul li
-  &.follower img, &.player img
-    border: 5px solid #eee
-    margin-bottom: 2px
+  #followers ul, #players ul
+    list-style-type: none
+    margin: 0
+    padding: 0
+    +clearfix
 
-#followers ul li
-  &.follower .player-is-dead, &.player .player-is-dead
-    color: #fff
-    font-size: 1.2em
-    top: 30%
-    text-align: center
-    width: 58px
-    position: absolute
+  #followers ul li
+    &.follower, &.player
+      float: left
+      width: 120px
+      font-size: 0.8em
+      font-weight: bold
+      margin-bottom: 10px
+      position: relative
 
-#players ul li
-  &.follower .player-is-dead, &.player .player-is-dead
-    color: #fff
-    font-size: 1.2em
-    top: 30%
-    text-align: center
-    width: 58px
-    position: absolute
+  #players ul li
+    &.follower, &.player
+      float: left
+      width: 120px
+      font-size: 0.8em
+      font-weight: bold
+      margin-bottom: 10px
+      position: relative
 
-#followers ul li
-  &.follower.hover img, &.player.hover img
-    border: 5px solid #ccc
+  #followers ul li
+    &.follower img, &.player img
+      border: 5px solid #eee
+      margin-bottom: 2px
 
-#players ul li
-  &.follower.hover img, &.player.hover img
-    border: 5px solid #ccc
+  #players ul li
+    &.follower img, &.player img
+      border: 5px solid #eee
+      margin-bottom: 2px
 
-#followers ul li
-  &.follower.selected img, &.player.selected img
-    border: 5px solid #cfc
+  #followers ul li
+    &.follower .player-is-dead, &.player .player-is-dead
+      color: #fff
+      font-size: 1.2em
+      top: 30%
+      text-align: center
+      width: 58px
+      position: absolute
 
-#players ul li
-  &.follower.selected img, &.player.selected img
-    border: 5px solid #cfc
+  #players ul li
+    &.follower .player-is-dead, &.player .player-is-dead
+      color: #fff
+      font-size: 1.2em
+      top: 30%
+      text-align: center
+      width: 58px
+      position: absolute
 
-#followers ul li.player.dead img, #players ul li.player.dead img
-  filter: alpha(opacity=60)
-  opacity: 0.4
+  #followers ul li
+    &.follower.hover img, &.player.hover img
+      border: 5px solid #ccc
 
-#followers #invitations textarea, #players #invitations textarea
-  width: 100%
-  margin-bottom: 20px
+  #players ul li
+    &.follower.hover img, &.player.hover img
+      border: 5px solid #ccc
+
+  #followers ul li
+    &.follower.selected img, &.player.selected img
+      border: 5px solid #cfc
+
+  #players ul li
+    &.follower.selected img, &.player.selected img
+      border: 5px solid #cfc
+
+  #followers ul li.player.dead img, #players ul li.player.dead img
+    filter: alpha(opacity=60)
+    opacity: 0.4
+
+  #followers #invitations textarea, #players #invitations textarea
+    width: 100%
+    margin-bottom: 20px

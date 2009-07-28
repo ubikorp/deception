@@ -26,6 +26,10 @@
           %li= link_to('Login via Twitter', '/login')
         %li= link_to('Instructions', '/')
 
+    #art
+      = image_tag('temp.png')
+    %h2#headline= "#{@title || 'A Game of Strategy and Deception for Twitter'}"
+
     #content
       - if flash[:error]
         .flash.error= flash[:error]
