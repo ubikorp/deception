@@ -975,7 +975,7 @@ textarea {
 
 /* line 16, ../../../app/stylesheets/screen.sass */
 body {
-  font-family: Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   background: #402f21;
   color: #222222; }
   /* line 22, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_typography.sass */
@@ -1295,8 +1295,9 @@ body {
     -moz-border-radius: 0.5em;
     -webkit-border-radius: 0.5em;
     border-radius: 0.5em;
-    padding: 0.5em; }
-  /* line 125, ../../../app/stylesheets/screen.sass */
+    padding: 0.5em;
+    font-size: 1.1em; }
+  /* line 126, ../../../app/stylesheets/screen.sass */
   body div.flash {
     padding: 5px;
     -moz-border-radius: 0.5em;
@@ -1304,17 +1305,17 @@ body {
     border-radius: 0.5em;
     border: 2px solid #ccc;
     margin: 10px 0; }
-  /* line 133, ../../../app/stylesheets/screen.sass */
+  /* line 134, ../../../app/stylesheets/screen.sass */
   body div.error {
     background: #fcc;
     border-color: #911;
     color: #311; }
-  /* line 138, ../../../app/stylesheets/screen.sass */
+  /* line 139, ../../../app/stylesheets/screen.sass */
   body div.notice {
     background: #cfc;
     border-color: #191;
     color: #131; }
-  /* line 143, ../../../app/stylesheets/screen.sass */
+  /* line 144, ../../../app/stylesheets/screen.sass */
   body div.status {
     padding: 5px;
     -moz-border-radius: 5px;
@@ -1324,11 +1325,11 @@ body {
     background: #cfc;
     border-color: #191;
     color: #131; }
-    /* line 153, ../../../app/stylesheets/screen.sass */
+    /* line 154, ../../../app/stylesheets/screen.sass */
     body div.status p {
       line-height: 100%;
       margin: 10px 0; }
-  /* line 157, ../../../app/stylesheets/screen.sass */
+  /* line 158, ../../../app/stylesheets/screen.sass */
   body #followers ul, body #players ul {
     list-style-type: none;
     margin: 0;
@@ -1338,7 +1339,7 @@ body {
     /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
     body #followers ul, body #players ul {
       display: block; }
-  /* line 164, ../../../app/stylesheets/screen.sass */
+  /* line 165, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower, body #followers ul li.player {
     float: left;
     width: 120px;
@@ -1346,7 +1347,7 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
     position: relative; }
-  /* line 173, ../../../app/stylesheets/screen.sass */
+  /* line 174, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower, body #players ul li.player {
     float: left;
     width: 120px;
@@ -1354,15 +1355,15 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
     position: relative; }
-  /* line 182, ../../../app/stylesheets/screen.sass */
+  /* line 183, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower img, body #followers ul li.player img {
     border: 5px solid #eee;
     margin-bottom: 2px; }
-  /* line 187, ../../../app/stylesheets/screen.sass */
+  /* line 188, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower img, body #players ul li.player img {
     border: 5px solid #eee;
     margin-bottom: 2px; }
-  /* line 192, ../../../app/stylesheets/screen.sass */
+  /* line 193, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower .player-is-dead, body #followers ul li.player .player-is-dead {
     color: #fff;
     font-size: 1.2em;
@@ -1370,7 +1371,7 @@ body {
     text-align: center;
     width: 58px;
     position: absolute; }
-  /* line 201, ../../../app/stylesheets/screen.sass */
+  /* line 202, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower .player-is-dead, body #players ul li.player .player-is-dead {
     color: #fff;
     font-size: 1.2em;
@@ -1378,23 +1379,23 @@ body {
     text-align: center;
     width: 58px;
     position: absolute; }
-  /* line 210, ../../../app/stylesheets/screen.sass */
+  /* line 211, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower.hover img, body #followers ul li.player.hover img {
     border: 5px solid #ccc; }
-  /* line 214, ../../../app/stylesheets/screen.sass */
+  /* line 215, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower.hover img, body #players ul li.player.hover img {
     border: 5px solid #ccc; }
-  /* line 218, ../../../app/stylesheets/screen.sass */
+  /* line 219, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower.selected img, body #followers ul li.player.selected img {
     border: 5px solid #cfc; }
-  /* line 222, ../../../app/stylesheets/screen.sass */
+  /* line 223, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower.selected img, body #players ul li.player.selected img {
     border: 5px solid #cfc; }
-  /* line 225, ../../../app/stylesheets/screen.sass */
+  /* line 226, ../../../app/stylesheets/screen.sass */
   body #followers ul li.player.dead img, body #players ul li.player.dead img {
     filter: alpha(opacity=60);
     opacity: 0.4; }
-  /* line 229, ../../../app/stylesheets/screen.sass */
+  /* line 230, ../../../app/stylesheets/screen.sass */
   body #followers #invitations textarea, body #players #invitations textarea {
     width: 100%;
     margin-bottom: 20px; }

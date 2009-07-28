@@ -5,6 +5,7 @@ require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_
 require 'spec/autorun'
 require 'spec/rails'
 require 'remarkable_rails'
+require 'remarkable_paperclip'
 
 IncomingMessage.delete_observers
 Game.delete_observers

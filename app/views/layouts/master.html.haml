@@ -27,9 +27,7 @@
           %li= link_to('Login via Twitter', '/login')
         %li= link_to('Instructions', '/')
 
-    #art
-      = image_tag('temp.png')
-
+    #art= art_tag
     #middle
       %h2#headline= "#{@title || 'A Game of Strategy and Deception for Twitter'}"
       - if flash[:error]
@@ -42,3 +40,4 @@
 
     #footer
       = "Copyright &copy; #{Time.now.year} #{link_to('Nth Metal Interactive', 'http://nthmetal.com')}."
+      = art_credits

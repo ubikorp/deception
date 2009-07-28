@@ -21,6 +21,7 @@ Rails::Initializer.run do |config|
 
   config.gem 'state_machine', :version => '>= 0.7.5'
   config.gem 'semanticart-is_paranoid', :lib => 'is_paranoid', :version => '>= 0.9.0'
+  config.gem 'thoughtbot-paperclip', :lib => 'paperclip', :version => '>= 2.3.0', :source => 'http://gems.github.com'
 
   config.gem 'javan-whenever', :lib => false, :source => 'http://gems.github.com'
 

@@ -30,4 +30,5 @@ config.action_mailer.delivery_method = :test
 config.gem "rspec",                   :lib => false,            :version => ">=1.2.6" unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
 config.gem "rspec-rails",             :lib => 'spec/rails',     :version => ">=1.2.6" unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
 config.gem "remarkable_rails",        :lib => false,            :version => ">=3.1.7"
+config.gem "lawrencepit-remarkable_paperclip", :lib => false,   :version => '<= 0.6.3', :source => "http://gems.github.com"
 config.gem "thoughtbot-factory_girl", :lib => "factory_girl",   :source => "http://gems.github.com"
