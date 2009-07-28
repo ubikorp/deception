@@ -4,37 +4,201 @@
 @import partials/base.sass
 // Import all the default blueprint modules so that we can access their mixins.
 @import blueprint
-// Import the non-default scaffolding module.
-@import blueprint/modules/scaffolding.sass
+
+// Utilities
+@import compass/utilities/general.sass
+@import compass/utilities/links.sass
+@import compass/utilities/lists.sass
 
 // To generate css equivalent to the blueprint css but with your configuration applied, uncomment:
-// +blueprint
++blueprint
 
-//Recommended Blueprint configuration with scoping and semantic layout:
-body.bp
+body
   +blueprint-typography
-  +blueprint-utilities
-  +blueprint-debug
-  +blueprint-interaction
-  // Remove the scaffolding when you're ready to start doing visual design.
-  // Or leave it in if you're happy with how blueprint looks out-of-the-box
-  +blueprint-scaffolding
-form.bp
-  +blueprint-form
+  font-family: Arial, sans-serif
+  background= !color_dark_brown
+  color= !color_dark_gray
 
-// Page layout can be done using mixins applied to your semantic classes and IDs:
-body.three-col
-  #container
-    +container
-  #header, #footer
-    +column(!blueprint_grid_columns)
-  #sidebar
-    // One third of the grid columns, rounding down. With 24 cols, this is 8.
-    !sidebar_columns = floor(!blueprint_grid_columns / 3)
-    +column(!sidebar_columns)
-  #content
-    // Two thirds of the grid columns, rounding up.
-    // With 24 cols, this is 16.
-    !content_columns = ceil(2 * !blueprint_grid_columns / 3)
-    // true means it's the last column in the row
-    +column(!content_columns, true)
+#container
+  +container
+  background= !color_dark_gray
+  -moz-border-radius: 1em
+  -webkit-border-radius: 1em
+  border-radius: 1em
+  padding: 1em 
+
+h1
+  font-size: 2em
+
+h2
+  font-size: 1.6em
+
+h3
+  font-size: 1.3em
+
+h4
+  font-size: 1.1em
+
+a
+  color: #06b
+  font-weight: bold
+
+  img
+    border: 0
+
+#footer
+  text-align: center
+  font-size: 0.8em
+  color= !color_light_beige
+  padding-bottom: 1.5em
+
+  a
+    +hover-link
+    font-weight: bold
+    color= !color_light_beige
+
+#header
+  background-color= !color_dark_gray
+  -moz-border-radius: 1em 1em 0 0
+  -webkit-border-radius: 1em 1em 0 0
+  border-radius: 1em 1em 0 0
+  +clearfix
+
+  #logo
+    +column(11)
+    font-size: 2em
+
+    a
+      +hover-link
+      color= !color_white
+      text-decoration: none
+
+  #status
+    +column(11,true)
+    text-align: right
+
+    img
+      vertical-align: middle
+
+    a
+      +hover-link
+      color= !color_white
+      text-decoration: none
+
+#content
+  color= !color_dark_gray
+  background-color= !color_light_beige
+  -moz-border-radius: 0.5em
+  -webkit-border-radius: 0.5em
+  border-radius: 0.5em
+  padding: 0.5em
+
+div
+  &.flash
+    padding: 4px 8px
+    -moz-border-radius: 4px
+    -webkit-border-radius: 4px
+    border-radius: 4px
+    border: 2px solid #ccc
+    margin: 10px 0
+
+  &.error
+    background: #fcc
+    border-color: #911
+    color: #311
+
+  &.notice
+    background: #cfc
+    border-color: #191
+    color: #131
+
+  &.status
+    padding: 4px 8px
+    -moz-border-radius: 4px
+    -webkit-border-radius: 4px
+    border-radius: 4px
+    border: 2px solid #ccc
+    margin: 10px 0
+    background: #cfc
+    border-color: #191
+    color: #131
+
+    p
+      line-height: 100%
+      margin: 10px 0
+
+#followers ul, #players ul
+  list-style-type: none
+  margin: 0
+  padding: 0
+  +clearfix
+
+#followers ul li
+  &.follower, &.player
+    float: left
+    width: 120px
+    font-size: 0.8em
+    font-weight: bold
+    margin-bottom: 10px
+    position: relative
+
+#players ul li
+  &.follower, &.player
+    float: left
+    width: 120px
+    font-size: 0.8em
+    font-weight: bold
+    margin-bottom: 10px
+    position: relative
+
+#followers ul li
+  &.follower img, &.player img
+    border: 5px solid #eee
+    margin-bottom: 2px
+
+#players ul li
+  &.follower img, &.player img
+    border: 5px solid #eee
+    margin-bottom: 2px
+
+#followers ul li
+  &.follower .player-is-dead, &.player .player-is-dead
+    color: #fff
+    font-size: 1.2em
+    top: 30%
+    text-align: center
+    width: 58px
+    position: absolute
+
+#players ul li
+  &.follower .player-is-dead, &.player .player-is-dead
+    color: #fff
+    font-size: 1.2em
+    top: 30%
+    text-align: center
+    width: 58px
+    position: absolute
+
+#followers ul li
+  &.follower.hover img, &.player.hover img
+    border: 5px solid #ccc
+
+#players ul li
+  &.follower.hover img, &.player.hover img
+    border: 5px solid #ccc
+
+#followers ul li
+  &.follower.selected img, &.player.selected img
+    border: 5px solid #cfc
+
+#players ul li
+  &.follower.selected img, &.player.selected img
+    border: 5px solid #cfc
+
+#followers ul li.player.dead img, #players ul li.player.dead img
+  filter: alpha(opacity=60)
+  opacity: 0.4
+
+#followers #invitations textarea, #players #invitations textarea
+  width: 100%
+  margin-bottom: 20px
