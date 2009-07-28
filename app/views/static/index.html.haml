@@ -1,0 +1,28 @@
+#main
+  %p Sign up to play and join a village. Most villagers are ordinary people, but some harbor a dark curse &mdash; they're secretly <em>Werewolves</em>! 
+  
+  %p Each night, werewolves transform and choose one of their fellow villagers to feast upon! During the day, remaining villagers must attempt to figure out who amongst them are werewolves, executing those that they suspect until they've found the culprit.
+
+  %p Will you be able to discover their secret and exterminate the threat before they end your miserable lives?
+
+  %p= link_to('Sign in with Twitter', '/login', :class => 'image')
+
+#sidebar
+  %table.stats{:cellspacing => 0, :cellpadding => 0, :border => 0}
+    %tr
+      %td.number
+        .circle= link_to(Game.pending.count, pending_games_path)
+      %td.text Games Looking for Players
+    %tr
+      %td.number
+        .circle= link_to(Game.current.count, games_path)
+      %td.text Ongoing Games
+    %tr
+      %td.number
+        .circle= link_to(Game.finished.count, finished_games_path)
+      %td.text Archived Games
+
+  - if @users.any?
+    %h3 Newest Villagers
+    - @users.each do |user|
+      = link_to(profile_image(user, :height => 36, :width => 36), twitter_profile_url(user), :target => '_blank')

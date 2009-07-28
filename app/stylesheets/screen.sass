@@ -143,6 +143,53 @@ body
     border-radius: 0.5em
     padding: 0.5em
     font-size: 1.1em
+    +clearfix
+
+    #main
+      +column(12)
+
+      a.image
+        height: 0
+        width: 151px
+        background-image: url('/images/twitter_login.png')
+        background-repeat: no-repeat
+        overflow: hidden
+        padding-top: 24px
+        display: block
+
+    #sidebar  
+      +column(9, true)
+      margin-left: 10px
+
+      table.stats
+        font-weight: bold
+
+        .number
+          height: 65px
+
+          .circle
+            background-image: url('/images/circle.png')
+            background-repeat: no-repeat
+            width: 40px
+            height: 40px
+
+            a
+              +unstyled-link
+              padding-top: 5px
+              width: 100%
+              font-size: 1.6em
+              text-align: center
+              display: block
+
+          .circle:hover
+            background-position: 0 -40px
+
+            a
+              color= !color_white
+
+        .text
+          font-size: 1.2em
+          vertical-align: middle
 
   div
     &.flash
