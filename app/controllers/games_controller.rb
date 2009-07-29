@@ -14,7 +14,7 @@ class GamesController < ApplicationController
   # list of games that are seeking players
   def pending
     @title = "Games Looking for Players"
-    @games = Game.pending
+    @games = Game.pending(:conditions => { :invite_only => false })
   end
 
   # list of games that have been completed

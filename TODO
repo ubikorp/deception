@@ -1,12 +1,15 @@
-- should only listen to lynch votes that are @replied
+- design game action / summary screen
 - copy and static page for instructions
+- design, multiple pages of followers for invite screen
+- web interface for player notification settings (user profile)
+- pagination for list screens
+- should only listen to lynch votes that are @replied
 - display / gather twitter chatter from in-game users (extra... javascripty?)
+
 - auto-start feature (once max players satisfied?)
-- web interface for player notification settings
-- multiple pages of followers for invite screen
 - rss feed for activity (after web interface)
 - make role assignment less 'dumb'
-- add multiple werewolf games
+- add multi-werewolf games
 - add seer player class
 - add hunter player class
 - smarter @replies: include actual validation errors?

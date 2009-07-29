@@ -60,7 +60,7 @@ body
     a
       +hover-link
       font-weight: bold
-      color= !color_light_beige
+      color= !color_white
 
   #header
     background-color= !color_dark_gray
@@ -135,18 +135,21 @@ body
     img
       display: inline
 
+  // content area
+
   #content
     color= !color_dark_gray
     background-color= !color_light_beige
     -moz-border-radius: 0.5em
     -webkit-border-radius: 0.5em
     border-radius: 0.5em
-    padding: 0.5em
+    padding: 5px 10px
     font-size: 1.1em
     +clearfix
 
     #main
       +column(12)
+      margin-right: 10px
 
       a.image
         height: 0
@@ -157,9 +160,11 @@ body
         padding-top: 24px
         display: block
 
+    // (optional) sidebar styles
+
     #sidebar  
       +column(9, true)
-      margin-left: 10px
+      margin-left: 5px
 
       table.stats
         font-weight: bold
@@ -190,6 +195,8 @@ body
         .text
           font-size: 1.2em
           vertical-align: middle
+
+  // flash messages and notices (js flash styles stored elsewhere)
 
   div
     &.flash
@@ -223,6 +230,26 @@ body
       p
         line-height: 100%
         margin: 10px 0
+
+  // list views
+
+  #games ul
+    margin: 5px 0 0 0
+    padding: 0
+    +no-bullets
+
+    li
+      display: block
+      border-bottom= 2px solid !color_medium_gray
+      padding: 5px 0
+
+      span
+        padding-left: 10px
+
+    li:hover
+      background-color= !color_light_gray
+
+  // invitations view and player selection widget
 
   #followers ul, #players ul
     list-style-type: none
