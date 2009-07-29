@@ -16,7 +16,7 @@ class PlayersController < ApplicationController
   # remove yourself from a game (quit)
   def destroy
     current_user.quit
-    flash[:error] = "Your player has committed suicide and left this game. So tragic!"
+    flash[:notice] = "Your player has committed suicide and left this game. So tragic!"
     redirect_to game_path(@game)
   end
 
