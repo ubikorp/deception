@@ -30,6 +30,7 @@ class GamesController < ApplicationController
       redirect_to(game_path(current_user.active_player.game))
     else
       @game = Game.new
+      @title = "New Game Village"
     end
   end
 
@@ -51,6 +52,8 @@ class GamesController < ApplicationController
     # TODO: add custom art
     # @illustration = @game.day? ? Illustration.find_by_name('villagers') : Illustration.find_by_name('werewolf')
     store_location if !logged_in? # for direct-login stuffs
+
+    @title = "The Incident at #{@game.name}"
   end
 
   # destroy a game during the setup phase

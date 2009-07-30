@@ -50,6 +50,17 @@ body
     img
       border: 0
 
+  input.btn
+    border= 2px solid !color_medium_gray
+    background= !color_light_gray
+    -moz-border-radius: 0.5em
+    -webkit-border-radius: 0.5em
+    border-radius: 0.5em
+
+  input.btn:hover
+    border= 2px solid !color_dark_gray
+    background= !color_medium_gray
+
   #footer
     text-align: center
     font-size: 0.8em
@@ -143,7 +154,7 @@ body
     -moz-border-radius: 0.5em
     -webkit-border-radius: 0.5em
     border-radius: 0.5em
-    padding: 5px 10px
+    padding: 10px 10px 5px
     font-size: 1.1em
     +clearfix
 
@@ -231,6 +242,21 @@ body
         line-height: 100%
         margin: 10px 0
 
+  // error display
+  .errorExplanation
+    border-top= 2px solid !color_red
+    border-bottom= 2px solid !color_red
+    padding: 5px 10px 0 10px
+    background: #fcc
+    color: #311
+
+    h2
+      font-weight: bold
+      font-size: 1.3em
+
+    p
+      line-height: 1em
+
   // list views
 
   #games ul
@@ -249,6 +275,27 @@ body
     li:hover
       background-color= !color_light_gray
 
+  // new game form
+  form#new_game
+    margin-bottom: 10px
+
+    label
+      float: left
+      margin-top: 7px
+      width: 150px
+      font-weight: bold
+
+    input,select,textarea
+      font-size: 1.1em
+
+    input[type=text]
+      padding-top: 0
+      padding-bottom: 0
+
+    p
+      +clearfix
+      margin-bottom: 10px
+
   // invitations view and player selection widget
 
   #followers ul, #players ul
@@ -260,7 +307,7 @@ body
   #followers ul li
     &.follower, &.player
       float: left
-      width: 120px
+      width: 75px
       font-size: 0.8em
       font-weight: bold
       margin-bottom: 10px
@@ -269,7 +316,7 @@ body
   #players ul li
     &.follower, &.player
       float: left
-      width: 120px
+      width: 75px
       font-size: 0.8em
       font-weight: bold
       margin-bottom: 10px

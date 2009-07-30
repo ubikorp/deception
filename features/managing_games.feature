@@ -14,7 +14,7 @@ And edit games that I have created
   Scenario: Registered user creates a game
     Given I am signed in
     When I go to the new game page
-    And I fill in "Name" with "The Incident at Devonshire"
+    And I fill in "Village Name" with "The Incident at Devonshire"
     And I select "Open Game" from "Game Type"
     And I select "30 minutes" from "Period Length"
     And I press "Create Game"

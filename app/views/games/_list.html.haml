@@ -3,6 +3,6 @@
     - @games.each do |game|
       %li
         %span
-          = link_to(game.name, game_path(game))
+          = link_to(h(game.name), game_path(game))
           = "#{game.players.length} players" unless game.finished?
           = "Won by #{game.winner_type.pluralize}" if game.finished?

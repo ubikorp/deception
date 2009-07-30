@@ -1,9 +1,11 @@
 - design game action / summary screen
 - copy and static page for instructions
 - design, multiple pages of followers for invite screen
+- link new game screen from somewhere
+
+- should only listen to lynch votes that are @replied
 - web interface for player notification settings (user profile)
 - pagination for list screens
-- should only listen to lynch votes that are @replied
 - display / gather twitter chatter from in-game users (extra... javascripty?)
 
 - auto-start feature (once max players satisfied?)

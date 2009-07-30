@@ -1,12 +1,12 @@
 - if logged_in?
   - content_for(:extra_head) do
     = javascript_include_tag('voting')
-   
-%h2= "Game Details: #{@game.name}"
-= error_messages_for(:game)
 
-%p This should read like a script opening scene / synopsis or something?
-%p= "Game phases for this game last #{@game.period_length / 60} minutes"
+%p= "Trouble has come to the sleepy village of <strong>#{h @game.name}</strong> where you live. Someone living amongst you is a werewolf, and has been killing poor townsfolk. Who could it be? Villagers must identify and lynch the monster before they all meet untimely deaths!"
+
+%p= "Game phases for this game last <strong>#{@game.period_length / 60} minutes</strong>."
+
+= error_messages_for(:game)
 
 - if playing_in_game(@game) && @game.playable?
   = render(:partial => 'games/actions', :locals => { :game => @game })

@@ -1,22 +1,28 @@
-%h2 Create New Game
+%p To start a new game you must create a village. Create a private game and invite your friends, or create a public game and allow anyone to join. As the owner of the game, you can log back in to start it once the minimum number of players have joined. 
 
-.errors= error_messages_for(:game)
+%p Remember, werewolf is more fun with more people!
+
+= error_messages_for(:game)
 
 - form_for(@game) do |f|
   %p
-    = f.label(:name, 'Name')
+    = f.label(:name, 'Village Name')
     = f.text_field(:name)
+
   %p
     = f.label(:invite_only, 'Game Type')
     = f.select(:invite_only, [['Open Game', false], ['Invite Only', true]])
+
   %p
-    = f.label(:period_length)
+    = f.label(:period_length, 'Period Length')
     = f.select(:period_length, [['10 minutes', 600], ['30 minutes', 1800], ['1 hour', 3600]])
+
   %p
-    = f.label(:min_players)
+    = f.label(:min_players, 'Minimum Players')
     = f.select(:min_players, [APP_CONFIG[:min_players]], {}, :disabled => true)
+
   %p
-    = f.label(:max_players)
+    = f.label(:max_players, 'Maximum Players')
     = f.select(:max_players, (9..20).to_a)
 
-  = f.submit('Create Game')
+  = f.submit('Create Game', :class => 'btn')
