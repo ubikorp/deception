@@ -46,4 +46,12 @@ describe Period do
     @game.periods[2].should_not be_current
     @game.periods.last.should be_current
   end
+
+  it 'should count down time remaining' do
+    time = Time.now
+    Time.stubs(:now).returns(time)
+
+    @period = @game.periods.last
+    @period.time_remaining.should == @period.created_at.utc + @game.period_length - time.utc
+  end
 end

@@ -30,4 +30,9 @@ class Period < ActiveRecord::Base
   def current?
     game.playable? && (game.current_period == self)
   end
+
+  # time remaining in this period
+  def time_remaining
+    created_at.utc + game.period_length - Time.now.utc
+  end
 end
