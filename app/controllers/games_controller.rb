@@ -36,6 +36,7 @@ class GamesController < ApplicationController
 
   # create new game
   def create
+    @title = "New Game Village"
     @game = Game.new(params[:game].merge(:owner => current_user))
     if @game.save
       current_user.join(@game)

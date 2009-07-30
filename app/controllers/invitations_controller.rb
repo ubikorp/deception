@@ -7,6 +7,7 @@ class InvitationsController < ApplicationController
     # TODO: multiple pages of users; this is limited to 100 followers
     # TODO: remove users from the list that already have an invite to the game
     @followers = current_user.twitter.get('/statuses/followers')
+    @title = "Invite Your Friends (and Enemies)"
   end
 
   # process invitations

@@ -1,9 +1,7 @@
 - content_for(:extra_head) do
   = javascript_include_tag('invitations')
 
-%h2 Invite Your Friends (and Enemies!)
-
-%p Select the followers you would like to invite to this game from the list below.
+%p Select the followers you'd like to invite to this game from the list below:
 
 #followers
   - form_tag(game_invitations_path(@game)) do
@@ -12,8 +10,9 @@
         %li.follower
           %img{:src => follower['profile_image_url'], :width => 48, :height => 48, :alt => follower['screen_name']}
           .name= follower['screen_name']
-    .clearfix
+
     #invitations
       %p.instructions Enter a comma-separated list of followers you would like to invite to this game
       = text_area_tag('invitations', nil, :id => 'invitation-ids')
-    = submit_tag('Send Invitations')
+
+    = submit_tag('Send Invitations', :class => 'btn')

@@ -1,6 +1,6 @@
 - content_for(:extra_head) do
   = javascript_include_tag('voting') if playing_in_game(@game)
-  = render(:partial => 'countdown', :locals => { :game => @game }) if game.playable?
+  = render(:partial => 'countdown', :locals => { :game => @game }) if @game.playable?
 
 %p= "Trouble has come to the sleepy village of <strong>#{h @game.name}</strong> where you live. Someone living amongst you is a werewolf, and has been killing poor townsfolk. Who could it be? Villagers must identify and lynch the monster before they all meet untimely deaths!"
 
