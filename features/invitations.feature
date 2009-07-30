@@ -32,3 +32,8 @@ I want to be able to invite my friends and followers
     And there is an invite-only game called "The Incident at Mariahville"
     When I go to the new invitations page for "The Incident at Mariahville"
     Then I should be redirected to login
+
+  Scenario: User retrieves list of followers for invite (via ajax)
+    Given I am signed in
+    When I go to my followers page
+    Then I should see my followers

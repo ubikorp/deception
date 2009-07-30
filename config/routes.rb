@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
     game.resources :invitations, :only => [:new, :create]
   end
 
-  map.resources :users, :only => [:new], :collection => { :follow => :post }
+  map.resources :users, :only => [:new], :member => { :follow => :post, :followers => :get }
 
   map.static '/:action', :controller => 'static'
   map.root :controller => 'static', :action => 'index'

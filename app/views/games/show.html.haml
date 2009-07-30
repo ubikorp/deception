@@ -32,5 +32,5 @@
   %h4 Instructions
   %p You can play the game through the web interface here, once it has started. Or you can play entirely through Twitter. Simply make sure you're following the werewolf user on Twitter. You'll be notified as the game progresses. See the directions page for more information. (needs link)
   - unless current_user.following?
-    %p= button_to("Play on Twitter", "#{follow_users_path}?game_id=#{@game.id}", :method => :post, :confirm => "This will update your Twitter account to follow us, thus allowing you to play the game entirely via Twitter!")
+    %p= button_to("Play on Twitter", "#{follow_user_path(current_user)}?game_id=#{@game.id}", :method => :post, :confirm => "This will update your Twitter account to follow us, thus allowing you to play the game entirely via Twitter!")
   %p= button_to("Leave Game", game_player_path(@game, current_user), :method => :delete, :confirm => "Are you sure? If you leave this game your player will commit suicide and there's no going back!")

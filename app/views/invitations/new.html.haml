@@ -11,8 +11,12 @@
           %img{:src => follower['profile_image_url'], :width => 48, :height => 48, :alt => follower['screen_name']}
           .name= follower['screen_name']
 
+    .pages
+      = link_to('Previous Page', '#', :class => 'prev')
+      = link_to('Next Page', '#', :class => 'next')
+
     #invitations
       %p.instructions Enter a comma-separated list of followers you would like to invite to this game
       = text_area_tag('invitations', nil, :id => 'invitation-ids')
 
-    = submit_tag('Send Invitations', :class => 'btn')
+    = submit_tag('Send Invitations', :id => 'submit', :class => 'btn')

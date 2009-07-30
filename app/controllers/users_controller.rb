@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :login_required, :only => [:follow]
+  before_filter :login_required, :only => [:follow, :followers]
 
   # new users are created through signin with Twitter
   def new
@@ -21,5 +21,20 @@ class UsersController < ApplicationController
 
     return_url = params[:game_id] ? game_path(params[:game_id]) : '/'
     redirect_to(return_url)
+  end
+
+  # get a list of users who follow this twitter account
+  # returns json for ajax calls (invitations/new)
+  def followers
+    begin
+      @followers = current_user.twitter.get("/statuses/followers?page=#{params[:page] || 1}")
+    rescue TwitterAuth::Dispatcher::Error
+      @followers = []
+    end
+
+    respond_to do |format|
+      format.html { render }
+      format.json { render(:json => @followers.to_json) }
+    end
   end
 end

@@ -7,3 +7,7 @@ Then /^an invitation for "([^\"]*)" should be sent to "([^\"]*)"$/ do |arg1, arg
   @game = Game.find_by_name(arg1)
   @game.invitations.map { |i| i.twitter_login }.should include(arg2)
 end
+
+Then /^I should see my followers$/ do
+  response.should have_selector('li', :class => 'follower')
+end

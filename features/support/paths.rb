@@ -28,6 +28,9 @@ module NavigationHelpers
 
     when /the new invitations page for "(.*?)"/
       new_game_invitation_path(Game.find_by_name($1))
+
+    when /my followers page/
+      followers_user_path('me')
     
     # Add more mappings here.
     # Here is a more fancy example:
