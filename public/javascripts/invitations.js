@@ -1,53 +1,44 @@
 var invitations = new Array();
 var page = 1;
+var endOfList = false;
 
 $(document).ready(function() {
   // hide the textbox if javascript is enabled!
   $('#invitations').css('display', 'none');
   $('#followers #submit').attr('disabled', 'disabled');
-  //$('#followers .pages input[type=submit]').attr('disabled', false);
+  $('#loader').hide();
 
-  // load follower list
-  $('#followers .next').click(function() {
-    page += 1;
-    $.getJSON('/users/me/followers.json?page=' + page, function(data) {
-      $('#followers ul').html('');
-      $.each(data, function(i, item) {
-        li = $('<li/>').addClass('follower').appendTo('#followers ul');
-        if ($.inArray(item.screen_name, invitations) != -1) { li.addClass('selected'); }
-
-        image = $('<img/>');
-        image.attr('src', item.profile_image_url).attr('alt', item.screen_name);
-        image.attr('width', 48).attr('height', 48)
-        image.appendTo(li);
-
-        $('<div/>').addClass('name').html(item.screen_name).appendTo(li);
-      });
-    });
-    return false;
-  });
-  $('#followers .prev').click(function() {
-    if (page > 1) {
-      page -= 1;
+  // infinite scroll to load follower list
+  $('#scrollwindow').endlessScroll({
+    bottomPixels: 200,
+    fireOnce: true,
+    fireDelay: 200,
+    loader: '<div>Loading...</div>',
+    insertAfter: '#followers ul',
+    callback: function() { 
+      page += 1;
+      $('#loader').show();
       $.getJSON('/users/me/followers.json?page=' + page, function(data) {
-        // TOOD: extract this out into a function
-        // is this really the cleanest user workflow? what about an iframe with a google reader-ish auto-populate as you scroll?
-        $('#followers ul').html('');
-        $.each(data, function(i, item) {
-          li = $('<li/>').addClass('follower').appendTo('#followers ul');
-          if ($.inArray(item.screen_name, invitations) != -1) { li.addClass('selected'); }
+        if (data.length == 0) {
+          endOfList = true;
+        } else {
+          $.each(data, function(i, item) {
+            li = $('<li/>').addClass('follower').appendTo('#followers ul');
+            if ($.inArray(item.screen_name, invitations) != -1) { li.addClass('selected'); }
 
-          image = $('<img/>');
-          image.attr('src', item.profile_image_url).attr('alt', item.screen_name);
-          image.attr('width', 48).attr('height', 48)
-          image.appendTo(li);
+            image = $('<img/>');
+            image.attr('src', item.profile_image_url).attr('alt', item.screen_name);
+            image.attr('width', 48).attr('height', 48);
+            image.appendTo(li);
 
-          $('<div/>').addClass('name').html(item.screen_name).appendTo(li);
-        });
+            $('<div/>').addClass('name').html(item.screen_name).appendTo(li);
+          });
+        }
       });
-      //if (page == 1) { $('#followers .prev').attr('disabled', true); }
-    }
-    return false;
+      $('#loader').hide();
+      return true;
+    },
+    ceaseFire: function() { return endOfList; }
   });
 
   $('#followers li.follower').live('mouseover',

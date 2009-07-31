@@ -1,22 +1,20 @@
 - content_for(:extra_head) do
-  = javascript_include_tag('invitations')
+  = javascript_include_tag('jquery.endless-scroll.js', 'invitations.js')
 
 %p Select the followers you'd like to invite to this game from the list below:
 
 #followers
   - form_tag(game_invitations_path(@game)) do
-    %ul
-      - @followers.each do |follower|
-        %li.follower
-          %img{:src => follower['profile_image_url'], :width => 48, :height => 48, :alt => follower['screen_name']}
-          .name= follower['screen_name']
-
-    .pages
-      = link_to('Previous Page', '#', :class => 'prev')
-      = link_to('Next Page', '#', :class => 'next')
+    #scrollwindow
+      %ul
+        - @followers.each do |follower|
+          %li.follower
+            %img{:src => follower['profile_image_url'], :width => 48, :height => 48, :alt => follower['screen_name']}
+            .name= follower['screen_name']
 
     #invitations
       %p.instructions Enter a comma-separated list of followers you would like to invite to this game
       = text_area_tag('invitations', nil, :id => 'invitation-ids')
 
+    #loader
     = submit_tag('Send Invitations', :id => 'submit', :class => 'btn')

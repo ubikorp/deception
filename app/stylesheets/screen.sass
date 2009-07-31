@@ -56,6 +56,7 @@ body
     -moz-border-radius: 0.5em
     -webkit-border-radius: 0.5em
     border-radius: 0.5em
+    margin-top: 10px
 
   input.btn:hover
     border= 2px solid !color_dark_gray
@@ -302,11 +303,21 @@ body
 
   // invitations view and player selection widget
 
-  .pages form
-    display: inline
-
   #followers, #players
     margin-bottom: 10px
+
+    #scrollwindow
+      height: 300px
+      overflow: auto
+      margin-bottom: 10px
+
+    #loader
+      background-image: url('/images/ajax-loader.gif')
+      background-repeat: no-repeat
+      width: 56px
+      height: 21px
+      margin-top: 10px
+      float: right
 
   #followers ul, #players ul
     list-style-type: none
@@ -317,7 +328,7 @@ body
   #followers ul li
     &.follower, &.player
       float: left
-      width: 105px
+      width: 100px
       font-size: 0.8em
       font-weight: bold
       margin-bottom: 10px

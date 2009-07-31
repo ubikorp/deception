@@ -1,0 +1,6 @@
+#followers
+  %ul
+    - @followers.each do |follower|
+      %li.follower
+        %img{:src => follower['profile_image_url'], :width => 48, :height => 48, :alt => follower['screen_name']}
+        .name= follower['screen_name']
