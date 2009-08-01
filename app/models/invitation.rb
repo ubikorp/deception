@@ -15,7 +15,7 @@ class Invitation < ActiveRecord::Base
   belongs_to :invited_by, :class_name => 'User'
 
   validates_presence_of   :game_id, :twitter_login, :invited_by_id
-  validates_uniqueness_of :twitter_login, :scope => :game_id
+  #validates_uniqueness_of :twitter_login, :scope => :game_id
 
   before_validation :check_referer
 

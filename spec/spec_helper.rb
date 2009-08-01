@@ -8,6 +8,7 @@ require 'remarkable_rails'
 require 'remarkable_paperclip'
 
 IncomingMessage.delete_observers
+Invitation.delete_observers
 Game.delete_observers
 
 # Requires supporting files with custom matchers and macros, etc,

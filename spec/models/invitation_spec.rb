@@ -21,7 +21,7 @@ describe Invitation do
   it { should belong_to(:invited_by) }
 
   it { should validate_presence_of(:game_id, :twitter_login, :invited_by_id) }
-  it { should validate_uniqueness_of(:twitter_login, :scope => :game_id) }
+  # it { should validate_uniqueness_of(:twitter_login, :scope => :game_id) }
   
   it 'should assume user was invited by game owner if unspecified' do
     invitation = Factory(:invitation, :invited_by => nil)

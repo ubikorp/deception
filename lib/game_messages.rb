@@ -29,6 +29,8 @@ module DeceptionGame
     BOT_INVALID_VOTE_REPLY_MSG = "Can't record your vote. Are you and the target player both playing in the game? Is it a night phase maybe? Visit the website for more info."
     # BOT_NIGHT_TURN_REPLY       = "It's not your turn right now. Go back to sleep so the werewolves can eat you."
 
+    INVITATION_MSG             = "I've invited you to play a game of Werewolf on Twitter! Check out <> for details."
+
     def self.build(msg_sym, *args)
       begin
         msg_name = "#{msg_sym}_msg".upcase
