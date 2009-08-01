@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :users, :only => [:new], :member => { :follow => :post, :followers => :get }
+  map.my_followers '/users/me/followers/:page', :controller => 'users', :action => 'followers', :id => 0
 
   map.static '/:action', :controller => 'static'
   map.root :controller => 'static', :action => 'index'

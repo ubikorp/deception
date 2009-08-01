@@ -5,7 +5,12 @@ class InvitationsController < ApplicationController
   # show invitation options
   def new
     @title = "Invite Your Friends (and Enemies)"
-    @followers = current_user.twitter.get('/statuses/followers')
+    begin
+      @followers = current_user.twitter.get('/statuses/followers')
+    rescue TwitterAuth::Dispatcher::Error
+      flash[:error] = "Sorry, could we could not load your follower list"
+      @followers = []
+    end
   end
 
   # process invitations
@@ -14,8 +19,9 @@ class InvitationsController < ApplicationController
     successes = []
     (params[:invitations].split(',') || []).each do |name|
       name.strip!
-      invitation = @game.invitations.build(:twitter_login => name)
+      invitation = @game.invitations.build(:twitter_login => name, :invited_by => current_user)
       successes << name if invitation.save
+      # TODO: send actual invitations as DMs from the user??
       # TODO: verify that the listed people are actually followers of the user?
     end
     flash[:notice] = "Invitations have been sent to the #{successes.length} people you selected"

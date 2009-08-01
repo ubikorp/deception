@@ -32,9 +32,11 @@ class UsersController < ApplicationController
       @followers = []
     end
 
+    status = @followers.empty? ? 404 : 200
+
     respond_to do |format|
-      format.html { render }
-      format.json { render(:json => @followers.to_json) }
+      format.html { render(:action => 'followers', :status => status) }
+      format.json { render(:json => @followers.to_json, :status => status) }
     end
   end
 end

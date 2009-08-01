@@ -1,5 +1,5 @@
 - content_for(:extra_head) do
-  = javascript_include_tag('jquery.endless-scroll.js', 'invitations.js')
+  = javascript_include_tag('jquery.infinitescroll.js', 'invitations.js')
 
 %p Select the followers you'd like to invite to this game from the list below:
 
@@ -11,6 +11,9 @@
           %li.follower
             %img{:src => follower['profile_image_url'], :width => 48, :height => 48, :alt => follower['screen_name']}
             .name= follower['screen_name']
+
+    .navigation
+      %a{:href => my_followers_path(:page => 2)} See more followers
 
     #invitations
       %p.instructions Enter a comma-separated list of followers you would like to invite to this game

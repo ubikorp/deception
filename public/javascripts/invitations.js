@@ -6,39 +6,18 @@ $(document).ready(function() {
   // hide the textbox if javascript is enabled!
   $('#invitations').css('display', 'none');
   $('#followers #submit').attr('disabled', 'disabled');
-  $('#loader').hide();
 
-  // infinite scroll to load follower list
-  $('#scrollwindow').endlessScroll({
-    bottomPixels: 200,
-    fireOnce: true,
-    fireDelay: 200,
-    loader: '<div>Loading...</div>',
-    insertAfter: '#followers ul',
-    callback: function() { 
-      page += 1;
-      $('#loader').show();
-      $.getJSON('/users/me/followers.json?page=' + page, function(data) {
-        if (data.length == 0) {
-          endOfList = true;
-        } else {
-          $.each(data, function(i, item) {
-            li = $('<li/>').addClass('follower').appendTo('#followers ul');
-            if ($.inArray(item.screen_name, invitations) != -1) { li.addClass('selected'); }
-
-            image = $('<img/>');
-            image.attr('src', item.profile_image_url).attr('alt', item.screen_name);
-            image.attr('width', 48).attr('height', 48);
-            image.appendTo(li);
-
-            $('<div/>').addClass('name').html(item.screen_name).appendTo(li);
-          });
-        }
-      });
-      $('#loader').hide();
-      return true;
-    },
-    ceaseFire: function() { return endOfList; }
+  $('#scrollwindow').infinitescroll({
+    navSelector  : "#followers .navigation",            
+    nextSelector : "#followers .navigation a:first",
+    itemSelector : "#followers ul",
+    //debug        : true,                        
+    loadingImg   : "/images/loading.gif",
+    loadingText  : "Loading more followers...",      
+    localMode    : true,
+    //animate      : true,
+    //extraScrollPx: 50,
+    donetext     : "Your follower list has finished loading." 
   });
 
   $('#followers li.follower').live('mouseover',
