@@ -1,0 +1,49 @@
+%table.stats{:cellspacing => 0, :cellpadding => 0, :border => 0}
+  - if game.playable?
+    %tr 
+      %td.number
+        .circle
+          %span= game.current_period.day
+      %td.text= "Current Game Day <br/><strong>#{game.current_period.phase.to_s.upcase} PHASE</strong>"
+
+    %tr 
+      %td.number
+        .circle
+          %span= game.players.alive.length
+      %td.text Remaining Villagers
+
+  - if game.setup?
+    %td.number
+      .circle
+        %span= game.max_players
+    %td.text Maximum Players
+
+  %tr 
+    - if game.period_length > 60*60
+      %td.number
+        .circle
+          %span= game.period_length / (60*60)
+      %td.text Hours Per Period
+    - else
+      %td.number
+        .circle
+          %span= game.period_length / 60
+      %td.text Minutes Per Period
+
+  - if game.playable?
+    %tr
+      %td.number
+        .circle
+          %span !!!
+      %td.text
+        %strong#countdown
+        %span Until Next Period Begins
+
+    - if playing_in_game(game)
+      %tr
+        %td.number
+          .circle
+            %span= current_user.active_player.type.slice(0, 1)
+        %td.text= "#Your Role: #{current_user.active_player.type}"
+
+= yield :sidebar

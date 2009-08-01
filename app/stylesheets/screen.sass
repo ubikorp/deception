@@ -56,7 +56,6 @@ body
     -moz-border-radius: 0.5em
     -webkit-border-radius: 0.5em
     border-radius: 0.5em
-    margin-top: 10px
 
   input.btn:hover
     border= 2px solid !color_dark_gray
@@ -166,6 +165,7 @@ body
     #main
       +column(12)
       margin-right: 10px
+      margin-bottom: 10px
 
       a.image
         height: 0
@@ -176,6 +176,15 @@ body
         padding-top: 24px
         display: block
 
+      .game-state
+        font-weight: bold
+        text-decoration: underline
+
+    .alert
+      .strong
+        font-weight: bold
+        font-size: 1.1em
+      
     // (optional) sidebar styles
 
     #sidebar  
@@ -184,6 +193,7 @@ body
 
       table.stats
         font-weight: bold
+        margin-bottom: 0
 
         .number
           height: 65px
@@ -194,7 +204,7 @@ body
             width: 40px
             height: 40px
 
-            a
+            a, span
               +unstyled-link
               padding-top: 5px
               width: 100%
@@ -205,7 +215,7 @@ body
           .circle:hover
             background-position: 0 -40px
 
-            a
+            a, span
               color= !color_white
 
         .text

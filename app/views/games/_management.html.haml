@@ -1,0 +1,4 @@
+- if playing_in_game(game)
+  %p= button_to("Follow us on Twitter", "#{follow_user_path(current_user)}?game_id=#{game.id}", :method => :post, :class => 'btn', :confirm => "This will update your Twitter account to follow us, allowing you to receive notifications and play the game entirely via Twitter!") unless current_user.following?
+  %p= button_to("Leave Game", game_player_path(game, current_user), :method => :delete, :class => 'btn', :confirm => "Are you sure? If you leave this game your player will commit suicide and there's no going back!")
+  %p= button_to('Abort Game', game_path(game), :method => :delete, :class => 'btn', :confirm => 'Are you sure you want to abort this game?') if can_be_aborted(game)

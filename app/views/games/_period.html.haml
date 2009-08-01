@@ -1,5 +1,5 @@
 %li 
-  %strong= "DAY #{period.day}, #{period.phase.to_s.upcase}"
+  %strong= "DAY #{period.day}: #{period.phase.to_s.upcase}"
   %ul 
     - if period.phase == :day
       - period_votes_summary(period).each do |victim, mob|

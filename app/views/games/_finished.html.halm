@@ -1,0 +1,9 @@
+%h3.game-state This Game Is Over
+- if game.winners[0].werewolf?
+  %p The <strong>werewolves</strong> won this time, devouring neighbors one by one at night, and managing to avoid suspicion during the day. Didn't the other villagers notice the blood on their clothes? Yeesh.
+- else
+  %p The brave <strong>villagers</strong> were able to discover the monsters in their midst and eliminated them. Congratulations villagers!
+
+%h3= "The Gory Details..."
+%ul.story
+  = render(:partial => 'games/period', :collection => @game.periods)

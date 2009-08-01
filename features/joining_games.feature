@@ -26,24 +26,25 @@ I want to be able to join an existing game
     And there is an invite-only game called "The Incident at Mariahville"
     When I go to the game page for "The Incident at Mariahville"
     Then I should not see "Join Game"
-    And I should see "this game is invitation-only"
+    And I should see "is a private game"
 
   Scenario: Anonymous visitor should be invited to login to check game invitation status
     Given there is an invite-only game called "The Incident at Mariahville"
     When I go to the game page for "The Incident at Mariahville"
     Then I should not see "Join Game"
-    And I should see "Do you have an invite? Login to find out"
+    And I should see "is a private game"
+    And I should see "Sign in with Twitter"
 
   Scenario: Anonymous visitor should be invited to login to join an open game
     Given there is a pending game called "The Incident at Mariahville"
     When I go to the game page for "The Incident at Mariahville"
     Then I should not see "Join Game"
-    And I should see "Want to join this game? Login to find out how"
+    And I should see "Sign in with Twitter"
 
   Scenario: Anonymous user logs in to join an open game
     Given there is a pending game called "The Incident at Mariahville"
     When I go to the game page for "The Incident at Mariahville"
-    And I follow "Login to find out how"
+    And I follow "Sign in with Twitter"
     And Twitter authorizes me
     Then I should see "Logged in as"
     And I should be redirected to the game page for "The Incident at Mariahville"
@@ -61,14 +62,14 @@ I want to be able to join an existing game
     And I am a "player" in the game
     When I go to the game page for "The Incident at Mariahville"
     Then I should not see "Join Game"
-    And I should see "You're scheduled to play in this game, once it starts"
+    And I should see "You're scheduled to play in this game"
 
   Scenario: User should be reminded to follow the gamebot when they join a game
     Given I am signed in
     And there is a pending game called "The Incident at Mariahville"
     And I am a "player" in the game
     When I go to the game page for "The Incident at Mariahville"
-    And I press "Play on Twitter"
+    And I press "Follow us on Twitter"
     Then I should be redirected to the game page for "The Incident at Mariahville"
     And I should see "following @"
     And I should not see "Play on Twitter"

@@ -52,7 +52,12 @@ class GamesController < ApplicationController
   def show
     # TODO: add custom art
     # @illustration = @game.day? ? Illustration.find_by_name('villagers') : Illustration.find_by_name('werewolf')
-    store_location if !logged_in? # for direct-login stuffs
+    if logged_in?
+      @invitation = @game.invitations.for_user(current_user)
+    else
+      store_location # for direct-login stuffs
+      @invitation = nil
+    end
 
     @title = "The Incident at #{@game.name}"
   end

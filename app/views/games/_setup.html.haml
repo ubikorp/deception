@@ -1,0 +1,39 @@
+%h3.game-state This Game Has Not Yet Started
+%p= "Players who join this game can participate by visiting this page again once the game has started."
+%p= "They can also play entirely through Twitter. Simply make sure you're following the #{link_to_gamebot} user and you'll be notified when the game starts. For more information about gameplay, see the #{link_to('rules', '#')} page."
+
+.alert
+  - if playing_in_game(game)
+    %h3.strong You're scheduled to play in this game!
+
+    - if !game.invite_only? || (game.owner == current_user)
+      %p= "Why not #{link_to('invite some of your friends', new_game_invitation_path(game))} to play too?"
+
+    - if game.startable? && (game.owner == current_user)
+      %p.strong= "This game is ready to begin whenever you are. You can start it now, or wait for more players."
+      %p= button_to('Start Game Now', start_game_path(game), :class => 'btn')
+
+  - elsif game.invite_only?
+    - if !logged_in?
+      %p.strong= "This is a private game. You must be invited to join. Do you have an invite?"
+      %p= link_to('Sign in with Twitter', '/login', :class => 'image')
+
+    - elsif @invitation
+      %p.strong= "#{link_to_twitter(@invitation.invited_by, :target => '_blank')} has invited you to join this game!"
+
+      - if current_user.active_player.nil?
+        %p= button_to('Join Game', game_players_path(game), :class => 'btn')
+      - else
+        %p= "However, you're already participating in #{link_to('another game', game_path(current_user.active_player.game))}. You can only play in one game at a time."
+
+    - else
+      %p.strong= "Sorry, this is a private game. You must be invited to join."
+
+  - else
+    %p.strong= "We're looking for players! You look like a tasty morsel..."
+    - if logged_in? && current_user.active_player.nil?
+      %p= button_to('Join Game', game_players_path(game), :class => 'btn')
+    - elsif logged_in?
+      %p= "But you're already participating in #{link_to('another game', game_path(current_user.active_player.game))}. You can only play in one game at a time."
+    - else
+      %p= link_to('Sign in with Twitter', '/login', :class => 'image')

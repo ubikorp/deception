@@ -25,4 +25,4 @@
     = f.label(:max_players, 'Maximum Players')
     = f.select(:max_players, (9..20).to_a)
 
-  = f.submit('Create Game', :class => 'btn')
+  %p= f.submit('Create Game', :class => 'btn')

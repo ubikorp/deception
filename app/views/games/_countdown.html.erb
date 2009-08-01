@@ -2,7 +2,7 @@
 
 <script type => 'text/javascript'>
   $(document).ready(function() {
-      $('#countdown').countdown({until: +<%= game.current_period.time_remaining %>, onExpiry: reloadPage, layout: 'The current period ends in {h<}{hnn}:{h>}{mnn}:{snn}'});
+      $('#countdown').countdown({until: +<%= game.current_period.time_remaining %>, onExpiry: reloadPage, layout: '{h<}{hnn}:{h>}{mnn}'});
   });
 
   function reloadPage() {

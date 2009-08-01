@@ -1,36 +1,18 @@
-- content_for(:extra_head) do
-  = javascript_include_tag('voting') if playing_in_game(@game)
-  = render(:partial => 'countdown', :locals => { :game => @game }) if @game.playable?
+- if @game.playable?
+  - content_for(:extra_head) do
+    = render(:partial => 'countdown', :locals => { :game => @game })
 
-%p= "Trouble has come to the sleepy village of <strong>#{h @game.name}</strong> where you live. Someone living amongst you is a werewolf, and has been killing poor townsfolk. Who could it be? Villagers must identify and lynch the monster before they all meet untimely deaths!"
-
-%p= "Game phases for this game last <strong>#{@game.period_length / 60} minutes</strong>."
-#countdown
+%p= "Trouble has come to the sleepy village of <strong>#{h @game.name}</strong>. Someone living amongst the villagers is a <strong>werewolf</strong>, and has been killing poor townsfolk one by one. Who could it be? Villagers must identify and lynch the monster before they all meet untimely deaths!"
 
 = error_messages_for(:game)
 
-- if playing_in_game(@game) && @game.playable?
-  = render(:partial => 'games/actions', :locals => { :game => @game })
-- else
-  = render(:partial => 'games/status', :locals => { :game => @game })
-
 %h3 Cast &amp; Crew
 #players
-  %ul
-    - @game.players.each do |player|
-      %li.player{:id => "player_#{player.user_id}", :class => "#{'dead' if player.dead?} #{'selected' if voted_for_player(player)}"}
-        = profile_image(player.user, :width => 48, :height => 48)
-        .player-is-dead= "DEAD" if player.dead?
-        .name= link_to(player.user.login, twitter_profile_url(player.user), :target => '_blank')
+  %ul 
+    = render(:partial => 'player', :collection => @game.players)
 
-- if !@game.setup?
-  %h3 The Story So Far...
-  %ul.story
-    = render(:partial => 'games/period', :collection => @game.periods)
-
-- if playing_in_game(@game)
-  %h4 Instructions
-  %p You can play the game through the web interface here, once it has started. Or you can play entirely through Twitter. Simply make sure you're following the werewolf user on Twitter. You'll be notified as the game progresses. See the directions page for more information. (needs link)
-  - unless current_user.following?
-    %p= button_to("Play on Twitter", "#{follow_user_path(current_user)}?game_id=#{@game.id}", :method => :post, :confirm => "This will update your Twitter account to follow us, thus allowing you to play the game entirely via Twitter!")
-  %p= button_to("Leave Game", game_player_path(@game, current_user), :method => :delete, :confirm => "Are you sure? If you leave this game your player will commit suicide and there's no going back!")
+#main
+  = render(:partial => "#{@game.state}", :locals => { :game => @game })
+#sidebar
+  = render(:partial => 'stats', :locals => { :game => @game })
+  = render(:partial => 'management', :locals => { :game => @game })

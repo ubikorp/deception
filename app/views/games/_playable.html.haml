@@ -1,0 +1,23 @@
+- if game.night?
+  %h3.game-state Darkness Has Fallen
+  %p Villagers sleep restlessly while werewolves prowl the nearby woods. Will everyone make it through the night?
+  - if playing_in_game(game) && game.playable? && current_user.active_player.werewolf?
+    %p.strong You've transformed and you hunger. Who will you feast upon this evening? Make your choice from the list of active players.
+
+- else # day
+  %h3.game-state A Day For Difficult Decisions
+  %p Villagers argue amongst themselves in the town square. Who is this foul creature? Who should they lynch?
+  - if playing_in_game(game) && game.playable?
+    %p.strong Discuss with your fellow villagers on Twitter and then make your choice from the list of active players. Majority rules. Good luck!
+
+- if playing_in_game(game) && game.playable? && (game.day? || current_user.active_player.werewolf?)
+  - content_for(:extra_head) do
+    = javascript_include_tag('voting')
+  #voting
+    - form_tag(vote_game_path(game)) do
+      = select(:vote, :user_id, game.players.alive.map { |p| [p.user.login, p.user.id] }.reject { |q| q[1] == current_user.id }, {}, :id => 'victims')
+      = submit_tag('Submit Choice', :class => 'btn')
+
+%h3= "The Story So Far..."
+%ul.story
+  = render(:partial => 'games/period', :collection => @game.periods)

@@ -25,7 +25,7 @@ And receive game progress messages
     When I go to the game page for "The Incident at Mariahville"
     And I select "aaronstack" from "victims"
     And I press "Submit Choice"
-    Then I should see "It's DAY"
+    Then I should see "DAY PHASE"
     And I should see "Yeah, that one sure looks suspicious to me"
     And the vote for "aaronstack" has been recorded
 
@@ -71,6 +71,6 @@ And receive game progress messages
     When I go to the game page for "The Incident at Mariahville"
     And I select "aaronstack" from "victims"
     And I press "Submit Choice"
-    Then I should see "It's NIGHT."
+    Then I should see "NIGHT PHASE"
     And I should see "Aye, he looks like a tasty one"
     And the vote for "aaronstack" has been recorded

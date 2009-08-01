@@ -1,0 +1,5 @@
+%li.player{:id => "player_#{player.user_id}", :class => "#{'dead' if player.dead?} #{'selected' if voted_for_player(player)}"}
+  = profile_image(player.user, :width => 48, :height => 48) 
+  .player-is-dead= "DEAD" if player.dead?
+  .name
+    = link_to(player.user.login, twitter_profile_url(player.user), :target => '_blank')
