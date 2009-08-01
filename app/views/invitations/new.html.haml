@@ -20,4 +20,6 @@
       = text_area_tag('invitations', nil, :id => 'invitation-ids')
 
     #loader
-    = submit_tag('Send Invitations', :id => 'submit', :class => 'btn')
+    %p
+      = submit_tag('Send Invitations', :id => 'submit', :class => 'btn')
+      = "or #{link_to('Cancel', game_path(@game))}"
