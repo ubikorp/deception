@@ -3,5 +3,7 @@ class StaticController < ApplicationController
     @users = User.all(:order => "created_at DESC", :limit => 10)
   end
 
-  def help; end
+  def help
+    @title = "Directions and Game Play Information"
+  end
 end
