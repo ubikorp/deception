@@ -1,8 +1,6 @@
 - static page copy for directions / instructions with links
-- link new game screen from somewhere
-
-- should only listen to lynch votes that are @-replied
 - check time sync issues (needs to be pdq for auto-refresh)
+- add illustrations to appropriate pages
 
 - web interface for player notification settings (user profile)
 - pagination for list screens (including followers list utility?)
@@ -12,6 +10,7 @@
 - add multi-werewolf games (or freeze number to two instead of one as per official rules)
 
 - later:
+  - should only listen to lynch votes that are @-replied? (encourage publicity?)
   - rss feed for activity (after web interface)
   - add seer player class
   - smarter @-replies: include actual validation errors?

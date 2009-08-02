@@ -3,3 +3,4 @@
 
 #sidebar
   = render(:partial => 'shared/sidebar')
+  %p= button_to('New Village', '/games/new', :method => :get, :class => 'btn') if logged_in? && current_user.active_player.nil?

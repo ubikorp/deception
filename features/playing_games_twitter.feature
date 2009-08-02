@@ -28,7 +28,7 @@ And receive game progress messages
     And "aaronstack" is a "villager" in the game
     And I am a "player" in the game
     And the game is in its "2nd" period
-    When I send a public message containing "@gamebot We should kill @aaronstack"
+    When I send a public message containing "We should kill @aaronstack"
     Then I should receive a direct message
     And the direct message should contain "We've recorded your vote"
     And the vote for "aaronstack" has been recorded
@@ -37,7 +37,7 @@ And receive game progress messages
     Given there is a game called "The Incident at Mariahville"
     And I am a "player" in the game
     And the game has started
-    When I send a direct message containing "@gamebot quit"
+    When I send a direct message containing "quit"
     Then I should receive a direct message
     And the direct message should contain "visit the website"
 
@@ -45,7 +45,7 @@ And receive game progress messages
     Given there is a game called "The Incident at Mariahville"
     And I am a "player" in the game
     And the game has started
-    When I send a direct message containing "@gamebot help"
+    When I send a direct message containing "help"
     Then I should receive a direct message
     And the direct message should contain "I don't understand"
 
@@ -54,7 +54,7 @@ And receive game progress messages
     And "aaronstack" is a "villager" in the game
     And I am a "werewolf" in the game
     And the game is in its "1st" period
-    When I send a public message containing "@gamebot Kill @aaronstack"
+    When I send a public message containing "Kill @aaronstack"
     Then I should receive a direct message
     And the direct message should contain "We've recorded your vote"
     And the vote for "aaronstack" has been recorded
@@ -64,7 +64,7 @@ And receive game progress messages
     And "aaronstack" is a "villager" in the game
     And I am a "villager" in the game
     And the game is in its "1st" period
-    When I send a public message containing "@gamebot We should kill @aaronstack"
+    When I send a public message containing "We should kill @aaronstack"
     Then I should receive a direct message
     And the direct message should contain "Can't record your vote"
     And there is no vote for "aaronstack"

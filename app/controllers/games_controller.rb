@@ -15,12 +15,14 @@ class GamesController < ApplicationController
   def pending
     @title = "Games Looking for Players"
     @games = Game.pending(:conditions => { :invite_only => false })
+    render(:action => 'index')
   end
 
   # list of games that have been completed
   def finished
     @title = "Werewolf Game Archive"
     @games = Game.finished
+    render(:action => 'index')
   end
 
   # new game form

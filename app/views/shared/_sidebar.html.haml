@@ -11,8 +11,3 @@
     %td.number
       .circle= link_to(Game.finished.count, finished_games_path)
     %td.text Archived Games
-
-- if newest_users.any?
-  %h3 Newest Villagers
-  - newest_users.each do |user|
-    = link_to(profile_image(user, :height => 36, :width => 36), twitter_profile_url(user), :target => '_blank')
