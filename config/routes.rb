@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.paginated_current_games  '/games/page/:page', :controller => 'games', :action => 'index'
+  map.paginated_pending_games  '/games/pending/page/:page', :controller => 'games', :action => 'pending'
+  map.paginated_finished_games '/games/finished/page/:page', :controller => 'games', :action => 'finished'
+
   map.resources :games, :member => { :start => :post, :vote => :post }, :collection => { :pending => :get, :finished => :get } do |game|
     game.resources :players, :only => [:create, :destroy]
     game.resources :invitations, :only => [:new, :create]

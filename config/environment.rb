@@ -13,15 +13,17 @@ require 'whenever'
 
 Rails::Initializer.run do |config|
   # config.gem 'twitter-auth', :lib => 'twitter_auth', :version => '>= 0.1.21'
-  config.gem 'twitter', :lib => 'twitter', :version => '>= 0.6.12'
   config.gem 'oauth', :version => '>= 0.3.1'
 
-  config.gem 'haml', :version => '>= 2.0.6'
+  config.gem 'twitter',               :lib => 'twitter', :version => '>= 0.6.12'
   config.gem 'chriseppstein-compass', :lib => "compass", :version => '>= 0.8.8', :source => 'http://gems.github.com'
 
+  config.gem 'haml',          :version => '>= 2.0.6'
   config.gem 'state_machine', :version => '>= 0.7.5'
-  config.gem 'semanticart-is_paranoid', :lib => 'is_paranoid', :version => '>= 0.9.0'
-  config.gem 'thoughtbot-paperclip', :lib => 'paperclip', :version => '>= 2.3.0', :source => 'http://gems.github.com'
+
+  config.gem 'semanticart-is_paranoid', :lib => 'is_paranoid',   :version => '>= 0.9.0'
+  config.gem 'thoughtbot-paperclip',    :lib => 'paperclip',     :version => '>= 2.3.0',  :source => 'http://gems.github.com'
+  config.gem 'mislav-will_paginate',    :lib => 'will_paginate', :version => '~> 2.3.11', :source => 'http://gems.github.com'
 
   config.gem 'javan-whenever', :lib => false, :source => 'http://gems.github.com'
 

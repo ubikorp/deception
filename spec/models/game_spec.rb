@@ -32,9 +32,9 @@ describe Game do
   it { should have_many(:outgoing_messages) }
   it { should belong_to(:owner) }
 
-  it { should have_scope(:pending,   :conditions => { :state => 'setup', :invite_only => false }) }
-  it { should have_scope(:current,   :conditions => { :state => 'playable' }) }
-  it { should have_scope(:finished,  :conditions => { :state => 'finished' }) }
+  it { should have_scope(:pending,   :conditions => { :state => 'setup', :invite_only => false }, :order => 'created_at DESC') }
+  it { should have_scope(:current,   :conditions => { :state => 'playable' }, :order => 'created_at DESC') }
+  it { should have_scope(:finished,  :conditions => { :state => 'finished' }, :order => 'created_at DESC') }
 
   it { should validate_presence_of(:name, :owner_id) } # :min_players, :max_players, :period_length have default values
   it { should validate_numericality_of(:min_players, :max_players, :period_length) }

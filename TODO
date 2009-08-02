@@ -1,13 +1,12 @@
-- static page copy for directions / instructions with links
-- check time sync issues (needs to be pdq for auto-refresh)
 - add illustrations to appropriate pages
-
 - web interface for player notification settings (user profile)
-- pagination for list screens (including followers list utility?)
 - display / gather twitter chatter from in-game users (use twitter live search widget?)
 
 - auto-start feature (once max players satisfied?)
 - add multi-werewolf games (or freeze number to two instead of one as per official rules)
+
+- check time sync issues (needs to be pdq for auto-refresh)
+- revise page copy for directions / instructions with links (use proper gamebot name, etc)
 
 - later:
   - should only listen to lynch votes that are @-replied? (encourage publicity?)

@@ -70,6 +70,31 @@ table {
 a img {
   border: none; }
 
+/* line 1, ../../../app/stylesheets/partials/_pagination.sass */
+.pagination {
+  text-align: center;
+  padding: 1em 0; }
+  /* line 4, ../../../app/stylesheets/partials/_pagination.sass */
+  .pagination a, .pagination span {
+    padding: 0 0.4em;
+    border-right: 1px solid #666;
+    float: left; }
+  /* line 8, ../../../app/stylesheets/partials/_pagination.sass */
+  .pagination .next_page {
+    border-right: 0; }
+  /* line 10, ../../../app/stylesheets/partials/_pagination.sass */
+  .pagination span.disabled {
+    color: #666; }
+  /* line 12, ../../../app/stylesheets/partials/_pagination.sass */
+  .pagination span.current {
+    font-weight: bold; }
+  /* line 14, ../../../app/stylesheets/partials/_pagination.sass */
+  .pagination a {
+    text-decoration: none; }
+    /* line 16, ../../../app/stylesheets/partials/_pagination.sass */
+    .pagination a:hover, .pagination a:focus {
+      text-decoration: underline; }
+
 /* line 22, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_typography.sass */
 body {
   line-height: 1.5;
@@ -973,7 +998,7 @@ textarea {
   width: 390px;
   height: 250px; }
 
-/* line 19, ../../../app/stylesheets/screen.sass */
+/* line 20, ../../../app/stylesheets/screen.sass */
 body {
   font-family: Helvetica, Arial, sans-serif;
   background: #402f21;
@@ -1145,7 +1170,7 @@ body {
   /* line 154, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_typography.sass */
   body .loud {
     color: #111111; }
-  /* line 25, ../../../app/stylesheets/screen.sass */
+  /* line 26, ../../../app/stylesheets/screen.sass */
   body #container {
     width: 550px;
     margin: 0 auto;
@@ -1160,19 +1185,19 @@ body {
     /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
     body #container {
       display: block; }
-  /* line 34, ../../../app/stylesheets/screen.sass */
+  /* line 35, ../../../app/stylesheets/screen.sass */
   body h1 {
     font-size: 2em; }
-  /* line 37, ../../../app/stylesheets/screen.sass */
+  /* line 38, ../../../app/stylesheets/screen.sass */
   body h2 {
     font-size: 1.6em; }
-  /* line 40, ../../../app/stylesheets/screen.sass */
+  /* line 41, ../../../app/stylesheets/screen.sass */
   body h3 {
     font-size: 1.3em; }
-  /* line 43, ../../../app/stylesheets/screen.sass */
+  /* line 44, ../../../app/stylesheets/screen.sass */
   body h4 {
     font-size: 1.1em; }
-  /* line 46, ../../../app/stylesheets/screen.sass */
+  /* line 47, ../../../app/stylesheets/screen.sass */
   body a {
     color: #700000;
     font-weight: bold; }
@@ -1188,32 +1213,32 @@ body {
     /* line 21, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/links/_link_colors.sass */
     body a:active {
       color: #700000; }
-    /* line 50, ../../../app/stylesheets/screen.sass */
+    /* line 51, ../../../app/stylesheets/screen.sass */
     body a img {
       border: 0; }
-  /* line 53, ../../../app/stylesheets/screen.sass */
+  /* line 54, ../../../app/stylesheets/screen.sass */
   body input.btn {
     border: 2px solid #666666;
     background: #cccccc;
     -moz-border-radius: 0.5em;
     -webkit-border-radius: 0.5em;
     border-radius: 0.5em; }
-  /* line 60, ../../../app/stylesheets/screen.sass */
+  /* line 61, ../../../app/stylesheets/screen.sass */
   body input.btn:hover {
     border: 2px solid #222222;
     background: #666666; }
-  /* line 64, ../../../app/stylesheets/screen.sass */
+  /* line 65, ../../../app/stylesheets/screen.sass */
   body input[disabled].btn:hover {
     border: 2px solid #666666;
     background: #cccccc; }
-  /* line 68, ../../../app/stylesheets/screen.sass */
+  /* line 69, ../../../app/stylesheets/screen.sass */
   body #footer {
     text-align: center;
     font-size: 0.8em;
     color: #d9c6b0;
     margin-top: 5px;
     margin-bottom: -5px; }
-    /* line 75, ../../../app/stylesheets/screen.sass */
+    /* line 76, ../../../app/stylesheets/screen.sass */
     body #footer a {
       text-decoration: none;
       font-weight: bold;
@@ -1221,7 +1246,7 @@ body {
       /* line 4, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/links/_hover_link.sass */
       body #footer a:hover {
         text-decoration: underline; }
-  /* line 80, ../../../app/stylesheets/screen.sass */
+  /* line 81, ../../../app/stylesheets/screen.sass */
   body #header {
     background-color: #222222;
     color: white;
@@ -1233,7 +1258,7 @@ body {
     /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
     body #header {
       display: block; }
-    /* line 88, ../../../app/stylesheets/screen.sass */
+    /* line 89, ../../../app/stylesheets/screen.sass */
     body #header #logo {
       display: inline;
       float: left;
@@ -1243,14 +1268,14 @@ body {
       /* line 97, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
       * html body #header #logo {
         overflow-x: hidden; }
-      /* line 92, ../../../app/stylesheets/screen.sass */
+      /* line 93, ../../../app/stylesheets/screen.sass */
       body #header #logo a {
         color: white;
         text-decoration: none; }
-      /* line 96, ../../../app/stylesheets/screen.sass */
+      /* line 97, ../../../app/stylesheets/screen.sass */
       body #header #logo a:hover {
         color: #d9c6b0; }
-    /* line 99, ../../../app/stylesheets/screen.sass */
+    /* line 100, ../../../app/stylesheets/screen.sass */
     body #header ul#status {
       display: inline;
       float: left;
@@ -1269,7 +1294,7 @@ body {
         margin: 0px;
         padding: 0px;
         display: inline; }
-      /* line 104, ../../../app/stylesheets/screen.sass */
+      /* line 105, ../../../app/stylesheets/screen.sass */
       body #header ul#status li {
         zoom: 1;
         display: inline;
@@ -1277,10 +1302,10 @@ body {
         display: inline-block;
         vertical-align: top;
         margin-left: 10px; }
-      /* line 108, ../../../app/stylesheets/screen.sass */
+      /* line 109, ../../../app/stylesheets/screen.sass */
       body #header ul#status li.hidden {
         display: none; }
-      /* line 111, ../../../app/stylesheets/screen.sass */
+      /* line 112, ../../../app/stylesheets/screen.sass */
       body #header ul#status a {
         text-decoration: none;
         color: white;
@@ -1288,7 +1313,7 @@ body {
         /* line 4, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/links/_hover_link.sass */
         body #header ul#status a:hover {
           text-decoration: underline; }
-      /* line 116, ../../../app/stylesheets/screen.sass */
+      /* line 117, ../../../app/stylesheets/screen.sass */
       body #header ul#status a.image {
         width: 24px;
         height: 0;
@@ -1296,38 +1321,38 @@ body {
         overflow: hidden;
         padding-top: 24px;
         float: right; }
-      /* line 124, ../../../app/stylesheets/screen.sass */
+      /* line 125, ../../../app/stylesheets/screen.sass */
       body #header ul#status a.image:hover {
         background-position: 0 -24px; }
-      /* line 127, ../../../app/stylesheets/screen.sass */
+      /* line 128, ../../../app/stylesheets/screen.sass */
       body #header ul#status a.login {
         width: 25px;
         background-image: url('/images/twitter.png'); }
-      /* line 131, ../../../app/stylesheets/screen.sass */
+      /* line 132, ../../../app/stylesheets/screen.sass */
       body #header ul#status a.logout {
         background-image: url('/images/logout.png'); }
-      /* line 134, ../../../app/stylesheets/screen.sass */
+      /* line 135, ../../../app/stylesheets/screen.sass */
       body #header ul#status a.help {
         background-image: url('/images/help.png'); }
-      /* line 137, ../../../app/stylesheets/screen.sass */
+      /* line 138, ../../../app/stylesheets/screen.sass */
       body #header ul#status a img.profile:hover {
         opacity: 0.7;
         -moz-opacity: 0.7;
         -khtml-opacity: 0.7;
         -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
         filter: alpha(opacity=70); }
-  /* line 140, ../../../app/stylesheets/screen.sass */
+  /* line 141, ../../../app/stylesheets/screen.sass */
   body #art {
     margin-bottom: 10px; }
-  /* line 145, ../../../app/stylesheets/screen.sass */
+  /* line 146, ../../../app/stylesheets/screen.sass */
   body #middle h2#headline {
     font-size: 1.5em;
     margin: 0 5px 10px 5px;
     color: white; }
-  /* line 150, ../../../app/stylesheets/screen.sass */
+  /* line 151, ../../../app/stylesheets/screen.sass */
   body #middle img {
     display: inline; }
-  /* line 155, ../../../app/stylesheets/screen.sass */
+  /* line 156, ../../../app/stylesheets/screen.sass */
   body #content {
     color: #222222;
     background-color: #d9c6b0;
@@ -1341,7 +1366,7 @@ body {
     /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
     body #content {
       display: block; }
-    /* line 165, ../../../app/stylesheets/screen.sass */
+    /* line 166, ../../../app/stylesheets/screen.sass */
     body #content #main {
       display: inline;
       float: left;
@@ -1352,7 +1377,7 @@ body {
       /* line 97, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
       * html body #content #main {
         overflow-x: hidden; }
-      /* line 170, ../../../app/stylesheets/screen.sass */
+      /* line 171, ../../../app/stylesheets/screen.sass */
       body #content #main a.image {
         height: 0;
         width: 151px;
@@ -1361,15 +1386,15 @@ body {
         overflow: hidden;
         padding-top: 24px;
         display: block; }
-      /* line 179, ../../../app/stylesheets/screen.sass */
+      /* line 180, ../../../app/stylesheets/screen.sass */
       body #content #main .game-state {
         font-weight: bold;
         text-decoration: underline; }
-    /* line 184, ../../../app/stylesheets/screen.sass */
+    /* line 185, ../../../app/stylesheets/screen.sass */
     body #content .alert .strong {
       font-weight: bold;
       font-size: 1.1em; }
-    /* line 190, ../../../app/stylesheets/screen.sass */
+    /* line 191, ../../../app/stylesheets/screen.sass */
     body #content #sidebar {
       display: inline;
       float: left;
@@ -1379,20 +1404,20 @@ body {
       /* line 97, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
       * html body #content #sidebar {
         overflow-x: hidden; }
-      /* line 194, ../../../app/stylesheets/screen.sass */
+      /* line 195, ../../../app/stylesheets/screen.sass */
       body #content #sidebar table.stats {
         font-weight: bold;
         margin-bottom: 0; }
-        /* line 198, ../../../app/stylesheets/screen.sass */
+        /* line 199, ../../../app/stylesheets/screen.sass */
         body #content #sidebar table.stats .number {
           height: 65px; }
-          /* line 201, ../../../app/stylesheets/screen.sass */
+          /* line 202, ../../../app/stylesheets/screen.sass */
           body #content #sidebar table.stats .number .circle {
             background-image: url('/images/circle.png');
             background-repeat: no-repeat;
             width: 40px;
             height: 40px; }
-            /* line 207, ../../../app/stylesheets/screen.sass */
+            /* line 208, ../../../app/stylesheets/screen.sass */
             body #content #sidebar table.stats .number .circle a, body #content #sidebar table.stats .number .circle span {
               color: inherit;
               text-decoration: inherit;
@@ -1402,17 +1427,17 @@ body {
               font-size: 1.6em;
               text-align: center;
               display: block; }
-          /* line 215, ../../../app/stylesheets/screen.sass */
+          /* line 216, ../../../app/stylesheets/screen.sass */
           body #content #sidebar table.stats .number .circle:hover {
             background-position: 0 -40px; }
-            /* line 218, ../../../app/stylesheets/screen.sass */
+            /* line 219, ../../../app/stylesheets/screen.sass */
             body #content #sidebar table.stats .number .circle:hover a, body #content #sidebar table.stats .number .circle:hover span {
               color: white; }
-        /* line 221, ../../../app/stylesheets/screen.sass */
+        /* line 222, ../../../app/stylesheets/screen.sass */
         body #content #sidebar table.stats .text {
           font-size: 1.2em;
           vertical-align: middle; }
-  /* line 228, ../../../app/stylesheets/screen.sass */
+  /* line 229, ../../../app/stylesheets/screen.sass */
   body div.flash {
     padding: 5px;
     -moz-border-radius: 0.5em;
@@ -1420,17 +1445,17 @@ body {
     border-radius: 0.5em;
     border: 2px solid #ccc;
     margin: 10px 0; }
-  /* line 236, ../../../app/stylesheets/screen.sass */
+  /* line 237, ../../../app/stylesheets/screen.sass */
   body div.error {
     background: #fcc;
     border-color: #911;
     color: #311; }
-  /* line 241, ../../../app/stylesheets/screen.sass */
+  /* line 242, ../../../app/stylesheets/screen.sass */
   body div.notice {
     background: #cfc;
     border-color: #191;
     color: #131; }
-  /* line 246, ../../../app/stylesheets/screen.sass */
+  /* line 247, ../../../app/stylesheets/screen.sass */
   body div.status {
     padding: 5px;
     -moz-border-radius: 5px;
@@ -1440,25 +1465,25 @@ body {
     background: #cfc;
     border-color: #191;
     color: #131; }
-    /* line 256, ../../../app/stylesheets/screen.sass */
+    /* line 257, ../../../app/stylesheets/screen.sass */
     body div.status p {
       line-height: 100%;
       margin: 10px 0; }
-  /* line 261, ../../../app/stylesheets/screen.sass */
+  /* line 262, ../../../app/stylesheets/screen.sass */
   body .errorExplanation {
     border-top: 2px solid #700000;
     border-bottom: 2px solid #700000;
     padding: 5px 10px 0 10px;
     background: #fcc;
     color: #311; }
-    /* line 268, ../../../app/stylesheets/screen.sass */
+    /* line 269, ../../../app/stylesheets/screen.sass */
     body .errorExplanation h2 {
       font-weight: bold;
       font-size: 1.3em; }
-    /* line 272, ../../../app/stylesheets/screen.sass */
+    /* line 273, ../../../app/stylesheets/screen.sass */
     body .errorExplanation p {
       line-height: 1em; }
-  /* line 277, ../../../app/stylesheets/screen.sass */
+  /* line 278, ../../../app/stylesheets/screen.sass */
   body #games ul {
     margin: 5px 0 0 0;
     padding: 0; }
@@ -1466,34 +1491,34 @@ body {
     body #games ul li {
       list-style-type: none;
       margin-left: 0px; }
-    /* line 282, ../../../app/stylesheets/screen.sass */
+    /* line 283, ../../../app/stylesheets/screen.sass */
     body #games ul li {
       display: block;
       border-bottom: 2px solid #666666;
       padding: 5px 0; }
-      /* line 287, ../../../app/stylesheets/screen.sass */
+      /* line 288, ../../../app/stylesheets/screen.sass */
       body #games ul li span {
         padding-left: 10px; }
-    /* line 290, ../../../app/stylesheets/screen.sass */
+    /* line 291, ../../../app/stylesheets/screen.sass */
     body #games ul li:hover {
       background-color: #cccccc; }
-  /* line 294, ../../../app/stylesheets/screen.sass */
+  /* line 295, ../../../app/stylesheets/screen.sass */
   body form#new_game {
     margin-bottom: 10px; }
-    /* line 297, ../../../app/stylesheets/screen.sass */
+    /* line 298, ../../../app/stylesheets/screen.sass */
     body form#new_game label {
       float: left;
       margin-top: 7px;
       width: 150px;
       font-weight: bold; }
-  /* line 303, ../../../app/stylesheets/screen.sass */
+  /* line 304, ../../../app/stylesheets/screen.sass */
   body input, body select, body textarea {
     font-size: 1.1em; }
-  /* line 306, ../../../app/stylesheets/screen.sass */
+  /* line 307, ../../../app/stylesheets/screen.sass */
   body input[type=text] {
     padding-top: 0;
     padding-bottom: 0; }
-    /* line 310, ../../../app/stylesheets/screen.sass */
+    /* line 311, ../../../app/stylesheets/screen.sass */
     body input[type=text] p {
       overflow: hidden;
       display: inline-block;
@@ -1501,18 +1526,18 @@ body {
       /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
       body input[type=text] p {
         display: block; }
-  /* line 316, ../../../app/stylesheets/screen.sass */
+  /* line 317, ../../../app/stylesheets/screen.sass */
   body #followers, body #players {
     margin-bottom: 10px; }
-    /* line 319, ../../../app/stylesheets/screen.sass */
+    /* line 320, ../../../app/stylesheets/screen.sass */
     body #followers #scrollwindow, body #players #scrollwindow {
       height: 300px;
       overflow: auto;
       margin-bottom: 10px; }
-    /* line 324, ../../../app/stylesheets/screen.sass */
+    /* line 325, ../../../app/stylesheets/screen.sass */
     body #followers .navigation, body #players .navigation {
       display: none; }
-  /* line 327, ../../../app/stylesheets/screen.sass */
+  /* line 328, ../../../app/stylesheets/screen.sass */
   body #followers ul, body #players ul {
     list-style-type: none;
     margin: 0 0 5px 0;
@@ -1522,7 +1547,7 @@ body {
     /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
     body #followers ul, body #players ul {
       display: block; }
-  /* line 334, ../../../app/stylesheets/screen.sass */
+  /* line 335, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower, body #followers ul li.player {
     float: left;
     width: 100px;
@@ -1530,7 +1555,7 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
     position: relative; }
-  /* line 343, ../../../app/stylesheets/screen.sass */
+  /* line 344, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower, body #players ul li.player {
     float: left;
     width: 75px;
@@ -1538,7 +1563,7 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
     position: relative; }
-  /* line 352, ../../../app/stylesheets/screen.sass */
+  /* line 353, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower img, body #followers ul li.player img {
     border: 5px solid #cccccc;
     margin-bottom: 2px;
@@ -1547,11 +1572,11 @@ body {
     -khtml-opacity: 0.8;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
     filter: alpha(opacity=80); }
-  /* line 358, ../../../app/stylesheets/screen.sass */
+  /* line 359, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower img, body #players ul li.player img {
     border: 5px solid #cccccc;
     margin-bottom: 2px; }
-  /* line 363, ../../../app/stylesheets/screen.sass */
+  /* line 364, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower .player-is-dead, body #players ul li.player .player-is-dead {
     color: white;
     font-size: 1.2em;
@@ -1559,7 +1584,7 @@ body {
     text-align: center;
     width: 58px;
     position: absolute; }
-  /* line 372, ../../../app/stylesheets/screen.sass */
+  /* line 373, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower.hover img, body #followers ul li.player.hover img {
     border: 5px solid #666666;
     opacity: 1;
@@ -1567,10 +1592,10 @@ body {
     -khtml-opacity: 1;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     filter: alpha(opacity=100); }
-  /* line 377, ../../../app/stylesheets/screen.sass */
+  /* line 378, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower.hover img, body #players ul li.player.hover img {
     border: 5px solid #666666; }
-  /* line 381, ../../../app/stylesheets/screen.sass */
+  /* line 382, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower.selected img, body #followers ul li.player.selected img {
     border: 5px solid #700000;
     opacity: 1;
@@ -1578,7 +1603,7 @@ body {
     -khtml-opacity: 1;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     filter: alpha(opacity=100); }
-  /* line 386, ../../../app/stylesheets/screen.sass */
+  /* line 387, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower.selected img, body #players ul li.player.selected img {
     border: 5px solid #700000;
     opacity: 1;
@@ -1586,14 +1611,14 @@ body {
     -khtml-opacity: 1;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     filter: alpha(opacity=100); }
-  /* line 390, ../../../app/stylesheets/screen.sass */
+  /* line 391, ../../../app/stylesheets/screen.sass */
   body #followers ul li.player.dead img, body #players ul li.player.dead img {
     opacity: 0.6;
     -moz-opacity: 0.6;
     -khtml-opacity: 0.6;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     filter: alpha(opacity=60); }
-  /* line 393, ../../../app/stylesheets/screen.sass */
+  /* line 394, ../../../app/stylesheets/screen.sass */
   body #followers #invitations textarea, body #players #invitations textarea {
     width: 100%;
     margin-bottom: 20px; }

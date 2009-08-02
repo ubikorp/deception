@@ -20,9 +20,9 @@ require 'array_ext'
 require 'short_round'
 
 class Game < ActiveRecord::Base
-  named_scope :pending,   :conditions => { :state => 'setup', :invite_only => false }
-  named_scope :current,   :conditions => { :state => 'playable' }
-  named_scope :finished,  :conditions => { :state => 'finished' }
+  named_scope :pending,   :conditions => { :state => 'setup', :invite_only => false }, :order => 'created_at DESC'
+  named_scope :current,   :conditions => { :state => 'playable' },                     :order => 'created_at DESC'
+  named_scope :finished,  :conditions => { :state => 'finished' },                     :order => 'created_at DESC'
   is_paranoid
 
   has_many :players, :dependent => :destroy

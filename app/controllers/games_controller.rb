@@ -8,20 +8,20 @@ class GamesController < ApplicationController
   # list of currently ongoing games
   def index
     @title = "Active (Ongoing) Games"
-    @games = Game.current
+    @games = Game.current.paginate(:page => params[:page] || 1, :per_page => 12, :order => 'created_at DESC')
   end
 
   # list of games that are seeking players
   def pending
     @title = "Games Looking for Players"
-    @games = Game.pending(:conditions => { :invite_only => false })
+    @games = Game.pending.paginate(:conditions => { :invite_only => false }, :page => params[:page] || 1, :per_page => 12, :order => 'created_at DESC')
     render(:action => 'index')
   end
 
   # list of games that have been completed
   def finished
     @title = "Werewolf Game Archive"
-    @games = Game.finished
+    @games = Game.finished.paginate(:page => params[:page] || 1, :per_page => 12, :order => 'created_at DESC')
     render(:action => 'index')
   end
 

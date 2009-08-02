@@ -6,3 +6,5 @@
           = link_to(h(game.name), game_path(game))
           = "#{game.players.length} players" unless game.finished?
           = "Won by #{game.winner_type.pluralize}" if game.finished?
+
+= will_paginate(@games)
