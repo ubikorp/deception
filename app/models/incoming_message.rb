@@ -30,20 +30,36 @@ class IncomingMessage < Message
     conditions = { :count => 200 }
     conditions[:since_id] = self.last.status_id unless self.last.nil?
 
+    # fetch replies / mentions
     self.twitter.replies(conditions).each do |msg|
-      if (user = User.find_by_login(msg.user.screen_name)) && user.active_player
-        model = self.new(:from_user => user, :game => user.active_player.game, :text => msg.text, :status_id => msg.id)
-        if model.save
-          count += 1
-        else
-          logger.error("Unable to save message with status=#{msg.id}: #{model.errors.full_messages.to_sentence}")
-        end
-      else
-        logger.error("User #{msg.user.screen_name} is not playing in any game!")
-      end
+      # incoming message observer expects messages to have the @-reply username removed
+      text = msg.text.gsub("@#{TwitterAuth.config['gamebot_user']} ", '')
+      count += 1 if self.create_from_twitter(msg.id, msg.user.screen_name, text)
+    end
 
-      logger.info("Processed #{count} messages")
-      count
+    # fetch direct messages
+    # TODO: should discriminate between these if we need villager votes to be public
+    self.twitter.direct_messages(conditions).each do |msg|
+      count += 1 if self.create_from_twitter(msg.id, msg.sender.screen_name, msg.text)
+    end
+
+    logger.info("[MSG] Processed #{count} replies and direct messages")
+    count
+  end
+
+  # create a new message from Twitter message data
+  def self.create_from_twitter(id, sender, text)
+    if (user = User.find_by_login(sender)) && user.active_player
+      model = self.new(:from_user => user, :game => user.active_player.game, :text => text, :status_id => id)
+      if model.save
+        true
+      else
+        logger.error("[MSG] Unable to save message with status=#{id}: #{model.errors.full_messages.to_sentence}")
+        false
+      end
+    else
+      logger.error("[MSG] User #{sender} is not playing in any game!")
+      false
     end
   end
 

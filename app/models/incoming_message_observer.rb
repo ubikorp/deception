@@ -14,7 +14,7 @@ class IncomingMessageObserver < ActiveRecord::Observer
   private
 
   def vote_message_received(msg)
-    if match = msg.text.match(/^.*@(\w+).*$/)
+    if match = msg.text.match(/@(\w+)/)
       target_user = User.find_by_login(match[1])
       if target_user && (vote = msg.from_user.vote(target_user))
         logger.info("Created a VoteEvent from msg (@#{msg.from_user.login}): #{msg.text}")

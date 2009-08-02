@@ -9,7 +9,7 @@ describe IncomingMessage do
 
   it 'should reply to @messages with a helpful direct message' do
     lambda { 
-      @msg = Factory.build(:incoming_message, :text => "@gamebot wtf??? random text...")
+      @msg = Factory.build(:incoming_message, :text => "wtf??? random text...")
       @obs.after_create(@msg)
     }.should change(OutgoingMessage, :count)
 
@@ -20,7 +20,7 @@ describe IncomingMessage do
 
   it 'should reply to quit messages with further instructions' do
     lambda {
-      @msg = Factory.build(:incoming_message, :text => "@gamebot I want to quit")
+      @msg = Factory.build(:incoming_message, :text => "I want to quit")
       @obs.after_create(@msg)
     }.should change(OutgoingMessage, :count)
 
@@ -36,7 +36,7 @@ describe IncomingMessage do
 
     it 'should reply to valid vote messages with an acknowledgement' do
       lambda {
-        @msg = Factory.build(:incoming_message, :from_user => werewolf.user, :text => "@gamebot I vote for @#{villager(0).user.login}")
+        @msg = Factory.build(:incoming_message, :from_user => werewolf.user, :text => "I vote for @#{villager(0).user.login}")
         @obs.after_create(@msg)
       }.should change(OutgoingMessage, :count)
 
@@ -47,7 +47,7 @@ describe IncomingMessage do
 
     it 'should record a vote if message is valid' do
       lambda {
-        @msg = Factory.build(:incoming_message, :from_user => werewolf.user, :text => "@gamebot I vote for @#{villager(0).user.login}")
+        @msg = Factory.build(:incoming_message, :from_user => werewolf.user, :text => "I vote for @#{villager(0).user.login}")
         @obs.after_create(@msg)
       }.should change(VoteEvent, :count)
 
@@ -57,7 +57,7 @@ describe IncomingMessage do
 
     it 'should reply to invalid vote messages' do
       lambda {
-        @msg = Factory.build(:incoming_message, :from_user => werewolf.user, :text => "@gamebot I vote for @pedro")
+        @msg = Factory.build(:incoming_message, :from_user => werewolf.user, :text => "I vote for @pedro")
         @obs.after_create(@msg)
       }.should change(OutgoingMessage, :count)
 
@@ -68,7 +68,7 @@ describe IncomingMessage do
 
     it 'should not record a vote if message is invalid' do
       lambda {
-        @msg = Factory.build(:incoming_message, :from_user => werewolf.user, :text => "@gamebot I vote for @pedro")
+        @msg = Factory.build(:incoming_message, :from_user => werewolf.user, :text => "I vote for @pedro")
         @obs.after_create(@msg)
       }.should_not change(VoteEvent, :count)
     end

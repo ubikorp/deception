@@ -45,11 +45,22 @@ describe IncomingMessage do
   context 'polling' do
     before(:each) do
       @game = setup_game
+      @replies = [Mash.new({ :id => 20000433, :user => { :screen_name => werewolf.user.login }, :text => "@t3stx i'm voting to kill @#{villager(0).user.login} because he is jerks" })]
+      @dms     = [Mash.new({ :id => 20000439, :sender => { :screen_name => werewolf.user.login }, :text => "kill @#{villager(0).user.login} because he is jerks" })]
+      IncomingMessage.twitter.stubs(:replies).returns([])
+      IncomingMessage.twitter.stubs(:direct_messages).returns([])
     end
 
-    it 'should create new messages from twitter' do
-      @replies = [Mash.new({ :id => 20000433, :user => { :screen_name => werewolf.user.login }, :text => "@gamebot i'm voting to kill @#{villager(0).user.login} because he is jerks" })]
-      IncomingMessage.twitter.stubs(:replies).returns(@replies)
+    it 'should create new messages from twitter replies' do
+      IncomingMessage.twitter.expects(:replies).returns(@replies)
+
+      lambda {
+        IncomingMessage.receive_messages
+      }.should change(IncomingMessage, :count)
+    end
+
+    it 'should create new messages from twitter direct messages' do
+      IncomingMessage.twitter.expects(:direct_messages).returns(@dms)
 
       lambda {
         IncomingMessage.receive_messages
@@ -57,12 +68,18 @@ describe IncomingMessage do
     end
 
     it 'should fail to record messages for inactive players' do
-      @replies = [Mash.new({ :id => 20000433, :user => { :screen_name => 'timferriss' }, :text => "@gamebot i'm voting to kill @#{villager(0).user.login} because he is jerks" })]
-      IncomingMessage.twitter.stubs(:replies).returns(@replies)
+      @replies = [Mash.new({ :id => 20000433, :user => { :screen_name => 'timferriss' }, :text => "@t3stx i'm voting to kill @#{villager(0).user.login} because he is jerks" })]
+      IncomingMessage.twitter.expects(:replies).returns(@replies)
 
       lambda {
         IncomingMessage.receive_messages
       }.should_not change(IncomingMessage, :count)
+    end
+
+    it 'should remove @-reply username from replies' do
+      IncomingMessage.twitter.stubs(:replies).returns(@replies)
+      IncomingMessage.receive_messages
+      IncomingMessage.last.text.should == "i'm voting to kill @#{villager(0).user.login} because he is jerks"
     end
   end
 end

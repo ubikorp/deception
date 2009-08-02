@@ -1,15 +1,17 @@
-- copy and static page for instructions
+- static page copy for directions / instructions with links
 - link new game screen from somewhere
 
-- should only listen to lynch votes that are @replied
+- should only listen to lynch votes that are @-replied
+- check time sync issues (needs to be pdq for auto-refresh)
+
 - web interface for player notification settings (user profile)
 - pagination for list screens (including followers list utility?)
-- display / gather twitter chatter from in-game users (extra... javascripty?)
+- display / gather twitter chatter from in-game users (use twitter live search widget?)
 
 - auto-start feature (once max players satisfied?)
-- rss feed for activity (after web interface)
-- make role assignment less 'dumb'
-- add multi-werewolf games
-- add seer player class
-- add hunter player class
-- smarter @replies: include actual validation errors?
+- add multi-werewolf games (or freeze number to two instead of one as per official rules)
+
+- later:
+  - rss feed for activity (after web interface)
+  - add seer player class
+  - smarter @-replies: include actual validation errors?
