@@ -2,6 +2,8 @@ class InvitationsController < ApplicationController
   before_filter :find_game # all
   before_filter :user_can_invite # all
 
+  default_illustration :seer
+
   # show invitation options
   def new
     @title = "Invite Your Friends (and Enemies)"

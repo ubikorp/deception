@@ -5,6 +5,8 @@ class GamesController < ApplicationController
   before_filter :membership_required, :only => [:vote]
   before_filter :playable_required, :only => [:vote]
 
+  default_illustration :villager
+
   # list of currently ongoing games
   def index
     @title = "Active (Ongoing) Games"
@@ -38,13 +40,13 @@ class GamesController < ApplicationController
 
   # create new game
   def create
-    @title = "New Game Village"
     @game = Game.new(params[:game].merge(:owner => current_user))
     if @game.save
       current_user.join(@game)
       flash[:notice] = "Your game has been created"
       redirect_to(game_path(@game))
     else
+      @title = "New Game Village"
       flash[:error] = "Please check the form for errors"
       render(:action => 'new')
     end
@@ -52,8 +54,6 @@ class GamesController < ApplicationController
 
   # show details for a specific game
   def show
-    # TODO: add custom art
-    # @illustration = @game.day? ? Illustration.find_by_name('villagers') : Illustration.find_by_name('werewolf')
     if logged_in?
       @invitation = @game.invitations.for_user(current_user)
     else
@@ -62,6 +62,11 @@ class GamesController < ApplicationController
     end
 
     @title = "The Incident at #{@game.name}"
+    if @game.finished?
+      @illustration = Illustration.find_by_title(@game.winner[0].type.downcase)
+    elsif @game.playable?
+      @illustration = Illustration.find_by_title(@game.day? ? 'werewolf' : 'villager')
+    end
   end
 
   # destroy a game during the setup phase

@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_filter :login_required, :only => [:follow, :followers]
 
+  default_illustration :villager
+
   # new users are created through signin with Twitter
   def new
     redirect_to(login_path)

@@ -1,15 +1,18 @@
-- add illustrations to appropriate pages
-- web interface for player notification settings (user profile)
 - display / gather twitter chatter from in-game users (use twitter live search widget?)
+- user profile with player notification settings
 
 - auto-start feature (once max players satisfied?)
 - add multi-werewolf games (or freeze number to two instead of one as per official rules)
-
 - check time sync issues (needs to be pdq for auto-refresh)
-- revise page copy for directions / instructions with links (use proper gamebot name, etc)
+
+- before deploy:
+  - choose name for game, website, twitter user
+  - revise page copy for directions / instructions with links
+  - add cropped illustrations to appropriate pages for production
 
 - later:
   - should only listen to lynch votes that are @-replied? (encourage publicity?)
   - rss feed for activity (after web interface)
   - add seer player class
   - smarter @-replies: include actual validation errors?
+  - home page should auto-redirect to current player game if player is active?
