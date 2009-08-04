@@ -110,7 +110,9 @@ When /^the game period turns over$/ do
 end
 
 When /^the game is finished$/ do
-  @game.finish # improper
+  @game.continue
+  KillEvent.create(:period => @game.current_period, :target_player => @game.werewolves.first) # hacky
+  @game.continue # finish game, werewolf is dead
 end
 
 Then /^there should not be a game called "([^\"]*)"$/ do |arg1|

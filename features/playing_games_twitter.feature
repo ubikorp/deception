@@ -88,7 +88,7 @@ And receive game progress messages
 
   Scenario: User is notified when the game is over
     Given there is a game called "The Incident at Mariahville"
-    And I am a "player" in the game
+    And I am a "villager" in the game
     And the game has started
     When the game is finished
     Then I should receive a direct message
@@ -101,3 +101,4 @@ And receive game progress messages
     And the game has started
     When the game is finished
     Then I should not receive a direct message containing "end of the game"
+    And I should not receive a direct message containing "found you out"

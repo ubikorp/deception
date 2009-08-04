@@ -1,8 +1,9 @@
 module DeceptionGame
   module Messages
-    GAME_START_MSG        = "Your werewolf game has started! You'll be a <> in this game. Visit http://mysite.tld for instructions and game play information."
-    GAME_OVER_MSG         = "That's the end of the game. Congrats to the winners!"
-    GAME_ABORT_MSG        = "Sorry, the game you were schedule to participate in has been cancelled by its organizer. You are free to join other games."
+    GAME_START_MSG           = "Your werewolf game has started! You'll be a <> in this game. Visit http://mysite.tld for instructions and game play information."
+    GAME_OVER_WEREWOLVES_MSG = "With villager numbers sufficiently depleted, the werewolves rise up and slaughter the remaining townfolk. Well played, werewolves!"
+    GAME_OVER_VILLAGERS_MSG  = "That's the end of the game. Congrats to the villagers for correctly identifying the monsters in their midst!"
+    GAME_ABORT_MSG           = "Sorry, the game you were schedule to participate in has been cancelled by its organizer. You are free to join other games."
 
     # PLAYER_SUICIDE_MSG    = "<> couldn't handle the stress and committed suicide."
 

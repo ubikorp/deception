@@ -19,6 +19,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Game do
+  include GameSpecHelper
+
   before(:each) do
     @game = Factory(:game)
   end
@@ -118,10 +120,7 @@ describe Game do
 
   context 'recently created' do
     before(:each) do
-      Factory(:nick).join(@game, :werewolf)
-      Factory(:jeff).join(@game)
-      Factory(:darcy).join(@game)
-      @game.start
+      @game = setup_game
     end
 
     it 'should enter the playable state' do
@@ -136,8 +135,14 @@ describe Game do
       @game.periods.first.phase.should == :night
     end
 
-    it 'should assign roles to players' do
-      @game.players.map { |a| a.type }.sort.should == ['Villager', 'Villager', 'Werewolf']
+    it 'should auto-assign roles to players' do
+      @game = Factory(:game)
+      Factory(:user).join(@game)
+      Factory(:user).join(@game)
+      Factory(:user).join(@game)
+      Factory(:user).join(@game)
+      @game.start
+      @game.players.map { |a| a.type }.sort.should == ['Villager', 'Villager', 'Villager', 'Werewolf']
     end
 
     it 'should be finished' do
@@ -148,11 +153,7 @@ describe Game do
 
   context 'in progress' do
     before(:each) do
-      @werewolf1 = Factory(:werewolf, :game => @game)
-      @werewolf2 = Factory(:werewolf, :game => @game, :user => Factory(:aaron))
-      @villager1 = Factory(:villager, :game => @game)
-      @villager2 = Factory(:villager, :game => @game, :user => Factory(:darcy))
-      @game.start
+      @game = setup_game
       @game.continue
     end
 
@@ -177,74 +178,74 @@ describe Game do
     end
 
     it 'should return all events occurring in the current period' do
-      first_event = Factory(:event, :period => @game.current_period, :source_player => @villager1)
+      first_event = Factory(:event, :period => @game.current_period, :source_player => villager(0))
       @game.continue
-      new_event = Factory(:event, :period => @game.current_period, :source_player => @villager1)
+      new_event = Factory(:event, :period => @game.current_period, :source_player => villager(0))
       @game.current_events.should include(new_event)
       @game.current_events.should_not include(first_event)
     end
 
     it 'should report villagers that are still in the game' do
+      @game.villagers.length.should == 3
+      villager(0).update_attribute(:dead, true)
       @game.villagers.length.should == 2
-      @villager1.update_attribute(:dead, true)
-      @game.villagers.length.should == 1
-    end
-
-    it 'should report werewolves that are still in the game' do
-      @game.werewolves.length.should == 2
-      @werewolf1.update_attribute(:dead, true)
-      @game.werewolves.length.should == 1
     end
   end
 
   context 'end of turn actions' do
     before(:each) do
-      @werewolf = Factory(:werewolf, :game => @game)
-      @villager1 = Factory(:villager, :game => @game)
-      @villager2 = Factory(:villager, :game => @game, :user => Factory(:darcy))
+      @game = setup_game
       @game.start
     end
 
     it 'should kill werewolf victims at sunrise' do
-      vote = Factory(:vote_event, :source_player => @werewolf, :target_player => @villager1, :period => @game.current_period)
+      vote = Factory(:vote_event, :source_player => werewolf, :target_player => villager(0), :period => @game.current_period)
       @game.continue
-      @villager1.reload.should be_dead
+      villager(0).reload.should be_dead
     end
 
     it 'should lynch chosen villagers at sunset' do
       @game.continue
-      vote = Factory(:vote_event, :source_player => @villager1, :target_player => @werewolf, :period => @game.current_period)
-      vote = Factory(:vote_event, :source_player => @villager2, :target_player => @werewolf, :period => @game.current_period)
+      vote = Factory(:vote_event, :source_player => villager(0), :target_player => werewolf, :period => @game.current_period)
+      vote = Factory(:vote_event, :source_player => villager(1), :target_player => werewolf, :period => @game.current_period)
       @game.continue
-      @werewolf.reload.should be_dead
+      werewolf.reload.should be_dead
     end
 
     it 'should end game if we have a winner' do
       @game.continue
-      vote = Factory(:vote_event, :source_player => @villager1, :target_player => @werewolf, :period => @game.current_period)
-      vote = Factory(:vote_event, :source_player => @villager2, :target_player => @werewolf, :period => @game.current_period)
+      vote = Factory(:vote_event, :source_player => villager(0), :target_player => werewolf, :period => @game.current_period)
+      vote = Factory(:vote_event, :source_player => villager(1), :target_player => werewolf, :period => @game.current_period)
       @game.continue
       @game.state?(:finished).should be_true
+    end
+
+    it 'should not register a kill unless there is a majority' do
+      @game.continue
+
+      lambda {
+        vote = Factory(:vote_event, :source_player => villager(0), :target_player => werewolf, :period => @game.current_period)
+        vote = Factory(:vote_event, :source_player => villager(1), :target_player => villager(0), :period => @game.current_period)
+        @game.continue
+      }.should_not change(KillEvent, :count)
     end
   end
 
   context 'winner' do
     before(:each) do
-      @werewolf  = Factory(:nick).join(@game, :werewolf)
-      @villager1 = Factory(:jeff).join(@game, :villager)
-      @villager2 = Factory(:darcy).join(@game, :villager)
+      @game = setup_game
       @game.start
     end
 
     it 'should be werewolf' do
-      @villager1.update_attribute(:dead, true)
-      @villager2.update_attribute(:dead, true)
-      @game.winner.should include(@werewolf)
+      villager(0).update_attribute(:dead, true)
+      villager(1).update_attribute(:dead, true)
+      @game.winner.should include(werewolf)
     end
 
     it 'should be villagers' do
-      @werewolf.update_attribute(:dead, true)
-      @game.winner.should include(@villager1)
+      werewolf.update_attribute(:dead, true)
+      @game.winner.should include(villager(0))
     end
 
     it 'should not be available yet' do
@@ -253,17 +254,15 @@ describe Game do
 
     it 'should summarize results' do
       @game.stubs(:finished?).returns(true)
-      @werewolf.update_attribute(:dead, true)
+      werewolf.update_attribute(:dead, true)
       @game.winner_type.should == 'Villagers'
     end
   end
 
   context 'period change' do
     before(:each) do
+      @game = setup_game(false)
       @game.update_attribute(:period_length, 1200)
-      @werewolf =  Factory(:werewolf, :game => @game)
-      @villager1 = Factory(:villager, :game => @game)
-      @villager2 = Factory(:darcy).join(@game)
     end
 
     it 'should indicate when next period starts' do

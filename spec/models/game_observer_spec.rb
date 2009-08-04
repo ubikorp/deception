@@ -4,7 +4,7 @@ describe GameObserver do
   include GameSpecHelper
 
   before(:each) do
-    setup_game(false) # setup but don't start
+    @game = setup_game(false) # setup but don't start
     @obs = GameObserver.instance
   end
 
@@ -21,7 +21,9 @@ describe GameObserver do
   it 'should broadcast a game over notice when the game ends' do
     lambda {
       @game.start
-      @game.finish
+      @game.continue
+      @event = Factory(:kill_event, :period => @game.current_period, :target_player => werewolf)
+      @game.continue # finish, wolf is dead!
       @obs.after_transition(@game, mock('Transition', :event => :finish))
     }.should change(OutgoingMessage, :count)
 
@@ -46,13 +48,13 @@ describe GameObserver do
 
     it 'should be sent to werewolf victims at sunrise' do
       lambda {
-        @wolf.user.vote(@p1.user)
+        werewolf.user.vote(villager(0).user)
         @game.continue # day -> night
         @obs.after_transition(@game, mock('Transition', :event => :continue))
       }.should change(OutgoingMessage, :count)
 
       msg = OutgoingMessage.last
-      msg.to_user.should == @p1.user
+      msg.to_user.should == villager(0).user
       msg.text.should match(/#{DeceptionGame::Messages::DEATH_VILLAGER_AM_MSG}/)
     end
 
@@ -60,13 +62,13 @@ describe GameObserver do
       @game.continue # night -> day
 
       lambda {
-        @p1.user.vote(@p2.user)
-        @wolf.user.vote(@p2.user)
+        villager(0).user.vote(villager(1).user)
+        werewolf.user.vote(villager(1).user)
         @game.continue # day -> night
         @obs.after_transition(@game, mock('Transition', :event => :continue))
       }.should change(OutgoingMessage, :count)
 
-      msg = OutgoingMessage.find(:first, :conditions => { :to_user_id => @p2.user_id })
+      msg = OutgoingMessage.find(:first, :conditions => { :to_user_id => villager(1).user_id })
       msg.text.should match(/#{DeceptionGame::Messages::DEATH_VILLAGER_PM_MSG}/)
     end
 
@@ -74,23 +76,23 @@ describe GameObserver do
       @game.continue # night -> day
 
       lambda {
-        @p1.user.vote(@wolf.user)
-        @p2.user.vote(@wolf.user)
+        villager(0).user.vote(werewolf.user)
+        villager(1).user.vote(werewolf.user)
         @game.continue # day -> night
         @obs.after_transition(@game, mock('Transition', :event => :finish))
         # NOTE: this will need updating if we support > 1 werewolf
       }.should change(OutgoingMessage, :count)
 
-      msg = OutgoingMessage.find(:first, :conditions => { :to_user_id => @wolf.user_id })
+      msg = OutgoingMessage.find(:first, :conditions => { :to_user_id => werewolf.user_id })
       msg.text.should match(/#{DeceptionGame::Messages::DEATH_WEREWOLF_PM_MSG}/)
     end
 
     it 'should not be sent to players with notifications turned off' do
-      @p1.user.update_attribute(:notify_death, false)
-      @wolf.user.vote(@p1.user)
+      villager(0).user.update_attribute(:notify_death, false)
+      werewolf.user.vote(villager(0).user)
       @game.continue
       @obs.after_transition(@game, mock('Transition', :event => :continue))
-      OutgoingMessage.find(:first, :conditions => { :to_user_id => @p1.user_id }).should be_nil
+      OutgoingMessage.find(:first, :conditions => { :to_user_id => villager(0).user_id }).should be_nil
     end
   end
 
@@ -125,13 +127,13 @@ describe GameObserver do
 
     it 'should include werewolf attack results' do
       lambda {
-        @wolf.user.vote(@p1.user)
+        werewolf.user.vote(villager(0).user)
         @game.continue # night -> day
         @obs.after_transition(@game, mock('Transition', :event => :continue))
       }.should change(OutgoingMessage, :count)
 
-      msg = OutgoingMessage.find(:first, :conditions => { :to_user_id => @p2.user }, :order => "created_at DESC")
-      msg.text.should match(/#{DeceptionGame::Messages.build(:period_summary_am, @p1.user.login)}/)
+      msg = OutgoingMessage.find(:first, :conditions => { :to_user_id => villager(1).user }, :order => "created_at DESC")
+      msg.text.should match(/#{DeceptionGame::Messages.build(:period_summary_am, villager(0).user.login)}/)
       msg.text.should match(/#{DeceptionGame::Messages::PERIOD_CHANGE_AM_MSG}/)
     end
 
@@ -139,32 +141,32 @@ describe GameObserver do
       @game.continue # night -> day
 
       lambda {
-        @p1.user.vote(@p2.user)
-        @wolf.user.vote(@p2.user)
+        villager(0).user.vote(villager(1).user)
+        werewolf.user.vote(villager(1).user)
         @game.continue # day -> night
         @obs.after_transition(@game, mock('Transition', :event => :continue))
       }.should change(OutgoingMessage, :count)
 
       msg = OutgoingMessage.first
-      msg.text.should match(/#{DeceptionGame::Messages.build(:period_summary_pm, @p2.user.login)}/)
+      msg.text.should match(/#{DeceptionGame::Messages.build(:period_summary_pm, villager(1).user.login)}/)
       msg.text.should match(/#{DeceptionGame::Messages.build(:villager_lynch)}/)
       msg.text.should match(/#{DeceptionGame::Messages::PERIOD_CHANGE_PM_MSG}/)
     end
 
     it 'should not be sent to dead players' do
-      @wolf.user.vote(@p1.user)
+      werewolf.user.vote(villager(0).user)
       @game.continue # night -> day
       @obs.after_transition(@game, mock('Transition', :event => :continue))
 
       # should get death notice but not period change notice
-      OutgoingMessage.find(:first, :conditions => { :to_user_id => @p1.user_id }).text.should_not match(/#{DeceptionGame::Messages::PERIOD_CHANGE_PM_MSG}/)
+      OutgoingMessage.find(:first, :conditions => { :to_user_id => villager(0).user_id }).text.should_not match(/#{DeceptionGame::Messages::PERIOD_CHANGE_PM_MSG}/)
     end
 
     it 'should not be sent to players with notifications turned off' do
-      @p1.user.update_attribute(:notify_period_change, false)
+      villager(0).user.update_attribute(:notify_period_change, false)
       @game.continue # night -> day
       @obs.after_transition(@game, mock('Transition', :event => :continue))
-      OutgoingMessage.find(:first, :conditions => { :to_user_id => @p1.user_id }).should be_nil
+      OutgoingMessage.find(:first, :conditions => { :to_user_id => villager(0).user_id }).should be_nil
     end
   end
 end

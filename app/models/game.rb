@@ -163,24 +163,24 @@ class Game < ActiveRecord::Base
   end
 
   def winner
-    # TODO: adjust this to be more intelligent; werewolves win if there's only 1 villager left, too (can stalemate voting)
-    villagers = players.villagers.alive.length > 0
-    werewolves = players.werewolves.alive.length > 0
-    if villagers && werewolves
+    # TODO: adjust this for games with > 2 werewolves
+    bwerewolves = werewolves.length > 0
+    bvillagers = villagers.length > werewolves.length
+    if bvillagers && bwerewolves
       false
-    elsif villagers
+    elsif bvillagers
       logger.info "Ending Game [#{id}] : Won by Villagers"
-      players.villagers.alive
-    elsif werewolves
+      villagers
+    elsif bwerewolves
       logger.info "Ending Game [#{id}] : Won by Werewolves"
-      players.werewolves.alive
+      werewolves
     else
       false
     end
   end
 
   def winner_type
-    if finished?
+    if finished? && winner
       winner.first.type.pluralize
     else
       nil
@@ -208,8 +208,15 @@ class Game < ActiveRecord::Base
   # this needs to respect that.
   def assign_roles
     # TODO: make this less 'dumb'; see multi-werewolf game statistics
+    wolf_candidates = []
     players_without_roles = players.select { |p| p.type.nil? }
-    wolf_candidates = (werewolves.length > 0) ? [] : [rand(players_without_roles.length)]
+    # wolf_candidates = (werewolves.length > 0) ? [] : [rand(players_without_roles.length)]
+    number_to_assign = [ideal_number_of_werewolves - werewolves.length, players_without_roles.length].min
+
+    until wolf_candidates.length == number_to_assign do
+      candidate = rand(players_without_roles.length)
+      wolf_candidates << candidate unless wolf_candidates.include?(candidate)
+    end
 
     players_without_roles.each_with_index do |player, i|
       role = wolf_candidates.include?(i) ? :werewolf : :villager
@@ -220,14 +227,15 @@ class Game < ActiveRecord::Base
   # tally villager or werewolf votes and remove the victim(s) from play
   # called as a before-transition filter
   def end_turn
-    # TODO: can probably simplify this since logic for villager voting was moved to vote event
-    victims = if night?
-      # TODO: support more than one werewolf
-      current_events.votes.select { |e| e.source_player.werewolf? }.map { |e| e.target_player }
+    # TODO: simplify this... kinda brittle
+    if night?
+      candidates = current_events.votes.select { |e| e.source_player.werewolf? }.map { |e| e.target_player }
+      victims = werewolves.length > 1 ? candidates.modes : candidates
     else # day
-      current_events.votes.map { |e| e.target_player }.modes || []
+      victims = current_events.votes.map { |e| e.target_player }.modes || []
     end
 
+    victims ||= []
     logger.info "End of turn for Game [#{id}] : Victims = #{victims.map { |v| v.user.login }.join(', ')}"
     victims.each { |victim| KillEvent.create(:period => current_period, :target_player => victim) }
   end
@@ -256,5 +264,14 @@ class Game < ActiveRecord::Base
 
   def add_owner_as_player
     self.owner.join(self)
+  end
+
+  # determines the number of werewolves that should be playing in a game
+  def ideal_number_of_werewolves
+    if self.players.length < 9
+      1
+    elsif self.players.length < APP_CONFIG[:max_players]
+      2
+    end
   end
 end

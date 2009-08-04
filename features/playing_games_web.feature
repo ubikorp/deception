@@ -55,7 +55,7 @@ And receive game progress messages
 
   Scenario: User should view history of ongoing game
     Given there is a game called "The Incident at Mariahville"
-    And "aaronstack" is a "player" in the game
+    And "aaronstack" is a "villager" in the game
     And the game is in its "1st" period
     And a werewolf killed "aaronstack" in the game
     When I go to the game page for "The Incident at Mariahville"
