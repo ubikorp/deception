@@ -7,7 +7,7 @@ development:
   invite_only: false
 
 test:
-  min_players: 2
+  min_players: 3
   max_players: 21
   min_period_length: 120
   max_period_length: 43200
@@ -15,7 +15,7 @@ test:
   invite_only: false
 
 production:
-  min_players: 7
+  min_players: 9
   max_players: 21
   min_period_length: 600
   max_period_length: 43200
