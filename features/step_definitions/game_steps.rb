@@ -8,7 +8,7 @@ Given /^there is an ongoing game called "([^\"]*)"$/ do |arg1|
   Factory(:jeffrafter).join(@game, :werewolf)
   Factory(:sutto).join(@game)
   Factory(:ebloodstone).join(@game)
-  @game.start
+  @game.reload.start
 end
 
 Given /^there is a finished game called "([^\"]*)"$/ do |arg1|
@@ -20,7 +20,7 @@ Given /^there is a finished game called "([^\"]*)"$/ do |arg1|
   @jeffrafter.join(@game, :werewolf)
   @zapnap.join(@game)
   @sutto.join(@game)
-  @game.start
+  @game.reload.start
 
   @jeffrafter.vote(@zapnap)
   @game.continue
@@ -64,9 +64,14 @@ Given /^"([^\"]*)" is a "([^\"]*)" in the game$/ do |arg1, arg2|
   user.join(@game, role)
 end
 
+Given /^the game needs one more player to auto-start$/ do
+  (@game.max_players - 1).times { |i| Factory(:user).join(@game) }
+  @game.reload
+end
+
 Given /^the game is startable$/ do
   # make sure minimum number of players is met
-  (APP_CONFIG[:min_players] + 1).times { |i| Factory(:user).join(@game) }
+  (@game.min_players + 1).times { |i| Factory(:user).join(@game) }
 end
 
 Given /^the game is not startable$/ do
@@ -74,7 +79,7 @@ end
 
 Given /^the game has started$/ do
   Given "the game is startable"
-  @game.start
+  @game.reload.start
 end
 
 Given /^the game is in its "([^\"]*)" period$/ do |arg1|
@@ -84,7 +89,7 @@ end
 
 Given /^a werewolf killed "([^\"]*)" in the game$/ do |arg1|
   user = User.find_by_login(arg1)
-  werewolf = @game.players.werewolves[0]
+  werewolf = @game.werewolves[0]
   werewolf.user.vote(user)
   @game.continue
 end
@@ -94,7 +99,7 @@ Given /^I have voted to kill "([^\"]*)"$/ do |arg1|
 end
 
 When /^the game starts$/ do
-  @game.start
+  @game.reload.start
 end
 
 When /^the game is aborted$/ do

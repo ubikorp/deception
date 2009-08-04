@@ -64,6 +64,14 @@ I want to be able to join an existing game
     Then I should not see "Join Game"
     And I should see "You're scheduled to play in this game"
 
+  Scenario: Game auto-starts when final player joins
+    Given I am signed in
+    And there is a pending game called "The Incident at Mariahville"
+    And the game needs one more player to auto-start
+    When I go to the game page for "The Incident at Mariahville"
+    And I press "Join Game"
+    Then the game is waiting to start
+
   Scenario: User should be reminded to follow the gamebot when they join a game
     Given I am signed in
     And there is a pending game called "The Incident at Mariahville"

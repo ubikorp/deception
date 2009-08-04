@@ -67,6 +67,7 @@ class GameObserver < ActiveRecord::Observer
     kills.each { |kill| send_death_notice(kill) }
   end
 
+  # TODO: move this to an observer on KillEvent instead?
   def send_death_notice(event)
     player = event.target_player
     if player.user.notify_death?
