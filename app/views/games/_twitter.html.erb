@@ -1,0 +1,25 @@
+<div id="twtr-search-widget"></div>
+<script src="http://widgets.twimg.com/j/1/widget.js"></script>
+<link href="http://widgets.twimg.com/j/1/widget.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+new TWTR.Widget({
+  search: '<%= "werewolf OR werewolves #{game.players.map { |p| p.user.login }.join(' OR ')}" %>',
+  id: 'twtr-search-widget',
+  loop: true,
+  title: "What\'s being said about...",
+  subject: 'Werewolves in the village of <%= game.name %>',
+  width: 218,
+  height: 200,
+  theme: {
+    shell: {
+      background: '#222222',
+      color: '#ffffff'
+    },
+    tweets: {
+      background: '#ffffff',
+      color: '#000000',
+      links: '#700000'
+    }
+  }
+}).render().start();
+</script>

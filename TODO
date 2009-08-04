@@ -1,7 +1,4 @@
-- display / gather twitter chatter from in-game users (use twitter live search widget?)
 - user profile with player notification settings
-
-- auto-start feature (once max players satisfied?)
 - check time sync issues (needs to be pdq for auto-refresh)
 
 - before deploy:

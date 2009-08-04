@@ -16,4 +16,4 @@
 #sidebar
   = render(:partial => 'stats', :locals => { :game => @game })
   = render(:partial => 'management', :locals => { :game => @game })
-  //= render(:partial => 'twitter', :locals => { :game => @game }) if @game.playable?
+  = render(:partial => 'twitter', :locals => { :game => @game }) if @game.playable?
