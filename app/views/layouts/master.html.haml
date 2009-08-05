@@ -20,7 +20,7 @@
 
       %ul#status
         - if logged_in?
-          %li= link_to(profile_image(current_user, :width => 24, :height => 24, :title => "Logged in as @#{current_user.login}", :class => 'profile'), '/')
+          %li= link_to(profile_image(current_user, :width => 24, :height => 24, :title => "Logged in as @#{current_user.login}", :class => 'profile'), account_path)
           %li.hidden= "Logged in as @#{current_user.login}"
           %li= link_to('Log out', '/logout', :title => 'Log out', :class => 'image logout')
         - else

@@ -1,0 +1,28 @@
+%p By default we'll notify you using Twitter direct messages whenever something important happens in your game. You can change those settings here.
+
+= error_messages_for(:user)
+
+- form_for(@user, :method => :put) do |f|
+  %h3 Notify Me When...
+
+  %p
+    = f.check_box(:notify_start)
+    = f.label(:notify_start, 'My Game Starts')
+
+  %p
+    = f.check_box(:notify_finish)
+    = f.label(:notify_finish, 'My Game Ends Or Is Aborted')
+
+  %p
+    = f.check_box(:notify_period_change)
+    = f.label(:notify_period_change, 'A New Period Begins')
+
+  %p
+    = f.check_box(:notify_death)
+    = f.label(:notify_death, 'My Player Is Killed')
+
+  %p
+    = f.check_box(:notify_reply)
+    = f.label(:notify_reply, 'Acknowledge My Game Actions')
+
+  %p= f.submit('Update Account Settings', :class => 'btn')

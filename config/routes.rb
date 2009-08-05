@@ -8,8 +8,9 @@ ActionController::Routing::Routes.draw do |map|
     game.resources :invitations, :only => [:new, :create]
   end
 
-  map.resources :users, :only => [:new], :member => { :follow => :post, :followers => :get }
+  map.resources :users, :member => { :follow => :post, :followers => :get }
   map.my_followers '/users/me/followers/:page', :controller => 'users', :action => 'followers', :id => 0
+  map.account '/settings', :controller => 'users', :action => 'show'
 
   map.rules '/rules', :controller => 'static', :action => 'help'
   map.static '/:action', :controller => 'static'

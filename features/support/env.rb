@@ -33,3 +33,15 @@ FakeWeb.register_uri(:get, 'http://twitter.com/statuses/followers.json?page=1', 
 # FakeWeb.register_uri(:get, 'http://twitter.com/friendships/show.json', :response => File.join(RAILS_ROOT, 'features', 'fixtures', 'friendship.json'))
 FakeWeb.register_uri(:post, 'http://twitter.com/friendships/create/t3stx.json?follow=true', :body => '', :response => File.join(RAILS_ROOT, 'features', 'fixtures', 'create_friendship.json'))
 FakeWeb.register_uri(:post, 'http://twitter.com/direct_messages/new.json', :body => '')
+
+module Webrat
+  module Locators  
+    class Locator # :nodoc:
+      def locate!
+        locate || raise(NotFoundError.new(error_message))        
+      rescue Webrat::NotFoundError => e
+        raise "#{e.message}\n#{@session.send(:response_body).gsub(/\n/, "\n  ")}"  
+      end
+    end
+  end
+end

@@ -1,4 +1,3 @@
-- user profile with player notification settings
 - check time sync issues (needs to be pdq for auto-refresh)
 
 - before deploy:
@@ -7,9 +6,10 @@
   - add cropped illustrations to appropriate pages for production
 
 - later:
-  - add multi-werewolf (3+ werewolf) games
+  - twitter activity feed for #werewolf (or whatever) on main page?
   - should only listen to lynch votes that are @-replied? (encourage publicity?)
   - rss feed for activity (after web interface)
   - add seer player class
+  - add multi-werewolf (3+ werewolf) games
   - smarter @-replies: include actual validation errors?
   - home page should auto-redirect to current player game if player is active?

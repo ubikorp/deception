@@ -1,11 +1,31 @@
 class UsersController < ApplicationController
-  before_filter :login_required, :only => [:follow, :followers]
+  before_filter :login_required, :except => [:new]
 
   default_illustration :villager
 
   # new users are created through signin with Twitter
   def new
     redirect_to(login_path)
+  end
+
+  # show user profile (always the current user for now)
+  # TODO: publicly visible user profiles?
+  def show
+    @user = current_user
+    @title = "Account and Notification Settings"
+  end
+
+  # update user profile and notification preferences
+  def update
+    @user = current_user
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Updated your account settings!"
+      redirect_to(account_path)
+    else
+      @title = "Account and Notification Settings"
+      flash[:error] = "Error updating your account settings."
+      render(:action => 'show')
+    end
   end
 
   # a user can have us auto-add a gamebot follow for them

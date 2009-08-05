@@ -31,6 +31,9 @@ module NavigationHelpers
 
     when /my followers page/
       followers_user_path('me')
+
+    when /settings page/
+      account_path
     
     # Add more mappings here.
     # Here is a more fancy example:
