@@ -3,21 +3,21 @@
 #main
   %h3 Player Roles
 
-  %p Sign in with your <a href='http://twitter.com' target='_blank'>Twitter</a> account, <a href='/games/pending'>join</a> or <a href='/games/new'>create</a> a village, and invite your friends. When enough people have joined, the game will begin and you'll be assigned a role. You will either be a werewolf or a villager (more roles are planned for later). Our games usually contain two werewolves, with everyone else being a villager.
+  %p Sign in with your <a href='http://twitter.com' target='_blank'>Twitter</a> account, <a href='/games/pending'>join</a> or <a href='/games/new'>create</a> a village, and invite your friends. When enough people have joined, the game will begin and you'll be assigned a role. You will either be a Werewolf or a Villager (more roles are planned for later). Our games usually include two Werewolves, with everyone else being a Villager.
 
   %h3 Game Phases
 
-  %p The game begins in the <strong>night phase</strong>, when all the villagers are sleeping. Meanwhile, the nasty werewolves transform and agree on a villager to feast upon (use direct messages to each other, werewolves!). When the night phase ends, we'll tell you who was killed. That player is removed from the game.
+  %p The game begins in the <strong>night phase</strong>, when all the Villagers are sleeping. Meanwhile, the nasty Werewolves transform and agree on a Villager to feast upon (use direct messages to coordinate your votes, Werewolves!). When the night phase ends, we'll tell you who was killed. That player is removed from the game.
 
-  %p During the <strong>day phase</strong>, everyone gets to choose one player to lynch. You must get a majority to agree on a victim, who they suspect of being a werewolf. Once they're in agreement, that player is removed from the game. If the villagers guessed incorrectly, the night phase begins anew and the werewolves can once again remove a villager from play. It continues on like this indefinitely, until either the werewolves have killed all of the villagers, or the villagers discover the werewolves identities and destroy them all.
+  %p During the <strong>day phase</strong>, everyone gets to choose one player to lynch. You must get a majority to agree on a victim, who they suspect of being a Werewolf. Once they're in agreement, that player is removed from the game. If the Villagers guessed incorrectly (fools!), the night phase begins anew and the Werewolves can once again remove a Villager from play. It continues on like this indefinitely, until either the Werewolves have killed all of the Villagers, or the Villagers discover the identities of the Werewolves and destroy them all. The players who are left alive at the end are the winners.
 
-  %p Each period lasts a set amount of time, as configured by the games creator at setup time. If you don't vote within this time window, your player simply abstains from voting.
+  %p Each period lasts a set amount of time, as configured by the game owner at setup time. If you don't vote within this time window, your player simply abstains from voting.
 
   %h3 Strategy
 
-  %p What makes <strong>Werewolf</strong> interesting is the deception and social engineering that happens. This is also what makes the game so well-suited to play over a digital messaging platform like Twitter. The villagers are trying to figure out who the werewolves are, and the werewolves are pretending to be villagers, and trying to throw suspicion on real villagers. The only information that the villagers have is what their neighbors are saying -- and who dies. Pay special attention to the patterns of accusations and murder and discuss strategy with your fellow players on Twitter.
+  %p What makes <strong>Werewolf</strong> interesting is the deception and social engineering that happens. This is also what makes the game so well-suited to playing over Twitter. The Villagers are trying to figure out who the Werewolves are, and the Werewolves are pretending to be Villagers, and trying to throw suspicion on real Villagers. The only information that the Villagers have is what their neighbors are saying -- and who dies. Pay special attention to the patterns of accusations and murder and discuss strategy with your fellow players on Twitter.
 
-  %p What kind of strategies work well in <strong>Werewolf</strong>? Well... accusing someone else of being a werewolf is awfully suspicious. But then again, so is not accusing anyone ever. And agreeing with someone else about someone who might be a werewolf is particularly suspicious, right? Eek. Good luck.
+  %p What kind of strategies work well in <strong>Werewolf</strong>? Well... accusing someone else of being a Werewolf is awfully suspicious. But then again, so is not accusing anyone ever. And agreeing with someone else about someone who might be a Werewolf is particularly suspicious, right? Eek. Good luck.
 
   %h3 Resources
 
@@ -29,10 +29,10 @@
   %h3 Twitter Commands
   %p You can play <strong>Werewolf</strong> entirely via Twitter, without ever visiting the web interface, or you can do all your voting right on this website. To play via Twitter, the only command you really need to know is the <em><strong>vote</strong></em> (or <em><strong>kill</strong></em>) command.
   
-  %p For example, to vote for killing a player, either as a werewolf or a villager, simply send a message to the gamebot like 
+  %p= "For example, to vote for killing a player, either as a Werewolf or a Villager, simply send a message to the gamebot user (#{link_to_gamebot})"
   
-  %p <em>@gamebot I'd like to kill @zapnap</em>
+  %p= "<em>#{link_to_gamebot} I'd like to kill @zapnap</em>"
   
   %p You can get creative with this if you want, but as long as the victims name is in the message and the word "kill" or "vote" is also present, it should do the trick.
 
-  %p The gamebot will respond to you to let you know that your vote was recorded. If you're a werewolf, make sure you are sending direct messages instead of @-replies. You wouldn't want to give away your secret, after all!
+  %p= "#{link_to_gamebot} will respond to you to let you know that your vote was recorded. If you're a Werewolf, make sure you are sending <strong>direct messages</strong> instead of @-replies. You wouldn't want to give away your secret, after all!"

@@ -28,5 +28,5 @@ production:
   base_url: "http://twitter.com"
   api_timeout: 10
   remember_for: 14 # days
-  gamebot_user: 't3stx'
-  gamebot_password: 't3stxpassword'
+  gamebot_user: 'werewolfgame'
+  gamebot_password: '----------''
