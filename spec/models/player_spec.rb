@@ -36,6 +36,14 @@ describe Player do
     player.errors.on(:game_id).should include("is already in progress")
   end
 
+  it 'should not allow players to join a game that is full' do
+    @game = setup_game(false)
+    @game.expects(:full?).returns(true)
+    player = Factory.build(:player, :game => @game)
+    player.should_not be_valid
+    player.errors.on(:game_id).should include("is full")
+  end
+
   it 'should be a werewolf' do
     werewolf.should be_werewolf
     werewolf.should_not be_villager

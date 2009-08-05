@@ -96,12 +96,13 @@ class Game < ActiveRecord::Base
     end
 
     # game auto-start
-    Game.with_state(:setup).each do |game|
-      if game.players.length >= game.max_players
-        logger.info "Auto-Starting Game [#{game.id}]"
-        game.start
-      end
-    end
+    # NOTE: moved to observer on player model
+    # Game.with_state(:setup).each do |game|
+    #   if game.players.length >= game.max_players
+    #     logger.info "Auto-Starting Game [#{game.id}]"
+    #     game.start
+    #   end
+    # end
   end
 
   [:invite_only, :min_players, :max_players, :period_length].each do |setter|
@@ -128,6 +129,10 @@ class Game < ActiveRecord::Base
 
   def to_param
     short_code
+  end
+
+  def full?
+    players(true).length >= max_players
   end
 
   def current_period
@@ -191,7 +196,7 @@ class Game < ActiveRecord::Base
   def startable?
     return false unless setup? || ready?
 
-    if players.length < APP_CONFIG[:min_players]
+    if players(true).length < APP_CONFIG[:min_players]
       errors.add_to_base("This game must have at least #{APP_CONFIG[:min_players]} players")
       false
     else

@@ -82,7 +82,7 @@ describe User do
 
     it 'should be added to the list of players' do
       @user.join(@game)
-      @game.players.should include(@user.players.first)
+      @game.players(true).should include(@user.players.first)
     end
 
     it 'should join a game as a werewolf' do

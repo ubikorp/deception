@@ -78,8 +78,12 @@ class User < TwitterAuth::GenericUser
   # would like the user to have in the game.
   def join(game, role = nil)
     if !active_player && has_invite?(game)
-      player = players.create(:game => game)
-      role.nil? ? player : player.assign_role(role)
+      player = players.build(:game => game)
+      if player.save
+        role.nil? ? player : player.assign_role(role)
+      else
+        false
+      end
     else
       # TODO: may want to raise here?
       false

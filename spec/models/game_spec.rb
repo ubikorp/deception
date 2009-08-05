@@ -62,6 +62,11 @@ describe Game do
     @game.to_param.should == 'abcde123'
   end
 
+  it 'should not have any player spots remaining' do
+    @game.max_players.times { |i| Factory(:user).join(@game) }
+    @game.should be_full
+  end
+
   context 'options' do
     before(:each) do
       Factory(:nick).join(@game, :werewolf)
