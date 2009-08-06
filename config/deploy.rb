@@ -35,8 +35,8 @@ namespace :deploy do
   end
 
   task :after_update_code, :roles => :app do
-    run "cp #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    run "cp #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
+    run "ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -s #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
     run "ln -s #{shared_path}/system #{release_path}/public/system"
   end
 
