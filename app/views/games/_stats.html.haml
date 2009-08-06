@@ -36,7 +36,7 @@
         .circle
           %span !!!
       %td.text
-        %strong#countdown
+        %strong#countdown= distance_of_time_from_now(@game.current_period.time_remaining)
         %span Until Next Period Begins
 
     - if playing_in_game(game)
@@ -44,6 +44,6 @@
         %td.number
           .circle
             %span= current_user.active_player.type.slice(0, 1)
-        %td.text= "#Your Role: #{current_user.active_player.type}"
+        %td.text= "Your Role: #{current_user.active_player.type}"
 
 = yield :sidebar
