@@ -1046,7 +1046,7 @@ textarea {
 /* line 22, ../../../app/stylesheets/screen.sass */
 body {
   font-family: Helvetica, Arial, sans-serif;
-  background: #402f21;
+  background-image: url('/images/bgtile.png');
   color: #222222; }
   /* line 22, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_typography.sass */
   body body {
