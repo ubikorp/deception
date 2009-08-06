@@ -71,7 +71,7 @@ class GamesController < ApplicationController
           @illustration = Illustration.find_by_title(@game.winner[0].type.downcase)
           render(:action => 'show')
         elsif @game.playable?
-          @illustration = Illustration.find_by_title(@game.day? ? 'werewolf' : 'villager')
+          @illustration = Illustration.find_by_title(@game.night? ? 'werewolf' : 'villager')
           render(:action => 'working') if @game.current_period.time_remaining < 1
         else
           render(:action => 'show')
