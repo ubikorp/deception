@@ -98,6 +98,10 @@ Given /^I have voted to kill "([^\"]*)"$/ do |arg1|
   @user.vote(User.find_by_login(arg1))
 end
 
+Given /^there is no time left in the current period$/ do
+  Period.any_instance.stubs(:time_remaining).returns(0)
+end
+
 When /^the game starts$/ do
   @game.reload.start
 end

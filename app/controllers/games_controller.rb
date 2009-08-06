@@ -62,10 +62,32 @@ class GamesController < ApplicationController
     end
 
     @title = "The Incident at #{@game.name}"
-    if @game.finished?
-      @illustration = Illustration.find_by_title(@game.winner[0].type.downcase)
-    elsif @game.playable?
-      @illustration = Illustration.find_by_title(@game.day? ? 'werewolf' : 'villager')
+
+    respond_to do |format|
+      format.html do
+        if @game.ready?
+          render(:action => 'working')
+        elsif @game.finished?
+          @illustration = Illustration.find_by_title(@game.winner[0].type.downcase)
+          render(:action => 'show')
+        elsif @game.playable?
+          @illustration = Illustration.find_by_title(@game.day? ? 'werewolf' : 'villager')
+          render(:action => 'working') if @game.current_period.time_remaining < 1
+        else
+          render(:action => 'show')
+        end
+      end
+
+      # TODO: clean this up, a little hacky the way we're using response codes
+      format.js do
+        if @game.ready? # not ready; retry later
+          render(:nothing => true, :status => 408)
+        elsif @game.playable? && @game.current_period.time_remaining <= 0
+          render(:nothing => true, :status => 408)
+        else # reset content
+          render(:nothing => true, :status => 205)
+        end
+      end
     end
   end
 

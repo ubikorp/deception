@@ -1,0 +1,12 @@
+- content_for(:extra_head) do
+  = javascript_include_tag('progress')
+
+.centerbox
+  %h2.title &mdash; Please Wait &mdash;
+  .progress
+    .dot
+    .dot
+    .dot
+    .dot
+    .dot
+  .note= "This page will #{link_to('refresh', game_path(@game))} once your game is ready"

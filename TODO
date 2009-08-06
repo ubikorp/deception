@@ -1,9 +1,11 @@
-- check time sync issues (needs to be pdq for auto-refresh)
+- test time sync workaround in production
+- background texture?
 
 - before deploy:
-  - choose name for game, website, twitter user
+  - choose name for game, website, twitter user (@werewolfgame)
   - revise page copy for directions / instructions with links
   - add cropped illustrations to appropriate pages for production
+  - custom 404 and 500 pages
 
 - later:
   - twitter activity feed for #werewolf (or whatever) on main page?

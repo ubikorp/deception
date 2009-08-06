@@ -74,3 +74,10 @@ And receive game progress messages
     Then I should see "NIGHT PHASE"
     And I should see "Aye, he looks like a tasty one"
     And the vote for "aaronstack" has been recorded
+
+  Scenario: User sees working screen while game period turnover happens
+    Given there is a game called "The Incident at Mariahville"
+    And the game is in its "2nd" period
+    And there is no time left in the current period
+    When I go to the game page for "The Incident at Mariahville"
+    Then I should see "Please Wait"

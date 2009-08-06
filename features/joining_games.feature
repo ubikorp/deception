@@ -70,6 +70,7 @@ I want to be able to join an existing game
     And the game needs one more player to auto-start
     When I go to the game page for "The Incident at Mariahville"
     And I press "Join Game"
+    Then I should see "Please Wait"
     Then the game is waiting to start
 
   Scenario: User should be reminded to follow the gamebot when they join a game
