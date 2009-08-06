@@ -15,7 +15,7 @@
 
   %p
     = f.label(:period_length, 'Period Length')
-    = f.select(:period_length, [['10 minutes', 600], ['30 minutes', 1800], ['1 hour', 3600]])
+    = f.select(:period_length, [['10 minutes', 600], ['30 minutes', 1800], ['1 hour', 3600], ['2 hours', 7200], ['4 hours', 14400], ['8 hours', 28800], ['12 hours', 43200]])
 
   %p
     = f.label(:min_players, 'Minimum Players')
@@ -23,6 +23,6 @@
 
   %p
     = f.label(:max_players, 'Maximum Players')
-    = f.select(:max_players, (9..20).to_a)
+    = f.select(:max_players, (APP_CONFIG[:min_players].to_i..APP_CONFIG[:max_players].to_i).to_a)
 
   %p= f.submit('Create Game', :class => 'btn')
