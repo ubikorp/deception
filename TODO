@@ -1,10 +1,9 @@
 - test time sync workaround in production
-- background texture?
 
 - before deploy:
-  - choose name for game, website, twitter user (@werewolfgame)
   - revise page copy for directions / instructions with links
   - add cropped illustrations to appropriate pages for production
+  - proper evented twitter daemon for receiving messages
   - custom 404 and 500 pages
 
 - later:
