@@ -9,6 +9,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 require 'observer_ext'
 require 'game_exception'
 require 'game_messages'
+require 'controller_extensions'
 require 'whenever'
 
 Rails::Initializer.run do |config|
