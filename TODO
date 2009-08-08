@@ -1,8 +1,7 @@
+- REQUIRE direct message for werewolf kills (don't listen to @-replies at night)
 - test time sync workaround in production
 
 - before deploy:
-  - revise page copy for directions / instructions with links
-  - add cropped illustrations to appropriate pages for production
   - proper evented twitter daemon for receiving messages
   - custom 404 and 500 pages
 
