@@ -12,4 +12,3 @@
   - add seer player class
   - add multi-werewolf (3+ werewolf) games
   - smarter @-replies: include actual validation errors?
-  - home page should auto-redirect to current player game if player is active?

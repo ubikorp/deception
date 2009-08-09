@@ -14,3 +14,10 @@ And change my notification settings
     And I press "Update Account Settings"
     Then I should see "Updated"
     And I should not be sent "reply" notifications
+
+  Scenario: User should see their current game on main page
+    Given I am signed in
+    And there is a game called "The Incident at Mariahville"
+    And I am a "player" in the game
+    When I go to "the homepage"
+    Then I should see "The Incident at Mariahville"
