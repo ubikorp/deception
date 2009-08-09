@@ -14,6 +14,7 @@ IncomingMessage.delete_observers
 Invitation.delete_observers
 Game.delete_observers
 Player.delete_observers
+User.delete_observers
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
