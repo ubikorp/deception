@@ -3,6 +3,7 @@
   %p Villagers sleep restlessly while werewolves prowl the nearby woods. Will everyone make it through the night?
   - if playing_in_game(game) && game.playable? && current_user.active_player.werewolf?
     %p.strong You've transformed and you hunger. Who will you feast upon this evening? Make your choice from the list of active players.
+    %p.strong= "Remember, you and your fellow werewolves (#{link_to_twitter(current_user.active_player.peer.user)}) must agree on a target. Discuss it with them using direct messages!" unless current_user.active_player.nil? || current_user.active_player.peer.nil?
 
 - else # day
   %h3.game-state A Day For Difficult Decisions

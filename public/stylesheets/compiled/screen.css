@@ -1435,11 +1435,11 @@ body {
       body #content #main .game-state {
         font-weight: bold;
         text-decoration: underline; }
-    /* line 187, ../../../app/stylesheets/screen.sass */
-    body #content .alert .strong {
+    /* line 186, ../../../app/stylesheets/screen.sass */
+    body #content .strong {
       font-weight: bold;
-      font-size: 1.1em; }
-    /* line 193, ../../../app/stylesheets/screen.sass */
+      font-weight-font-size: 1.1em; }
+    /* line 192, ../../../app/stylesheets/screen.sass */
     body #content #sidebar {
       display: inline;
       float: left;
@@ -1449,20 +1449,20 @@ body {
       /* line 97, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/blueprint/stylesheets/blueprint/modules/_grid.sass */
       * html body #content #sidebar {
         overflow-x: hidden; }
-      /* line 197, ../../../app/stylesheets/screen.sass */
+      /* line 196, ../../../app/stylesheets/screen.sass */
       body #content #sidebar table.stats {
         font-weight: bold;
         margin-bottom: 0; }
-        /* line 201, ../../../app/stylesheets/screen.sass */
+        /* line 200, ../../../app/stylesheets/screen.sass */
         body #content #sidebar table.stats .number {
           height: 65px; }
-          /* line 204, ../../../app/stylesheets/screen.sass */
+          /* line 203, ../../../app/stylesheets/screen.sass */
           body #content #sidebar table.stats .number .circle {
             background-image: url('/images/circle.png');
             background-repeat: no-repeat;
             width: 40px;
             height: 40px; }
-            /* line 210, ../../../app/stylesheets/screen.sass */
+            /* line 209, ../../../app/stylesheets/screen.sass */
             body #content #sidebar table.stats .number .circle a, body #content #sidebar table.stats .number .circle span {
               color: inherit;
               text-decoration: inherit;
@@ -1472,17 +1472,17 @@ body {
               font-size: 1.6em;
               text-align: center;
               display: block; }
-          /* line 218, ../../../app/stylesheets/screen.sass */
+          /* line 217, ../../../app/stylesheets/screen.sass */
           body #content #sidebar table.stats .number .circle:hover {
             background-position: 0 -40px; }
-            /* line 221, ../../../app/stylesheets/screen.sass */
+            /* line 220, ../../../app/stylesheets/screen.sass */
             body #content #sidebar table.stats .number .circle:hover a, body #content #sidebar table.stats .number .circle:hover span {
               color: white; }
-        /* line 224, ../../../app/stylesheets/screen.sass */
+        /* line 223, ../../../app/stylesheets/screen.sass */
         body #content #sidebar table.stats .text {
           font-size: 1.2em;
           vertical-align: middle; }
-  /* line 231, ../../../app/stylesheets/screen.sass */
+  /* line 230, ../../../app/stylesheets/screen.sass */
   body div.flash {
     padding: 5px;
     -moz-border-radius: 0.5em;
@@ -1490,17 +1490,17 @@ body {
     border-radius: 0.5em;
     border: 2px solid #ccc;
     margin: 10px 0; }
-  /* line 239, ../../../app/stylesheets/screen.sass */
+  /* line 238, ../../../app/stylesheets/screen.sass */
   body div.error {
     background: #fcc;
     border-color: #911;
     color: #311; }
-  /* line 244, ../../../app/stylesheets/screen.sass */
+  /* line 243, ../../../app/stylesheets/screen.sass */
   body div.notice {
     background: #cfc;
     border-color: #191;
     color: #131; }
-  /* line 249, ../../../app/stylesheets/screen.sass */
+  /* line 248, ../../../app/stylesheets/screen.sass */
   body div.status {
     padding: 5px;
     -moz-border-radius: 5px;
@@ -1510,25 +1510,25 @@ body {
     background: #cfc;
     border-color: #191;
     color: #131; }
-    /* line 259, ../../../app/stylesheets/screen.sass */
+    /* line 258, ../../../app/stylesheets/screen.sass */
     body div.status p {
       line-height: 100%;
       margin: 10px 0; }
-  /* line 264, ../../../app/stylesheets/screen.sass */
+  /* line 263, ../../../app/stylesheets/screen.sass */
   body .errorExplanation {
     border-top: 2px solid #700000;
     border-bottom: 2px solid #700000;
     padding: 5px 10px 0 10px;
     background: #fcc;
     color: #311; }
-    /* line 271, ../../../app/stylesheets/screen.sass */
+    /* line 270, ../../../app/stylesheets/screen.sass */
     body .errorExplanation h2 {
       font-weight: bold;
       font-size: 1.3em; }
-    /* line 275, ../../../app/stylesheets/screen.sass */
+    /* line 274, ../../../app/stylesheets/screen.sass */
     body .errorExplanation p {
       line-height: 1em; }
-  /* line 280, ../../../app/stylesheets/screen.sass */
+  /* line 279, ../../../app/stylesheets/screen.sass */
   body #games ul {
     margin: 5px 0 0 0;
     padding: 0; }
@@ -1536,34 +1536,34 @@ body {
     body #games ul li {
       list-style-type: none;
       margin-left: 0px; }
-    /* line 285, ../../../app/stylesheets/screen.sass */
+    /* line 284, ../../../app/stylesheets/screen.sass */
     body #games ul li {
       display: block;
       border-bottom: 2px solid #666666;
       padding: 5px 0; }
-      /* line 290, ../../../app/stylesheets/screen.sass */
+      /* line 289, ../../../app/stylesheets/screen.sass */
       body #games ul li span {
         padding-left: 10px; }
-    /* line 293, ../../../app/stylesheets/screen.sass */
+    /* line 292, ../../../app/stylesheets/screen.sass */
     body #games ul li:hover {
       background-color: #cccccc; }
-  /* line 297, ../../../app/stylesheets/screen.sass */
+  /* line 296, ../../../app/stylesheets/screen.sass */
   body form#new_game {
     margin-bottom: 10px; }
-    /* line 300, ../../../app/stylesheets/screen.sass */
+    /* line 299, ../../../app/stylesheets/screen.sass */
     body form#new_game label {
       float: left;
       margin-top: 7px;
       width: 150px;
       font-weight: bold; }
-  /* line 306, ../../../app/stylesheets/screen.sass */
+  /* line 305, ../../../app/stylesheets/screen.sass */
   body input, body select, body textarea {
     font-size: 1.1em; }
-  /* line 309, ../../../app/stylesheets/screen.sass */
+  /* line 308, ../../../app/stylesheets/screen.sass */
   body input[type=text] {
     padding-top: 0;
     padding-bottom: 0; }
-    /* line 313, ../../../app/stylesheets/screen.sass */
+    /* line 312, ../../../app/stylesheets/screen.sass */
     body input[type=text] p {
       overflow: hidden;
       display: inline-block;
@@ -1571,18 +1571,18 @@ body {
       /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
       body input[type=text] p {
         display: block; }
-  /* line 319, ../../../app/stylesheets/screen.sass */
+  /* line 318, ../../../app/stylesheets/screen.sass */
   body #followers, body #players {
     margin-bottom: 10px; }
-    /* line 322, ../../../app/stylesheets/screen.sass */
+    /* line 321, ../../../app/stylesheets/screen.sass */
     body #followers #scrollwindow, body #players #scrollwindow {
       height: 300px;
       overflow: auto;
       margin-bottom: 10px; }
-    /* line 327, ../../../app/stylesheets/screen.sass */
+    /* line 326, ../../../app/stylesheets/screen.sass */
     body #followers .navigation, body #players .navigation {
       display: none; }
-  /* line 330, ../../../app/stylesheets/screen.sass */
+  /* line 329, ../../../app/stylesheets/screen.sass */
   body #followers ul, body #players ul {
     list-style-type: none;
     margin: 0 0 5px 0;
@@ -1592,7 +1592,7 @@ body {
     /* line 5, ../../../../../../../opt/local/lib/ruby/gems/1.8/gems/chriseppstein-compass-0.8.8/frameworks/compass/stylesheets/compass/utilities/general/_hacks.sass */
     body #followers ul, body #players ul {
       display: block; }
-  /* line 337, ../../../app/stylesheets/screen.sass */
+  /* line 336, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower, body #followers ul li.player {
     float: left;
     width: 100px;
@@ -1600,7 +1600,7 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
     position: relative; }
-  /* line 346, ../../../app/stylesheets/screen.sass */
+  /* line 345, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower, body #players ul li.player {
     float: left;
     width: 75px;
@@ -1608,7 +1608,7 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
     position: relative; }
-  /* line 355, ../../../app/stylesheets/screen.sass */
+  /* line 354, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower img, body #followers ul li.player img {
     border: 5px solid #cccccc;
     margin-bottom: 2px;
@@ -1617,11 +1617,11 @@ body {
     -khtml-opacity: 0.8;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
     filter: alpha(opacity=80); }
-  /* line 361, ../../../app/stylesheets/screen.sass */
+  /* line 360, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower img, body #players ul li.player img {
     border: 5px solid #cccccc;
     margin-bottom: 2px; }
-  /* line 366, ../../../app/stylesheets/screen.sass */
+  /* line 365, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower .player-is-dead, body #players ul li.player .player-is-dead {
     color: white;
     font-size: 1.2em;
@@ -1629,7 +1629,7 @@ body {
     text-align: center;
     width: 58px;
     position: absolute; }
-  /* line 375, ../../../app/stylesheets/screen.sass */
+  /* line 374, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower.hover img, body #followers ul li.player.hover img {
     border: 5px solid #666666;
     opacity: 1;
@@ -1637,10 +1637,10 @@ body {
     -khtml-opacity: 1;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     filter: alpha(opacity=100); }
-  /* line 380, ../../../app/stylesheets/screen.sass */
+  /* line 379, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower.hover img, body #players ul li.player.hover img {
     border: 5px solid #666666; }
-  /* line 384, ../../../app/stylesheets/screen.sass */
+  /* line 383, ../../../app/stylesheets/screen.sass */
   body #followers ul li.follower.selected img, body #followers ul li.player.selected img {
     border: 5px solid #700000;
     opacity: 1;
@@ -1648,7 +1648,7 @@ body {
     -khtml-opacity: 1;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     filter: alpha(opacity=100); }
-  /* line 389, ../../../app/stylesheets/screen.sass */
+  /* line 388, ../../../app/stylesheets/screen.sass */
   body #players ul li.follower.selected img, body #players ul li.player.selected img {
     border: 5px solid #700000;
     opacity: 1;
@@ -1656,14 +1656,14 @@ body {
     -khtml-opacity: 1;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     filter: alpha(opacity=100); }
-  /* line 393, ../../../app/stylesheets/screen.sass */
+  /* line 392, ../../../app/stylesheets/screen.sass */
   body #followers ul li.player.dead img, body #players ul li.player.dead img {
     opacity: 0.6;
     -moz-opacity: 0.6;
     -khtml-opacity: 0.6;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     filter: alpha(opacity=60); }
-  /* line 396, ../../../app/stylesheets/screen.sass */
+  /* line 395, ../../../app/stylesheets/screen.sass */
   body #followers #invitations textarea, body #players #invitations textarea {
     width: 100%;
     margin-bottom: 20px; }

@@ -12,4 +12,7 @@
 #
 
 class Werewolf < Player
+  def peer
+    game.werewolves.detect { |w| w.user_id != self.user_id }
+  end
 end
