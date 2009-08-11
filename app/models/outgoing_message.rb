@@ -30,9 +30,8 @@ class OutgoingMessage < Message
 
     self.undelivered.each do |msg|
       begin
-        # send direct message to this user only
         OutgoingMessage.twitter.direct_message_create(msg.to_user.login, msg.text) && (direct_count += 1)
-      rescue TwitterAuth::Dispatcher::Error
+      rescue # evil
         logger.error "ERROR: Unable to send message to #{msg.to_user.login}; moving on..."
       end
       msg.delivered!
