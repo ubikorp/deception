@@ -16,4 +16,4 @@
           %li= "Poor #{player_profile_link(kill.target_player)} was killed in the middle of the night by a bloodthirsty werewolf!"
 
     - period.events.quits.each do |quit|
-      %li= "#{player_profile_link(quit.source_player)} committed suicide! He was a #{quit.source_player.type}."
+      %li= "#{player_profile_link(quit.source_player)} committed suicide! Sometimes #{quit.source_player.type.pluralize} just can't handle the pressure."
