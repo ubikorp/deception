@@ -29,14 +29,11 @@ class OutgoingMessage < Message
     direct_count = 0
 
     self.undelivered.each do |msg|
-      if msg.to_user.nil?
-        msg.game.players.alive.each do |recipient|
-          # broadcast direct message to all active players
-          OutgoingMessage.twitter.direct_message_create(recipient.user.login, msg.text) && (broadcast_count += 1)
-        end
-      else
+      begin
         # send direct message to this user only
         OutgoingMessage.twitter.direct_message_create(msg.to_user.login, msg.text) && (direct_count += 1)
+      rescue TwitterAuth::Dispatcher::Error
+        logger.error "ERROR: Unable to send message to #{msg.to_user.login}; moving on..."
       end
       msg.delivered!
     end

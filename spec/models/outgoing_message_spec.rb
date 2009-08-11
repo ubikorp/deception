@@ -39,16 +39,5 @@ describe OutgoingMessage do
       OutgoingMessage.send_messages
       @message.reload.delivered_at.should_not be_nil
     end
-
-    it 'should be broadcast to all active players in the specified game' do
-      @game = Factory(:game)
-      Factory(:nick).join(@game)
-      Factory(:jeff).join(@game)
-      Factory(:darcy).join(@game)
-      @message = Factory(:outgoing_message, :text => 'Broadcast message!', :to_user => nil, :game => @game)
-      OutgoingMessage.twitter.expects(:direct_message_create).times(3)
-      OutgoingMessage.send_messages
-      @message.reload.delivered_at.should_not be_nil
-    end
   end
 end
