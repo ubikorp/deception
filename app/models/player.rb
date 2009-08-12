@@ -30,11 +30,11 @@ class Player < ActiveRecord::Base
   end
 
   def werewolf?
-    type == 'Werewolf'
+    type.to_s == 'Werewolf'
   end
 
   def villager?
-    type == 'Villager'
+    type.to_s == 'Villager'
   end
 
   # used to assign a role to the player when game is about to start
