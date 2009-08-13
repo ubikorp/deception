@@ -15,7 +15,7 @@ module DeceptionGame
     PERIOD_NODEATH_PM_MSG = "Villagers couldn't decide who to lynch today. Eek. "
     PERIOD_SUMMARY_PM_MSG = "The villagers have chosen to lynch <>, "
 
-    VILLAGER_LYNCH_MSG    = "a common villager. Oops."
+    VILLAGER_LYNCH_MSG    = "a common villager. Oops. "
     WEREWOLF_LYNCH_MSG    = "a werewolf!"
 
     PERIOD_CHANGE_PM_MSG  = "Now, night time approaches. Villagers sleep while wolves hunt..."
