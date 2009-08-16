@@ -186,7 +186,7 @@ class Game < ActiveRecord::Base
 
   def winner_type
     if finished? && winner
-      winner.first.type.pluralize
+      winner.first.type.to_s.pluralize
     else
       nil
     end
