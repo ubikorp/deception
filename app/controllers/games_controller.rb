@@ -68,7 +68,7 @@ class GamesController < ApplicationController
         if @game.ready?
           render(:action => 'working')
         elsif @game.finished?
-          @illustration = Illustration.find_by_title(@game.winner[0].type.downcase)
+          @illustration = Illustration.find_by_title(@game.winner[0].type.to_s.downcase)
           render(:action => 'show')
         elsif @game.playable?
           @illustration = Illustration.find_by_title(@game.night? ? 'werewolf' : 'villager')
