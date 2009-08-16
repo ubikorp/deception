@@ -19,6 +19,6 @@
       %li= "#{player_profile_link(quit.source_player)} committed suicide! Sometimes <strong>#{quit.source_player.type.pluralize}</strong> just can't handle the pressure."
     - if period.game.finished?
       - if period.game.winner_type == 'Werewolves'
-        %li= "The werewolves rise up and slaughter the remaining villagers! What a travesty!"
+        %li= "The werewolves (#{period.game.winner.map { |p| player_profile_link(p)}.join(', ')}) rise up and slaughter the remaining villagers! What a travesty!"
       - else
         %li= "The villagers have slaughtered the last werewolf. Congratulations villagers!"
