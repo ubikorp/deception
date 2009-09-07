@@ -1,6 +1,6 @@
 <%= javascript_include_tag('countdown') %>
 
-<script type => 'text/javascript'>
+<script type='text/javascript'>
   $(document).ready(function() {
       $('#countdown').countdown({until: +<%= game.current_period.time_remaining %>, onExpiry: reloadPage, layout: '{h<}{hnn}:{h>}{mnn}'});
   });
