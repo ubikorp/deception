@@ -47,6 +47,33 @@ describe Period do
     @game.periods.last.should be_current
   end
 
+  it 'should be finished if time is up' do
+    time = Time.now
+    Time.stubs(:now).returns(time)
+    period = @game.periods.last
+
+    period.game.players.stubs(:alive).returns(Array.new(3, mock('Player')))
+
+    period.stubs(:created_at).returns(time - 10)
+    period.should_not be_finished
+
+    period.game.stubs(:period_length).returns(5)
+    period.should be_finished
+  end
+
+  it 'should be finished if all votes are in' do
+    time = Time.now
+    Time.stubs(:now).returns(time)
+    period = @game.periods.last
+
+    period.stubs(:created_at).returns(time - 10)
+    period.game.stubs(:period_length).returns(5)
+
+    period.game.players.stubs(:alive).returns(Array.new(3, mock('Player')))
+    period.events.stubs(:votes).returns(Array.new(3, mock('Vote')))
+    period.should be_finished
+  end
+
   it 'should count down time remaining' do
     time = Time.now
     Time.stubs(:now).returns(time)

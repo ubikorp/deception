@@ -83,7 +83,7 @@ class Game < ActiveRecord::Base
   # Check status of playable games and update them, moving to the next period if the time is right
   def self.update_periods
     Game.with_state(:playable).each do |game|
-      if game.next_period_starts_at <= Time.now
+      if game.current_period.finished?
         logger.info "Next period for Game [#{game.id}]"
         game.continue
       end
@@ -137,14 +137,6 @@ class Game < ActiveRecord::Base
 
   def current_period
     periods(true).last
-  end
-
-  def next_period_starts_at
-    if playable?
-      periods.last.created_at + period_length
-    else
-      nil
-    end
   end
 
   def current_events

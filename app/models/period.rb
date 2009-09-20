@@ -35,4 +35,9 @@ class Period < ActiveRecord::Base
   def time_remaining
     created_at.utc + game.period_length - Time.now.utc
   end
+
+  # have all players voted in this period?
+  def finished?
+    (created_at + game.period_length <= Time.now) || (events.votes.length >= game.players.alive.length)
+  end
 end

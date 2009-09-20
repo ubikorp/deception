@@ -282,11 +282,6 @@ describe Game do
       @game.update_attribute(:period_length, 1200)
     end
 
-    it 'should indicate when next period starts' do
-      @game.start
-      @game.next_period_starts_at.to_i.should == Time.now.to_i + @game.period_length
-    end
-
     it 'should start games that are in the ready state (ensuring that games always start on the XX minute mark for easy sync updates)' do
       @game.ready
 
@@ -296,9 +291,9 @@ describe Game do
       }.should change(Period, :count)
     end
 
-    it 'should continue any game that has exceeded period length' do
+    it 'should continue any game whose current period is finished' do
       @game.start
-      Time.stubs(:now).returns(@game.next_period_starts_at)
+      Period.any_instance.expects(:finished?).returns(true)
 
       lambda {
         Game.update_periods
