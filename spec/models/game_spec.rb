@@ -234,6 +234,18 @@ describe Game do
         @game.continue
       }.should_not change(KillEvent, :count)
     end
+
+    it 'should choose a single player to kill if the majority is split' do
+      @game.continue
+
+      lambda {
+        vote = Factory(:vote_event, :source_player => villager(0), :target_player => villager(2), :period => @game.current_period)
+        vote = Factory(:vote_event, :source_player => villager(1), :target_player => villager(2), :period => @game.current_period)
+        vote = Factory(:vote_event, :source_player => villager(2), :target_player => werewolf, :period => @game.current_period)
+        vote = Factory(:vote_event, :source_player => werewolf, :target_player => werewolf, :period => @game.current_period)
+        @game.continue
+      }.should change(KillEvent, :count).by(1)
+    end
   end
 
   context 'winner' do

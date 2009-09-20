@@ -235,14 +235,17 @@ class Game < ActiveRecord::Base
     # TODO: simplify this... kinda brittle
     if night?
       candidates = current_events.votes.select { |e| e.source_player.werewolf? }.map { |e| e.target_player }
-      victims = werewolves.length > 1 ? candidates.modes : candidates
+      candidates = werewolves.length > 1 ? candidates.modes : candidates
     else # day
-      victims = current_events.votes.map { |e| e.target_player }.modes || []
+      candidates = current_events.votes.map { |e| e.target_player }.modes || []
     end
 
-    victims ||= []
-    logger.info "End of turn for Game [#{id}] : Victims = #{victims.map { |v| v.user.login }.join(', ')}"
-    victims.each { |victim| KillEvent.create(:period => current_period, :target_player => victim) }
+    if victim = (candidates || []).first
+      logger.info "End of turn for Game [#{id}] : Victim is #{victim.user.login}"
+      KillEvent.create(:period => current_period, :target_player => victim)
+    else
+      logger.info "End of turn for Game [#{id}] : Nobody was killed this period"
+    end
   end
 
   # check to see if a winner has been determined
