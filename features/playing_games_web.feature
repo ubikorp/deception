@@ -62,7 +62,7 @@ And receive game progress messages
     Then I should see "The Story So Far"
     And I should see "aaronstack was killed"
 
-  Scenario: Werewolf user votes to kill a player
+  Scenario: Werewolf user votes to kill a player, ends period
     Given I am signed in
     And there is a game called "The Incident at Mariahville"
     And I am a "werewolf" in the game
@@ -71,7 +71,7 @@ And receive game progress messages
     When I go to the game page for "The Incident at Mariahville"
     And I select "aaronstack" from "victims"
     And I press "Submit Choice"
-    Then I should see "NIGHT PHASE"
+    Then I should see "DAY PHASE"
     And I should see "Aye, he looks like a tasty one"
     And the vote for "aaronstack" has been recorded
 

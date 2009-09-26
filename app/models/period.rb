@@ -40,7 +40,7 @@ class Period < ActiveRecord::Base
   def finished?
     return true if created_at + game.period_length <= Time.now
 
-    if day
+    if phase == :day
       events.votes.length >= game.players.alive.length
     else # night
       events.votes.length >= game.werewolves.length

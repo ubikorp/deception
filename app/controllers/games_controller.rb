@@ -118,8 +118,12 @@ class GamesController < ApplicationController
   # record a vote in this game
   def vote
     if @user = User.find((params[:vote] || {})[:user_id])
-      if current_user.vote(@user)
-        flash[:notice] = @game.night? ? "Aye, he looks like a tasty one." : "Yeah, that one sure looks suspicious to me."
+      if vote = current_user.vote(@user)
+        flash[:notice] = if vote.period.phase == :night
+          "Aye, he looks like a tasty one."
+        else
+          "Yeah, that one sure looks suspicious to me."
+        end
       else
         flash[:error] = "Unable to record your vote. Please try again."
       end

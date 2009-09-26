@@ -21,7 +21,7 @@ class GameObserver < ActiveRecord::Observer
           GameBot.messages.dm(player.user.login, notice) if player.user.notify_period_change?
         end
 
-        send_death_notice(period.events.kills.first) if game.events.kills.length > 0 # assume single death in a period
+        send_death_notice(period.events.kills.first) if period.events.kills.length > 0 # assume single death in a period
       end
     when :finish
       send_death_notice(game.events.kills.last) if game.events.kills.length > 0 # send final kill notice (last round)

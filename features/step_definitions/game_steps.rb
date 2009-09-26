@@ -143,7 +143,7 @@ end
 
 Then /^the vote for "([^\"]*)" has been recorded$/ do |arg1|
   user = User.find_by_login(arg1)
-  VoteEvent.find(:first, :conditions => { :target_player_id => user.active_player.id }).should_not be_nil
+  VoteEvent.find(:first, :conditions => { :target_player_id => user.players.last.id }).should_not be_nil
 end
 
 Then /^there is no vote for "([^\"]*)"$/ do |arg1|
