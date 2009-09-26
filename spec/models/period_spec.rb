@@ -61,7 +61,7 @@ describe Period do
     period.should be_finished
   end
 
-  it 'should be finished if all votes are in' do
+  it 'should be finished if all day votes are in' do
     time = Time.now
     Time.stubs(:now).returns(time)
     period = @game.periods.last
@@ -71,6 +71,19 @@ describe Period do
 
     period.game.players.stubs(:alive).returns(Array.new(3, mock('Player')))
     period.events.stubs(:votes).returns(Array.new(3, mock('Vote')))
+    period.should be_finished
+  end
+
+  it 'should be finished if all night votes are in' do
+    time = Time.now
+    Time.stubs(:now).returns(time)
+    period = @game.periods.create
+
+    period.stubs(:created_at).returns(time - 10)
+    period.game.stubs(:period_length).returns(5)
+
+    period.game.stubs(:werewolves).returns(Array.new(2, mock('Werewolf')))
+    period.events.stubs(:votes).returns(Array.new(2, mock('Vote')))
     period.should be_finished
   end
 

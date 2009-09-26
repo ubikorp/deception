@@ -38,6 +38,12 @@ class Period < ActiveRecord::Base
 
   # have all players voted in this period?
   def finished?
-    (created_at + game.period_length <= Time.now) || (events.votes.length >= game.players.alive.length)
+    return true if created_at + game.period_length <= Time.now
+
+    if day
+      events.votes.length >= game.players.alive.length
+    else # night
+      events.votes.length >= game.werewolves.length
+    end
   end
 end
