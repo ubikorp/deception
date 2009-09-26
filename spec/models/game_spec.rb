@@ -30,8 +30,6 @@ describe Game do
   it { should have_many(:players) }
   it { should have_many(:users, :through => :players) }
   it { should have_many(:invitations) }
-  it { should have_many(:incoming_messages) }
-  it { should have_many(:outgoing_messages) }
   it { should belong_to(:owner) }
 
   it { should have_scope(:pending,   :conditions => { :state => 'setup', :invite_only => false }, :order => 'created_at DESC') }
@@ -87,7 +85,7 @@ describe Game do
       @game.start
       lambda {
         @game.invite_only = true
-      }.should raise_error(GameException::GameInProgress)
+      }.should raise_error(DeceptionGame::Exception::GameInProgress)
     end
 
     it 'should use defaults if unspecified' do

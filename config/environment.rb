@@ -7,9 +7,9 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 require 'observer_ext'
-require 'game_exception'
-require 'game_messages'
-require 'controller_extensions'
+require 'deception_game/exception'
+require 'deception_game/messages'
+require 'deception_game/controller_extensions'
 require 'whenever'
 
 Rails::Initializer.run do |config|
@@ -22,11 +22,12 @@ Rails::Initializer.run do |config|
   config.gem 'haml',          :version => '>= 2.0.6'
   config.gem 'state_machine', :version => '>= 0.7.5'
 
-  config.gem 'semanticart-is_paranoid', :lib => 'is_paranoid',   :version => '>= 0.9.0'
+  config.gem 'semanticart-is_paranoid', :lib => 'is_paranoid',   :version => '>= 0.9.0',  :source => 'http://gems.github.com'
   config.gem 'thoughtbot-paperclip',    :lib => 'paperclip',     :version => '>= 2.3.0',  :source => 'http://gems.github.com'
   config.gem 'mislav-will_paginate',    :lib => 'will_paginate', :version => '~> 2.3.11', :source => 'http://gems.github.com'
 
-  config.gem 'javan-whenever', :lib => false, :source => 'http://gems.github.com'
+  config.gem 'javan-whenever', :lib => false,   :source => 'http://gems.github.com'
+  config.gem 'ezmobius-redis', :lib => 'redis', :source => 'http://gems.github.com'
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -51,7 +52,7 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
-  config.active_record.observers = :user_observer, :player_observer, :incoming_message_observer, :game_observer, :invitation_observer
+  config.active_record.observers = :user_observer, :player_observer, :game_observer, :invitation_observer
 
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
   # Run "rake -D time" for a list of tasks for finding time zone names.

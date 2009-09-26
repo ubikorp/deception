@@ -28,8 +28,6 @@ class Game < ActiveRecord::Base
   has_many :players, :dependent => :destroy
   has_many :users, :through => :players
 
-  has_many :incoming_messages
-  has_many :outgoing_messages
   has_many :invitations do
     def for_user(user)
       self.detect { |i| i.twitter_login == user.login }
@@ -110,7 +108,7 @@ class Game < ActiveRecord::Base
       if new_record? || setup? 
         write_attribute(setter, value)
       else
-        raise GameException::GameInProgress, "Cannot set game options after setup phase"
+        raise DeceptionGame::Exception::GameInProgress, "Cannot set game options after setup phase"
       end
     end
   end

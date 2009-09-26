@@ -10,7 +10,6 @@ require 'remarkable_paperclip'
 require 'spec/stub_chain_mocha'
 require 'spec/game_spec_helper'
 
-IncomingMessage.delete_observers
 Invitation.delete_observers
 Game.delete_observers
 Player.delete_observers
@@ -59,4 +58,10 @@ Spec::Runner.configure do |config|
   # == Notes
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
+
+  config.before(:each) do
+    Twitter::HTTPAuth.stubs(:new).returns(mock('HTTPAuth'))
+    Twitter::Base.stubs(:new).returns(@twitter = mock('Twitter'))
+    BirdGrinderClient.stubs(:new).returns(@messages = mock('BirdGrinderClient'))
+  end
 end

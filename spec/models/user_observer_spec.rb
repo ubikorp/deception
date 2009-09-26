@@ -7,7 +7,7 @@ describe User do
   end
 
   it 'should auto-follow the new user once they authenticate for the first time' do
-    Message.twitter.expects(:friendship_create).with(@user.login)
+    GameBot.twitter.expects(:friendship_create).with(@user.login)
     @obs.after_create(@user)
   end
 end

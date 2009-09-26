@@ -1,23 +1,7 @@
-# == Schema Information
-#
-# Table name: messages
-#
-#  id           :integer         not null, primary key
-#  game_id      :integer
-#  text         :string(255)
-#  delivered_at :datetime
-#  created_at   :datetime
-#  updated_at   :datetime
-#  type         :string(255)
-#  from_user_id :integer
-#  to_user_id   :integer
-#  status_id    :integer
-#
-
-class Message < ActiveRecord::Base
-  belongs_to  :game
-
-  validates_presence_of :text, :game_id
+class GameBot
+  def self.messages
+    @client ||= initialize_messages
+  end
 
   def self.twitter
     @twitter ||= initialize_twitter
@@ -36,5 +20,10 @@ class Message < ActiveRecord::Base
     @twitter = Twitter::Base.new(httpauth)
   end
 
+  def self.initialize_messages
+    @client = BirdGrinderClient.new
+  end
+
   private_class_method :initialize_twitter
+  private_class_method :initialize_messages
 end
