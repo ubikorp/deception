@@ -7,6 +7,7 @@ class PlayersController < ApplicationController
   def create
     if current_user.join(@game)
       flash[:notice] = "Thanks for joining up! If you follow us on Twitter, we'll send you a direct message when the game starts."
+      session[:follow_prompt] = true
     else
       flash[:error] = "Sorry you are unable to join this game."
     end
