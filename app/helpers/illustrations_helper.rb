@@ -6,9 +6,9 @@ module IllustrationsHelper
 
   def art_tag
     if current_illustration
-      image_tag(current_illustration.art.url(:normal))
+      image_tag(current_illustration.art.url(:normal), :width => 550, :height => 500)
     else
-      image_tag('default.png')
+      image_tag('default.png', :with => 550, :height => 500)
     end
   end
 
