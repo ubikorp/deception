@@ -6,6 +6,11 @@ class Array
       m << item if m && times == m[0] and find_all
       m = [times, item] if (!m && times>1) or (m && times > m[0])
     end
-    return m ? m[1...m.size] : m
+
+    if m.nil?
+      find_all ? self : self.first
+    else
+      m[1...m.size]
+    end
   end
 end

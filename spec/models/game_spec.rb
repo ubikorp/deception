@@ -223,16 +223,6 @@ describe Game do
       @game.state?(:finished).should be_true
     end
 
-    it 'should not register a kill unless there is a majority' do
-      @game.continue
-
-      lambda {
-        vote = Factory(:vote_event, :source_player => villager(0), :target_player => werewolf, :period => @game.current_period)
-        vote = Factory(:vote_event, :source_player => villager(1), :target_player => villager(0), :period => @game.current_period)
-        @game.continue
-      }.should_not change(KillEvent, :count)
-    end
-
     it 'should choose a single player to kill if the majority is split' do
       @game.continue
 
