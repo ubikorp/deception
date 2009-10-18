@@ -164,10 +164,8 @@ class Game < ActiveRecord::Base
     if bvillagers && bwerewolves
       false
     elsif bvillagers
-      logger.info "Ending Game [#{id}] : Won by Villagers"
       villagers
     elsif bwerewolves
-      logger.info "Ending Game [#{id}] : Won by Werewolves"
       werewolves
     else
       false
@@ -243,6 +241,7 @@ class Game < ActiveRecord::Base
   # called as an after-transition filter
   def next_phase
     if winner
+      logger.info "Ending Game [#{id}]"
       finish
     else
       periods.create
