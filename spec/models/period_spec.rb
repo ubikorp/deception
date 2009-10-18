@@ -53,6 +53,7 @@ describe Period do
     period = @game.periods.last
 
     period.game.players.stubs(:alive).returns(Array.new(3, mock('Player')))
+    period.game.stubs(:werewolves).returns(Array.new(1, mock('Werewolf')))
 
     period.stubs(:created_at).returns(time - 10)
     period.should_not be_finished
