@@ -5,7 +5,7 @@
 
   %p= "Will you be able to discover their secret and exterminate the threat before they end your miserable lives? #{link_to('(game play information)', '/help')}"
 
-  %p= link_to('Sign in with Twitter', '/login', :class => 'image')
+  %p= link_to('Sign in with Twitter', '/login', :class => 'image') unless logged_in?
 
 #sidebar
   = render(:partial => 'shared/sidebar')
