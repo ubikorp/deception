@@ -58,15 +58,15 @@ class GameObserver < ActiveRecord::Observer
       victim = kills[0].target_player # assuming a singular victim for now
 
       if period.game.day?
-        build_message(:period_summary_am, victim.user.login) + build_message(:period_change_am)
+        build_message(:period_summary_am, victim.user.login) + ' ' + build_message(:period_change_am)
       else # period.game.night?
-        build_message(:period_summary_pm, victim.user.login) + build_message("#{victim.type}_lynch") + build_message(:period_change_pm)
+        build_message(:period_summary_pm, victim.user.login) + ' ' + build_message("#{victim.type}_lynch") + build_message(:period_change_pm)
       end
     else
       if period.game.day?
-        build_message(:period_nodeath_am) + build_message(:period_change_am)
+        build_message(:period_nodeath_am) + ' ' + build_message(:period_change_am)
       else
-        build_message(:period_nodeath_pm) + build_message(:period_change_pm)
+        build_message(:period_nodeath_pm) + ' ' + build_message(:period_change_pm)
       end
     end
   end
