@@ -25,7 +25,9 @@ namespace :deploy do
   desc "Restarting passenger with restart.txt"
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "touch #{current_path}/tmp/restart.txt"
-    run "#{current_path}/script/checker_control restart"
+
+    run "RAILS_ENV=production #{current_path}/script/checker_control stop"
+    run "RAILS_ENV=production #{current_path}/script/checker_control start"
   end
   
   [:start, :stop].each do |t|

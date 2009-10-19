@@ -3,5 +3,5 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'envi
 loop do
   puts "Checking #{Time.now}"
   Game.update_periods
-  sleep(10)
+  sleep(30)
 end
