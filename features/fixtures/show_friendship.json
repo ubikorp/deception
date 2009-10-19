@@ -1,0 +1,27 @@
+HTTP/1.1 200 OK
+X-experimental-RLS-remaining: 149
+X-experimental-RLS-maxvalue: 150
+X-experimental-RLS-reset: 1255925262
+X-experimental-RLS-th: succ
+X-RLS-id: sjc1c029
+Via: Cachet/0.91
+Date: Mon, 19 Oct 2009 03:07:43 GMT
+Server: hi
+X-RateLimit-Limit: 150
+X-Transaction: 1255921663-91344-22850
+Status: 200 OK
+ETag: "94d6b9a0e32a259b48b4782a1f4a8f55"
+Last-Modified: Mon, 19 Oct 2009 03:07:43 GMT
+X-RateLimit-Remaining: 149
+Content-Type: application/json; charset=utf-8
+Pragma: no-cache
+Cache-Control: no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+Expires: Tue, 31 Mar 1981 05:00:00 GMT
+X-Revision: 985dc6f698bff361869da9276aa7c1dd1358eefc
+X-RateLimit-Reset: 1255925263
+Vary: Accept-Encoding
+Content-Length: 239
+Connection: close
+
+{"relationship":{"target":{"followed_by":true,"following":false,"screen_name":"werewolfgame","id":63181380},"source":{"blocking":false,"followed_by":false,"notifications_enabled":true,"following":true,"screen_name":"t3stx","id":58655592}}}
+

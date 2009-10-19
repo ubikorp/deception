@@ -77,6 +77,7 @@ I want to be able to join an existing game
     Given I am signed in
     And there is a pending game called "The Incident at Mariahville"
     And I am a "player" in the game
+    And I am not following the gamebot user on Twitter
     When I go to the game page for "The Incident at Mariahville"
     And I press "Follow us on Twitter"
     Then I should be redirected to the game page for "The Incident at Mariahville"

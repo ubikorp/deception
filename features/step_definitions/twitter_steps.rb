@@ -9,6 +9,10 @@ Given /^I have disabled notifications$/ do
   @user.save
 end
 
+Given /^I am not following the gamebot user on Twitter$/ do
+  FakeWeb.register_uri(:get, %r|http://twitter\.com/friendships/show\.json.*|, :response => File.join(RAILS_ROOT, 'features', 'fixtures', 'show_friendship.json'))
+end
+
 When /^I send a public message containing "([^\"]*)"$/ do |arg1|
   @user = User.find_by_login('zapnap')
   @msg = Factory(:incoming_message, :game => Game.first, :from_user => @user, :text => arg1)

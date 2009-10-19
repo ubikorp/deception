@@ -11,8 +11,6 @@ Content-Length: 964
 Expires: Tue, 31 Mar 1981 05:00:00 GMT
 X-Revision: 08451021f9b9752c438d88882335e6ddc88f994a
 X-Transaction: 1248395235-78347-13910
-Set-Cookie: lang=en; path=/
-Set-Cookie: _twitter_sess=BAh7CToTcGFzc3dvcmRfdG9rZW4iLTU1YTJjOWJkZjlmNDE5NjlmZmVhOTMy%250AN2Y5ZWM4NDQ4M2ZhNTY2ODk6CXVzZXJpA%252FnlFzoHaWQiJTViMGY4NTI5NTNl%250AZTkzYzQ2YjZjNzk0YjllNTJmOWRhIgpmbGFzaElDOidBY3Rpb25Db250cm9s%250AbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ad26af9182934f17004c9f3a9cafec1c9f902e7e; domain=.twitter.com; path=/
 Vary: Accept-Encoding
 Connection: close
 

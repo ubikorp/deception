@@ -142,8 +142,10 @@ class User < TwitterAuth::GenericUser
   # use following?(true) to do a live query (otherwise returned cached data)
   def following?(force_check = false)
     if force_check
-      status = twitter.get("/friendships/show.json?target_screen_name=#{TwitterAuth.config['gamebot_user']}")['relationship']['source']['following']
-      update_attribute(:following, status)
+      res = twitter.get("/friendships/show?target_screen_name=#{TwitterAuth.config['gamebot_user']}")
+      res = JSON.parse(res) if res.is_a?(String)
+      status = res['relationship']['source']['following']
+      update_attribute(:following, status) && status
     else
       read_attribute(:following)
     end
@@ -151,7 +153,7 @@ class User < TwitterAuth::GenericUser
 
   # update user to auto-follow the gamebot on Twitter
   def follow_game
-    unless following?
+    unless following?(true)
       twitter.post("/friendships/create/#{TwitterAuth.config['gamebot_user']}.json?follow=true")
       update_attribute(:following, true)
     end
