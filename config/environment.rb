@@ -26,7 +26,6 @@ Rails::Initializer.run do |config|
   config.gem 'thoughtbot-paperclip',    :lib => 'paperclip',     :version => '>= 2.3.0',  :source => 'http://gems.github.com'
   config.gem 'mislav-will_paginate',    :lib => 'will_paginate', :version => '~> 2.3.11', :source => 'http://gems.github.com'
 
-  config.gem 'javan-whenever', :lib => false,   :source => 'http://gems.github.com'
   config.gem 'ezmobius-redis', :lib => 'redis', :source => 'http://gems.github.com'
 
   # Settings in config/environments/* take precedence over those specified here.

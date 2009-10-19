@@ -20,13 +20,12 @@ role :app, "werewolfgame.net"
 role :web, "werewolfgame.net"
 role :db,  "werewolfgame.net", :primary => true
 
-after "deploy:symlink", "deploy:update_crontab"
-
 # for whenever / scheduling
 namespace :deploy do
   desc "Restarting passenger with restart.txt"
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "touch #{current_path}/tmp/restart.txt"
+    run "#{current_path}/script/checker_control restart"
   end
   
   [:start, :stop].each do |t|
@@ -35,15 +34,9 @@ namespace :deploy do
   end
 
   task :after_update_code, :roles => :app do
-    run "ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    run "ln -s #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
-    run "ln -s #{shared_path}/config/twitter_auth.yml #{release_path}/config/twitter_auth.yml"
-    run "ln -s #{shared_path}/system #{release_path}/public/system"
-  end
-
-  desc "Update the crontab file"
-  task :update_crontab, :roles => :db do
-    run "cd #{release_path} && whenever --update-crontab #{application}"
+    run "ln -sf #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -sf #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
+    run "ln -sf #{shared_path}/config/twitter_auth.yml #{release_path}/config/twitter_auth.yml"
   end
 end
 
