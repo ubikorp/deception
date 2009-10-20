@@ -136,7 +136,7 @@ class GamesController < ApplicationController
   private
 
   def find_game
-    @game = Game.find(params[:id])
+    @game = Game.find_by_short_code(params[:id])
   end
 
   def ownership_required

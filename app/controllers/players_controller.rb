@@ -24,7 +24,7 @@ class PlayersController < ApplicationController
   private
 
   def find_game
-    @game = Game.find(params[:game_id])
+    @game = Game.find_by_short_code(params[:game_id])
   end
 
   def membership_required
