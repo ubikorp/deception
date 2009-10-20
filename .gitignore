@@ -6,3 +6,4 @@ config/settings.yml
 config/twitter_auth.yml
 db/*.sqlite3
 tmp/webrat-*.html
+twitter-bot/config/settings.yml

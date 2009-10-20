@@ -25,9 +25,10 @@ namespace :deploy do
   desc "Restarting passenger with restart.txt"
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "touch #{current_path}/tmp/restart.txt"
-
     run "RAILS_ENV=production #{current_path}/script/checker_control stop"
     run "RAILS_ENV=production #{current_path}/script/checker_control start"
+    run "RAILS_ENV=production birdgrinder client #{current_path}/twitter-bot -k"
+    run "RAILS_ENV=production birdgrinder client #{current_path}/twitter-bot -d"
   end
   
   [:start, :stop].each do |t|
@@ -39,6 +40,10 @@ namespace :deploy do
     run "ln -sf #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -sf #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
     run "ln -sf #{shared_path}/config/twitter_auth.yml #{release_path}/config/twitter_auth.yml"
+    # Link the BirdGrinder items
+    run "ln -sf #{shared_path}/config/birdgrinder-setting.yml #{release_path}/twitter-bot/config/settings.yml"
+    run "ln -sf #{shared_path}/birdgrinder/tmp/ #{release_path}/twitter-bot/tmp"
+    run "ln -sf #{shared_path}/birdgrinder/log/ #{release_path}/twitter-bot/log"
   end
 end
 
