@@ -192,6 +192,11 @@ class Game < ActiveRecord::Base
     end
   end
 
+  # Returns the real time deception instance for this game
+  def real_time
+    @real_time ||= RealTimeDeception[self.id]
+  end
+
   private
 
   # assign roles (like villager, werewolf, etc) to players in this game
