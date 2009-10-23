@@ -51,7 +51,6 @@ class GameObserver < ActiveRecord::Observer
   def period_change_message(period)
     # TODO: include suicide notifications (separate notification setting too?)
     # quits = period.events.quits
-
     kills = period.events.kills
 
     if kills.length > 0

@@ -19,9 +19,9 @@ class RealTimeDeception
     @game_id = game_id
   end
 
-  def event!(name, arguments)
+  def event!(name, arguments = {})
     args = arguments.symbolize_keys
-    args[:event] = name.to_s
+    args[:event] = name.to_s.gsub("_", "-")
     args[:game_id] = @game_id
     log.append(args)
   rescue SystemCallError

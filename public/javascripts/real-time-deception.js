@@ -86,6 +86,9 @@ Deception.onEvent("lynched", function(c, t) {
 Deception.onEvent("attacked", function(c, t) {
 });
 
+Deception.onEvent("no-death", function(c, t) {
+});
+
 Deception.onEvent("game-ended", function(c, t) {
 });
 
