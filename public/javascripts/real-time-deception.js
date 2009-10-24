@@ -95,7 +95,7 @@ Deception.onEvent("game-ended", function(c, t) {
 Deception.onEvent("game-started", function(c, t) {
 });
 
-Deception.onEvent("played-joined", function(c, t) {
+Deception.onEvent("player-joined", function(c, t) {
 });
 
 Chainsaw.onLogMessage("deception:game-event", function(message, channel) {
