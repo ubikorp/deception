@@ -59,8 +59,7 @@ Deception.prototype = {
   {},
 
   createContainer: function()
-  {
-  },
+  {},
 
   container: function()
   {
@@ -69,30 +68,49 @@ Deception.prototype = {
   },
 
   handleEvent: function(ev) {
+    var name = ev.event;
+    if(!name) return;
+    var handler = Deception.events[name];
+    if(handler) handler.call(this, ev);
+  },
+  
+  showMessage: function(message, css_class) {
+    var c = this.container();
+    var entry = $("<li class='message'/>");
+    entry.html(message).addClass(css_class).hide();
+    entry.prependTo(c).slideDown();
   }
 
 };
 
 // Our basic event definitions
 Deception.onEvent("period-change", function(data) {
+  this.showMessage(data.message, "period-change");
 });
 
 Deception.onEvent("vote", function(data) {
+  // TODO: Update vote
+  this.showMessage(data.message, "vote");
 });
 
 Deception.onEvent("lynched", function(data) {
+  this.showMessage(data.message, "lynched");
 });
 
 Deception.onEvent("attacked", function(data) {
+  this.showMessage(data.message, "attacked");
 });
 
 Deception.onEvent("no-death", function(data) {
+  this.showMessage(data.message, "no-death");
 });
 
 Deception.onEvent("game-ended", function(data) {
+  this.endGame();
 });
 
 Deception.onEvent("game-started", function(data) {
+  this.startGame();
 });
 
 Deception.onEvent("player-joined", function(data) {
