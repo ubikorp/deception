@@ -73,29 +73,29 @@ Deception.prototype = {
 
 };
 
-// Our basic event definitions.
-Deception.onEvent("period-change", function(c, t) {
+// Our basic event definitions
+Deception.onEvent("period-change", function(data) {
 });
 
-Deception.onEvent("vote", function(c, t) {
+Deception.onEvent("vote", function(data) {
 });
 
-Deception.onEvent("lynched", function(c, t) {
+Deception.onEvent("lynched", function(data) {
 });
 
-Deception.onEvent("attacked", function(c, t) {
+Deception.onEvent("attacked", function(data) {
 });
 
-Deception.onEvent("no-death", function(c, t) {
+Deception.onEvent("no-death", function(data) {
 });
 
-Deception.onEvent("game-ended", function(c, t) {
+Deception.onEvent("game-ended", function(data) {
 });
 
-Deception.onEvent("game-started", function(c, t) {
+Deception.onEvent("game-started", function(data) {
 });
 
-Deception.onEvent("player-joined", function(c, t) {
+Deception.onEvent("player-joined", function(data) {
 });
 
 Chainsaw.onLogMessage("deception:game-event", function(message, channel) {

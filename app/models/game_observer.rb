@@ -22,7 +22,7 @@ class GameObserver < ActiveRecord::Observer
         end
 
         send_death_notice(period.events.kills.first) if period.events.kills.length > 0 # assume single death in a period
-        game.real_time.event! :period_change
+        game.real_time.event! :period_change, :message => notice
       end
     when :finish
       send_death_notice(game.events.kills.last) if game.events.kills.length > 0 # send final kill notice (last round)
@@ -57,20 +57,22 @@ class GameObserver < ActiveRecord::Observer
 
     if kills.length > 0
       victim = kills[0].target_player # assuming a singular victim for now
-      if period.game.day?
+      message = if period.game.day?
         build_message(:period_summary_am, victim.user.login) + ' ' + build_message(:period_change_am)
       else # period.game.night?
         build_message(:period_summary_pm, victim.user.login) + ' ' + build_message("#{victim.type}_lynch") + build_message(:period_change_pm)
       end
       event_type = period.game.day? ? :attacked : :lynched
-      period.game.real_time.event! event_type, :user_id => victim.user_id, :user => victim.user.login
+      period.game.real_time.event! event_type, :user_id => victim.user_id, :user => victim.user.login, :message => message
+      message
     else
-      if period.game.day?
+      message =  if period.game.day?
         build_message(:period_nodeath_am) + ' ' + build_message(:period_change_am)
       else
         build_message(:period_nodeath_pm) + ' ' + build_message(:period_change_pm)
       end
-      period.game.real_time.event! :no_death
+      period.game.real_time.event! :no_death, :message => message
+      message
     end
   end
 
