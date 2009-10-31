@@ -2,7 +2,7 @@
   - content_for(:extra_head) do
     = render(:partial => 'countdown', :locals => { :game => @game })
 
-%p= "Trouble has come to the sleepy village of <strong>#{h @game.name}</strong>. Someone living amongst the villagers is a <strong>werewolf</strong>, and has been killing poor townsfolk one by one. Who could it be? Villagers must identify and lynch the monster before they all meet untimely deaths!"
+%p= "Trouble has come to the sleepy village of <strong>#{h @game.name}</strong>. Someone(s) living amongst the villagers is a <strong>werewolf</strong>, and has been killing poor townsfolk one by one. Who could it be? Villagers must identify and lynch the monster before they all meet untimely deaths!"
 
 = error_messages_for(:game)
 

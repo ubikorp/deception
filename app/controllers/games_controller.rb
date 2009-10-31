@@ -91,6 +91,23 @@ class GamesController < ApplicationController
     end
   end
 
+  # real-time dashboard
+  def dashboard
+    if logged_in?
+      @invitation = @game.invitations.for_user(current_user)
+    else
+      store_location # for direct-login stuffs
+      @invitaiton = nil
+    end
+
+    @title = "The Incident at #{@game.name}"
+    if @game.finished?
+      @illustration = Illustration.find_by_title(@game.winner[0].type.to_s.downcase)
+    elsif @game.playable?
+      @illustration = Illustration.find_by_title(@game.night? ? 'werewolf' : 'villager')
+    end
+  end
+
   # destroy a game during the setup phase
   def destroy
     if @game.setup?

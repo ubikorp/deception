@@ -1,0 +1,33 @@
+- if playing_in_game(game)
+  - if game.playable?
+    #timing.user_info_box
+      #countdown= distance_of_time_from_now(game.current_period.time_remaining)
+      Time left in this period
+      = "(#{game.period.length} seconds per period)"
+
+    #role_info.user_info_box
+      Your role in this game is:
+      %span.role= "#{current_user.active_player.type}"
+
+    - elsif game.setup?
+      #tbd.user_info_box
+        %p This game will start shortly. In the meantime, you can choose from the following options:
+        %p= button_to("Follow us on Twitter", "#{follow_user_path(current_user)}?game_id=#{game.id}", :method => :post, :id => 'follow-prompt', :class => 'btn', :confirm => "We suggest that you follow the gamebot user on Twitter. This will update your account, allowing you to receive notifications and play the game entirely from Twitter.")
+        - if session[:follow_prompt]
+          %script{:type => 'text/javascript'}= "$(document).ready(function() { $('#follow-prompt').click(); });"
+          - session[:follow_prompt] = false
+
+        %p= button_to("Leave Game", game_player_path(game, current_user), :method => :delete, :class => 'btn', :confirm => "Are you sure? If you leave this game your player will commit suicide and there's no going back!")
+        %p= button_to('Abort Game', game_path(game), :method => :delete, :class => 'btn', :confirm => 'Are you sure you want to abort this game?') if can_be_aborted(game)
+
+- elsif game.setup?
+  .stats
+    %span= game.period.length
+    seconds per period
+  .stats
+    %span= game.max_players
+    maximum players
+
+- if playing_in_game(game)
+  - unless current_user.following?
+

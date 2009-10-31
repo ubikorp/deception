@@ -1,0 +1,26 @@
+- if @game.playable?
+  - content_for(:extra_head) do
+    = render(:partial => 'countdown', :locals => { :game => @game })
+
+= error_messages_for(:game)
+
+#status
+  - if @game.playable?
+    %h3.date= "#{@game.current_period.phase.to_s.upcase} #{@game.curent_period.day}"
+    .description= "Description about current day or night phase. And call to action."
+  - else
+    %p= "Trouble has come to the sleepy village of <strong>#{h @game.name}</strong>. Someone(s) living amongst the villagers is a <strong>werewolf</strong>, and has been killing poor townsfolk one by one. Who could it be? Villagers must identify and lynch the monster before they all meet untimely deaths!"
+
+#main
+  - if @game.playable?
+    %ul#events
+      = render(:partial => 'event', :collection => [])
+  - else
+    = render(:partial => "#{@game.state}", :locals => { :game => @game })
+#sidebar
+  #tools
+    = render(:partial => 'user_info', :locals => { :game => @game })
+  %ul#players
+    = render(:partial => 'player', :collection => @game.players)
+  %ul#chatter
+    = render(:partial => 'tweet', :collection => [])
